@@ -1,0 +1,22 @@
+<Alloy>
+	<TabGroup tabHeight="175dp" id="tabGroup">
+		<Tab title="School" id="school_tab" navBarHidden="true" iconIsMask="false" activeIconIsMask="false" icon="images/icons/building.png" activeIcon="images/icons/building_active.png">
+			<Require src="homepage/school_index"></Require>
+		</Tab>
+		<Tab title="Events" icon="KS_nav_ui.png">
+			<Window title="Events List">
+				<Require src="homepage/events"></Require>
+			</Window>
+		</Tab>
+		<Tab title="Tuition" icon="KS_nav_views.png">
+			<Window title="Tuition">
+				<!--<<Require src="homepage/tuition_index"></Require>-->
+			</Window>
+		</Tab>
+		<Tab title="Book Shop" icon="KS_nav_views.png">
+			<Window title="Book Shop">
+				<!--<<Require src="homepage/bookshop_index"></Require>-->
+			</Window>
+		</Tab>
+	</TabGroup>
+</Alloy>

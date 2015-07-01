@@ -1,0 +1,129 @@
+/*
+
+This is your global styles file. Selectors and rules you define
+here will be applied throughout your app. However, these rules
+have the lowest priority of any style settings.
+
+For more information, see the "Style Priorities" section of
+http://docs.appcelerator.com/titanium/latest/#!/guide/Alloy_Styles_and_Themes
+
+For example, the following would apply to all labels, windows,
+and text fields (depending on platform) in your app unless you
+overrode the settings with other TSS, XML, or JS settings:
+
+'Label[platform=android]': {
+	color: '#000' // all platforms except Android default to black
+}
+
+'TextField[platform=android]': {
+	height: Ti.UI.SIZE //
+}
+
+*/
+
+'Window': {
+	backgroundColor: '#EBEBEB'
+}
+
+'Label': {
+	color: '#0c0e15',
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	font: {
+		fontSize: 12
+	}
+}
+
+'TableView':{
+	contentHeight: Ti.UI.SIZE,
+	contentWidth: Ti.UI.FILL,	
+}
+
+"TabGroup":{
+	tabHeight: '100dp',
+	tabsBackgroundColor: "black"
+}
+
+'TextField': {
+	height: 40,
+	borderColor: "#dfe0e4",
+	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
+	backgroundColor: "#ffffff",
+	width: Titanium.UI.FILL,
+	left: 10,
+	right: 10,
+	top: 10,
+}
+
+'.button': {
+	height: 40,
+	borderColor: "#C6C8CA",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+	backgroundColor: "#ED1C24",
+	borderRadius: 6,
+	color: "#ffffff",
+	width: Titanium.UI.FILL,
+	left: 10,
+	right: 10,
+	top: 10,
+}
+
+'.vert':{
+	layout: "vertical"
+}
+
+'.horz':{
+	layout: "horizontal"
+}
+
+'.wfill':{
+	width: Ti.UI.FILL
+}
+
+'.wsize':{
+	width: Ti.UI.SIZE
+}
+
+'.hfill':{
+	height: Ti.UI.FILL
+}
+
+'.hsize':{
+	height: Ti.UI.SIZE
+}
+
+'.padding':{
+	top: 10,
+	left: 10,
+	right: 10,
+	bottom: 10,
+}
+
+'.box':{
+	borderRadius: "5",
+	borderColor: "#dfe0e4",
+	backgroundColor: "#FFFFFF",
+}
+
+'.font_big':{
+	font:{
+		fontSize: 18
+	}
+}
+
+'.font_medium':{
+	font:{
+		fontSize: 14
+	}
+}
+
+'.font_small':{
+	font:{
+		fontSize: 10
+	}
+}
+
+'.font_light_grey':{
+	color: "#9197a3 "
+}

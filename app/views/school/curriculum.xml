@@ -1,0 +1,20 @@
+<Alloy>
+    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    	<View class="wfill hsize padding box vert">
+    		<View class="wfill hsize padding vert ">
+	    		<Label class="font_big" color="#000000">Curriculum Notice Board</Label>
+	    		<Label>I incorporate a Preschool Curriculum into our daily activities for fun and to ... The bulletin board has real christmas lights connecting each reindeer together. </Label>
+    		</View>
+    	</View>
+    	
+    	<TableView class="wfill hfill padding box" top="0">
+    		<SearchBar showCancel="true"></SearchBar>
+    		<TableViewRow hasChild="true" title="Badminton">
+    		</TableViewRow>
+    		<TableViewRow hasChild="true" title="Volley Ball">
+    		</TableViewRow>
+    		<TableViewRow hasChild="true" title="English Society">
+    		</TableViewRow>
+    	</TableView>
+	</ScrollView>
+</Alloy>

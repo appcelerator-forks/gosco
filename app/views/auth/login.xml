@@ -1,0 +1,12 @@
+<Alloy>
+	<NavigationWindow platform="ios" id="navWin">
+	<Window title="GOSCO">
+		<View class="wfill hfill vert">
+			<TextField hintText="Username"></TextField>
+			<TextField hintText="Password"></TextField>
+			<Button onClick="do_login" class="button" title="Login"></Button>
+			<Button onClick="do_signup" class="button" backgroundColor="#5375BD" title="Register"></Button>
+		</View>
+	</Window>
+	</NavigationWindow>
+</Alloy>

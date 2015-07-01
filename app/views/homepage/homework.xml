@@ -1,0 +1,30 @@
+<Alloy>
+    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    	<TableView class="wfill hfill padding box">
+    		<TableViewRow hasChild="true" class="horz">
+    			<View class="hsize padding vert" width="80">
+    				<Label>June 2015</Label>
+    				<Label class="font_big">FRI 6</Label>
+    			</View>
+    			<View height="100" width="1" backgroundColor="#dfe0e4"></View>
+	    		<View class="wfill hsize padding vert">
+	    			<Label>National Day</Label>
+	    			<Label>Malaysia's National day is one of the cheif event in Kuala lumpur.</Label>
+	    			<Label>6, June 2015</Label>
+    			</View>
+    		</TableViewRow>
+    		<TableViewRow hasChild="true" class="horz">
+    			<View class="hsize padding vert" width="80">
+    				<Label>June 2015</Label>
+    				<Label class="font_big">FRI 6</Label>
+    			</View>
+    			<View height="100" width="1" backgroundColor="#dfe0e4"></View>
+	    		<View class="wfill hsize padding vert">
+	    			<Label>National Day</Label>
+	    			<Label>Malaysia's National day is one of the cheif event in Kuala lumpur.</Label>
+	    			<Label>6, June 2015</Label>
+    			</View>
+    		</TableViewRow>
+    	</TableView>
+	</ScrollView>
+</Alloy>

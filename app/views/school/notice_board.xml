@@ -1,0 +1,27 @@
+<Alloy>
+    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    	<View class="wfill hsize padding box vert">
+    		<View class="wfill hsize padding vert ">
+	    		<Label class="font_big" color="#000000">Basic Information for school</Label>
+	    		<Label>Address: 100, Jalan taman tasik.</Label>
+	    		<Label>Telephone: 03-4040 3432</Label>
+    		</View>
+    	</View>
+    	<TableView class="wfill hfill padding box" top="0">
+    		<TableViewRow hasChild="true">
+	    		<View class="wfill hsize padding vert">
+	    			<Label>Newsletter of June 2015</Label>
+	    			<Label>Principle say something here</Label>
+	    			<Label class="font_light_grey">3 days ago</Label>
+    			</View>
+    		</TableViewRow>
+    		<TableViewRow hasChild="true">
+	    		<View class="wfill hsize padding vert">
+	    			<Label>Newsletter of June 2015</Label>
+	    			<Label>Principle say something here</Label>
+	    			<Label class="font_light_grey">3 days ago</Label>
+    			</View>
+    		</TableViewRow>
+    	</TableView>
+	</ScrollView>
+</Alloy>

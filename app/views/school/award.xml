@@ -1,0 +1,16 @@
+<Alloy>
+    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    	<View class="wfill hsize padding box vert">
+    		<View class="wfill hsize padding vert ">
+    			<ImageView image="http://archives.thestar.com.my/archives/2010/8/11/central/m_22spike.jpg"></ImageView>
+	    		<Label color="#000000">Sterling role: Leong Wei Loong (left) of SMK Jinjang delivering a spike while Chong Yun Hoe from SM Chong Hwa Independent A attempts to block the shot.</Label>
+    		</View>
+    	</View>
+    	<View class="wfill hsize padding box vert" top="0">
+    		<View class="wfill hsize padding vert ">
+    			<ImageView image="http://3.bp.blogspot.com/_c_lQKvo_g5c/TD-0wAdVtSI/AAAAAAAAA3k/UEgb-4cK7X4/s1600/DatoSieh-Souvenir.JPG"></ImageView>
+	    		<Label color="#000000">Boy Champion - Maktab Tentera Diraja (RMC)</Label>
+    		</View>
+    	</View>
+	</ScrollView>
+</Alloy>
