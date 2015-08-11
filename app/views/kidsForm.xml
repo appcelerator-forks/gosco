@@ -1,0 +1,14 @@
+<Alloy> 
+	<Window title="Kids Information"  >
+		<View class="wfill hfill vert"  backgroundImage="/images/home_background.jpg">
+			<View width="100" height="100p"   top="10" />
+			
+			<Label class="padding font_light_white font_big" top="10">Tell us more about your kid</Label>
+			<TextField hintText="Full Name"></TextField>
+			<TextField hintText="Date Of Birth"></TextField>
+			<TextField hintText="Hobby"></TextField>
+			<TextField hintText="Student ID"></TextField>
+			<Button onClick="add_kid" class="button" title="Add Kid"></Button> 
+		</View>
+	</Window> 
+</Alloy>

@@ -1,0 +1,23 @@
+<Alloy>
+	<Window>
+	 	<View class=" wfill hfill vert" backgroundImage="/images/home_background.jpg">
+			<View class="vert" top="30" height="60%">
+				<Label class="padding font_light_white font_big">Notice Board / Announcement</Label>
+				<ScrollView class="vert"   >
+					<View class="padding box" height="100" />
+					<View class="padding box" height="100" />	
+					<View class="padding box" height="100" />	
+					<View class="padding box" height="100" />	
+					<View class="padding box" height="100" />	
+				</ScrollView>
+			</View>
+			<ScrollView class="horz" width="Ti.UI.FILL" height="100" top="10" scrollType="horizontal"> 
+				<View onClick="addKid" class="small_padding" width="80" height="80" borderRadius="30" backgroundImage="/images/home_add.png" />
+			</ScrollView>
+			
+		</View>
+		<View class="wfill" backgroundImage="/images/home_search.png" bottom="0" height="120">
+			 
+		</View>
+ 	</Window>
+</Alloy>

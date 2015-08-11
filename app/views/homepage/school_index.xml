@@ -6,7 +6,7 @@
         <View class="wfill hfill">
 			<TableView class="wfill hfill" bottom="150" id="table_list">
 				<TableViewRow right="10" sid="1">
-					<View height="Ti.UI.SIZE" width="Ti.UI.FILL" top="10" bottom="10"class="horz">
+					<View height="Ti.UI.SIZE" width="Ti.UI.FILL" top="10" bottom="10" class="horz">
 						<ImageView image="/images/icons/building.png" width="Ti.UI.SIZE" height="40"></ImageView>
 						<Label textAlign="left">SMK Taman Tasik</Label>
 					</View>

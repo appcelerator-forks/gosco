@@ -1,12 +1,13 @@
 <Alloy>
 	<Window title="Register">
-		<View class="wfill hfill vert">
+		<ScrollView class="wfill hfill vert" backgroundImage="/images/home_background.jpg" scrollType="vertical">
+			<ImageView image="/images/full_logo.png" top="10" width="50%" />
 			<TextField hintText="Fullname"></TextField>
 			<TextField hintText="Mobile Number"></TextField>
 			<TextField hintText="Username"></TextField>
 			<TextField hintText="Password"></TextField>
 			<TextField hintText="Confirm Password"></TextField>
 			<Button backgroundColor="#5375BD" class="button" title="Register"></Button>
-		</View>
+		</ScrollView>
 	</Window>
 </Alloy>

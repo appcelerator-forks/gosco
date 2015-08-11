@@ -1,7 +1,8 @@
 <Alloy>
 	<NavigationWindow platform="ios" id="navWin">
-	<Window title="GOSCO">
-		<View class="wfill hfill vert">
+	<Window title="GOSCO"  >
+		<View class="wfill hfill vert"  backgroundImage="/images/home_background.jpg">
+			<ImageView image="/images/full_logo.png"  top="10" width="50%" />
 			<TextField hintText="Username"></TextField>
 			<TextField hintText="Password"></TextField>
 			<Button onClick="do_login" class="button" title="Login"></Button>

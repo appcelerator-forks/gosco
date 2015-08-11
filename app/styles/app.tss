@@ -100,6 +100,13 @@ overrode the settings with other TSS, XML, or JS settings:
 	bottom: 10,
 }
 
+'.small_padding':{
+	top: 4,
+	left: 4,
+	right: 4,
+	bottom: 4,
+}
+
 '.box':{
 	borderRadius: "5",
 	borderColor: "#dfe0e4",
@@ -126,4 +133,8 @@ overrode the settings with other TSS, XML, or JS settings:
 
 '.font_light_grey':{
 	color: "#9197a3 "
+}
+
+'.font_light_white':{
+	color: "#ffffff "
 }

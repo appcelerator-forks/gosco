@@ -12,14 +12,18 @@
 Alloy.Globals.tabgroup = undefined;
 Alloy.Globals.schooltabgroup = undefined;
 
-var openNewWindow = function(win, new_window, tab){
-	console.log('a');
-	console.log(typeof new_window);
+var _ = require('underscore')._;
+var API = require('api');
+var COMMON = require('common'); 
+var PUSH = require('push');
+var DBVersionControl = require('DBVersionControl');
+
+DBVersionControl.checkAndUpdate();
+
+var openNewWindow = function(win, new_window, tab){ 
 	if(typeof Alloy.Globals.tabgroup.activeTab != "undefined" && typeof new_window == "undefined"){
-		tab.activeTab.open(win);
-		console.log('b');
-	}else{
-		console.log('c');
+		tab.activeTab.open(win); 
+	}else{ 
 		win.open();
 	}
 };
@@ -56,3 +60,5 @@ function children(key, e){
 		return e;
     }
 }
+
+

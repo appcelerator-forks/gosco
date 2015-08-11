@@ -6,6 +6,6 @@ function do_signup(){
 }
 
 function do_login(){
-	var win = Alloy.createController("index").getView();
+	var win = Alloy.createController("main").getView();
 	win.open(win);
 }
