@@ -23,7 +23,7 @@
 
 
 ".container":{
-	backgroundColor:  "/images/home_background.jpg",
+	backgroundImage:  "/images/home_background.jpg",
 	theme:"Theme.NoActionBar"
 }
 
@@ -35,7 +35,7 @@
 	backgroundImage: "/images/home_background.jpg",
 },
 "#rocketSmoke": {
-	width: 110,
+	width: 130,
 	height: 130,
 	opacity: 0,
 	duration: 0.02,
@@ -45,7 +45,7 @@
 	]
 },
 "#rocketFlight": {
-	width: 110,
+	width: 130,
 	height: 130,
 	opacity: 0,
 	duration: 0.02,

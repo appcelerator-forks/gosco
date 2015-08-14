@@ -7,6 +7,87 @@ exports.deconstruct = function(){
 	mainView = null;
 };
 
+
+exports.hideLoading = function(){
+	mainView.activityIndicator.hide();
+	mainView.loadingBar.opacity = "0";
+	mainView.loadingBar.height = "0";
+	mainView.loadingBar.top = "0"; 
+};
+
+exports.showLoading = function(){ 
+	mainView.activityIndicator.show();
+	mainView.loadingBar.opacity = 1;
+	mainView.loadingBar.zIndex = 100;
+	mainView.loadingBar.height = 120;
+	 
+	if(Ti.Platform.osname == "android"){
+		mainView.loadingBar.top =  (DPUnitsToPixels(Ti.Platform.displayCaps.platformHeight) / 2) -50; 
+		mainView.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG;
+		//mainView.activityIndicator.top = 0; 
+	}else if (Ti.Platform.name === 'iPhone OS'){
+		mainView.loadingBar.top = (Ti.Platform.displayCaps.platformHeight / 2) -50; 
+		mainView.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+};
+
+exports.showLoadingFull = function(){ 
+	var loadingBarView = Ti.UI.createView({
+		layout: "vertical",
+		height: 120,
+		width: 120,
+		borderRadius: 15,
+		backgroundColor: "#2E2E2E",
+		id:"loadingBar",
+		zIndex:99
+	});
+	var activityIndicator = Ti.UI.createActivityIndicator({    
+	  top:30,
+	  left:30,
+	  width:60, 
+	});
+	if(Ti.Platform.osname == "android"){ 
+		activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (Ti.Platform.name === 'iPhone OS'){ 
+		activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+	activityIndicator.show();
+	var loadingLabel = Ti.UI.createLabel({
+		top:5,
+		text : "Loading ...",
+		color: "#ffffff"
+	});
+	loadingBarView.add(activityIndicator);
+	loadingBarView.add(loadingLabel);
+	
+	return loadingBarView;
+};
+
+exports.noRecord = function(){
+	var data = [];
+	var row = Titanium.UI.createTableViewRow({
+		touchEnabled: false,
+		backgroundColor: 'transparent' 
+	});
+		 
+	var tblView = Ti.UI.createView({
+		height: 'auto'//parseInt(Ti.Platform.displayCaps.platformHeight) -100
+	}); 
+
+	var noRecord = Ti.UI.createLabel({ 
+		text: "No record found", 
+		color: '#375540', 
+		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+		 font:{fontSize:14,fontStyle:'italic'},
+		top: 15,
+		width: "100%"
+	});
+	tblView.add(noRecord); 
+	row.add(tblView); 
+	data.push(row);
+	return data;
+};
+
 function openWindow(win){
 	if(Ti.Platform.osname == "android"){
 	  	win.open(); //{fullscreen:false, navBarHidden: false}
@@ -104,4 +185,73 @@ exports.timeFormat = function(datetime){
 	
 	newFormat = date[2]+"/"+date[1]+"/"+date[0] + " "+ time[0]+":"+time[1]+ " "+ ampm;
 	return newFormat;
+};
+
+exports.modalView = function(title, contentView){ 
+		var myModal = Ti.UI.createWindow({
+			title	: title,
+			backgroundColor : '#FFFFFF',
+			height: Ti.UI.FILL,
+			width: Ti.UI.FILL,
+			navBarHidden : true,
+			fullscreen	 :true
+		});
+		var leftBtn = Ti.UI.createButton({
+			title: "Close",
+			color: "#10844D",
+			left: 10,
+			top: 5,
+		});
+		
+	 
+		var loadingBarView = COMMON.showLoadingFull();
+		myModal.add(loadingBarView);
+		var wrapperView    = Ti.UI.createView({
+			layout:"vertical",
+			height: Ti.UI.FILL
+		}); 
+		// Full screen
+		var topView = Ti.UI.createView({  // Also full screen
+		    backgroundColor : '#EEEEEE',
+		    top         : 0,
+		    layout		: "horizontal",
+		    height		: 40
+		}); 
+		
+		var viewLabel = Ti.UI.createView({  // Also full screen
+		   	width 		: Ti.UI.FILL, 
+		    height		: 40 
+		}); 
+		
+		var titleLabel = Ti.UI.createLabel({
+			height: Ti.UI.SIZE,
+			width : Ti.UI.FILL,
+			textAlign : "center",
+			top: 10,
+			color: "#646464",
+			text: 	title,
+		});
+		viewLabel.add(titleLabel);
+		var containerView  = Ti.UI.createView({  // Set height appropriately
+		    height          : Ti.UI.FILL,
+		    width			: Ti.UI.FILL,
+		    
+		});
+		  
+		topView.add(leftBtn); 
+		topView.add(viewLabel); 
+		containerView.add(contentView); 
+		wrapperView.add(topView);
+	 	
+		wrapperView.add(containerView); 
+		myModal.add(wrapperView); 
+		myModal.open({
+			modal : true
+		});
+		leftBtn.addEventListener('click',function(ex){
+			myModal.close({animated: true});
+			loadingBarView = null;
+		});		
+		
+	return loadingBarView;
 };

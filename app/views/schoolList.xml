@@ -1,0 +1,19 @@
+<Alloy> 
+	
+		<Window title="School List" id="schoolListWin" >
+			
+			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
+		        <ActivityIndicator id="activityIndicator" />
+		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
+			</View>
+			<View class="vert">
+				<View backgroundColor="#EEEEEE" top="0" layout="horizontal" height="40">
+					<Button title="X" onClick="closeWin" color="#10844D" left="10" top="5" />
+					<Label color="#10844D">School List</Label>
+				</View>
+				<View class="wfill hfill vert" id="schoolContainer"  backgroundImage="/images/home_background.jpg">
+					 
+				</View>
+			</View>
+		</Window> 
+</Alloy>

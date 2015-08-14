@@ -19,7 +19,9 @@ function loadingViewFinish(){
 function init(){
 	var user = require("user"); 
 	if(user.checkAuth()){
-		$.tabGroup.open();
+	//	$.tabGroup.open();
+		var win = Alloy.createController("main").getView();
+    	openNewWindow(win);
 	}
 }
 

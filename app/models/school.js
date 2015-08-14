@@ -36,8 +36,37 @@ exports.definition = {
 			// extended functions and properties go here
 			getSchoolList : function(){
 				var collection = this;
-                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1'" ;
-                
+				var arr = []; 
+				var lvlpick = Ti.App.Properties.getString('LevelPick');  
+				var typepick = Ti.App.Properties.getString('TypePick');  
+				var statepick = Ti.App.Properties.getString('StatePick'); 
+				
+				if(lvlpick == null && typepick == null && statepick == null ){
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND level=1 AND school_type=1 AND state='wp'" ;
+					 
+				}else{
+					var str ="";
+					if(lvlpick != null){ 
+						lvlpick = parseInt(lvlpick) +1;
+						str += " AND level='"+lvlpick+"'";
+					} 
+					if(typepick != null){ 
+						typepick = parseInt(typepick) +1;
+						str += " AND school_type='"+typepick+"'";
+					}
+					if(statepick != null){ 
+						var st;
+						if(statepick == "0"){
+							st = "wp";
+						}
+						if(statepick == "1"){
+							st = "sl";
+						}
+						str += " AND state='"+st+"'";
+					}
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' " + str ; 
+				} 
+				console.log(sql);
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
                 	db.file.setRemoteBackup(false);
@@ -45,7 +74,7 @@ exports.definition = {
                 //	return;
                 var res = db.execute(sql);
                 
-                var arr = []; 
+                
                 var count = 0;
                 while (res.isValidRow()){
 					arr[count] = {

@@ -28,10 +28,7 @@ overrode the settings with other TSS, XML, or JS settings:
 'Label': {
 	color: '#0c0e15',
 	width: Ti.UI.FILL,
-	height: Ti.UI.SIZE,
-	font: {
-		fontSize: 12
-	}
+	height: Ti.UI.SIZE, 
 }
 
 'TableView':{
@@ -118,7 +115,11 @@ overrode the settings with other TSS, XML, or JS settings:
 		fontSize: 18
 	}
 }
-
+'.font_regular':{
+	font:{
+		fontSize: 16
+	}
+}
 '.font_medium':{
 	font:{
 		fontSize: 14
@@ -138,3 +139,20 @@ overrode the settings with other TSS, XML, or JS settings:
 '.font_light_white':{
 	color: "#ffffff "
 }
+'.left' :{
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
+}
+'.right' :{
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+}
+'.center' :{
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
+}
+'.themeColor' : {
+	color: "#10844D"
+}
+"#activityIndicator" : { 
+	 top:30,
+	 left:30,
+	 width:60,
+},

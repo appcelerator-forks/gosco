@@ -24,7 +24,9 @@ var openNewWindow = function(win, new_window, tab){
 	if(typeof Alloy.Globals.tabgroup.activeTab != "undefined" && typeof new_window == "undefined"){
 		tab.activeTab.open(win); 
 	}else{ 
-		win.open();
+		win.open({
+			modal:true
+		});
 	}
 };
 
@@ -61,4 +63,8 @@ function children(key, e){
     }
 }
 
+//
+Alloy.Globals.SchoolLevel =  [ 'Primary School', 'Secondary School', 'College','Cancel'];
+Alloy.Globals.SchoolType =  [ 'Kebangsaan', 'Jenis Kebangsaan', 'Private/International','Cancel'];
+Alloy.Globals.SchoolState =  [ 'Kuala Lumpur','Selangor','Cancel'];
 

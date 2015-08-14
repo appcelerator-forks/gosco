@@ -12,7 +12,9 @@ var getSchoolList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USE
 var getTuitionList   	= "http://"+API_DOMAIN+"/gosco/api/getTuitionList?user="+USER+"&key="+KEY; 
 
 var deviceInfoUrl       = "http://"+API_DOMAIN+"/gosco/api/getDeviceInfo?user="+USER+"&key="+KEY;
-var getMerchantListByCategory  = "http://"+API_DOMAIN+"/api/getMerchantListByCategory?user="+USER+"&key="+KEY;
+var doLoginUrl  		= "http://"+API_DOMAIN+"/gosco/api/doLogin?user="+USER+"&key="+KEY;
+var doSignUpUrl  		= "http://"+API_DOMAIN+"/gosco/api/doSignUp?user="+USER+"&key="+KEY;
+
 //API that call in sequence 
 var APILoadingList = [
 	{url: getSchoolList, model: "school", checkId: "1"},
@@ -76,6 +78,59 @@ exports.getDeviceInfo = function(ex){
 	var _result = contactServerByPost(url,records);   
 	_result.onload = function(e) { 
 		 
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
+
+// Do login
+exports.doLogin = function(ex){ 
+	var url = doLoginUrl+"&username="+ex.username+"&password="+ex.password;
+	console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText);
+		COMMON.hideLoading(); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data[0]);
+			return false;
+		}else{
+			var userModel = Alloy.createCollection('user'); 
+			var arr = result.data; 
+			userModel.saveArray(arr);
+	   		Ti.App.Properties.setString('user_id', arr.id);
+	   		Ti.App.Properties.setString('fullname', arr.fullname);
+			var win = Alloy.createController("main").getView();
+			openNewWindow(win);
+		}
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
+// Do Sign Up
+exports.doSignUp = function(ex,mainView){
+	 
+	var url = doSignUpUrl+"&fullname="+ex.fullname+"&email="+ex.email+"&mobile="+ex.mobile+"&username="+ex.username+"&password="+ex.password+"&confirmation="+ex.password;
+	console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText);
+		COMMON.hideLoading(); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data);
+			return false;
+		}else{
+			var userModel = Alloy.createCollection('user'); 
+			var arr = result.data; 
+			userModel.saveArray(arr);
+	   	
+			COMMON.createAlert("Success", "Gosco account registration successful!");
+			Alloy.Globals.navWin.closeWindow(mainView.signUpWin); 
+		}
 	};
 	
 	_result.onerror = function(e) { 
