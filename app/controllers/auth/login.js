@@ -4,7 +4,7 @@ COMMON.construct($);
 Alloy.Globals.navWin = $.navWin;
 function do_signup(){
 	var win = Alloy.createController("auth/signup").getView();
-	$.navWin.openWindow(win);
+	COMMON.openWindow(win);
 }
 
 function do_login(){

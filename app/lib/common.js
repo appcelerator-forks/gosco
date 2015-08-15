@@ -66,7 +66,7 @@ exports.showLoadingFull = function(){
 exports.noRecord = function(){
 	var data = [];
 	var row = Titanium.UI.createTableViewRow({
-		touchEnabled: false,
+		touchEnabled: false, 
 		backgroundColor: 'transparent' 
 	});
 		 
@@ -92,7 +92,7 @@ function openWindow(win){
 	if(Ti.Platform.osname == "android"){
 	  	win.open(); //{fullscreen:false, navBarHidden: false}
 	}else{ 
-		var nav = Alloy.Globals.navMenu;
+		var nav = Alloy.Globals.navWin;
 		nav.openWindow(win,{animated:true});  
 	} 
 }
@@ -103,7 +103,7 @@ exports.closeWindow = function(win){
 	if(Ti.Platform.osname == "android"){ 
 	  	win.close(); 
 	}else{ 
-		var nav = Alloy.Globals.navMenu;
+		var nav = Alloy.Globals.navWin;
 		nav.closeWindow(win,{animated:true});  
 	} 
 };

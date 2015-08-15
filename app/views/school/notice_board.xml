@@ -1,10 +1,10 @@
 <Alloy>
-    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    <ScrollView class="wfill hfill vert" backgroundImage="/images/home_background.jpg" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
     	<View class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">
-	    		<Label class="font_big" color="#000000">Basic Information for school</Label>
-	    		<Label>Address: 100, Jalan taman tasik.</Label>
-	    		<Label>Telephone: 03-4040 3432</Label>
+	    		<Label class="font_big themeColor" id="schoolName"></Label>
+	    		<Label id="schoolAddress"></Label>
+	    		<Label id="schoolTel"></Label>
     		</View>
     	</View>
     	<TableView class="wfill hfill padding box" top="0">

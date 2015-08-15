@@ -18,11 +18,7 @@ function loadingViewFinish(){
 
 function init(){
 	var user = require("user"); 
-	if(user.checkAuth()){
-	//	$.tabGroup.open();
-		var win = Alloy.createController("main").getView();
-    	openNewWindow(win);
-	}
+	user.checkAuth();
 }
 
 Ti.App.addEventListener('app:loadingViewFinish', loadingViewFinish);

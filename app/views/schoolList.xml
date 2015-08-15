@@ -6,10 +6,10 @@
 		        <ActivityIndicator id="activityIndicator" />
 		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
 			</View>
+			<Button title="X" zIndex="999" onClick="closeWin" color="#10844D" left="10" top="5" />
 			<View class="vert">
-				<View backgroundColor="#EEEEEE" top="0" layout="horizontal" height="40">
-					<Button title="X" onClick="closeWin" color="#10844D" left="10" top="5" />
-					<Label color="#10844D">School List</Label>
+				<View backgroundColor="#EEEEEE" height="40"> 
+					<Label textAlign="center" color="#10844D">School List</Label>
 				</View>
 				<View class="wfill hfill vert" id="schoolContainer"  backgroundImage="/images/home_background.jpg">
 					 

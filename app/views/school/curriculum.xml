@@ -1,5 +1,5 @@
 <Alloy>
-    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    <ScrollView class="wfill hfill vert" backgroundImage="/images/home_background.jpg" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
     	<View class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">
 	    		<Label class="font_big" color="#000000">Curriculum Notice Board</Label>

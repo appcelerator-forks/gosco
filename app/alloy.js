@@ -33,8 +33,7 @@ var openNewWindow = function(win, new_window, tab){
 function parent(key, e){
 	if(eval("e."+key.name+"") != key.value){
 		if(eval("e.parent."+key.name+"") != key.value){
-			if(eval("e.parent.parent."+key.name+"") != key.value){
-    			console.log("box not found");
+			if(eval("e.parent.parent."+key.name+"") != key.value){ 
     		}else{
     			return e.parent.parent;
     		}
@@ -62,6 +61,41 @@ function children(key, e){
 		return e;
     }
 }
+
+function separateLine(){
+	return seperatorLine = Titanium.UI.createView({ 
+		backgroundColor: "#D5D5D5",
+		height:Ti.UI.FILL, 
+		width:1
+	});
+}
+
+function currentDateTime(){
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth()+1; 
+	var yyyy = today.getFullYear();
+	
+	var hours = today.getHours();
+	var minutes = today.getMinutes();
+	var sec = today.getSeconds();
+	if (minutes < 10){
+		minutes = "0" + minutes;
+	} 
+	if (sec < 10){
+		sec = "0" + sec;
+	} 
+	if(dd<10) {
+	    dd='0'+dd;
+	} 
+	
+	if(mm<10) {
+	    mm='0'+mm;
+	} 
+	
+	datetime = yyyy+'-'+mm+'-'+dd + " "+ hours+":"+minutes+":"+sec;
+	return datetime ;
+} 
 
 //
 Alloy.Globals.SchoolLevel =  [ 'Primary School', 'Secondary School', 'College','Cancel'];

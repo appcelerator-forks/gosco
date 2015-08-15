@@ -151,6 +151,11 @@ overrode the settings with other TSS, XML, or JS settings:
 '.themeColor' : {
 	color: "#10844D"
 }
+".line":{
+	height: '1',
+	backgroundColor: '#ccc',
+	bottom: '0',
+}
 "#activityIndicator" : { 
 	 top:30,
 	 left:30,

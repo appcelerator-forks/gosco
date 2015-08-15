@@ -1,13 +1,13 @@
 <Alloy>
 	<NavigationWindow platform="ios" id="mainWin">
-		<Window id="goscoMain" title="Dashboard">
+		<Window id="goscoMain" title="Dashboard" backgroundImage="/images/home_background.jpg">
 			<LeftNavButton>
 		        <View id="btnLogout" left="0"  width="30" height="35">
 		         	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
 		        </View>
 	        </LeftNavButton>
-		 	<View class=" wfill hfill vert" backgroundImage="/images/home_background.jpg">
-				<View class="vert" top="5" height="60%">
+		 	<View class=" wfill hfill vert"  bottom="160">
+				<View class="vert" top="5" height="auto" >
 					<Label class="padding font_light_white font_big">Notice Board / Announcement</Label>
 					<ScrollView class="vert"   >
 						<View class="padding box" height="100" />
@@ -16,16 +16,16 @@
 						<View class="padding box" height="100" />	
 						<View class="padding box" height="100" />	
 					</ScrollView>
-				</View>
-				<ScrollView class="horz" width="Ti.UI.FILL" height="100" top="5" scrollType="horizontal"> 
-					<View class="small_padding" width="Ti.UI.SIZE" height="Ti.UI.SIZE" >
-						<ImageView onClick="addKid"  width="80" height="80" image="/images/home_add.png" />
-					</View>
-				</ScrollView>
-				
+				</View> 
 			</View>
-			<View class="wfill" backgroundImage="/images/home_search.png" bottom="0" height="120">
-				 
+			<View  layout="horizontal" width="Ti.UI.FILL" height="100"  bottom="60">
+					<ScrollView  id="myKidsContainer" class="horz" width="75%" height="100" scrollType="horizontal" />   
+					<View class="small_padding" right="0" width="70" height="70" >
+						<ImageView onClick="addKid"  width="70" height="70" image="/images/home_add.png" />
+					</View>
+				</View>
+			<View class="wfill" bottom="0" height="Ti.UI.SIZE">
+				 <SearchBar barColor="transparent" id="search" showCancel="true" height="60" top="0" />
 			</View>
 	 	</Window>
 	 </NavigationWindow>

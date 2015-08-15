@@ -1,10 +1,20 @@
 var args = arguments[0] || {};
 var SCHOOL = require('school'); 
 
+/*** Initialize***/ 
 COMMON.construct($);
 SCHOOL.construct($);
-var schoolModel = Alloy.createCollection('school');  
-
+var schoolModel = Alloy.createCollection('school');   
+if(Ti.App.Properties.getString('LevelPick') == null) {
+	Ti.App.Properties.setString('LevelPick',0);
+} 
+if(Ti.App.Properties.getString('TypePick') == null) {
+	Ti.App.Properties.setString('TypePick',0);
+} 
+if(Ti.App.Properties.getString('StatePick') == null) {
+	Ti.App.Properties.setString('StatePick',0);
+}  
+	 
 var listing = [];
 listing = schoolModel.getSchoolList();   
 var bigContainer = $.UI.create('View',{
@@ -138,16 +148,9 @@ function separateHozLine(){
 	});
 }
 
-function separateLine(){
-	return seperatorLine = Titanium.UI.createView({ 
-		backgroundColor: "#D5D5D5",
-		height:Ti.UI.FILL, 
-		width:1
-	});
-}
 
-function filterList(){
-	console.log("filterList");
+
+function filterList(){ 
 	var lvlpick = Ti.App.Properties.getString('LevelPick');  
 	var typepick = Ti.App.Properties.getString('TypePick');  
 	var statepick = Ti.App.Properties.getString('StatePick');  

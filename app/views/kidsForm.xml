@@ -1,17 +1,54 @@
 <Alloy> 
 	
-		<Window title="Kids Information" id="kidsFormWin" >
-			<View class="wfill hfill vert"  backgroundImage="/images/home_background.jpg">
-				<View width="100" height="100" borderRadius="50" backgroundColor="#f5f5f5"   top="20" />
+		<Window title="Kids Information" id="kidsFormWin"  backgroundImage="/images/home_background.jpg">
+			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
+		        <ActivityIndicator id="activityIndicator" />
+		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
+			</View>
+			<View class="wfill hfill vert" >
+				<View width="100" height="100" borderRadius="50"  backgroundColor="#f5f5f5" onClick="takePhoto"  top="20">
+					<ImageView width="100" height="100" borderRadius="50" id="thumbPreview" />
+				</View>
 				
 				<Label class="padding font_light_white font_big" top="10">Tell us more about your kid</Label>
-				<TextField id="name" hintText="Full Name"></TextField>
-				<TextField id="gender" hintText="Kid's Gender"></TextField>
-				<TextField id="dob" hintText="Date Of Birth"></TextField>
-				<TextField id="hobby" hintText="Hobby"></TextField>
-				<TextField id="contact" hintText="Parent Contact No."></TextField>
-				
-				<Label class="padding font_light_white font_big" top="10">Select Kid's School</Label>
+				<View id="table" height="225" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false"> 
+					<View id="tvrName"  height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
+						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
+							<Label text="Kid's Name" top="12" width="25%" class="title_Label"  /> 
+							<TextField borderColor="#ffffff" id="fullname" top="5" bottom='5' right='5' textAlign="right" hintText="Full Name" /> 
+						</View>
+					</View> 
+					<View class="line" />
+					<View id="tvrFieldDate" onClick="showDatePicker" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
+						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
+							<Label text="Birthdate" top="12" width="35%" class="title_Label"  />
+							<Label text="" top="12" color="#707070" id="date_value" textAlign="right" width="50%"  />
+						</View>
+					</View>
+					<View class="line" />
+					<View id="tvrFieldGender" onClick="showGenderPicker" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
+						<View  layout="horizontal" height="45" width="Ti.UI.FILL" >
+							<Label text="Gender" width="35%" top="12" class="title_Label"  />
+							<Label text="" top="12" color="#707070" id="gender_value" textAlign="right" width="50%"   />
+						</View>
+					</View>
+					<View class="line" />
+					<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
+						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
+							<Label text="Hobby" top="12" width="25%" class="title_Label"  /> 
+							<TextField borderColor="#ffffff" id="hobby" top="5" bottom='5' right='5' textAlign="right" hintText="Hobby" /> 
+						</View>
+					</View>  
+					<View class="line" />
+					<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
+						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
+							<Label text="Contact" top="12" width="25%" class="title_Label"  /> 
+							<TextField borderColor="#ffffff" id="contact" top="5" bottom='5' right='5' textAlign="right" keyboardType="Titanium.UI.KEYBOARD_PHONE_PAD" hintText="Parent Contact No." /> 
+						</View>
+					</View>   
+				</View>
+			
+				 
 				<!--<TableView class="wfill hsize">
 					<TableViewRow title="Add School" onClick="showSchool" />
 				</TableView>			
@@ -20,5 +57,8 @@
 				<Button onClick="add_kid" class="button" title="Add Kid"></Button> 
 				
 			</View>
+			<View height="0" id="selectorView" bottom="0" > 
+				 <Picker id="genderPicker" onChange="changeGender"  visible="false" />  
+			</View>	 
 		</Window> 
 </Alloy>
