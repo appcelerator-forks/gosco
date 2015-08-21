@@ -3,11 +3,9 @@ COMMON.construct($);
 Alloy.Globals.navWin = $.mainWin;
 var kidsModel = Alloy.createCollection('kids'); 
 var myKids = kidsModel.getMyKids(Ti.App.Properties.getString('user_id'));
-displayMyKids();
+displayMyKids(); 
 
-
-function displayMyKids(){
-	console.log(myKids.length);
+function displayMyKids(){ 
 	if(myKids.length > 0){ 
 		myKids.forEach(function(entry) {
 			var myKidView = $.UI.create('View',{

@@ -3,7 +3,7 @@ exports.definition = {
 		columns: {
 		    "id": "INTEGER PRIMARY KEY AUTOINCREMENT", 
 		    "k_id": "INTEGER", 
-		    "school_id": "INTEGER",
+		    "e_id": "INTEGER",
 		    "standard": "TEXT",
 		    "class_name": "TEXT", 
 		    'status': "INTEGER",
@@ -44,7 +44,7 @@ exports.definition = {
 					arr = {
 						id: res.fieldByName('id'),
 					    k_id: res.fieldByName('k_id'),
-					    school_id: res.fieldByName('school_id'),
+					    e_id: res.fieldByName('e_id'),
 					    standard: res.fieldByName('standard'),
 					    class_name: res.fieldByName('class_name'),
 					    status: res.fieldByName('status'),
@@ -60,7 +60,7 @@ exports.definition = {
 			
             getSchoolByKids :  function(k_id){
 				var collection = this;
-                var sql = "SELECT s.id AS school_id, s.name, s.level,s.school_type,k.id AS ks_id,* FROM " + collection.config.adapter.collection_name + " k, school s WHERE k.school_id=s.id AND k_id='"+ k_id+ "'" ;
+                var sql = "SELECT s.id AS e_id, s.name, s.level,s.school_type,k.id AS ks_id,* FROM " + collection.config.adapter.collection_name + " k, education s WHERE k.e_id=s.id AND k_id='"+ k_id+ "'" ;
                 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
@@ -74,7 +74,7 @@ exports.definition = {
 					arr[count] = { 
 						id: res.fieldByName('ks_id'),
 					    k_id: res.fieldByName('k_id'),
-					    school_id: res.fieldByName('school_id'),
+					    e_id: res.fieldByName('e_id'),
 					    school_name: res.fieldByName('name'),
 					    school_type: res.fieldByName('school_type'),
 					    level: res.fieldByName('level'),
@@ -102,7 +102,7 @@ exports.definition = {
                  
                 db.execute("BEGIN");
         		arr.forEach(function(entry) {
-		            var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, k_id, school_id,standard,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?,?)";
+		            var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, k_id, e_id,standard,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?,?)";
 					db.execute(sql_query, entry.id, entry.fullname,  entry.u_id,entry.dob ,entry.gender,entry.hobby,entry.contact,entry.img_path,entry.status,entry.created,entry.updated);
 					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET standard=?,class_name=?,status=?,updated=? WHERE id=?";
 					db.execute(sql_query, entry.standard,entry.class_name,entry.status,entry.updated, entry.id);
@@ -113,7 +113,7 @@ exports.definition = {
 			},
 			addNewKidsSchool : function(e){ 
 				var collection = this;
-                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE k_id='"+e.k_id+"' AND school_id='"+e.school_id+"' " ;
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE k_id='"+e.k_id+"' AND e_id='"+e.e_id+"' " ;
  
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
@@ -121,8 +121,8 @@ exports.definition = {
                 }
                 var res = db.execute(sql);
                 if (!res.isValidRow()){
-                	sql_query = "INSERT INTO " + collection.config.adapter.collection_name + " (  k_id, school_id,standard,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?)"; 
-	           		db.execute(sql_query,e.k_id,e.school_id,"","",1,e.created, e.updated );
+                	sql_query = "INSERT INTO " + collection.config.adapter.collection_name + " (  k_id, e_id,standard,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?)"; 
+	           		db.execute(sql_query,e.k_id,e.e_id,"","",1,e.created, e.updated );
 	            } 
 	            db.close();
 	            collection.trigger('sync');

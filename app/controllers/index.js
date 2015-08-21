@@ -1,7 +1,6 @@
 Alloy.Globals.tabgroup = $.tabGroup;
 Alloy.Globals.school_tab = $.school_tab;
-
-
+ 
 /**
  * Lets add a loading animation - Just for Fun!
  */

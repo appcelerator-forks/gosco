@@ -3,6 +3,7 @@ exports.definition = {
 		columns: {
 		    "id": "INTEGER", 
 		    "name": "TEXT",
+		    "education_type": "INTEGER",
 		    "level": "INTEGER",
 		    "address": "TEXT",
 		    "state": "TEXT",
@@ -19,7 +20,7 @@ exports.definition = {
 		},
 		adapter: {
 			type: "sql",
-			collection_name: "school",
+			collection_name: "education",
 			idAttribute: "id"
 		}
 	},
@@ -42,7 +43,7 @@ exports.definition = {
 				var statepick = Ti.App.Properties.getString('StatePick'); 
 				
 				if(lvlpick == null && typepick == null && statepick == null ){
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND level=1 AND school_type=1 AND state='wp'" ;
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND level=1 AND school_type=1 AND state='wp' AND education_type='1' " ;
 					 
 				}else{
 					var str ="";
@@ -66,7 +67,7 @@ exports.definition = {
 					}
 					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' " + str ; 
 				} 
-				console.log(sql);
+				 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
                 	db.file.setRemoteBackup(false);
@@ -79,6 +80,7 @@ exports.definition = {
                 while (res.isValidRow()){
 					arr[count] = {
 						id: res.fieldByName('id'),
+						education_type: res.fieldByName('education_type'),
 					    name: res.fieldByName('name'),
 					    level: res.fieldByName('level'),
 					    address: res.fieldByName('address'),
@@ -118,6 +120,7 @@ exports.definition = {
                 if (res.isValidRow()){
 					arr = {
 						id: res.fieldByName('id'),
+						education_type: res.fieldByName('education_type'),
 					    name: res.fieldByName('name'),
 					    level: res.fieldByName('level'),
 					    address: res.fieldByName('address'),
@@ -150,10 +153,10 @@ exports.definition = {
                 }
                 db.execute("BEGIN");
                 arr.forEach(function(entry) {
-	                var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, name, level,address,state,postcode,contact_no,fax_no,email,longitude,latitude,website,img_path,school_type,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					db.execute(sql_query, entry.id, entry.name, entry.level,entry.address,entry.state ,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.status);
-					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET name=?,level=?,address=?,state=?,postcode=?,contact_no=?,fax_no=?,email=?,longitude=?,latitude=?,website=?,img_path=?,school_type=?,status=? WHERE id=?";
-					db.execute(sql_query,   entry.name,entry.level,entry.address,entry.state,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.status, entry.id);
+	                var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, name,education_type, level,address,state,postcode,contact_no,fax_no,email,longitude,latitude,website,img_path,school_type,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					db.execute(sql_query, entry.id, entry.name,entry.education_type, entry.level,entry.address,entry.state ,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.status);
+					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET name=?,education_type=?,level=?,address=?,state=?,postcode=?,contact_no=?,fax_no=?,email=?,longitude=?,latitude=?,website=?,img_path=?,school_type=?,status=? WHERE id=?";
+					db.execute(sql_query,   entry.name,entry.education_type,entry.level,entry.address,entry.state,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.status, entry.id);
 				});
 				db.execute("COMMIT");
 	            db.close();

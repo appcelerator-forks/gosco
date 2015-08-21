@@ -3,7 +3,7 @@ var FORM = require('form');
 COMMON.construct($);
 FORM.construct($);	
 var kidsModel = Alloy.createCollection('kids'); 
-var kidsSchoolModel = Alloy.createCollection('kidsSchool'); 
+var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 var kid_id = args.kid_id || "";  
 var details = kidsModel.getKidsById(kid_id);
 var pop;
@@ -16,7 +16,7 @@ function init(){
 	}
 	$.thumbPreview.image = details.img_path;
 	$.fullname.text = details.fullname;
-	$.date_value.text = details.dob;
+	$.date_value.text = COMMON.monthFormat(details.dob);
 	$.gender_value.text = gender;
 	$.hobby.text = details.hobby;
 	$.parent_contact.text = details.contact;
@@ -34,20 +34,18 @@ function loadKidsSchool(){
 		title: "Add School"
 	});
 	addSchoolTblRow.addEventListener("click",function(){showSchool();} );
-	ksTable.appendRow(addSchoolTblRow);	
-	
-
-	var ks = kidsSchoolModel.getSchoolByKids(kid_id);   
+	ksTable.appendRow(addSchoolTblRow);	 
+	var ks = kidsEducationModel.getSchoolByKids(kid_id);   
   
   	if(ks.length < 1){  
-		 
+		$.myKidsFormView.add(ksTable);	
 	}else{
 		ks.forEach(function(entry) {
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
 			    height: Ti.UI.SIZE,
 			    source: entry.id, 
-			  	school: entry.school_id,
+			  	school: entry.e_id,
 			    selectedBackgroundColor: "#FFFFFF",
 		 
 			});
@@ -55,21 +53,21 @@ function loadKidsSchool(){
 				layout: "horizontal",
 				height:50,
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				width:Ti.UI.FILL 
 			}); 
 			var tblView = Ti.UI.createView({
 				layout: "vertical",
 				height:Ti.UI.SIZE,
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				width:"58%" 
 			}); 
 			var schoolTitle = $.UI.create('Label',{
 				classes : ['font_medium', 'hsize','themeColor'],
 				text: entry.school_name, 
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				left:4,
 				textAlign:'left',  
 			});	
@@ -80,7 +78,7 @@ function loadKidsSchool(){
 				classes : ['font_small', 'hsize'],
 				text: mySt, 
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				left:4,
 				textAlign:'left',  
 			});	
@@ -94,7 +92,7 @@ function loadKidsSchool(){
 				layout: "vertical",
 				height:Ti.UI.SIZE,
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				width:"20%" 
 			}); 
 			
@@ -102,7 +100,7 @@ function loadKidsSchool(){
 				classes : ['font_medium', 'hsize','themeColor' ],
 				text: "Standard", 
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				top:0,
 				textAlign:'center',  
 			});	
@@ -110,7 +108,7 @@ function loadKidsSchool(){
 				classes : ['font_small', 'hsize' ],
 				text: kidSd, 
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				textAlign:'center',  
 			});	
 			tblStandardView.add(standardName);
@@ -125,14 +123,14 @@ function loadKidsSchool(){
 				layout: "vertical",
 				height:Ti.UI.SIZE,
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				width:"20%" 
 			}); 
 			var className = $.UI.create('Label',{
 				classes : ['font_medium' ,'hsize' ,'themeColor'],
 				text: "Class", 
 				source: entry.id, 
-				school: entry.school_id,
+				school: entry.e_id,
 				top:0,
 				textAlign:'center' 
 			});	
@@ -161,12 +159,13 @@ function loadKidsSchool(){
 		});
 		$.myKidsFormView.add(ksTable);	
 	}
+	
 }
 
 function viewSchoolDetails(e){
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl); 
-	
+	console.log("kid details :"+ res.school);
 	var win = Alloy.createController("school/index",{school_id: res.school}).getView();
 	COMMON.openWindow(win);
 }
@@ -216,7 +215,7 @@ function popUpForm(iType,source_id){
 				item: itemData,
 				type: iType,
 			};
-			kidsSchoolModel.updatePartialRecords(param); 
+			kidsEducationModel.updatePartialRecords(param); 
 			console.log(param);
 			loadKidsSchool();  
 		}else{
@@ -233,12 +232,12 @@ function showSchool(){
 var selectSchool = function(e){ 
 	var param = { 
 		k_id: kid_id, 
-		school_id: e.school,
+		e_id: e.school,
 		status: 1,
 		created: currentDateTime(),
 		updated: currentDateTime()
 	}; 
-	kidsSchoolModel.addNewKidsSchool(param);   
+	kidsEducationModel.addNewKidsSchool(param);   
 	loadKidsSchool();	 
 };
  

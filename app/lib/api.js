@@ -17,9 +17,7 @@ var doSignUpUrl  		= "http://"+API_DOMAIN+"/gosco/api/doSignUp?user="+USER+"&key
 var addKidUrl 			= "http://"+API_DOMAIN+"/gosco/api/addkid?user="+USER+"&key="+KEY;
 //API that call in sequence 
 var APILoadingList = [
-	{url: getSchoolList, model: "school", checkId: "1"},
-	{url: getTuitionList, model: "tuition", checkId: "2"},
- 	
+	{url: getSchoolList, model: "education", checkId: "1"}, 
 ];
 
 /*********************
@@ -45,6 +43,7 @@ exports.loadAPIBySequence = function (ex, counter){
 	  
 	 var url = api['url']+"&last_updated="+last_updated; 
 	 var _result = contactServerByGet(url);    
+	 
 	 _result.onload = function(e) {  
 	 	var res = JSON.parse(this.responseText);
 	 	if(res.status == "Success" || res.status == "success"){

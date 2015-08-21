@@ -4,7 +4,7 @@ var SCHOOL = require('school');
 /*** Initialize***/ 
 COMMON.construct($);
 SCHOOL.construct($);
-var schoolModel = Alloy.createCollection('school');   
+var educationModel = Alloy.createCollection('education');   
 if(Ti.App.Properties.getString('LevelPick') == null) {
 	Ti.App.Properties.setString('LevelPick',0);
 } 
@@ -16,7 +16,7 @@ if(Ti.App.Properties.getString('StatePick') == null) {
 }  
 	 
 var listing = [];
-listing = schoolModel.getSchoolList();   
+listing = educationModel.getSchoolList();   
 var bigContainer = $.UI.create('View',{
 	classes: ['hfill','wfill','vert']
 });
@@ -146,9 +146,7 @@ function separateHozLine(){
 		height:1, 
 		width:Ti.UI.FILL
 	});
-}
-
-
+} 
 
 function filterList(){ 
 	var lvlpick = Ti.App.Properties.getString('LevelPick');  
@@ -158,7 +156,7 @@ function filterList(){
 		
 	}else{
 		COMMON.showLoading();
-		listing = schoolModel.getSchoolList();   
+		listing = educationModel.getSchoolList();   
  		createSchoolList(); 
 	}
 	

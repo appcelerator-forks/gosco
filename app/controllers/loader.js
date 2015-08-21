@@ -3,7 +3,6 @@ var args = arguments[0] || {};
  * function to start the loading animation
  */
 $.start = function() {
-	console.log('start');
 	//$.overlay.opacity = 0;
 	$.rocketSmoke.opacity = 0.1;
 	$.rocketFlight.opacity = 0;
