@@ -97,6 +97,32 @@ function currentDateTime(){
 	return datetime ;
 } 
 
+function monthFormat(date){
+	var monthNames = [
+        "January", "February", "March",
+        "April", "May", "June", "July",
+        "August", "September", "October",
+        "November", "December"
+    ];
+ 
+    var day = date.split('-'); 
+    if(day[1] == "08"){
+		day[1] = "8";
+	}
+	if(day[1] == "09"){
+		day[1] = "9";
+	}
+    month = parseInt(day[1]) -1;  
+    return day[2]+" "+ monthNames[month]+" "+ day[0];
+}
+
+function escapeSpecialCharacter(msg){ 
+	msg = msg.replace(/<br\/>/g,"\r\n");
+	msg = msg.replace(/\&quot;/g,"'");
+	msg = msg.replace(/\\/g,'');
+	return msg;
+}
+
 //
 Alloy.Globals.SchoolLevel =  [ 'Primary School', 'Secondary School', 'College','Cancel'];
 Alloy.Globals.SchoolType =  [ 'Kebangsaan', 'Jenis Kebangsaan', 'Private/International','Cancel'];

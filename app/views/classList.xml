@@ -1,0 +1,19 @@
+<Alloy> 
+	
+		<Window title="Class List" id="classListWin" >
+			
+			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
+		        <ActivityIndicator id="activityIndicator" />
+		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
+			</View>
+			<Button title="X" zIndex="999" onClick="closeWin" color="#10844D" left="10" top="5" />
+			<View class="vert">
+				<View backgroundColor="#EEEEEE" height="40"> 
+					<Label textAlign="center" color="#10844D">Class List</Label>
+				</View>
+				<View class="wfill hfill vert" id="schoolContainer"  backgroundImage="/images/home_background.jpg">
+					 
+				</View>
+			</View>
+		</Window> 
+</Alloy>

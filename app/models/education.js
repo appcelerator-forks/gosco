@@ -43,7 +43,7 @@ exports.definition = {
 				var statepick = Ti.App.Properties.getString('StatePick'); 
 				
 				if(lvlpick == null && typepick == null && statepick == null ){
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND level=1 AND school_type=1 AND state='wp' AND education_type='1' " ;
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND level=1 AND school_type=1 AND state='wp' AND status=2 AND education_type='1' " ;
 					 
 				}else{
 					var str ="";
@@ -65,7 +65,7 @@ exports.definition = {
 						}
 						str += " AND state='"+st+"'";
 					}
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' " + str ; 
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='2' " + str ; 
 				} 
 				 
                 db = Ti.Database.open(collection.config.adapter.db_name);

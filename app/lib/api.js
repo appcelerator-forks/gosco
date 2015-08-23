@@ -8,16 +8,24 @@ var USER  = 'gosco';
 var KEY   = '206b53047cf312532294f7207789fdggh';
 
 //API when app loading phase
+var getSchoolPost		= "http://"+API_DOMAIN+"/gosco/api/getPostList?user="+USER+"&key="+KEY;
 var getSchoolList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USER+"&key="+KEY;
-var getTuitionList   	= "http://"+API_DOMAIN+"/gosco/api/getTuitionList?user="+USER+"&key="+KEY; 
+var getBannerList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USER+"&key="+KEY;
+var getCurriculumList  	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumList?user="+USER+"&key="+KEY;
+var getSchoolClassList  = "http://"+API_DOMAIN+"/gosco/api/getSchoolClassList?user="+USER+"&key="+KEY;
+var updateKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/updateKidsClass?user="+USER+"&key="+KEY;
+
+//var getTuitionList   	= "http://"+API_DOMAIN+"/gosco/api/getTuitionList?user="+USER+"&key="+KEY; 
 var getKidByUserList    = "http://"+API_DOMAIN+"/gosco/api/getKidByUser?user="+USER+"&key="+KEY; 
+var getKidsClassByUser  = "http://"+API_DOMAIN+"/gosco/api/getKidsClassByUser?user="+USER+"&key="+KEY; 
 var deviceInfoUrl       = "http://"+API_DOMAIN+"/gosco/api/getDeviceInfo?user="+USER+"&key="+KEY;
 var doLoginUrl  		= "http://"+API_DOMAIN+"/gosco/api/doLogin?user="+USER+"&key="+KEY;
 var doSignUpUrl  		= "http://"+API_DOMAIN+"/gosco/api/doSignUp?user="+USER+"&key="+KEY;
 var addKidUrl 			= "http://"+API_DOMAIN+"/gosco/api/addkid?user="+USER+"&key="+KEY;
 //API that call in sequence 
 var APILoadingList = [
-	{url: getSchoolList, model: "education", checkId: "1"}, 
+	{url: getSchoolList, model: "education", checkId: "1"},
+	{url: getBannerList, model: "banner", checkId: "2"}, 
 ];
 
 /*********************
@@ -60,7 +68,7 @@ exports.loadAPIBySequence = function (ex, counter){
 	 
 	 // function called when an error occurs, including a timeout
 	 _result.onerror = function(e) { 
-	 	console.log("API getCategoryList fail, skip sync with server");
+	 	 
 	    API.loadAPIBySequence(ex, counter);
 	 }; 
 };
@@ -83,11 +91,90 @@ exports.getDeviceInfo = function(ex){
 	};
 };
 
+exports.updateKidsClass = function(ex){
+	var url = updateKidsClass+"&k_id="+ex.k_id+"&ec_id="+ex.item+"&e_id="+ex.e_id;
+ 
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		
+	};
+};
+
+//Get school announcement / awards
+exports.getSchoolPost = function(e_id){
+	var url = getSchoolPost+"&e_id="+e_id;
+	var _result = contactServerByGet(url);   
+	
+	_result.onload = function(e) { 
+		var res = JSON.parse(this.responseText);  
+	    if(res.status == "success"){	  
+			 var postData = res.data; 
+			 if(postData != ""){ 
+			 	 var post = res.data.post;  
+				 var post_model = Alloy.createCollection('post');  
+				 post_model.addPost(post);
+				 
+				 var post_element_model = Alloy.createCollection('post_element');  
+				 post_element_model.addElement(post);
+				  
+			 } 
+			 
+			// Ti.App.fireEvent('endLoad'); 
+	     }
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
+//Get school class
+exports.getSchoolClassList = function(e_id){
+	 
+	var url = getSchoolClassList+"&e_id="+e_id;
+	//console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data[0]);
+			return false;
+		}else{
+			var educationClassModel = Alloy.createCollection('education_class'); 
+			var arr = result.data; 
+			 
+			educationClassModel.saveArray(arr); 
+		}
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
+//Get curriculum list
+exports.getCurriculumList = function(e_id){
+	var url = getCurriculumList+"&e_id="+e_id;
+	// console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data[0]);
+			return false;
+		}else{
+			var curriculumModel = Alloy.createCollection('curriculum'); 
+			var arr = result.data;  
+			curriculumModel.saveArray(arr); 
+		}
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
 
 // Do login
 exports.doLogin = function(ex){ 
 	var url = doLoginUrl+"&username="+ex.username+"&password="+ex.password;
-	console.log(url);
+	 
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
@@ -104,7 +191,7 @@ exports.doLogin = function(ex){
 	   		
 	   		//UPDATE / SYNC kids from server
 	   		API.getKidByUser({login: 1});
-			
+			API.getKidsClassByUser();
 		}
 	};
 	
@@ -112,9 +199,9 @@ exports.doLogin = function(ex){
 	};
 };
 
+
 exports.getKidByUser = function(ex){
-	var url = getKidByUserList+"&u_id="+Ti.App.Properties.getString('user_id');
-	console.log(url);
+	var url = getKidByUserList+"&u_id="+Ti.App.Properties.getString('user_id'); 
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
@@ -135,16 +222,40 @@ exports.getKidByUser = function(ex){
 	};
 	
 	_result.onerror = function(e) { 
+	}; 
+};
+
+exports.getKidsClassByUser = function(ex){
+	var url = getKidsClassByUser+"&u_id="+Ti.App.Properties.getString('user_id'); 
+	//console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText);
+		 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data);
+			return false;
+		}else{
+			var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
+			kidsEducationModel.resetData(); 
+			var arr = result.data; 
+			arr.forEach(function(entry) {
+				API.getSchoolClassList(entry.e_id);
+				API.getCurriculumList(entry.e_id);  
+			});
+			 
+			kidsEducationModel.saveArray(arr);   
+		}
 	};
 	
-	
+	_result.onerror = function(e) { 
+	}; 
 };
 
 // Do Sign Up
-exports.doSignUp = function(ex,mainView){
-	 
+exports.doSignUp = function(ex,mainView){ 
 	var url = doSignUpUrl+"&fullname="+ex.fullname+"&email="+ex.email+"&mobile="+ex.mobile+"&username="+ex.username+"&password="+ex.password+"&confirmation="+ex.password;
-	console.log(url);
+	//console.log(url);
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
@@ -167,7 +278,8 @@ exports.doSignUp = function(ex,mainView){
 };
 
 // Do save Kids
-exports.saveKids = function(ex,mainView){
+exports.saveKids = function(ex,onAPIReturn){
+	 
  	ex.gender = 1;
 	if(ex.gender == "Female"){
 		ex.gender = 2;
@@ -182,18 +294,7 @@ exports.saveKids = function(ex,mainView){
 		var _result = contactServerByPostImage(url+"&photoLoad=1", ex.photo);   
 	} 
 	_result.onload = function(e) { 
-		var result = JSON.parse(this.responseText);
-		COMMON.hideLoading(); 
-		if(result.status == "error"){
-			COMMON.createAlert("Error", result.data);
-			return false;
-		}else{
-			var kidsModel = Alloy.createCollection('kids'); 
-			var arr = result.data;  
-			kidsModel.saveArray(arr); 
-			COMMON.createAlert("Success", "Your kid is added successfully!");
-			COMMON.closeWindow(mainView.kidsFormWin); 
-		}
+		onAPIReturn(this.responseText); 
 	};
 	
 	_result.onerror = function(e) { 

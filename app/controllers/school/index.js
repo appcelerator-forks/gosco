@@ -3,8 +3,9 @@ var args = arguments[0] || {};
 COMMON.construct($); 
 var school_id = args.school_id || ""; 
 init();
-function init(){  console.log(school_id);
+function init(){   
 	$.noticeBoardDetailsView.init({school_id:school_id}); 
+	$.curriculumDetailsView.init({school_id:school_id}); 
 }
 
 function backToHome(){

@@ -23,18 +23,16 @@ function createOptions(title,options,onSelected){
 		width:'33%', 
 	});
 	var theLabel = mainView.UI.create('Label',{
-		classes: [ 'center', 'font_regular', 'small_padding', 'font_light_white'],
+		classes: [ 'center', 'font_small', 'small_padding'],
+		color: "#D5D5D5",
 		text : title+" :",
 		width:'100%', 
 	});
 	
 	var theTextLabel = mainView.UI.create('Label',{
-		classes: [ 'center', 'font_medium','font_light_white'],
-		text : myselected,
-		top:0,
-		left:4,
-		right:4,
-		width:'100%', 
+		classes: [ 'center', 'font_12','font_light_white'],
+		text : myselected, 
+		width:Ti.UI.SIZE, 
 	});
 	theView.add(theLabel);
 	theView.add(theTextLabel);

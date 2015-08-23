@@ -9,12 +9,8 @@
 		 	<View class=" wfill hfill vert"  bottom="160">
 				<View class="vert" top="5" height="auto" >
 					<Label class="padding font_light_white font_big">Notice Board / Announcement</Label>
-					<ScrollView class="vert"   >
-						<View class="padding box" height="100" />
-						<View class="padding box" height="100" />	
-						<View class="padding box" height="100" />	
-						<View class="padding box" height="100" />	
-						<View class="padding box" height="100" />	
+					<ScrollView class="vert" id="latestBoardView" >
+						 
 					</ScrollView>
 				</View> 
 			</View>

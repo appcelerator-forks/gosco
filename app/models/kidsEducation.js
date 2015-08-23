@@ -3,8 +3,7 @@ exports.definition = {
 		columns: {
 		    "id": "INTEGER PRIMARY KEY AUTOINCREMENT", 
 		    "k_id": "INTEGER", 
-		    "e_id": "INTEGER",
-		    "standard": "TEXT",
+		    "e_id": "INTEGER", 
 		    "class_name": "TEXT", 
 		    'status': "INTEGER",
 		    "created"  : "TEXT",
@@ -13,7 +12,7 @@ exports.definition = {
 	  
 		adapter: {
 			type: "sql",
-			collection_name: "kidsSchool",
+			collection_name: "kidsEducation",
 			idAttribute: "id"
 		}
 	},
@@ -44,8 +43,7 @@ exports.definition = {
 					arr = {
 						id: res.fieldByName('id'),
 					    k_id: res.fieldByName('k_id'),
-					    e_id: res.fieldByName('e_id'),
-					    standard: res.fieldByName('standard'),
+					    e_id: res.fieldByName('e_id'), 
 					    class_name: res.fieldByName('class_name'),
 					    status: res.fieldByName('status'),
 					    created: res.fieldByName('created'), 
@@ -57,10 +55,9 @@ exports.definition = {
                 collection.trigger('sync');
                 return arr;
 			},
-			
-            getSchoolByKids :  function(k_id){
+			getSchoolList :  function(){
 				var collection = this;
-                var sql = "SELECT s.id AS e_id, s.name, s.level,s.school_type,k.id AS ks_id,* FROM " + collection.config.adapter.collection_name + " k, education s WHERE k.e_id=s.id AND k_id='"+ k_id+ "'" ;
+                var sql = "SELECT DISTINCT(e_id) FROM " + collection.config.adapter.collection_name ;
                 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
@@ -71,21 +68,48 @@ exports.definition = {
                 var arr = []; 
                 var count = 0;
                 while (res.isValidRow()){
-					arr[count] = { 
-						id: res.fieldByName('ks_id'),
-					    k_id: res.fieldByName('k_id'),
-					    e_id: res.fieldByName('e_id'),
-					    school_name: res.fieldByName('name'),
-					    school_type: res.fieldByName('school_type'),
-					    level: res.fieldByName('level'),
-					    standard: res.fieldByName('standard'),
-					    class_name: res.fieldByName('class_name'),
-					    status: res.fieldByName('status'),
-					    created: res.fieldByName('created'), 
-					    updated: res.fieldByName('updated') 
+					arr[count] = {  
+					    e_id: res.fieldByName('e_id') 
 					};
 					res.next();
 					count++;
+				} 
+				res.close();
+                db.close();
+                collection.trigger('sync');
+                return arr;
+			},
+            getSchoolByKids :  function(k_id){
+				var collection = this;
+                var sql = "SELECT s.id AS e_id, s.name, s.level,s.school_type,k.id AS ks_id,*,es.className AS cName,es.year FROM " + collection.config.adapter.collection_name + " k, education s, education_class es WHERE k.e_id=s.id AND es.id=k.class_name AND k.k_id='"+ k_id+ "'" ;
+                
+                db = Ti.Database.open(collection.config.adapter.db_name);
+                if(Ti.Platform.osname != "android"){
+                	db.file.setRemoteBackup(false);
+				}
+                //	return;
+                var res = db.execute(sql);
+                var arr = []; 
+                var count = 0;
+               	var year = new Date().getFullYear(); 
+                while (res.isValidRow()){
+                	if(res.fieldByName('year') == year){
+						arr[count] = {   
+							id: res.fieldByName('ks_id'),
+						    k_id: res.fieldByName('k_id'),
+						    e_id: res.fieldByName('e_id'),
+						    school_name: res.fieldByName('name'),
+						    school_type: res.fieldByName('school_type'),
+						    level: res.fieldByName('level'), 
+						    class_name: res.fieldByName('cName'),
+						    status: res.fieldByName('status'),
+						    created: res.fieldByName('created'), 
+						    updated: res.fieldByName('updated') 
+						};
+						count++;
+					}
+					res.next();
+					
 				} 
 				res.close();
                 db.close();
@@ -102,10 +126,10 @@ exports.definition = {
                  
                 db.execute("BEGIN");
         		arr.forEach(function(entry) {
-		            var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, k_id, e_id,standard,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?,?)";
-					db.execute(sql_query, entry.id, entry.fullname,  entry.u_id,entry.dob ,entry.gender,entry.hobby,entry.contact,entry.img_path,entry.status,entry.created,entry.updated);
-					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET standard=?,class_name=?,status=?,updated=? WHERE id=?";
-					db.execute(sql_query, entry.standard,entry.class_name,entry.status,entry.updated, entry.id);
+        			 console.log(entry);
+		            var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, k_id, e_id,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?)";
+					db.execute(sql_query, entry.id, entry.k_id,  entry.e_id,entry.ec_id ,entry.status, entry.created,entry.updated);
+				 
 			 	});
 				db.execute("COMMIT");
 	            db.close();
@@ -121,8 +145,8 @@ exports.definition = {
                 }
                 var res = db.execute(sql);
                 if (!res.isValidRow()){
-                	sql_query = "INSERT INTO " + collection.config.adapter.collection_name + " (  k_id, e_id,standard,class_name,status,created,updated) VALUES (?,?,?,?,?,?,?)"; 
-	           		db.execute(sql_query,e.k_id,e.e_id,"","",1,e.created, e.updated );
+                	sql_query = "INSERT INTO " + collection.config.adapter.collection_name + " (  k_id, e_id, class_name,status,created,updated) VALUES (?,?,? ,?,?,?)"; 
+	           		db.execute(sql_query,e.k_id,e.e_id, "",1,e.created, e.updated );
 	            } 
 	            db.close();
 	            collection.trigger('sync');
@@ -135,18 +159,23 @@ exports.definition = {
                 if(Ti.Platform.osname != "android"){
                 	db.file.setRemoteBackup(false);
                 }
-                
-                if(item.type == "standard"){
-                	 var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET standard=?,updated=? WHERE id=?";
-				}
-               	
-               	if(item.type == "class"){
-                	 var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET class_name=?,updated=? WHERE id=?";
-				}
-                db.execute(sql_query,  item.item,currentDateTime(), item.id);
+                 
+                var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET class_name=?,updated=? WHERE id=?";
+			 	db.execute(sql_query,  item.item, currentDateTime(), item.id);
                 db.close();
 	            collection.trigger('sync');
 			},
+			resetData : function(e){
+            	var collection = this;
+                var sql = "DELETE FROM " + collection.config.adapter.collection_name;
+                db = Ti.Database.open(collection.config.adapter.db_name);
+                if(Ti.Platform.osname != "android"){
+                	db.file.setRemoteBackup(false);
+                }
+                db.execute(sql);
+                db.close();
+                collection.trigger('sync');
+            }
 		});
 
 		return Collection;

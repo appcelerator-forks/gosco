@@ -44,7 +44,9 @@
 						</View>   
 					</View>
 					
-					<View  height="Ti.UI.SIZE" class="wfill vert" id="myKidsFormView" />
+					<View  height="Ti.UI.SIZE" class="wfill vert" id="myKidsSchoolView" />
+					
+					<View  height="Ti.UI.SIZE" class="wfill vert" id="myKidsTuitionView" />
 				</ScrollView>
 			</View>
 			 

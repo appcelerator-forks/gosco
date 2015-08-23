@@ -100,9 +100,25 @@ var add_kid = function(){
 		photo : imgBlob, 
 		type : "kid" 
 	};
- 	API.saveKids(params,$);
+ 	API.saveKids(params,onAPIReturn);
 	 
 }; 
+
+function onAPIReturn(responseText){
+	var result = JSON.parse(responseText);
+	COMMON.hideLoading(); 
+	if(result.status == "error"){
+		COMMON.createAlert("Error", result.data);
+		return false;
+	}else{
+		var kidsModel = Alloy.createCollection('kids'); 
+		var arr = result.data;  
+		kidsModel.saveArray(arr); 
+		COMMON.createAlert("Success", "Your kid is added successfully!");
+		Ti.App.fireEvent('refreshKids');
+		COMMON.closeWindow($.kidsFormWin); 
+	}
+}
 //
 function takePhoto(){
 	 FORM.loadPhoto($.thumbPreview, "","");

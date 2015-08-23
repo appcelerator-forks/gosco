@@ -31,6 +31,45 @@ exports.showLoading = function(){
 	}  
 };
 
+exports.displayHTMLArticle = function(msg){
+	var str = '<html  style=" overflow: hidden;">';
+	str += '<head>';
+	str += '<meta name="viewport" content="user-scalable=0">';
+	str += '<script src="jquery.min.js"></script>';
+	str += '<style>';
+	str += 'html{ -webkit-user-select: none}';
+	str += 'a{ text-decoration:none;color:"#EABD2A"} ';
+	str += '</style>';
+	str += '</head>';
+	str += '<body style="overflow: hidden;font-size:14px;color:#676767; font-family:arial;">';
+	str += '<div id="myContent" style="">'+msg; 
+	str += '</div>';
+	str += '</body>';
+	str += '</html>';
+	str += '<script> ';
+	str += 'var contentHeight = $( "div" ).height();';
+	str += '$("html").css("height", contentHeight + 10);';
+	str += ' $("body").css("height", contentHeight);';
+	str += '</script>'; 
+	if (OS_IOS) {
+		return Ti.UI.createWebView({ 
+			html: str,
+			width : Ti.UI.FILL,
+			height: Ti.UI.SIZE,  
+		}) ; 
+	}else{
+		return Ti.UI.createWebView({ 
+			html: str,
+			enableZoomControls : false,
+			overScrollMode : Titanium.UI.Android.OVER_SCROLL_IF_CONTENT_SCROLLS,
+			width : Ti.UI.FILL,
+			height: Ti.UI.SIZE,  
+		}) ; 
+	}
+	
+};
+
+
 exports.showLoadingFull = function(){ 
 	var loadingBarView = Ti.UI.createView({
 		layout: "vertical",
@@ -128,7 +167,10 @@ function createAlert (tt,msg){
 
 exports.openWindow = _.throttle(openWindow, 500, true);
 //exports.closeWindow = _.debounce(closeWindow, 0, true);
-exports.removeAllChildren = _.debounce(removeAllChildren, 0, true);
+exports.removeAllChildren = function(view){
+	removeAllChildren(view);
+};
+ 
 exports.createAlert = _.throttle(createAlert, 500, true);
 
 /***Date Time related and format***/

@@ -47,7 +47,7 @@
 			         	<Button id="backButton" onClick="backToHome" color="#ff0000" title="Back" right="0" />
 			        </View>
 			    </LeftNavButton>
-				<Require src="school/curriculum"></Require>
+				<Require  id="curriculumDetailsView" src="school/curriculum"></Require>
 			</Window>
 		</Tab>
 	</TabGroup>

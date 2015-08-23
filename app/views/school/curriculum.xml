@@ -7,14 +7,10 @@
     		</View>
     	</View>
     	
-    	<TableView class="wfill hfill padding box" top="0">
+    	<TableView id="curriculumTbl" class="wfill hsize padding box" top="0">
     		<SearchBar showCancel="true"></SearchBar>
-    		<TableViewRow hasChild="true" title="Badminton">
-    		</TableViewRow>
-    		<TableViewRow hasChild="true" title="Volley Ball">
-    		</TableViewRow>
-    		<TableViewRow hasChild="true" title="English Society">
-    		</TableViewRow>
+    		
+    		 
     	</TableView>
 	</ScrollView>
 </Alloy>

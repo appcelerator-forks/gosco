@@ -7,21 +7,8 @@
 	    		<Label id="schoolTel"></Label>
     		</View>
     	</View>
-    	<TableView class="wfill hfill padding box" top="0">
-    		<TableViewRow hasChild="true">
-	    		<View class="wfill hsize padding vert">
-	    			<Label>Newsletter of June 2015</Label>
-	    			<Label>Principle say something here</Label>
-	    			<Label class="font_light_grey">3 days ago</Label>
-    			</View>
-    		</TableViewRow>
-    		<TableViewRow hasChild="true">
-	    		<View class="wfill hsize padding vert">
-	    			<Label>Newsletter of June 2015</Label>
-	    			<Label>Principle say something here</Label>
-	    			<Label class="font_light_grey">3 days ago</Label>
-    			</View>
-    		</TableViewRow>
+    	<TableView id="boardTbl" class="wfill hsize padding box" top="0">
+    		 
     	</TableView>
 	</ScrollView>
 </Alloy>

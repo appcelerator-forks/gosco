@@ -22,7 +22,7 @@ var bigContainer = $.UI.create('View',{
 });
 var optionContainer = $.UI.create('View',{
 	classes: [ 'wfill','horz'],
-	height:65
+	height:50
 });
 var schContainer = Ti.UI.createScrollView({
 	width: Ti.UI.FILL,

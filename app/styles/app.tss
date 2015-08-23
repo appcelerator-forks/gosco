@@ -125,7 +125,11 @@ overrode the settings with other TSS, XML, or JS settings:
 		fontSize: 14
 	}
 }
-
+'.font_12':{
+	font:{
+		fontSize: 12
+	}
+}
 '.font_small':{
 	font:{
 		fontSize: 10

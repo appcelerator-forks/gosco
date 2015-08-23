@@ -104,7 +104,7 @@ exports.definition = {
 							caption = caption.replace(/["']/g, "&quot;"); 
 						}
 						
-			       		sql_query = "INSERT INTO "+ collection.config.adapter.collection_name + "(id, post_id, element,caption, type,position) VALUES ("+ele.id+", '"+ele.a_id+"', '"+element+"', '"+caption+"', '"+ele.type+"' , '"+ele.position+"')";
+			       		sql_query = "INSERT INTO "+ collection.config.adapter.collection_name + "(id, post_id, element,caption, type,position) VALUES ("+ele.id+", '"+ele.p_id+"', '"+element+"', '"+caption+"', '"+ele.type+"' , '"+ele.position+"')";
 						 
 					    db.execute(sql_query);
 					 });
