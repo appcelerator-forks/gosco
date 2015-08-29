@@ -7,9 +7,9 @@ exports.checkAuth = function() {
 	if(u_id == "" || u_id == null){
 		var win = Alloy.createController("auth/login").getView();
     	openNewWindow(win);
-	} else {
-    	var win = Alloy.createController("main").getView();
-    	openNewWindow(win);
+	} else { 
+    	var win = Alloy.createController("homepage/index").getView(); 
+    	openModal(win);
     } 
     
 };

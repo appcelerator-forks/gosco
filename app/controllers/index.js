@@ -1,6 +1,6 @@
-Alloy.Globals.tabgroup = $.tabGroup;
-Alloy.Globals.school_tab = $.school_tab;
- 
+//Alloy.Globals.tabgroup = $.tabGroup;
+//Alloy.Globals.school_tab = $.school_tab;
+Alloy.Globals.navWin = $.navWin;
 /**
  * Lets add a loading animation - Just for Fun!
  */

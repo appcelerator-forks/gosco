@@ -4,7 +4,7 @@
 			<Window title="SMK Taman Tasik">
 				<LeftNavButton>
 			        <View>
-			         	<Button id="backButton" onClick="backToHome" color="#ff0000" title="Back" right="0" />
+			         	<Button id="backButton" onClick="backToHome" image="/images/btn-back.png" left="0" />
 			        </View>
 			    </LeftNavButton>
 				<Require id="noticeBoardDetailsView" src="school/notice_board" ></Require>

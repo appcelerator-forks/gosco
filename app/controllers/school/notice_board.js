@@ -66,10 +66,10 @@ function addClickEvent(vw){
 		var res = JSON.parse(elbl); 
 		 
 		var win = Alloy.createController("postDetails", {p_id: res.source}).getView();
-		COMMON.openWindow(win); 
+		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});
 }
 
- exports.init = function(e){
+exports.init = function(e){
  	init(e);
- };
+};

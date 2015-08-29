@@ -7,8 +7,7 @@ var kidsEducationModel = Alloy.createCollection('kidsEducation');
 var kid_id = args.kid_id || "";  
 var details = kidsModel.getKidsById(kid_id);
 var pop; 
-init();
-
+init(); 
 function init(){
 	var gender = "Male";
 	if(details.gender){
@@ -59,7 +58,7 @@ function loadKidsSchool(){
 	addSchoolTblRow.addEventListener("click",function(){showSchool();} );
 	ksTable.appendRow(addSchoolTblRow);	 
 	var ks = kidsEducationModel.getSchoolByKids(kid_id);   
-   console.log(ks);
+    //console.log(ks);
   	if(ks.length < 1){  
 		$.myKidsSchoolView.add(ksTable);	
 	}else{
@@ -159,20 +158,22 @@ function viewSchoolDetails(e){
 	var res = JSON.parse(elbl); 
 	 
 	var win = Alloy.createController("school/index",{school_id: res.school}).getView();
-	COMMON.openWindow(win);
+	//Alloy.Globals.tabgroup.activeTab.open(win);
+	openModal(win);
+	//COMMON.openWindow(win);
 } 
 
 function classPop(e){
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl);    
 	var win = Alloy.createController("classList",{id:res.source ,school:res.school, class_id: res.class_id }).getView();
-	openNewWindow(win); 
+	openModal(win);
 }
  
 
 function showSchool(){  
 	var win = Alloy.createController("schoolList").getView();
-	openNewWindow(win);
+	openModal(win);
 }; 
  
 var selectClass = function(e){

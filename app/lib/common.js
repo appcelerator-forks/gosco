@@ -131,7 +131,7 @@ function openWindow(win){
 	if(Ti.Platform.osname == "android"){
 	  	win.open(); //{fullscreen:false, navBarHidden: false}
 	}else{ 
-		var nav = Alloy.Globals.navWin;
+		var nav = Alloy.Globals.navWin; 
 		nav.openWindow(win,{animated:true});  
 	} 
 }

@@ -215,7 +215,7 @@ exports.getKidByUser = function(ex){
 			kidsModel.saveArray(arr);  
 			
 			if(ex.login == "1"){
-				var win = Alloy.createController("main").getView();
+				var win = Alloy.createController("homepage/index").getView();
 				openNewWindow(win);
 			}
 		}

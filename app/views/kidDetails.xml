@@ -1,6 +1,6 @@
 <Alloy> 
 	
-		<Window title="Kids Details" id="kidDetailWin" backgroundImage="/images/home_background.jpg" >
+		<Window title="Kids Details" id="kidDetailWin" backgroundImage="/images/home_background.jpg">
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
 		    	<Label top="5" class="center" text="Loading" color="#ffffff" />

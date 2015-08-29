@@ -21,13 +21,19 @@ var DBVersionControl = require('DBVersionControl');
 DBVersionControl.checkAndUpdate();
 
 var openNewWindow = function(win, new_window, tab){ 
-	if(typeof Alloy.Globals.tabgroup.activeTab != "undefined" && typeof new_window == "undefined"){
+	if(typeof Alloy.Globals.tabgroup != "undefined" && typeof new_window == "undefined"){
 		tab.activeTab.open(win); 
 	}else{ 
 		win.open({
 			modal:true
 		});
 	}
+};
+
+var openModal = function(win){ 
+	win.open({
+		modal:true
+	});
 };
 
 function parent(key, e){
