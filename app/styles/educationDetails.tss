@@ -1,0 +1,56 @@
+
+"TableViewRow" : {
+  height: Titanium.UI.SIZE,
+},
+".education_name":{
+	height: Titanium.UI.SIZE,
+	width: Titanium.UI.FILL,
+	left: 10,
+	font:{
+		fontSize: 18
+	},
+	color: "#5E5E5E",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER
+},
+
+".education_address":{
+	left: 10,
+	width: "90%", 
+	height: Titanium.UI.SIZE,
+	font:{
+		fontSize: 14
+	},
+	color: "#777777",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+},
+".educationLabelTitle" :{
+	font:{
+		fontWeight: "bold"
+	},
+	color: "#10844D",
+},
+".date":{
+	height: Titanium.UI.SIZE,
+	width: Titanium.UI.FILL,
+	font:{
+		fontSize: 14
+	},
+	color: "#ccc",
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+},
+".category":{
+	font:{
+		fontSize: 14
+	},
+	width: Titanium.UI.FILL,
+	height: Titanium.UI.SIZE,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+},
+".mc":{
+	font:{
+		fontSize: 14
+	},
+	width: Titanium.UI.FILL,
+	height: Titanium.UI.SIZE,
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT
+}

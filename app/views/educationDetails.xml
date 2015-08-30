@@ -1,0 +1,30 @@
+<Alloy>
+	<Window title="" id="win"  backgroundImage="/images/home_background.jpg">
+		<View id="main" layout="vertical"   height="100%" >
+		 <ScrollView layout="vertical"  height="Ti.UI.FILL" width="Ti.UI.FILL" top="0">
+		 	<View width="95%" layout="vertical" backgroundColor="#F5F5F5" height="Ti.UI.SIZE" top="15">
+		 		<Label id="educationName" class="education_name"   bottom="10"/>
+		 		<Label text="Address" class="education_address educationLabelTitle" />
+			 	<Label id="educationAddress" class="education_address" bottom="10" /> 
+			 	
+			 	<Label text="Coordinate" class="education_address educationLabelTitle" />
+			 	<Label id="educationLocation" class="education_address"  bottom="10"   />
+			 	
+			 	<Label text="Telephone/Mobile" class="education_address educationLabelTitle" />
+			 	<Label id="educationTel" class="education_address"  bottom="10"   />
+			 	
+			 	<Label text="Fax" class="education_address educationLabelTitle" />
+			 	<Label id="educationFax" class="education_address"  bottom="10"   /> 
+			 </View>
+		 	
+		 	<View height="1" backgroundColor="#CE1D1C" width="98%" top="10" />
+		 	<TableView id="healthTableData" backgroundColor="#ffffff" height="Ti.UI.SIZE" width="100%" scrollable="false" >
+		 		<TableViewRow height="50" left="10" selectedBackgroundColor="#FFE1E1" color="#5E5E5E" onClick="direction2here" title="Direction To Here"   />
+				<TableViewRow height="50" left="10" selectedBackgroundColor="#FFE1E1" color="#5E5E5E" onClick="clickToCall" title="Call"   />
+	            <TableViewRow height="50" left="10" id="add2contact" selectedBackgroundColor="#FFE1E1" color="#5E5E5E" onClick="addToContact" title="Add To Contact"   />
+			</TableView>
+		 	 
+		 </ScrollView>
+		</View>
+	</Window>
+</Alloy>

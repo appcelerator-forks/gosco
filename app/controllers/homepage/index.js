@@ -6,6 +6,8 @@ COMMON.construct($);
 init();
 function init(){   
 	$.dashboardDetailsView.init();  
+	$.schoolDetailsView.init({educationType : 1});
+	$.tuitionDetailsView.init({educationType : 2});
 }
 
 

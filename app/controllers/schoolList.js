@@ -16,7 +16,7 @@ if(Ti.App.Properties.getString('StatePick') == null) {
 }  
 	 
 var listing = [];
-listing = educationModel.getSchoolList();   
+listing = educationModel.getSchoolList(2,1,"");   
 var bigContainer = $.UI.create('View',{
 	classes: ['hfill','wfill','vert']
 });
@@ -39,8 +39,7 @@ bigContainer.add(optionContainer);
 bigContainer.add(separateHozLine());
 bigContainer.add(schContainer);
 $.schoolContainer.add(bigContainer); 
-
-
+ 
 function createSchoolList(){
 	//COMMON.removeAllChildren(schContainer);
 	var schTable = Ti.UI.createTableView();
@@ -129,6 +128,7 @@ function createSchoolList(){
 	}
 	COMMON.hideLoading();
 	schContainer.add(schTable); 
+	return schContainer;
 }
  
 function addSchoolAction(vw){
@@ -156,7 +156,7 @@ function filterList(){
 		
 	}else{
 		COMMON.showLoading();
-		listing = educationModel.getSchoolList();   
+		listing = educationModel.getSchoolList(2,1,"");   
  		createSchoolList(); 
 	}
 	

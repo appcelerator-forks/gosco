@@ -5,17 +5,17 @@
 				<Require id="dashboardDetailsView" src="homepage/dashboard" ></Require>
 			</Window>
 		</Tab>
-		<Tab color="white" title="School" icon="/images/icons/icon_events.png" activeIcon="/images/icons/icon_events_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+		<Tab color="white" title="School" icon="/images/icons/icon_school.png" activeIcon="/images/icons/icon_school_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="School" backgroundImage="/images/home_background.jpg"> 
-				<Require src="school/events"></Require>
+				<Require id="schoolDetailsView" src="homepage/school"></Require>
 			</Window>
 		</Tab>
-		<Tab title="Tuition Centre" icon="/images/icons/icon_homeworks.png" activeIcon="/images/icons/icon_homeworks_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+		<Tab title="Tuition Centre" icon="/images/icons/icon_tuition.png" activeIcon="/images/icons/icon_tuition_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Tuition Centre" backgroundImage="/images/home_background.jpg"> 
-				<Require src="school/homework"></Require>
+				<Require id="tuitionDetailsView" src="homepage/school"></Require>
 			</Window>
 		</Tab>
-		<Tab title="Others" icon="/images/icons/icon_awards.png" activeIcon="/images/icons/icon_awards_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+		<Tab title="Others" icon="/images/icons/icon_others.png" activeIcon="/images/icons/icon_others_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Others" backgroundImage="/images/home_background.jpg"> 
 				<Require src="school/award"></Require>
 			</Window>

@@ -35,23 +35,37 @@ exports.definition = {
 	extendCollection: function(Collection) {
 		_.extend(Collection.prototype, {
 			// extended functions and properties go here
-			getSchoolList : function(){
+			getSchoolList : function(schStatus, educationType, searchKey){
 				var collection = this;
 				var arr = []; 
 				var lvlpick = Ti.App.Properties.getString('LevelPick');  
 				var typepick = Ti.App.Properties.getString('TypePick');  
 				var statepick = Ti.App.Properties.getString('StatePick'); 
 				
+				var sts = "";
+				if(schStatus != "all"){
+					sts = " AND status="+schStatus;	
+				}
+				
+				var srh = "";
+				if(searchKey != ""){
+					srh = " AND name LIKE '%"+searchKey+"%' ";
+				}
+				
+				var lvlntype = ""; 
 				if(lvlpick == null && typepick == null && statepick == null ){
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND level=1 AND school_type=1 AND state='wp' AND status=2 AND education_type='1' " ;
+					if(educationType == "1"){
+						lvlntype = " AND level=1 AND school_type=1  ";
+					}
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE state='wp' "+sts+" AND education_type='"+educationType+"' " +srh + lvlntype ;
 					 
 				}else{
 					var str ="";
-					if(lvlpick != null){ 
+					if(lvlpick != null && educationType == "1"){ 
 						lvlpick = parseInt(lvlpick) +1;
 						str += " AND level='"+lvlpick+"'";
 					} 
-					if(typepick != null){ 
+					if(typepick != null && educationType == "1"){ 
 						typepick = parseInt(typepick) +1;
 						str += " AND school_type='"+typepick+"'";
 					}
@@ -65,7 +79,8 @@ exports.definition = {
 						}
 						str += " AND state='"+st+"'";
 					}
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='2' " + str ; 
+					 
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE education_type='"+educationType+"' "+sts+" " + str +srh;
 				} 
 				 
                 db = Ti.Database.open(collection.config.adapter.db_name);
@@ -108,7 +123,7 @@ exports.definition = {
 			getSchoolById : function(id){
 				var collection = this;
                 var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE id='"+ id+ "'" ;
-                
+               
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
                 	db.file.setRemoteBackup(false);
