@@ -47,3 +47,7 @@ function doRegister(){
 	COMMON.showLoading();   
 	API.doSignUp(params, $);
 }
+
+function closeWindow(){
+	COMMON.closeWindow($.win); 
+}

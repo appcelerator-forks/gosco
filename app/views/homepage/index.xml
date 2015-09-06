@@ -1,23 +1,29 @@
 <Alloy> 
-	<TabGroup id="tabGroup"  tabsTintColor="#10844D" tabsBackgroundImage="/images/kid_menu_bar1.png" navBarHidden="true">
-		<Tab id="dashboardTab"  title="Dashboard" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="Dashboard" backgroundImage="/images/home_background.jpg" >  
+	<TabGroup id="tabGroup"  tabsTintColor="#10844D" onOpen="doOpen">
+		<Tab id="dashboardTab" tintColor="black" title="Dashboard" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+			<Window id="win1" title="Dashboard" backgroundImage="/images/home_background.jpg" theme="Theme.NoActionBar" > 
+				<LeftNavButton platform="ios">
+				    <View id="btnLogout" left="0"  width="30" height="35">
+				     	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
+				    </View>
+				</LeftNavButton> 
+				 
 				<Require id="dashboardDetailsView" src="homepage/dashboard" ></Require>
 			</Window>
 		</Tab>
 		<Tab color="white" title="School" icon="/images/icons/icon_school.png" activeIcon="/images/icons/icon_school_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="School" backgroundImage="/images/home_background.jpg"> 
-				<Require id="schoolDetailsView" src="homepage/school"></Require>
+				<Require id="schoolDetailsView" src="homepage/education"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Tuition Centre" icon="/images/icons/icon_tuition.png" activeIcon="/images/icons/icon_tuition_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Tuition Centre" backgroundImage="/images/home_background.jpg"> 
-				<Require id="tuitionDetailsView" src="homepage/school"></Require>
+				<Require id="tuitionDetailsView" src="homepage/education"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Others" icon="/images/icons/icon_others.png" activeIcon="/images/icons/icon_others_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Others" backgroundImage="/images/home_background.jpg"> 
-				<Require src="school/award"></Require>
+				<Require id="othersDetailsView" src="homepage/others"></Require>
 			</Window>
 		</Tab>
 	 

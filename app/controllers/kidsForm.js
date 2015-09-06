@@ -37,16 +37,17 @@ function setupPersonalData(){
 		dpView.height=0;
 	});
 	
-	flexSpace = Titanium.UI.createButton({
-	    systemButton:Titanium.UI.iPhone.SystemButton.FLEXIBLE_SPACE
-	}); 
-	toolbar = Titanium.UI.iOS.createToolbar({
-	    items:[  done], 
-	    extendBackground:true,
-	    borderTop:true,
-   		borderBottom:false
-	}); 
-	dpView.add(toolbar);
+	 
+	if(OS_IOS){
+		toolbar = Titanium.UI.iOS.createToolbar({
+		    items:[  done], 
+		    extendBackground:true,
+		    borderTop:true,
+	   		borderBottom:false
+		}); 
+		dpView.add(toolbar);
+	}
+	
 	dpView.add(datePicker);
 	
 	$.selectorView.add(dpView);    
@@ -207,5 +208,8 @@ function changeGender(e){
 	$.genderPicker.visible = "false";
 }
 //		 
+function closeWindow(){
+	COMMON.closeWindow($.win); 
+}
 
 setupPersonalData();

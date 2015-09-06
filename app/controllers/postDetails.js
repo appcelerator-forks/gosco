@@ -168,3 +168,7 @@ function loadPostDetails(){
 	});
 	COMMON.hideLoading();
 }
+
+function closeWindow(){
+	COMMON.closeWindow($.win); 
+}

@@ -1,9 +1,6 @@
 <Alloy>
-	<LeftNavButton>
-	    <View id="btnLogout" left="0"  width="30" height="35">
-	     	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
-	    </View>
-	</LeftNavButton>
+	
+	
 	<View class=" wfill hfill vert"  bottom="160">
 		<View class="vert" top="5" height="auto" >
 			<Label class="padding font_light_white font_big">Notice Board / Announcement</Label>

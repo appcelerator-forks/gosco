@@ -6,6 +6,7 @@ init();
 function init(){   
 	$.noticeBoardDetailsView.init({school_id:school_id}); 
 	$.curriculumDetailsView.init({school_id:school_id}); 
+	$.awardDetailsView.init({school_id:school_id}); 
 }
 
 function backToHome(){

@@ -9,13 +9,15 @@ loadingView.getView().open();
 loadingView.start();
 
 function loadingViewFinish(){
-	loadingView.finish(function(){ 
+	
+	loadingView.finish(function(){
 		init();
 		loadingView = null;
 	});
 }
 
 function init(){
+	console.log("checkAuth");
 	var user = require("user"); 
 	user.checkAuth();
 }

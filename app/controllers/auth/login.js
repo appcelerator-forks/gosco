@@ -1,7 +1,10 @@
 var args = arguments[0] || {};
 COMMON.construct($);
+console.log("load login start");
+if(OS_IOS){
+	Alloy.Globals.navWin = $.navWin;
+}
 
-Alloy.Globals.navWin = $.navWin;
 function do_signup(){
 	var win = Alloy.createController("auth/signup").getView();
 	COMMON.openWindow(win);
@@ -27,4 +30,4 @@ function do_login(){
 	API.doLogin(params, $); 
 	
 }
- 
+ console.log("load login end");

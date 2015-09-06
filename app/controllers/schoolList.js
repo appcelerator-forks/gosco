@@ -134,7 +134,7 @@ function createSchoolList(){
 function addSchoolAction(vw){
 	vw.addEventListener('click', function(e){ 
 		var elbl = JSON.stringify(e.source); 
-		var res = JSON.parse(elbl); 
+		var res = JSON.parse(elbl);  
 	 	Ti.App.fireEvent('selectSchool',{school:res.source });
 	 	$.schoolListWin.close(); 
 	});

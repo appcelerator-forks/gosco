@@ -11,7 +11,7 @@
 				<View backgroundColor="#EEEEEE" height="40"> 
 					<Label textAlign="center" color="#10844D">School List</Label>
 				</View>
-				<View class="wfill hfill vert" id="schoolContainer"  backgroundImage="/images/home_background.jpg">
+				<View class="wfill hfill vert" id="schoolContainer"  >
 					 
 				</View>
 			</View>

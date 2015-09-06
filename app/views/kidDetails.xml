@@ -1,42 +1,41 @@
 <Alloy> 
-	
-		<Window title="Kids Details" id="kidDetailWin" backgroundImage="/images/home_background.jpg">
+		<Window title="Kids Details" id="win"   >
+			<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
 		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
 			</View>
-			<View class="wfill hfill vert" >
-				<View width="100" height="100" borderRadius="50"  backgroundColor="#f5f5f5" top="20">
-					<ImageView width="100" height="100" borderRadius="50" id="thumbPreview" />
-				</View>
+			<View class="wfill hfill vert">
+				<ScrollView scrollType="vertical"  contentHeight="Ti.UI.SIZE"  class="wfill vert hsize">
+					<View width="100" height="100" borderRadius="50"  backgroundColor="#f5f5f5" top="10">
+						<ImageView width="100" height="100" borderRadius="50" id="thumbPreview" />
+					</View>
+					
+					<Label id="fullname" textAlign="center" class="padding themeColor font_big" top="10"></Label> 
 				
-				<Label id="fullname" textAlign="center" class="padding font_light_white font_big" top="10"></Label>
-				
-				<ScrollView scrollType="vertical" contentHeight="Ti.UI.SIZE" height="Ti.UI.FILL" class="wfill vert">
-					<View id="table" height="180" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false">
-						 
-						<View id="tvrFieldDate" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
+					<View id="table" height="180"  backgroundColor="#ffffff" layout="vertical" > 
+						<View id="tvrFieldDate" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
 								<Label text="Birthdate" top="12" width="40%" class="title_Label"  />
 								<Label text="" top="12" color="#707070" id="date_value" textAlign="right" width="50%"  />
 							</View>
 						</View>
 						<View class="line" />
-						<View id="tvrFieldGender" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
+						<View id="tvrFieldGender" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" >
 								<Label text="Gender" width="40%" top="12" class="title_Label"  />
 								<Label text="" top="12" color="#707070" id="gender_value" textAlign="right" width="50%"   />
 							</View>
 						</View>
 						<View class="line" />
-						<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
+						<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
 								<Label text="Hobby" top="12" width="40%" class="title_Label"  /> 
 								<Label text="" top="12" color="#707070" id="hobby" textAlign="right" width="50%"   />  
 							</View>
 						</View>  
 						<View class="line" />
-						<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
+						<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
 								<Label text="Contact" top="12" width="40%" class="title_Label"  /> 
 								<Label text="" top="12" color="#707070" id="parent_contact" textAlign="right" width="50%"   />  
@@ -44,9 +43,9 @@
 						</View>   
 					</View>
 					
-					<View  height="Ti.UI.SIZE" class="wfill vert" id="myKidsSchoolView" />
+					<View class="wfill vert hsize" id="myKidsSchoolView"  />
 					
-					<View  height="Ti.UI.SIZE" class="wfill vert" id="myKidsTuitionView" />
+					<View class="wfill vert hsize" id="myKidsTuitionView"  top="10" />
 				</ScrollView>
 			</View>
 			 

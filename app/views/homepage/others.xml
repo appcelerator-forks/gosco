@@ -1,0 +1,5 @@
+<Alloy>
+	<ScrollView id="bannerSv" class="wfill hfill vert" backgroundImage="/images/home_background.jpg" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    	  
+	</ScrollView>
+</Alloy>

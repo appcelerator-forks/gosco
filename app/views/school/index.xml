@@ -27,7 +27,7 @@
 			         	<Button id="backButton" onClick="backToHome" color="#ff0000" title="Back" right="0" />
 			        </View>
 			    </LeftNavButton>
-				<Require src="school/homework"></Require>
+				<Require id="homeworkDetailsView" src="school/homework"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Awards" icon="/images/icons/icon_awards.png" activeIcon="/images/icons/icon_awards_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
@@ -37,7 +37,7 @@
 			         	<Button id="backButton" onClick="backToHome" color="#ff0000" title="Back" right="0" />
 			        </View>
 			    </LeftNavButton>
-				<Require src="school/award"></Require>
+				<Require id="awardDetailsView" src="school/award"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Curicurum" icon="/images/icons/icon_coccurricula.png" activeIcon="/images/icons/icon_coccurricula_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">

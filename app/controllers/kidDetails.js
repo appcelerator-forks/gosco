@@ -9,6 +9,7 @@ var details = kidsModel.getKidsById(kid_id);
 var pop; 
 init(); 
 function init(){
+	 
 	var gender = "Male";
 	if(details.gender){
 		gender = "Female";
@@ -57,13 +58,12 @@ function loadKidsSchool(){
 	});
 	addSchoolTblRow.addEventListener("click",function(){showSchool();} );
 	ksTable.appendRow(addSchoolTblRow);	 
-	var ks = kidsEducationModel.getSchoolByKids(kid_id);   
-    //console.log(ks);
+	var ks = kidsEducationModel.getSchoolByKids(kid_id); 
+	 
   	if(ks.length < 1){  
 		$.myKidsSchoolView.add(ksTable);	
 	}else{
-		ks.forEach(function(entry) {
-			 
+		ks.forEach(function(entry) { 
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
 			    height: Ti.UI.SIZE,
@@ -110,6 +110,10 @@ function loadKidsSchool(){
 			var kidcn = entry.class_name;
 			if(kidcn == ""){
 				kidcn ="N/A";
+			}else{
+				var educationClassModel = Alloy.createCollection('education_class'); 
+				var ec = educationClassModel.getEducationClassById(entry.class_name);
+				kidcn = ec.className;
 			}
 			var tblClassView = Ti.UI.createView({
 				layout: "vertical",
@@ -165,7 +169,7 @@ function viewSchoolDetails(e){
 
 function classPop(e){
 	var elbl = JSON.stringify(e.source); 
-	var res = JSON.parse(elbl);    
+	var res = JSON.parse(elbl);   
 	var win = Alloy.createController("classList",{id:res.source ,school:res.school, class_id: res.class_id }).getView();
 	openModal(win);
 }
@@ -184,13 +188,13 @@ var selectClass = function(e){
 		item: e.className,
 		k_id : kid_id 
 	};
- 
+ 	
 	kidsEducationModel.updatePartialRecords(param);  
 	API.updateKidsClass(param);
 	loadKidsSchool();  
 };
 
-var selectSchool = function(e){ 
+var selectSchool = function(e){  
 	var param = { 
 		k_id: kid_id, 
 		e_id: e.school,
@@ -198,11 +202,16 @@ var selectSchool = function(e){
 		created: currentDateTime(),
 		updated: currentDateTime()
 	}; 
+ 
 	kidsEducationModel.addNewKidsSchool(param);  
 	API.getSchoolClassList(e.school);
 	API.getCurriculumList(e.school); 
 	loadKidsSchool();	 
 };
- 
+
+function closeWindow(){
+	COMMON.closeWindow($.win); 
+}
+
 Ti.App.addEventListener('selectClass',selectClass);
 Ti.App.addEventListener('selectSchool',selectSchool);

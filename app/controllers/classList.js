@@ -6,6 +6,7 @@ var class_id = args.class_id || "";
 var year = new Date().getFullYear(); 
 var educationClassModel = Alloy.createCollection('education_class'); 
 var listing = []; 
+
 /*** Initialize***/ 
 COMMON.construct($); 
 var schContainer = Ti.UI.createScrollView({
@@ -65,9 +66,8 @@ function createClassList(){
 					
 			});	
 			classTitleView.add(classTitle);
-			tblRowView.add(classTitleView);
-			
-			if(class_id == entry.className){ 
+			tblRowView.add(classTitleView); 
+			if(class_id == entry.id){ 
 				var tickView = $.UI.create('ImageView',{
 					classes : [ 'themeColor','padding'],
 					image:  '/images/tick.png', 
@@ -93,7 +93,7 @@ function createClassList(){
 function addClassAction(vw){
 	vw.addEventListener('click', function(e){ 
 		var elbl = JSON.stringify(e.source); 
-		var res = JSON.parse(elbl);  
+		var res = JSON.parse(elbl);   
 	 	Ti.App.fireEvent('selectClass',{e_id:e_id, className:res.source, ks_id:ks_id });
 	 	$.classListWin.close(); 
 	});

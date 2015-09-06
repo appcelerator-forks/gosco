@@ -1,5 +1,5 @@
 <Alloy>
-    <ScrollView class="wfill hfill vert" backgroundImage="/images/home_background.jpg" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    <ScrollView class="wfill hfill vert"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
     	<View class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">
 	    		<Label class="font_big themeColor" id="schoolName"></Label>
@@ -7,8 +7,6 @@
 	    		<Label id="schoolTel"></Label>
     		</View>
     	</View>
-    	<TableView id="boardTbl" class="wfill hsize padding box" top="0">
-    		 
-    	</TableView>
+    	<TableView id="boardTbl" class="wfill hsize padding box" top="0" /> 
 	</ScrollView>
 </Alloy>

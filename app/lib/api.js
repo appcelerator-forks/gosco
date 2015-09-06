@@ -10,7 +10,7 @@ var KEY   = '206b53047cf312532294f7207789fdggh';
 //API when app loading phase
 var getSchoolPost		= "http://"+API_DOMAIN+"/gosco/api/getPostList?user="+USER+"&key="+KEY;
 var getSchoolList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USER+"&key="+KEY;
-var getBannerList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USER+"&key="+KEY;
+var getBannerList  		= "http://"+API_DOMAIN+"/gosco/api/getBannerList?user="+USER+"&key="+KEY;
 var getCurriculumList  	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumList?user="+USER+"&key="+KEY;
 var getSchoolClassList  = "http://"+API_DOMAIN+"/gosco/api/getSchoolClassList?user="+USER+"&key="+KEY;
 var updateKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/updateKidsClass?user="+USER+"&key="+KEY;
@@ -33,8 +33,8 @@ var APILoadingList = [
 **********************/
 
 exports.loadAPIBySequence = function (ex, counter){ 
-	counter = (typeof counter == "undefined")?0:counter;
-	if(counter >= APILoadingList.length){
+	counter = (typeof counter == "undefined")?0:counter; 
+	if(counter >= APILoadingList.length){ 
 		Ti.App.fireEvent('app:loadingViewFinish');
 		return false;
 	}
@@ -51,7 +51,7 @@ exports.loadAPIBySequence = function (ex, counter){
 	  
 	 var url = api['url']+"&last_updated="+last_updated; 
 	 var _result = contactServerByGet(url);    
-	 
+	 console.log(url);
 	 _result.onload = function(e) {  
 	 	var res = JSON.parse(this.responseText);
 	 	if(res.status == "Success" || res.status == "success"){
@@ -61,14 +61,14 @@ exports.loadAPIBySequence = function (ex, counter){
 	   	}
 		Ti.App.fireEvent('app:update_loading_text', {text: APILoadingList[counter]['model']+" loading..."});
 		checker.updateModule(APILoadingList[counter]['checkId'],APILoadingList[counter]['model'], COMMON.now());
-			
+		 
 		counter++;
 		API.loadAPIBySequence(ex, counter);
 	 };
 	 
 	 // function called when an error occurs, including a timeout
 	 _result.onerror = function(e) { 
-	 	 
+	  
 	    API.loadAPIBySequence(ex, counter);
 	 }; 
 };
@@ -216,7 +216,7 @@ exports.getKidByUser = function(ex){
 			
 			if(ex.login == "1"){
 				var win = Alloy.createController("homepage/index").getView();
-				openNewWindow(win);
+				openModal(win);
 			}
 		}
 	};

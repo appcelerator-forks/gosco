@@ -25,38 +25,28 @@ $.start = function() {
 /*
  * exposed function to finish the loading animation. Animates the rocket off the screen.
  */
-$.finish = function(_callback) {
-	$.rocketFlight.opacity = 0.1;
+$.finish = function(_callback) {  
+	$.rocketSmoke.opacity = 0;
+	$.rocketFlight.opacity = 1;
 	
 	$.rocketFlight.start();
-	
 	$.rocketFlight.animate({
-		opacity: 1,
-		duration: 500
-	});
-	
-	$.rocketSmoke.animate({
-		opacity: 0,
-		duration: 500,
-		delay: 500
-	}, function() {
-		$.rocketSmoke.stop();
-		
-		$.rocketFlight.animate({
-			top: -130,
-			duration: 750,
-			curve: Ti.UI.ANIMATION_CURVE_EASE_IN
-		});
-		
+		top: -130,
+		duration: 750,
+		curve: Ti.UI.ANIMATION_CURVE_EASE_IN
+	},function() {
+		console.log("rocketFlight callback");
 		$.overlay.animate({
 			opacity: 0,
 			duration: 750
 		}, function() {
+			console.log("overlay callback");
 			$.rocketFlight.stop();
 			
 			_callback && _callback();
 		});
 	});
+		
 };
 
 //load API loadAPIBySequence

@@ -137,16 +137,7 @@ var refreshKids = function(){
 
 Ti.App.addEventListener('refreshKids',refreshKids);
 
-$.btnLogout.addEventListener('touchend', function(){
-	//Do logout  
-	Ti.App.Properties.removeProperty('user_id');
-	Ti.App.Properties.removeProperty('fullname');
-	   		
-	var win = Alloy.createController("auth/login").getView();
-  	openNewWindow(win);
-});
-
-
+  
 exports.init = function(e){
  	init(e);
 };

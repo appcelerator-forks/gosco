@@ -76,7 +76,7 @@ exports.definition = {
             getBannerList :  function(b_type){
 				var collection = this;
                 var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE status='1' AND b_type='"+b_type+"' " ;
-                
+             
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
                 	db.file.setRemoteBackup(false);
@@ -106,7 +106,7 @@ exports.definition = {
 					};
 					res.next();
 					count++;
-				} 
+				}  
 				res.close();
                 db.close();
                 collection.trigger('sync');

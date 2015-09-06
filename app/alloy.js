@@ -24,16 +24,20 @@ var openNewWindow = function(win, new_window, tab){
 	if(typeof Alloy.Globals.tabgroup != "undefined" && typeof new_window == "undefined"){
 		tab.activeTab.open(win); 
 	}else{ 
-		win.open({
-			modal:true
-		});
+		openModal(win);
 	}
 };
 
-var openModal = function(win){ 
-	win.open({
-		modal:true
-	});
+var openModal = function(win,payload){  
+	
+	if(OS_IOS){
+			win.open({
+			modal:true
+		});
+	}else{
+		// added this property to the payload to know if the window is a child 
+		win.open({navBarHidden: false, fullscreen: false});
+	}
 };
 
 function parent(key, e){
