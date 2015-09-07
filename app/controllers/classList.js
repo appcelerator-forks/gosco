@@ -11,7 +11,8 @@ var listing = [];
 COMMON.construct($); 
 var schContainer = Ti.UI.createScrollView({
 	width: Ti.UI.FILL,
-	height: Ti.UI.FILL 
+	height: Ti.UI.FILL,
+	backgroundColor: "#ffffff" 
 });
 init();
 
@@ -95,14 +96,14 @@ function addClassAction(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl);   
 	 	Ti.App.fireEvent('selectClass',{e_id:e_id, className:res.source, ks_id:ks_id });
-	 	$.classListWin.close(); 
+	 	$.win.close(); 
 	});
 }
 
 
 function closeWin(){
-	$.classListWin.close();
+	$.win.close();
 }
 
-$.classListWin.addEventListener("close", function(){ 
+$.win.addEventListener("close", function(){ 
 });

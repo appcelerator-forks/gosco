@@ -1,5 +1,6 @@
 <Alloy>
 	<Window title="" id="win"  backgroundImage="/images/home_background.jpg">
+		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
 		<View id="main" layout="vertical"   height="100%" >
 		 <ScrollView layout="vertical"  height="Ti.UI.FILL" width="Ti.UI.FILL" top="0">
 		 	<View width="95%" layout="vertical" backgroundColor="#F5F5F5" height="Ti.UI.SIZE" top="15">

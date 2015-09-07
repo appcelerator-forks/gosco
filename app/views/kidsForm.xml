@@ -26,17 +26,20 @@
 						</View>
 					</View>
 					<View class="line" />
-					<View id="tvrFieldGender" onClick="showGenderPicker" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
+					<View id="tvrFieldGender" onClick="showGenderPicker" height="Ti.UI.SIZE"   selectedBackgroundColor="#ffffff"  >
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" >
 							<Label text="Gender" width="35%" top="12" class="title_Label"  />
-							<Label text="Not Set" top="12" color="#707070" id="gender_value" textAlign="right" width="55%"   />
+							<Label text="" top="12" color="#707070" id="gender_value" textAlign="right" width="55%"   />
 						</View>
+						<View height="0" id="selectorView" top="10"  width="Ti.UI.FILL" platform="android"> 
+							 <Picker id="genderPicker" onChange="changeGender" right="65"  visible="false" />  
+						</View>	 
 					</View>
 					<View class="line" />
 					<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
 							<Label text="Hobby" top="12" width="25%" class="title_Label"  /> 
-							<TextField borderColor="#ffffff" id="hobby" top="5" bottom='5' right='5' textAlign="right" hintText="Hobby" /> 
+							<TextField borderColor="#ffffff" id="hobby" value="" top="5" bottom='5' right='5' textAlign="right" hintText="Hobby" /> 
 						</View>
 					</View>  
 					<View class="line" />
@@ -54,10 +57,10 @@
 				</TableView>			
 				
 				-->	
-				<Button onClick="add_kid" class="button" title="Add Kid"></Button> 
+				<Button onClick="add_kid" id="saveKidBtn" class="button" title="Add Kid"></Button> 
 				
 			</View>
-			<View height="0" id="selectorView" bottom="0" > 
+			<View height="0" id="selectorView" bottom="0" platform="ios"> 
 				 <Picker id="genderPicker" onChange="changeGender"  visible="false" />  
 			</View>	 
 		</Window> 

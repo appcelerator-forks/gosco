@@ -1,6 +1,8 @@
 var args = arguments[0] || {}; 
 var FORM = require('form'); 
-
+var isEdit = args.edit || "";  
+var k_id = args.k_id || ""; 
+var details; 
 COMMON.construct($);
 FORM.construct($);		
  
@@ -21,24 +23,25 @@ var dpView = Titanium.UI.createView({
 		width: Ti.UI.FILL,
 		visible: false
 	});
-	
+
+
+
 function setupPersonalData(){
-	var done = Titanium.UI.createButton({
-	    title: 'Done',
-	    style: Titanium.UI.iPhone.SystemButtonStyle.DONE,
-	});
-	  
-	
-	done.addEventListener('click', function(){
-		var all_picker = $.selectorView.children;
-		all_picker[0].visible="false";
-		all_picker[1].visible="false";
-		$.selectorView.height=0;
-		dpView.height=0;
-	});
-	
-	 
 	if(OS_IOS){
+		var done = Titanium.UI.createButton({
+		    title: 'Done',
+		    style: Titanium.UI.iPhone.SystemButtonStyle.DONE,
+		});
+		  
+		
+		done.addEventListener('click', function(){
+			var all_picker = $.selectorView.children;
+			all_picker[0].visible="false";
+			all_picker[1].visible="false";
+			$.selectorView.height=0;
+			dpView.height=0;
+		});
+	  
 		toolbar = Titanium.UI.iOS.createToolbar({
 		    items:[  done], 
 		    extendBackground:true,
@@ -54,9 +57,13 @@ function setupPersonalData(){
 	datePicker.addEventListener("change", changeDate);
 	
 	//Set Gender
-	var genderValue =["Not Set", "Female", "Male"]; 
-	for(var i = 0 ; i < genderValue.length; i++){
-		 
+	if(isEdit == "1"){
+		var genderValue =["Female", "Male"]; 
+	}else{
+		var genderValue =["Not Set", "Female", "Male"]; 
+	}
+	
+	for(var i = 0 ; i < genderValue.length; i++){ 
 		var genderData = genderValue[i]; 
 		var gendata = Ti.UI.createPickerRow({
 			title:genderData.toString() 
@@ -64,6 +71,28 @@ function setupPersonalData(){
 		$.genderPicker.add(gendata); 
 	}
 	$.genderPicker.setSelectedRow(0,0,true); 	
+	
+	if(isEdit == "1"){
+		$.saveKidBtn.title = "Update Kid";
+		var kidsModel = Alloy.createCollection('kids');  
+		details = kidsModel.getKidsById(k_id);
+		
+		var gender = "Male";
+		if(details.gender == "2"){
+			gender = "Female";
+		}
+		
+		var avatar = details.img_path;
+		if(avatar == ""){
+			avatar = "/images/avatar.jpg";
+		} 
+		$.thumbPreview.image = avatar;
+		$.fullname.value = details.fullname;
+		$.date_value.text = COMMON.monthFormat(details.dob);
+		$.gender_value.text = gender ;
+		$.hobby.value = details.hobby;
+		$.contact.value = details.contact; 
+	}	
 }
 
 var add_kid = function(){ 
@@ -99,8 +128,11 @@ var add_kid = function(){
 		birthdate : birthdate, 
 		hobby : hobby,  
 		photo : imgBlob, 
+		isEdit: isEdit,
+		k_id: k_id,
 		type : "kid" 
 	};
+	console.log(params);
  	API.saveKids(params,onAPIReturn);
 	 
 }; 
@@ -115,7 +147,13 @@ function onAPIReturn(responseText){
 		var kidsModel = Alloy.createCollection('kids'); 
 		var arr = result.data;  
 		kidsModel.saveArray(arr); 
-		COMMON.createAlert("Success", "Your kid is added successfully!");
+		
+		if(isEdit == "1"){
+			COMMON.createAlert("Success", "Your kid is updated successfully!");
+		}else{
+			COMMON.createAlert("Success", "Your kid is added successfully!");
+		}
+		 
 		Ti.App.fireEvent('refreshKids');
 		COMMON.closeWindow($.kidsFormWin); 
 	}
@@ -127,7 +165,7 @@ function takePhoto(){
 
 function showDatePicker(e){ 
 	var all_picker = $.selectorView.children;
-	$.selectorView.height = Ti.UI.SIZE;
+	$.selectorView.height = 0;
 	dpView.height = Ti.UI.SIZE;
 	if(OS_ANDROID){ 
 		datePicker.showDatePickerDialog({
@@ -174,8 +212,7 @@ function changeDate(e){
     if(e.age == "1"){
     	age = "("+getAge(year+"-"+month+"-"+day)+")";  
     } 
-	$.date_value.text = selDate + age; 
-	//hd.changeDate({date: e.value, age : 1});
+	$.date_value.text = selDate + age;  
 }
 
 function getAge(dateString) {
@@ -190,6 +227,7 @@ function getAge(dateString) {
 }
 
 function showGenderPicker(){  
+	
 	$.selectorView.height = Ti.UI.SIZE;  
 	resetTextColor();
 	$.gender_value.color = "#10844D";

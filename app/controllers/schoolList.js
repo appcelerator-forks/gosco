@@ -1,6 +1,10 @@
 var args = arguments[0] || {};
-var SCHOOL = require('school'); 
+var SCHOOL = require('school');  
+var educationType = args.education || "1";
 
+if(educationType == "2"){
+	$.win.title = "Tuition List";
+}
 /*** Initialize***/ 
 COMMON.construct($);
 SCHOOL.construct($);
@@ -41,7 +45,7 @@ bigContainer.add(schContainer);
 $.schoolContainer.add(bigContainer); 
  
 function createSchoolList(){
-	//COMMON.removeAllChildren(schContainer);
+	COMMON.removeAllChildren(schContainer);
 	var schTable = Ti.UI.createTableView();
 	var data=[]; 
 	var counter = 0;
@@ -136,7 +140,7 @@ function addSchoolAction(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl);  
 	 	Ti.App.fireEvent('selectSchool',{school:res.source });
-	 	$.schoolListWin.close(); 
+	 	$.win.close(); 
 	});
 }
 
@@ -168,10 +172,10 @@ setTimeout(function(){
 Ti.App.addEventListener('filterList',filterList);
 
 function closeWin(){
-	$.schoolListWin.close();
+	$.win.close();
 }
 
-$.schoolListWin.addEventListener("close", function(){ 
+$.win.addEventListener("close", function(){ 
 	Ti.App.removeEventListener('filterList',filterList);
 	optionContainer = null;
 });

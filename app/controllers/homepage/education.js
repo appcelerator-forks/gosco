@@ -25,8 +25,7 @@ var searchBar = Ti.UI.createSearchBar({
 
 var schContainer = Ti.UI.createScrollView({
 		width: Ti.UI.FILL,
-		height: Ti.UI.FILL,
-		backgroundColor: "blue" 
+		height: Ti.UI.FILL 
 }); 
 
 var init = function(e){
@@ -78,6 +77,11 @@ var viewSchoolAction = function(vw){
 	});
 };
 
+
+$.createOptions = function(title,options,onSelected){ 
+	createOptions(title,options,onSelected);
+};
+
 function createOptions(title,options,onSelected){ 
 	if(onSelected == null){
 		onSelected= "0";
@@ -93,8 +97,7 @@ function createOptions(title,options,onSelected){
 		width:'33%', 
 	});
 	var theLabel = $.UI.create('Label',{
-		classes: [ 'center', 'font_small', 'small_padding'],
-		color: "#D5D5D5",
+		classes: [ 'center', 'font_small', 'small_padding','font_light_white'], 
 		text : title+" :",
 		width:'100%', 
 	});
@@ -155,7 +158,7 @@ var filterList = function(){
 Ti.App.addEventListener('filterList',filterList);
 
 function createSchoolList(){
-	//COMMON.removeAllChildren(schContainer);
+	COMMON.removeAllChildren(schContainer);
 	var schTable = Ti.UI.createTableView({
 		height:Ti.UI.FILL,
 		width: Ti.UI.FILL,
@@ -172,7 +175,7 @@ function createSchoolList(){
 	   		var row = Titanium.UI.createTableViewRow({ 
 			    height: 40,
 			    source: entry.id,   
-			    selectedBackgroundColor: "#ECFFF9",
+			    backgroundSelectedColor: "#ECFFF9",
 		 		backgroundColor: "#ffffff"
 			});
 			 

@@ -210,6 +210,12 @@ exports.monthFormat = function(date){
     ];
  
     var day = date.split('-'); 
+    if(day[1] == "08"){
+		day[1] = "8";
+	}
+	if(day[1] == "09"){
+		day[1] = "9";
+	}
     month = parseInt(day[1]) -1; 
     return day[2]+" "+ monthNames[month]+" "+ day[0];
 };

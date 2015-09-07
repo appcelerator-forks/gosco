@@ -1,19 +1,19 @@
 <Alloy> 
 	
-		<Window title="School List" id="schoolListWin" >
-			
+		<Window title="School List" id="win" navBarHidden="true" >
+			<LeftNavButton>
+			    <View>
+			    	<Button id="backButton" onClick="closeWin" image="/images/btn-back.png" left="0" />
+				</View>
+			</LeftNavButton>
+			<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWin" />
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
 		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
 			</View>
-			<Button title="X" zIndex="999" onClick="closeWin" color="#10844D" left="10" top="5" />
-			<View class="vert">
-				<View backgroundColor="#EEEEEE" height="40"> 
-					<Label textAlign="center" color="#10844D">School List</Label>
-				</View>
-				<View class="wfill hfill vert" id="schoolContainer"  >
-					 
-				</View>
+			 
+			<View class="vert"> 
+				<View class="wfill hfill vert" id="schoolContainer"  /> 
 			</View>
 		</Window> 
 </Alloy>

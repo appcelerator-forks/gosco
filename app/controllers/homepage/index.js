@@ -15,13 +15,28 @@ $.doLogout = function(){
 	doLogout();
 };
 
-function doLogout(){
-	//Do logout  
-	Ti.App.Properties.removeProperty('user_id');
-	Ti.App.Properties.removeProperty('fullname');
-	   		
-	var win = Alloy.createController("auth/login").getView();
-  	openModal(win); 
+function doLogout(){ 
+	var dialog = Ti.UI.createAlertDialog({
+	    cancel: 1,
+	    buttonNames: ['Cancel','Confirm'],
+	    message: 'Would you like to logout?',
+	    title: 'Logout account'
+	});
+	dialog.addEventListener('click', function(e){
+	  
+		if (e.index === e.source.cancel){
+	      //Do nothing
+	    }
+	    if (e.index === 1){
+	    	//Do logout  
+			Ti.App.Properties.removeProperty('user_id');
+			Ti.App.Properties.removeProperty('fullname');
+			   		
+			var win = Alloy.createController("auth/login").getView();
+		  	openModal(win); 
+	    }
+	});
+	dialog.show();
 }
 
 if(OS_IOS){
@@ -31,22 +46,33 @@ if(OS_IOS){
 } 
 
 function doOpen() { 
-	//Add a title to the tabgroup. We could also add menu items here if needed
-	var activity = $.win1.activity;
-
-	if (activity.actionBar) {
-		activity.actionBar.title = "Gosco";
+	if(OS_ANDROID){
+		//Add a title to the tabgroup. We could also add menu items here if needed
+		var activity = $.tabGroup.activity;
+	
+		if (activity.actionBar) {
+			activity.actionBar.title = "GOSCO";
+		}
+		
+		activity.actionBar.displayHomeAsUp = true;
+		activity.actionBar.onHomeIconItemSelected = function(){
+			doLogout();
+		};
+		/***
+		activity.onCreateOptionsMenu = function(e) {
+			var menuItem = e.menu.add({
+				title : "Logout",
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS 
+			});
+			menuItem.addEventListener("click", function(e) {
+				 doLogout();
+			});
+		};
+		***/
 	}
-
-	activity.onCreateOptionsMenu = function(e) {
-		var menuItem = e.menu.add({
-			title : "Logout",
-			showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS,
-			icon :   "/images/logout.png"
-		});
-		menuItem.addEventListener("click", function(e) {
-			 doLogout();
-		});
-	};
 }
 
+$.tabGroup.addEventListener('android:back', function (e) {
+	doLogout();
+	return false;
+});

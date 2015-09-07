@@ -40,7 +40,7 @@
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
         <manifest>
-            <application android:debuggable="false" android:theme="@style/Theme.CustomActionBar">
+            <application android:debuggable="false" android:theme="@style/Theme.Gosco">
                 <meta-data
                     android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDSLcOrBVlgh45JmLyO6khgv_x4xL3AZUA"/>
                 <intent-filter>

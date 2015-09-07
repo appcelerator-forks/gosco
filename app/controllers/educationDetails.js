@@ -10,7 +10,7 @@ for (var i = 0; i < contacts.length; i++) {
 	var phone = contacts[i].phone;
     
     var workPhone = phone.work; 
-    if(workPhone != null && workPhone[0] == details.tel ){
+    if(workPhone != null && workPhone[0] == details.contact_no ){
     	isAddedToContact = "1";
     	$.add2contact.title = "Already added to contact";
     } 
@@ -29,16 +29,16 @@ if(details != ""){
  
 	$.educationTel.text = "TEL : " +details.contact_no  ; 
 	$.educationFax.text = "FAX : " +details.fax_no  ; 
-	phoneArr.push(details.tel);
+	phoneArr.push(details.contact_no);
 }
  
-function clickToCall(){
-	var tel = details.tel;
-	tel = tel.replace(/[+]/g, "");
+function clickToCall(){ 
+	var tel = details.contact_no; 
+	tel = tel.replace(/[+]/g, ""); 
 	Ti.Platform.openURL('tel:+'+tel);
 }
 
-var performAddressBookFunction = function(){
+var performAddressBookFunction = function(){ 
 	var workAddress1 = {
 	  'CountryCode': 'my',
 	  'Street':  details.address, 
@@ -48,8 +48,8 @@ var performAddressBookFunction = function(){
 	
 	var phoneList = { 
 	    work: phoneArr
-	 };
-  
+	}; 
+	 
 	Ti.Contacts.createPerson({
 	  firstName: details.name,
 	  lastName:'',
@@ -60,11 +60,11 @@ var performAddressBookFunction = function(){
 	});
 	isAddedToContact = "1";
     $.add2contact.title = "Already added to contact";
-	common.createAlert("Success", "Successfully added to contact book.");
+	COMMON.createAlert("Success", "Successfully added to contact book.");
 };
 
 var addressBookDisallowed = function(){
-	common.createAlert("Cannot Access Contact Book", "You need allow GOSCO to access your contact book.");
+	COMMON.createAlert("Cannot Access Contact Book", "You need allow GOSCO to access your contact book.");
 };
 	
 function addToContact(){
@@ -122,9 +122,7 @@ function direction2here(){
 	Titanium.Geolocation.addEventListener('location', locationCallback); 
 }
  
-
-if(Ti.Platform.osname == "android"){
-	$.btnBack.addEventListener('click', function(){ 
-		nav.closeWindow($.panelDetails); 
-	}); 
+function closeWindow(){
+	COMMON.closeWindow($.win); 
 }
+ 

@@ -1,4 +1,4 @@
-//Alloy.Globals.tabgroup = $.tabGroup;
+Alloy.Globals.tabgroup = $.tabGroup;
 //Alloy.Globals.school_tab = $.school_tab;
 Alloy.Globals.navWin = $.navWin;
 /**

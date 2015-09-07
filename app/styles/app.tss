@@ -136,6 +136,10 @@ overrode the settings with other TSS, XML, or JS settings:
 	}
 }
 
+'.font_dark_grey':{
+	color: "#606060 "
+}
+
 '.font_light_grey':{
 	color: "#9197a3 "
 }
@@ -155,6 +159,10 @@ overrode the settings with other TSS, XML, or JS settings:
 '.themeColor' : {
 	color: "#10844D"
 }
+'.themeColor' : {
+	color: "#10844D"
+}
+
 ".line":{
 	height: '1',
 	backgroundColor: '#ccc',

@@ -284,10 +284,17 @@ exports.saveKids = function(ex,onAPIReturn){
 	if(ex.gender == "Female"){
 		ex.gender = 2;
 	} 
-	var url = addKidUrl+"&fullname="+ex.fullname+
+	var url = addKidUrl+"&isEdit="+ex.isEdit+"&fullname="+ex.fullname+
 				"&dob="+ex.birthdate+"&contact="+ex.contact+"&gender="+ex.gender+
 				"&hobby="+ex.hobby+"&u_id="+Ti.App.Properties.getString('user_id');
- 
+ 	
+ 	if(ex.isEdit == "1"){
+ 		url += "&id="+ex.k_id;
+ 	}
+ 	
+ 	console.log(url);
+	return false;
+ 	
 	if(ex.photo == ""){
 		var _result = contactServerByGet(url);   
 	}else{

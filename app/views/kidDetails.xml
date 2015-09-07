@@ -1,12 +1,20 @@
 <Alloy> 
 		<Window title="Kids Details" id="win"   >
 			<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
+			<RightNavButton platform="ios">
+		        <View>
+		         	<Button id="editButton" onTouchend="doEditKids" title="Edit" right="0"   /> 
+		        </View>
+	        </RightNavButton>
+	        <Menu id="menu" platform="android">
+			 
+	            <MenuItem id="bookmarkBtn" title="Edit" onClick="doEditKids" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM"/>
+	        </Menu>
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
 		    	<Label top="5" class="center" text="Loading" color="#ffffff" />
-			</View>
-			<View class="wfill hfill vert">
-				<ScrollView scrollType="vertical"  contentHeight="Ti.UI.SIZE"  class="wfill vert hsize">
+			</View> 
+				<ScrollView scrollType="vertical"  contentHeight="Ti.UI.SIZE"  class="wfill vert hfill">
 					<View width="100" height="100" borderRadius="50"  backgroundColor="#f5f5f5" top="10">
 						<ImageView width="100" height="100" borderRadius="50" id="thumbPreview" />
 					</View>
@@ -45,9 +53,8 @@
 					
 					<View class="wfill vert hsize" id="myKidsSchoolView"  />
 					
-					<View class="wfill vert hsize" id="myKidsTuitionView"  top="10" />
+					<View class="wfill vert hsize" id="myKidsTuitionView" bottom="10" top="10" />
 				</ScrollView>
-			</View>
 			 
 		</Window> 
 </Alloy>

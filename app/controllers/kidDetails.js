@@ -40,7 +40,7 @@ function loadKidsTuition(){
 	var addTuitionTblRow = Titanium.UI.createTableViewRow({
 		title: "Add Tuition"
 	});
-	addTuitionTblRow.addEventListener("click",function(){showSchool();} );
+	addTuitionTblRow.addEventListener("click",function(){showSchool(2);} );
 	tuiTable.appendRow(addTuitionTblRow);	 
 	$.myKidsTuitionView.add(tuiTable);	
 }
@@ -56,7 +56,7 @@ function loadKidsSchool(){
 	var addSchoolTblRow = Titanium.UI.createTableViewRow({
 		title: "Add School"
 	});
-	addSchoolTblRow.addEventListener("click",function(){showSchool();} );
+	addSchoolTblRow.addEventListener("click",function(){showSchool(1);} );
 	ksTable.appendRow(addSchoolTblRow);	 
 	var ks = kidsEducationModel.getSchoolByKids(kid_id); 
 	 
@@ -69,7 +69,7 @@ function loadKidsSchool(){
 			    height: Ti.UI.SIZE,
 			    source: entry.id, 
 			  	school: entry.e_id,
-			    selectedBackgroundColor: "#FFFFFF",
+			    backgroundSelectedColor: "#FFFFFF",
 		 
 			});
 			var tblRowView = Ti.UI.createView({
@@ -175,8 +175,8 @@ function classPop(e){
 }
  
 
-function showSchool(){  
-	var win = Alloy.createController("schoolList").getView();
+function showSchool(educationType){  
+	var win = Alloy.createController("schoolList",{education:educationType}).getView();
 	openModal(win);
 }; 
  
@@ -208,6 +208,11 @@ var selectSchool = function(e){
 	API.getCurriculumList(e.school); 
 	loadKidsSchool();	 
 };
+
+function doEditKids(){
+	var win = Alloy.createController("kidsForm",{edit:1, k_id:kid_id}).getView();
+	Alloy.Globals.tabgroup.activeTab.open(win);
+}
 
 function closeWindow(){
 	COMMON.closeWindow($.win); 
