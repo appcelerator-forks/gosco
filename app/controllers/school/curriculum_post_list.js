@@ -1,21 +1,48 @@
 var args = arguments[0] || {};
 COMMON.construct($);
-//Alloy.Globals.navWin = $.mainWin;
-var kidsModel = Alloy.createCollection('kids'); 
-var postModel = Alloy.createCollection('post'); 
-  
-function init(e){
+var curriculumPostModel = Alloy.createCollection('curriculumPost'); 
+var curriculumPost_element_model = Alloy.createCollection('curriculumPost_element');  
+var c_id = args.c_id || "";  
+COMMON.showLoading();
+API.getCurriculumPost({c_id: c_id}, onReturn);
+init(); 
+
+function init(){
 	displayLatestBoard();  
-	displayMyKids();  
+}
+
+function onReturn(result){
+	var res = JSON.parse(result);  
+	
+	if(res.status == "success"){	  
+	 var postData = res.data; 
+	 if(postData != ""){ 
+	 	 var post = res.data.post;   
+		 curriculumPostModel.addPost(post);  
+		 curriculumPost_element_model.addElement(post);   
+	 }  
+	 init();
+	// Ti.App.fireEvent('endLoad'); 
+	}
+	
+}
+
+function closeWindow(){
+	COMMON.closeWindow($.win); 
 }
 
 function displayLatestBoard(){
-	var latestPost = postModel.getLatestPost(5,1);  
+	var latestPost = curriculumPostModel.getLatestPost(c_id,5);  
 	var boardPost = $.UI.create('View',{
 		classes: ['padding' ,'box', 'hsize'], 
 	});
+	
+	COMMON.hideLoading();
+	COMMON.removeAllChildren($.latestView);
 	if(latestPost.length > 0){ 
+		 
 		latestPost.forEach(function(entryPost) {
+			
 			var postView = $.UI.create('View',{
 				classes: ['padding' ,'wfill','vert', 'hsize'],  
 				source: entryPost.id
@@ -71,9 +98,20 @@ function displayLatestBoard(){
 			postView.add(publishView);
 			boardPost.add(postView);
 			addClickEvent(postView); 
+		}); 
+		$.latestView.add(boardPost);
+	}else{
+		var postView = $.UI.create('View',{
+			classes: ['padding' ,'wfill','vert', 'hsize'],   
 		});
-		
-		$.latestBoardView.add(boardPost);
+			
+		var titleLbl = $.UI.create('Label',{
+			classes: [ 'hsize','font_regular'],  
+			text: "No record(s) found"
+		});
+		postView.add(titleLbl);
+		boardPost.add(postView);
+		$.latestView.add(boardPost);
 	} 
 }
 
@@ -82,63 +120,8 @@ function addClickEvent(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl); 
 		 
-		var win = Alloy.createController("postDetails", {p_id: res.source}).getView(); 
+		var win = Alloy.createController("postDetails", {p_id: res.source, isCurriculum: "1"}).getView(); 
 		//COMMON.openWindow(win); 
-		Alloy.Globals.tabgroup.activeTab.open(win);
+		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});
 }
-
-function displayMyKids(){
-	COMMON.removeAllChildren($.myKidsContainer); 
-	var myKids = kidsModel.getMyKids(Ti.App.Properties.getString('user_id'));
-	if(myKids.length > 0){ 
-		myKids.forEach(function(entry) {
-			var myKidView = $.UI.create('View',{
-				classes: ['padding'],
-				height:80,
-				width:80,
-				borderRadius: 40,
-				kid_id: entry.id,
-				backgroundColor: "#f5f5f5" 
-			}); 
-			
-			var avatar = entry.img_path;
-			console.log("avatar : "+avatar);
-			if(avatar == ""){
-				avatar = "/images/avatar.jpg";
-			}
-			var kidImg =Ti.UI.createImageView({
-				height:Ti.UI.FILL,
-				width:Ti.UI.FILL, 
-				kid_id: entry.id,
-				image: avatar
-			});
-			myKidView.add(kidImg);
-			myKidView.addEventListener('click',function(e){
-				var elbl = JSON.stringify(e.source); 
-				var res = JSON.parse(elbl); 
-				var win = Alloy.createController("kidDetails", {kid_id:res.kid_id }).getView();
-				Alloy.Globals.tabgroup.activeTab.open(win);
-			}); 
-			$.myKidsContainer.add(myKidView);  
-			 
-		}); 
-	} 
-}
-
-var addKid = function(){ 
-	var win = Alloy.createController("kidsForm").getView();
-	Alloy.Globals.tabgroup.activeTab.open(win);
-};
-
-var refreshKids = function(){ 
-	displayMyKids(); 
-};
-
-  
-Ti.App.addEventListener('refreshKids',refreshKids);
-
-  
-exports.init = function(e){
- 	init(e);
-};

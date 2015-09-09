@@ -1,13 +1,17 @@
 <Alloy> 
 		<Window title="Kids Details" id="win"   >
 			<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
+			<LeftNavButton>
+				<View>
+					<ImageView left='0' onClick="closeWindow" width="25" height="25" image="/images/btn-back.png" />   
+			    </View>
+			</LeftNavButton> 
 			<RightNavButton platform="ios">
 		        <View>
 		         	<Button id="editButton" onTouchend="doEditKids" title="Edit" right="0"   /> 
 		        </View>
 	        </RightNavButton>
-	        <Menu id="menu" platform="android">
-			 
+	        <Menu id="menu" platform="android"> 
 	            <MenuItem id="bookmarkBtn" title="Edit" onClick="doEditKids" showAsAction="Ti.Android.SHOW_AS_ACTION_IF_ROOM"/>
 	        </Menu>
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >

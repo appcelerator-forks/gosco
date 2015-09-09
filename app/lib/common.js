@@ -26,7 +26,7 @@ exports.showLoading = function(){
 		mainView.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG;
 		//mainView.activityIndicator.top = 0; 
 	}else if (Ti.Platform.name === 'iPhone OS'){
-		mainView.loadingBar.top = (Ti.Platform.displayCaps.platformHeight / 2) -50; 
+		//mainView.loadingBar.top = (Ti.Platform.displayCaps.platformHeight / 2) -50; 
 		mainView.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
 	}  
 };
@@ -139,12 +139,13 @@ function openWindow(win){
 
 //function closeWindow(win){
 exports.closeWindow = function(win){
-	if(Ti.Platform.osname == "android"){ 
+	/**if(Ti.Platform.osname == "android"){ 
 	  	win.close(); 
 	}else{ 
 		var nav = Alloy.Globals.navWin;
 		nav.closeWindow(win,{animated:true});  
-	} 
+	} **/
+	win.close(); 
 };
 
 function removeAllChildren (viewObject){

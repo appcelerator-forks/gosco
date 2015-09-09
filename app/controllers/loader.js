@@ -34,8 +34,7 @@ $.finish = function(_callback) {
 		top: -130,
 		duration: 750,
 		curve: Ti.UI.ANIMATION_CURVE_EASE_IN
-	},function() {
-		console.log("rocketFlight callback");
+	},function() { 
 		$.overlay.animate({
 			opacity: 0,
 			duration: 750
@@ -50,9 +49,7 @@ $.finish = function(_callback) {
 };
 
 //load API loadAPIBySequence
-API.loadAPIBySequence();
 API.getDeviceInfo();
-
 /***Check school updates***/
 var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 var ks = kidsEducationModel.getSchoolList();
@@ -63,6 +60,10 @@ if(ks.length > 0){
 		API.getCurriculumList(entry.e_id);  
 	});
 }
+API.loadAPIBySequence();
+
+
+
 
 Ti.App.addEventListener('app:update_loading_text', update_loading_text);
 

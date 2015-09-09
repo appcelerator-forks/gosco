@@ -16,8 +16,7 @@ function loadingViewFinish(){
 	});
 }
 
-function init(){
-	console.log("checkAuth");
+function init(){ 
 	var user = require("user"); 
 	user.checkAuth();
 }

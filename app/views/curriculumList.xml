@@ -1,12 +1,12 @@
 <Alloy>  
-	<Window title="School List" id="win" fullscreen="true" > 
+	<Window title="Curriculum List" id="win" fullscreen="true" > 
 		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWin" />
 		<View platform="ios" top="0" height="50" backgroundColor="#B8D5BA"> 
 			<View left="0" zIndex="9" width="20%" onClick="closeWin">
 				<ImageView left='10'  width="25" height="25" image="/images/btn-back.png" />
 			</View>
 			<View >
-				<Label id="titleLbl"  class='hsize themeColor' textAlign="center">School list</Label>
+				<Label id="titleLbl"  class='hsize themeColor' textAlign="center">Curriculum list</Label>
 		   </View>
 		</View>
 		<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
@@ -15,7 +15,10 @@
 		</View>
 			 
 		<View id="educationView" class="vert"  > 
-			<View class="wfill hfill vert" id="schoolContainer"  /> 
+			<View class="wfill hsize padding">
+	    		<Label class="font_big themeColor" bottom="0">Available Curriculum</Label>
+	    	</View>
+			<View class="wfill hfill vert" id="curriculumContainer"  /> 
 		</View>
 	</Window> 
 </Alloy>

@@ -1,13 +1,21 @@
 var args = arguments[0] || {};
 COMMON.construct($);
-
-var postModel = Alloy.createCollection('post'); 
-var postElementModel = Alloy.createCollection('post_element'); 
+var postModel;
+var postElementModel;
 var post_id = args.p_id  || "";
+var isCurriculum = args.isCurriculum  || "";  
+ 
+if(isCurriculum == "1"){
+ 	postModel = Alloy.createCollection('curriculumPost'); 
+	postElementModel = Alloy.createCollection('curriculumPost_element'); 
+}else{
+	postModel = Alloy.createCollection('post'); 
+	postElementModel = Alloy.createCollection('post_element'); 	
+}
+
 var postDetails = postModel.getRecordsById(post_id);
 var details = postElementModel.getListByPost(post_id);
-var clickTime = null;
- 
+
 loadPostDetails();
 function loadPostDetails(){
 	var titleLabel = $.UI.create('Label',{
@@ -37,7 +45,6 @@ function loadPostDetails(){
 	dateView.add(authorDateView);
 	$.myContentView.add(dateView);		 
 	details.forEach(function(entry) {
-		console.log(entry);
 		var msg = escapeSpecialCharacter(entry.element); 
 		if(entry.type == "1"){
 			var dynaLabel = $.UI.create('Label',{
@@ -76,19 +83,9 @@ function loadPostDetails(){
 			
 			//image event
 			 imageVw.addEventListener('click', function(e) {
-		    	// double click prevention
-			    var currentTime = new Date();
-			    if (currentTime - clickTime < 1000) {
-			        return;
-			    };
-			    clickTime = currentTime;
-				var page = Alloy.createController("imageDetails",{element_id:entry.id}).getView(); 
-			  	page.open();
-			  	page.animate({
-					curve: Ti.UI.ANIMATION_CURVE_EASE_IN,
-					opacity: 1,
-					duration: 300
-				});
+		     
+				var win = Alloy.createController("imageDetails",{element_id:entry.id, isCurriculum: isCurriculum}).getView(); 
+			  	Alloy.Globals.schooltabgroup.activeTab.open(win);  
 		    });
 			
 			//caption

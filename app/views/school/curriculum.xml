@@ -1,16 +1,24 @@
-<Alloy>
-    <ScrollView class="wfill hfill vert" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
-    	<View class="wfill hsize padding box vert">
+<Alloy> 
+	 
+    <ScrollView id="curScrollView" class="wfill hfill vert" top="5" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    	
+    	<!--<View class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">
 	    		<Label class="font_big" color="#000000">Curriculum Notice Board</Label>
 	    		<Label>I incorporate a Preschool Curriculum into our daily activities for fun and to ... The bulletin board has real christmas lights connecting each reindeer together. </Label>
     		</View>
     	</View>
-    	
-    	<TableView id="curriculumTbl" class="wfill hsize padding box" top="0">
-    		<SearchBar showCancel="true"></SearchBar>
-    		
-    		 
-    	</TableView>
+    -->
+    	<View class="wfill hsize padding">
+    		<View left="0" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
+    			<Label class="font_big themeColor " bottom="0">My Kid Curriculum</Label>
+    		</View>
+    		<View right="0" height="Ti.UI.SIZE" width="80">
+				<ImageView right='40' id="removeBtn" onTouchend="showRemoveList" width="25" height="25" image="/images/remove.png" /> 
+				<ImageView right='40' id="doneBtn" onTouchend="doneRemove" visible="false" width="25" height="25" image="/images/tick.png" />   
+				<ImageView right='0'  onTouchend="showCurriculumList" width="30" height="22" image="/images/add.png" />  
+			</View>
+    	</View>
+    	<View id="curList" class="wfill hsize" />
 	</ScrollView>
 </Alloy>

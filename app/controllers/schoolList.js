@@ -4,6 +4,13 @@ var educationType = args.education || "1";
 
 if(educationType == "2"){
 	$.win.title = "Tuition List";
+	if(OS_IOS){
+		$.titleLbl.text = "Tuition List";
+	} 
+}
+
+if(OS_IOS){
+	$.educationView.top = 50;
 }
 /*** Initialize***/ 
 COMMON.construct($);
@@ -20,7 +27,7 @@ if(Ti.App.Properties.getString('StatePick') == null) {
 }  
 	 
 var listing = [];
-listing = educationModel.getSchoolList(2,1,"");   
+listing = educationModel.getSchoolList(2,educationType,"");   
 var bigContainer = $.UI.create('View',{
 	classes: ['hfill','wfill','vert']
 });
@@ -32,11 +39,13 @@ var schContainer = Ti.UI.createScrollView({
 	width: Ti.UI.FILL,
 	height: Ti.UI.FILL 
 });
-  
-optionContainer.add(SCHOOL.createOptions("Level",Alloy.Globals.SchoolLevel, Ti.App.Properties.getString('LevelPick')));
-optionContainer.add(separateLine());
-optionContainer.add(SCHOOL.createOptions("Type",Alloy.Globals.SchoolType,Ti.App.Properties.getString('TypePick')));
-optionContainer.add(separateLine());
+
+if(educationType == "1"){  
+	optionContainer.add(SCHOOL.createOptions("Level",Alloy.Globals.SchoolLevel, Ti.App.Properties.getString('LevelPick')));
+	optionContainer.add(separateLine());
+	optionContainer.add(SCHOOL.createOptions("Type",Alloy.Globals.SchoolType,Ti.App.Properties.getString('TypePick')));
+	optionContainer.add(separateLine());
+}
 optionContainer.add(SCHOOL.createOptions("State",Alloy.Globals.SchoolState,Ti.App.Properties.getString('StatePick'))); 
  
 bigContainer.add(optionContainer);
@@ -66,12 +75,14 @@ function createSchoolList(){
 			var tblView = Ti.UI.createView({
 					layout: "vertical",
 					height:Ti.UI.SIZE,
+					image: img_path, 
 					width:"auto" 
 			}); 
 			
 			var tblRowView = Ti.UI.createView({
 					layout: "horizontal",
 					height:Ti.UI.SIZE,
+					image: img_path, 
 					width:Ti.UI.FILL 
 			}); 
 			
@@ -82,6 +93,7 @@ function createSchoolList(){
 			var logoView = Ti.UI.createView({  
 				width:50 ,
 				layout:"vertical",
+				image: img_path, 
 				height:Ti.UI.SIZE
 			}); 
 			var schoolLogo = $.UI.create('ImageView',{  
@@ -139,7 +151,7 @@ function addSchoolAction(vw){
 	vw.addEventListener('click', function(e){ 
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl);  
-	 	Ti.App.fireEvent('selectSchool',{school:res.source });
+	 	Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
 	 	$.win.close(); 
 	});
 }
@@ -160,7 +172,7 @@ function filterList(){
 		
 	}else{
 		COMMON.showLoading();
-		listing = educationModel.getSchoolList(2,1,"");   
+		listing = educationModel.getSchoolList(2,educationType,"");   
  		createSchoolList(); 
 	}
 	

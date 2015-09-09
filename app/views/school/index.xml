@@ -1,21 +1,26 @@
 <Alloy>
-	<TabGroup id="school_tg" tabsTintColor="#10844D" tabsBackgroundImage="/images/kid_menu_bar1.png">
+	<TabGroup id="school_tg" tabsTintColor="#10844D" tabsBackgroundImage="/images/kid_menu_bar1.png" onOpen="doOpen">
 		<Tab  title="Notice Board" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="SMK Taman Tasik">
 				<LeftNavButton>
-			        <View>
-			         	<Button id="backButton" onClick="backToHome" image="/images/btn-back.png" left="0" />
-			        </View>
+			        <View onClick="backToHome">
+			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
+			        </View> 
 			    </LeftNavButton>
+			    <RightNavButton>
+			        <View onClick="removeEducation">
+			        	<ImageView right='10'  width="25" height="25" image="/images/remove.png" />  
+			        </View>
+			    </RightNavButton>
 				<Require id="noticeBoardDetailsView" src="school/notice_board" ></Require>
 			</Window>
 		</Tab>
 		<Tab color="white" title="Events" icon="/images/icons/icon_events.png" activeIcon="/images/icons/icon_events_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="SMK Taman Tasik">
 				<LeftNavButton>
-			        <View>
-			         	<Button id="backButton" onClick="backToHome" image="/images/btn-back.png" left="0" />
-			        </View>
+			        <View onClick="backToHome">
+			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
+			        </View> 
 			    </LeftNavButton>
 				<Require src="school/events"></Require>
 			</Window>
@@ -23,9 +28,9 @@
 		<Tab title="Homework" icon="/images/icons/icon_homeworks.png" activeIcon="/images/icons/icon_homeworks_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="SMK Taman Tasik">
 				<LeftNavButton>
-			        <View>
-			         	<Button id="backButton" onClick="backToHome" image="/images/btn-back.png" left="0" />
-			        </View>
+			        <View onClick="backToHome">
+			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
+			        </View> 
 			    </LeftNavButton>
 				<Require id="homeworkDetailsView" src="school/homework"></Require>
 			</Window>
@@ -34,18 +39,18 @@
 			<Window title="SMK Taman Tasik">
 				<LeftNavButton>
 			        <View>
-			         	<Button id="backButton" onClick="backToHome" image="/images/btn-back.png" left="0" />
+			         	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View>
 			    </LeftNavButton>
 				<Require id="awardDetailsView" src="school/award"></Require>
 			</Window>
 		</Tab>
-		<Tab title="Curicurum" icon="/images/icons/icon_coccurricula.png" activeIcon="/images/icons/icon_coccurricula_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="SMK Taman Tasik">
+		<Tab title="Curriculum" icon="/images/icons/icon_coccurricula.png" activeIcon="/images/icons/icon_coccurricula_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+			<Window title="Curriculum" id="curriculum_win">
 				<LeftNavButton>
-			        <View>
-			         	<Button id="backButton" onClick="backToHome" image="/images/btn-back.png" left="0" />
-			        </View>
+			        <View onClick="backToHome">
+			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
+			        </View> 
 			    </LeftNavButton>
 				<Require  id="curriculumDetailsView" src="school/curriculum"></Require>
 			</Window>

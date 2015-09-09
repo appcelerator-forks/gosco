@@ -9,15 +9,20 @@ var KEY   = '206b53047cf312532294f7207789fdggh';
 
 //API when app loading phase
 var getSchoolPost		= "http://"+API_DOMAIN+"/gosco/api/getPostList?user="+USER+"&key="+KEY;
+var getCurriculumPost	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumPost?user="+USER+"&key="+KEY;
 var getSchoolList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USER+"&key="+KEY;
 var getBannerList  		= "http://"+API_DOMAIN+"/gosco/api/getBannerList?user="+USER+"&key="+KEY;
 var getCurriculumList  	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumList?user="+USER+"&key="+KEY;
 var getSchoolClassList  = "http://"+API_DOMAIN+"/gosco/api/getSchoolClassList?user="+USER+"&key="+KEY;
 var updateKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/updateKidsClass?user="+USER+"&key="+KEY;
+var removeKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/removeKidsClass?user="+USER+"&key="+KEY;
+var updateKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/updateKidsCurriculum?user="+USER+"&key="+KEY;
+var removeKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/removeKidsCurriculum?user="+USER+"&key="+KEY;
 
 //var getTuitionList   	= "http://"+API_DOMAIN+"/gosco/api/getTuitionList?user="+USER+"&key="+KEY; 
 var getKidByUserList    = "http://"+API_DOMAIN+"/gosco/api/getKidByUser?user="+USER+"&key="+KEY; 
 var getKidsClassByUser  = "http://"+API_DOMAIN+"/gosco/api/getKidsClassByUser?user="+USER+"&key="+KEY; 
+var getKidsCurriculum   = "http://"+API_DOMAIN+"/gosco/api/getKidsCurriculum?user="+USER+"&key="+KEY; 
 var deviceInfoUrl       = "http://"+API_DOMAIN+"/gosco/api/getDeviceInfo?user="+USER+"&key="+KEY;
 var doLoginUrl  		= "http://"+API_DOMAIN+"/gosco/api/doLogin?user="+USER+"&key="+KEY;
 var doSignUpUrl  		= "http://"+API_DOMAIN+"/gosco/api/doSignUp?user="+USER+"&key="+KEY;
@@ -50,8 +55,7 @@ exports.loadAPIBySequence = function (ex, counter){
 	}
 	  
 	 var url = api['url']+"&last_updated="+last_updated; 
-	 var _result = contactServerByGet(url);    
-	 console.log(url);
+	 var _result = contactServerByGet(url);     
 	 _result.onload = function(e) {  
 	 	var res = JSON.parse(this.responseText);
 	 	if(res.status == "Success" || res.status == "success"){
@@ -92,16 +96,34 @@ exports.getDeviceInfo = function(ex){
 };
 
 exports.updateKidsClass = function(ex){
-	var url = updateKidsClass+"&k_id="+ex.k_id+"&ec_id="+ex.item+"&e_id="+ex.e_id;
- 
+	var url = updateKidsClass+"&k_id="+ex.k_id+"&ec_id="+ex.item+"&e_id="+ex.e_id; 
 	var _result = contactServerByGet(url);   
-	_result.onload = function(e) { 
-		
-	};
+	_result.onload = function(e) {};
+};
+
+exports.removeKidsClass = function(ex){
+	var url = removeKidsClass+"&id="+ex.id; 
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) {};
+};
+
+exports.updateKidsCurriculum = function(ex){
+	var url = updateKidsCurriculum+"&k_id="+ex.k_id+"&c_id="+ex.c_id;
+	console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) {};
+};
+
+exports.removeKidsCurriculum = function(ex){
+	var url = removeKidsCurriculum+"&k_id="+ex.k_id+"&c_id="+ex.c_id;
+	console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) {};
 };
 
 //Get school announcement / awards
 exports.getSchoolPost = function(e_id){
+	console.log("loading school post...");
 	var url = getSchoolPost+"&e_id="+e_id;
 	var _result = contactServerByGet(url);   
 	
@@ -115,8 +137,10 @@ exports.getSchoolPost = function(e_id){
 				 post_model.addPost(post);
 				 
 				 var post_element_model = Alloy.createCollection('post_element');  
-				 post_element_model.addElement(post);
-				  
+				 post_element_model.addElement(post); 
+				 Ti.App.Properties.setString('post', '1');
+				 console.log("DONE school POST..." +Ti.App.Properties.getString('post'));
+				 checkLoadDone(); 
 			 } 
 			 
 			// Ti.App.fireEvent('endLoad'); 
@@ -127,9 +151,24 @@ exports.getSchoolPost = function(e_id){
 	};
 };
 
+exports.getCurriculumPost = function(e, onReturn){
+	
+	var url = getCurriculumPost+"&c_id="+e.c_id;
+	console.log("loading curriculum post..."+ url);
+	var _result = contactServerByGet(url);   
+	
+	_result.onload = function(e) { 
+		onReturn(this.responseText);
+	};
+	
+	_result.onerror = function(e) { 
+	};
+	
+};
+
 //Get school class
 exports.getSchoolClassList = function(e_id){
-	 
+	console.log("loading class list...");
 	var url = getSchoolClassList+"&e_id="+e_id;
 	//console.log(url);
 	var _result = contactServerByGet(url);   
@@ -143,6 +182,35 @@ exports.getSchoolClassList = function(e_id){
 			var arr = result.data; 
 			 
 			educationClassModel.saveArray(arr); 
+			Ti.App.Properties.setString('class', '1');
+			console.log("DONE class LIST..." +Ti.App.Properties.getString('class'));
+			checkLoadDone(); 
+		}
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
+//Get kid curriculum
+exports.getKidsCurriculum = function(k_id){
+	console.log("loading kid curriculum...");
+	var url = getKidsCurriculum+"&k_id="+k_id;
+	//console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data[0]);
+			return false;
+		}else{
+			var kidsCurriculumClassModel = Alloy.createCollection('kidsCurriculum'); 
+			var arr = result.data; 
+			 
+			kidsCurriculumClassModel.saveArray(arr); 
+			Ti.App.Properties.setString('curriculum', '1'); 
+			console.log("DONE kid curriculum..." +Ti.App.Properties.getString('curriculum'));
+			checkLoadDone(); 
 		}
 	};
 	
@@ -152,6 +220,7 @@ exports.getSchoolClassList = function(e_id){
 
 //Get curriculum list
 exports.getCurriculumList = function(e_id){
+	console.log("loading curriculum list...");
 	var url = getCurriculumList+"&e_id="+e_id;
 	// console.log(url);
 	var _result = contactServerByGet(url);   
@@ -164,6 +233,10 @@ exports.getCurriculumList = function(e_id){
 			var curriculumModel = Alloy.createCollection('curriculum'); 
 			var arr = result.data;  
 			curriculumModel.saveArray(arr); 
+			
+			Ti.App.Properties.setString('kidsCurriculum', '1'); 
+			console.log("DONE curriculum LIST..." + Ti.App.Properties.getString('kidsCurriculum'));
+			checkLoadDone(); 
 		}
 	};
 	
@@ -190,8 +263,8 @@ exports.doLogin = function(ex){
 	   		Ti.App.Properties.setString('fullname', arr.fullname);
 	   		
 	   		//UPDATE / SYNC kids from server
-	   		API.getKidByUser({login: 1});
-			API.getKidsClassByUser();
+	   		API.getKidsInfoByUser({login: 1}); 
+	   		API.getKidByUser(); 
 		}
 	};
 	
@@ -212,12 +285,8 @@ exports.getKidByUser = function(ex){
 		}else{
 			var kidsModel = Alloy.createCollection('kids'); 
 			var arr = result.data;  
-			kidsModel.saveArray(arr);  
+			kidsModel.saveArray(arr);   
 			
-			if(ex.login == "1"){
-				var win = Alloy.createController("homepage/index").getView();
-				openModal(win);
-			}
 		}
 	};
 	
@@ -225,9 +294,9 @@ exports.getKidByUser = function(ex){
 	}; 
 };
 
-exports.getKidsClassByUser = function(ex){
+exports.getKidsInfoByUser = function(ex){
 	var url = getKidsClassByUser+"&u_id="+Ti.App.Properties.getString('user_id'); 
-	//console.log(url);
+	Ti.App.Properties.setString('isLoadHomepage', "0");			
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
@@ -240,17 +309,48 @@ exports.getKidsClassByUser = function(ex){
 			kidsEducationModel.resetData(); 
 			var arr = result.data; 
 			arr.forEach(function(entry) {
+				Ti.App.Properties.setString('curriculum', '0');
+				Ti.App.Properties.setString('post', '0');
+				Ti.App.Properties.setString('class', '0');
+				Ti.App.Properties.setString('kidsCurriculum','0');
+				
+				API.getKidsCurriculum(entry.k_id);
+				API.getSchoolPost(entry.e_id);
 				API.getSchoolClassList(entry.e_id);
 				API.getCurriculumList(entry.e_id);  
 			});
 			 
-			kidsEducationModel.saveArray(arr);   
+			kidsEducationModel.saveArray(arr); 
+			if(ex.login == "1"){
+			//	checkLoadDone(); 
+			}  
 		}
 	};
 	
 	_result.onerror = function(e) { 
 	}; 
 };
+
+function checkLoadDone(){
+	var load1 = Ti.App.Properties.getString('curriculum');
+	var load2 = Ti.App.Properties.getString('post');
+	var load3 = Ti.App.Properties.getString('class');
+	var load4 = Ti.App.Properties.getString('kidsCurriculum'); 
+	
+	if(load1 == "1" && load2 == "1" && load3 == "1" && load4 == "1"){
+		var loadHP = Ti.App.Properties.getString('isLoadHomepage');		
+		console.log("loadHP : "+loadHP);
+		if(loadHP == "0"){
+			Ti.App.Properties.setString('isLoadHomepage', "1");			
+			var win = Alloy.createController("homepage/index").getView();
+			openModal(win); 
+		}
+				
+	}else{
+	//	checkLoadDone();
+	}
+	
+}
 
 // Do Sign Up
 exports.doSignUp = function(ex,mainView){ 
@@ -280,21 +380,18 @@ exports.doSignUp = function(ex,mainView){
 // Do save Kids
 exports.saveKids = function(ex,onAPIReturn){
 	 
- 	ex.gender = 1;
+ 	var gender = 1;
 	if(ex.gender == "Female"){
-		ex.gender = 2;
+		gender = 2;
 	} 
 	var url = addKidUrl+"&isEdit="+ex.isEdit+"&fullname="+ex.fullname+
-				"&dob="+ex.birthdate+"&contact="+ex.contact+"&gender="+ex.gender+
+				"&dob="+ex.birthdate+"&contact="+ex.contact+"&gender="+gender+
 				"&hobby="+ex.hobby+"&u_id="+Ti.App.Properties.getString('user_id');
  	
  	if(ex.isEdit == "1"){
  		url += "&id="+ex.k_id;
  	}
- 	
- 	console.log(url);
-	return false;
- 	
+ 	console.log(url); 
 	if(ex.photo == ""){
 		var _result = contactServerByGet(url);   
 	}else{

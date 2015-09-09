@@ -21,7 +21,7 @@ var dpView = Titanium.UI.createView({
 		layout: "vertical",
 		height: 0,
 		width: Ti.UI.FILL,
-		visible: false
+		visible: true
 	});
 
 
@@ -32,8 +32,7 @@ function setupPersonalData(){
 		    title: 'Done',
 		    style: Titanium.UI.iPhone.SystemButtonStyle.DONE,
 		});
-		  
-		
+		   
 		done.addEventListener('click', function(){
 			var all_picker = $.selectorView.children;
 			all_picker[0].visible="false";
@@ -86,12 +85,20 @@ function setupPersonalData(){
 		if(avatar == ""){
 			avatar = "/images/avatar.jpg";
 		} 
+		
+		 
+		var dob = details.dob;
+		var dobArr = dob.split('-');
 		$.thumbPreview.image = avatar;
 		$.fullname.value = details.fullname;
-		$.date_value.text = COMMON.monthFormat(details.dob);
+		$.date_value.text = dobArr[2]+"/"+ dobArr[1] +"/" + dobArr[0] ;
 		$.gender_value.text = gender ;
 		$.hobby.value = details.hobby;
 		$.contact.value = details.contact; 
+		
+		//hijack datepicker
+		datePicker.setValue( new Date(dobArr[0],parseInt(dobArr[1]) -1,dobArr[2]));
+
 	}	
 }
 
@@ -147,15 +154,16 @@ function onAPIReturn(responseText){
 		var kidsModel = Alloy.createCollection('kids'); 
 		var arr = result.data;  
 		kidsModel.saveArray(arr); 
-		
+		console.log(arr);
 		if(isEdit == "1"){
 			COMMON.createAlert("Success", "Your kid is updated successfully!");
+			Ti.App.fireEvent('refreshKidsDetails');
 		}else{
 			COMMON.createAlert("Success", "Your kid is added successfully!");
-		}
-		 
-		Ti.App.fireEvent('refreshKids');
-		COMMON.closeWindow($.kidsFormWin); 
+			Ti.App.fireEvent('refreshKids');
+		} 
+		//closeWindow();
+		$.win.close();
 	}
 }
 //
@@ -164,9 +172,10 @@ function takePhoto(){
 }
 
 function showDatePicker(e){ 
-	var all_picker = $.selectorView.children;
-	$.selectorView.height = 0;
-	dpView.height = Ti.UI.SIZE;
+	
+	resetTextColor();
+	$.date_value.color = "#10844D";  
+
 	if(OS_ANDROID){ 
 		datePicker.showDatePickerDialog({
 			 //value: new Date(sBday[0],parseInt(sBday[1]) - 1, parseInt(sBday[2]) ),
@@ -178,13 +187,17 @@ function showDatePicker(e){
 			 }
 		});
 	}else{   
+		var all_picker = $.selectorView.children;
+		$.selectorView.height = Ti.UI.SIZE;
+		dpView.height = Ti.UI.SIZE;
 		//toolbar.visible = "true"; 
 		var dobPicker = all_picker[1]; 
-		dobPicker.visible = "true";
-		$.genderPicker.visible = "false"; 
+		dobPicker.visible = true;
+		dpView.visible = true;
+		$.genderPicker.visible = false; 
 	}
-	resetTextColor();
-	$.date_value.color = "#10844D";  
+	
+	
 }
 
 function changeDate(e){ 
@@ -227,11 +240,11 @@ function getAge(dateString) {
 }
 
 function showGenderPicker(){  
-	
+	console.log("showGenderPicker");
 	$.selectorView.height = Ti.UI.SIZE;  
 	resetTextColor();
 	$.gender_value.color = "#10844D";
-	$.genderPicker.visible = "true"; 
+	$.genderPicker.visible = true; 
 }  
 
 function resetTextColor(){ 
@@ -243,7 +256,7 @@ function changeGender(e){
 	$.gender_value.text = e.selectedValue[0]; 
 	resetTextColor(); 
 	$.selectorView.height=0;
-	$.genderPicker.visible = "false";
+	$.genderPicker.visible = false;
 }
 //		 
 function closeWindow(){

@@ -1,5 +1,4 @@
-Alloy.Globals.tabgroup = $.tabGroup;
-Alloy.Globals.navWin = $.navWin;
+Alloy.Globals.tabgroup = $.tabGroup; 
 var args = arguments[0] || {}; 
 COMMON.construct($); 
 
@@ -51,7 +50,7 @@ function doOpen() {
 		var activity = $.tabGroup.activity;
 	
 		if (activity.actionBar) {
-			activity.actionBar.title = "GOSCO";
+			activity.actionBar.title = "My Dashboard";
 		}
 		
 		activity.actionBar.displayHomeAsUp = true;

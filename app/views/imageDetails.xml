@@ -1,0 +1,13 @@
+<Alloy> 
+	<Window id="win" title="View Post Photo" fullscreen="true"   navTintColor="#CE1D1C" backgroundColor="#000000">
+		<LeftNavButton platform="ios">
+			<View onClick="closeWindow">
+				<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
+			</View>
+		</LeftNavButton>
+		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
+		<View layout="vertical" class="container" id="galleryView">
+			<ScrollView id="imageDetailsView" zoomScale="0.6" maxZoomScale="10"  />
+		</View>
+	</Window>
+</Alloy>

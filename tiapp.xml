@@ -42,7 +42,7 @@
         <manifest>
             <application android:debuggable="false" android:theme="@style/Theme.Gosco">
                 <meta-data
-                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDSLcOrBVlgh45JmLyO6khgv_x4xL3AZUA"/>
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyCB_mRDVKoRKpN7i6JpgfpU8vnKRbr86CU"/>
                 <intent-filter>
                     <action android:name="android.intent.action.SEND"/>
                     <category android:name="android.intent.category.DEFAULT"/>

@@ -173,7 +173,7 @@ function createSchoolList(){
 	}else{
 		listing.forEach(function(entry) {
 	   		var row = Titanium.UI.createTableViewRow({ 
-			    height: 40,
+			    height: Ti.UI.SIZE,
 			    source: entry.id,   
 			    backgroundSelectedColor: "#ECFFF9",
 		 		backgroundColor: "#ffffff"

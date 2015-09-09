@@ -23,6 +23,7 @@ overrode the settings with other TSS, XML, or JS settings:
 
 'Window': {
 	backgroundColor: '#EBEBEB'
+	//backgroundImage : "/images/home_background.jpg"
 }
 
 'Label': {

@@ -1,6 +1,5 @@
 var args = arguments[0] || {};
-COMMON.construct($);
-console.log("load login start");
+COMMON.construct($); 
 if(OS_IOS){
 	Alloy.Globals.navWin = $.navWin;
 }
@@ -30,4 +29,4 @@ function do_login(){
 	API.doLogin(params, $); 
 	
 }
- console.log("load login end");
+  
