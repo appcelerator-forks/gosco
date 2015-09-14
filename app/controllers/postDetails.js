@@ -4,6 +4,12 @@ var postModel;
 var postElementModel;
 var post_id = args.p_id  || "";
 var isCurriculum = args.isCurriculum  || "";  
+var showHeader = args.showHeader || "";
+
+if(showHeader == "1"){
+	$.showHeader.visible = true;
+	$.showHeader.height = 50;
+}
  
 if(isCurriculum == "1"){
  	postModel = Alloy.createCollection('curriculumPost'); 

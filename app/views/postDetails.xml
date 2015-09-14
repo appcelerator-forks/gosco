@@ -11,6 +11,11 @@
 			<Label top="5" class="center" text="Loading" color="#ffffff" />
 		</View>
 		<View class="wfill hfill vert" >
+			<View id="showHeader" layout="vertical" backgroundColor="#B8D5BA" visible="false" height="0">
+				<View onClick="closeWindow">
+					<ImageView left='10'  width="25" height="25" image="/images/btn-back.png" />  
+				</View>
+			</View>
 			<ScrollView class="news_item" id="myContentView" backgroundColor="#FFFFFF" contentWidth="Ti.UI.FILL" contentHeight="Ti.UI.SIZE" />
 		</View>
 	</Window>

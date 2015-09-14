@@ -58,6 +58,7 @@ if(ks.length > 0){
 		API.getSchoolPost(entry.e_id);
 		API.getSchoolClassList(entry.e_id);
 		API.getCurriculumList(entry.e_id);  
+		API.getEventsList(entry.e_id);  
 	});
 }
 API.loadAPIBySequence();

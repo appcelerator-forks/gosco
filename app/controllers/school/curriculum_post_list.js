@@ -3,10 +3,15 @@ COMMON.construct($);
 var curriculumPostModel = Alloy.createCollection('curriculumPost'); 
 var curriculumPost_element_model = Alloy.createCollection('curriculumPost_element');  
 var c_id = args.c_id || "";  
+var showHeader = args.showHeader || "";
 COMMON.showLoading();
 API.getCurriculumPost({c_id: c_id}, onReturn);
 init(); 
 
+if(showHeader == "1"){
+	$.showHeader.visible = true;
+	$.showHeader.height = 50;
+}
 function init(){
 	displayLatestBoard();  
 }
@@ -120,8 +125,12 @@ function addClickEvent(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl); 
 		 
-		var win = Alloy.createController("postDetails", {p_id: res.source, isCurriculum: "1"}).getView(); 
+		var win = Alloy.createController("postDetails", {p_id: res.source, isCurriculum: "1", showHeader : showHeader}).getView(); 
 		//COMMON.openWindow(win); 
-		Alloy.Globals.schooltabgroup.activeTab.open(win);
+		if(showHeader == "1"){
+			openModal(win);
+		}else{
+			Alloy.Globals.schooltabgroup.activeTab.open(win);
+		}
 	});
 }

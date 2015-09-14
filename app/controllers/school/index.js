@@ -7,6 +7,7 @@ var ke_id = args.ke_id || "";
 init();
 function init(){   
 	$.noticeBoardDetailsView.init({school_id:school_id}); 
+	$.eventsDetailsView.init({school_id:school_id}); 
 	$.curriculumDetailsView.init({school_id:school_id}); 
 	$.awardDetailsView.init({school_id:school_id}); 
 }

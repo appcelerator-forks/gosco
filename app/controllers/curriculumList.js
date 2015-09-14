@@ -30,9 +30,44 @@ function createList(){
 				c_id: entry.id,
 				height: 50,
 				left: 10,
-				title: entry.curriculum
+				//title: entry.curriculum
 			});
-			tblRowView.addEventListener('click',selectCurriculum); 
+			
+			var titleView = $.UI.create('View', { 
+				classes: ['horz', 'wfill', 'hsize'],
+				height: Ti.UI.SIZE, 
+				c_id: entry.id
+			});
+			
+			var titleLbl = $.UI.create('Label', { 
+				classes: ['horz',  'hsize'], 
+				text: entry.curriculum,
+				left:10,
+				color: "#000000",
+				c_id: entry.id
+			});
+			titleView.add(titleLbl);
+			tblRowView.add(titleView);
+			tblRowView.addEventListener('click',readCurriculumDetails);  
+			
+			var addView = Ti.UI.createView({ 
+					width: 50,
+					height: Ti.UI.SIZE,
+					right:20,
+					isAdd:1,
+					c_id: entry.id 
+				});
+				var addBtn = Ti.UI.createImageView({
+					width: 25,
+					height: 25,
+					c_id: entry.id,
+					isAdd:1, 
+					image: "/images/add.png"
+				});
+				addView.add(addBtn);
+				tblRowView.add(addView);
+				addView.addEventListener('click',selectCurriculum);  
+			//tblRowView.addEventListener('click',selectCurriculum); 
 			curTable.appendRow(tblRowView);
 		});
 	}else{
@@ -48,10 +83,20 @@ function createList(){
 
 function selectCurriculum(e){
 	var elbl = JSON.stringify(e.source); 
-	var res = JSON.parse(elbl);   
+	var res = JSON.parse(elbl);    
 	Ti.App.fireEvent('selectCurriculum',{c_id:res.c_id});
  
 	$.win.close();  
+}
+
+function readCurriculumDetails(e){
+	var elbl = JSON.stringify(e.source); 
+	var res = JSON.parse(elbl);    
+	if(res.isAdd == "1"){
+		return false;
+	}
+	var win = Alloy.createController("school/curriculum_post_list", {c_id: res.c_id, showHeader: 1}).getView(); 
+ 	openModal(win);
 }
 
 /***SEARCH FUNCTION***/

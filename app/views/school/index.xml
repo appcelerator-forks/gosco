@@ -16,17 +16,17 @@
 			</Window>
 		</Tab>
 		<Tab color="white" title="Events" icon="/images/icons/icon_events.png" activeIcon="/images/icons/icon_events_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="SMK Taman Tasik">
+			<Window title="School Events">
 				<LeftNavButton>
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View> 
 			    </LeftNavButton>
-				<Require src="school/events"></Require>
+				<Require id="eventsDetailsView" src="school/events"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Homework" icon="/images/icons/icon_homeworks.png" activeIcon="/images/icons/icon_homeworks_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="SMK Taman Tasik">
+			<Window title="Homework">
 				<LeftNavButton>
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
@@ -36,7 +36,7 @@
 			</Window>
 		</Tab>
 		<Tab title="Awards" icon="/images/icons/icon_awards.png" activeIcon="/images/icons/icon_awards_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="SMK Taman Tasik">
+			<Window title="School Award">
 				<LeftNavButton>
 			        <View>
 			         	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  

@@ -12,7 +12,7 @@ function init(e){
 function displayLatestBoard(){
 	var latestPost = postModel.getLatestPost(5,1);  
 	var boardPost = $.UI.create('View',{
-		classes: ['padding' ,'box', 'hsize'], 
+		classes: ['padding' ,'box', 'hsize', 'vert'], 
 	});
 	if(latestPost.length > 0){ 
 		latestPost.forEach(function(entryPost) {
@@ -69,6 +69,7 @@ function displayLatestBoard(){
 			postView.add(titleLbl);
 			postView.add(descLbl);
 			postView.add(publishView);
+			postView.add(separateHozLine());
 			boardPost.add(postView);
 			addClickEvent(postView); 
 		});
@@ -76,6 +77,15 @@ function displayLatestBoard(){
 		$.latestBoardView.add(boardPost);
 	} 
 }
+
+function separateHozLine(){
+	return seperatorLine = Titanium.UI.createView({ 
+		backgroundColor: "#D5D5D5",
+		height:1, 
+		top:5,
+		width:Ti.UI.FILL
+	});
+} 
 
 function addClickEvent(vw){
 	vw.addEventListener('click', function(e){ 

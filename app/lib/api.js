@@ -14,6 +14,7 @@ var getSchoolList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USE
 var getBannerList  		= "http://"+API_DOMAIN+"/gosco/api/getBannerList?user="+USER+"&key="+KEY;
 var getCurriculumList  	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumList?user="+USER+"&key="+KEY;
 var getSchoolClassList  = "http://"+API_DOMAIN+"/gosco/api/getSchoolClassList?user="+USER+"&key="+KEY;
+var getEventsList       = "http://"+API_DOMAIN+"/gosco/api/getEventsList?user="+USER+"&key="+KEY;
 var updateKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/updateKidsClass?user="+USER+"&key="+KEY;
 var removeKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/removeKidsClass?user="+USER+"&key="+KEY;
 var updateKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/updateKidsCurriculum?user="+USER+"&key="+KEY;
@@ -166,6 +167,31 @@ exports.getCurriculumPost = function(e, onReturn){
 	
 };
 
+exports.getEventsList = function(e_id){
+	console.log("loading events list...");
+	var url = getEventsList+"&e_id="+e_id;
+	console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data[0]);
+			return false;
+		}else{
+			var eventsModel = Alloy.createCollection('events'); 
+			var arr = result.data; 
+			 
+			eventsModel.saveArray(arr); 
+			Ti.App.Properties.setString('events', '1');
+			console.log("DONE events LIST..." +Ti.App.Properties.getString('events'));
+			checkLoadDone(); 
+		}
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
 //Get school class
 exports.getSchoolClassList = function(e_id){
 	console.log("loading class list...");
@@ -312,12 +338,14 @@ exports.getKidsInfoByUser = function(ex){
 				Ti.App.Properties.setString('curriculum', '0');
 				Ti.App.Properties.setString('post', '0');
 				Ti.App.Properties.setString('class', '0');
+				Ti.App.Properties.setString('events', '0');
 				Ti.App.Properties.setString('kidsCurriculum','0');
 				
 				API.getKidsCurriculum(entry.k_id);
 				API.getSchoolPost(entry.e_id);
 				API.getSchoolClassList(entry.e_id);
 				API.getCurriculumList(entry.e_id);  
+				API.getEventsList(entry.e_id);  
 			});
 			 
 			kidsEducationModel.saveArray(arr); 
@@ -336,8 +364,8 @@ function checkLoadDone(){
 	var load2 = Ti.App.Properties.getString('post');
 	var load3 = Ti.App.Properties.getString('class');
 	var load4 = Ti.App.Properties.getString('kidsCurriculum'); 
-	
-	if(load1 == "1" && load2 == "1" && load3 == "1" && load4 == "1"){
+	var load5 = Ti.App.Properties.getString('events');
+	if(load1 == "1" && load2 == "1" && load3 == "1" && load4 == "1" && load5 =="1"){
 		var loadHP = Ti.App.Properties.getString('isLoadHomepage');		
 		console.log("loadHP : "+loadHP);
 		if(loadHP == "0"){
