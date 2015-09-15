@@ -119,6 +119,7 @@ function loadKidsSchool(){
 			    height: Ti.UI.SIZE,
 			    source: entry.id, 
 			  	school: entry.e_id,
+			  	ec_id : entry.class_name,
 			    backgroundSelectedColor: "#FFFFFF",
 		 
 			});
@@ -127,6 +128,7 @@ function loadKidsSchool(){
 				height:50,
 				source: entry.id, 
 				school: entry.e_id,
+				ec_id : entry.class_name,
 				width:Ti.UI.FILL 
 			}); 
 			var tblView = Ti.UI.createView({
@@ -134,6 +136,7 @@ function loadKidsSchool(){
 				height:Ti.UI.SIZE,
 				source: entry.id, 
 				school: entry.e_id,
+				ec_id : entry.class_name,
 				width:"80%" 
 			}); 
 			var schoolTitle = $.UI.create('Label',{
@@ -141,6 +144,7 @@ function loadKidsSchool(){
 				text: entry.school_name, 
 				source: entry.id, 
 				school: entry.e_id,
+				ec_id : entry.class_name,
 				left:4,
 				textAlign:'left',  
 			});	
@@ -152,6 +156,7 @@ function loadKidsSchool(){
 				text: mySt, 
 				source: entry.id, 
 				school: entry.e_id,
+				ec_id : entry.class_name,
 				left:4,
 				textAlign:'left',  
 			});	
@@ -169,16 +174,16 @@ function loadKidsSchool(){
 				layout: "vertical",
 				height:Ti.UI.SIZE,
 				source: entry.id, 
-				school: entry.e_id,
-				class_id: entry.class_name,
+				school: entry.e_id, 
+				ec_id : entry.class_name,
 				width:"auto" 
 			}); 
 			var className = $.UI.create('Label',{
 				classes : ['font_medium' ,'hsize' ,'themeColor'],
 				text: "Class", 
 				source: entry.id, 
-				school: entry.e_id,
-				class_id: entry.class_name,
+				school: entry.e_id, 
+				ec_id : entry.class_name,
 				top:0,
 				textAlign:'center' 
 			});	
@@ -186,8 +191,8 @@ function loadKidsSchool(){
 				classes : ['font_small', 'hsize' ],
 				text: kidcn, 
 				source: entry.id, 
-				school: entry.e_id,
-				class_id: entry.class_name,
+				school: entry.e_id, 
+				ec_id : entry.class_name,
 				textAlign:'center',  
 			});	
 			tblClassView.add(className);
@@ -211,7 +216,7 @@ function viewSchoolDetails(e){
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl); 
 	Ti.App.Properties.setString('current_school',  res.school);  
-	var win = Alloy.createController("school/index",{school_id: res.school, ke_id: res.source}).getView();
+	var win = Alloy.createController("school/index",{school_id: res.school, ke_id: res.source, ec_id:res.ec_id}).getView();
 	//Alloy.Globals.tabgroup.activeTab.open(win);
 	openModal(win);
 	//COMMON.openWindow(win);
@@ -220,7 +225,7 @@ function viewSchoolDetails(e){
 function classPop(e){
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl);   
-	var win = Alloy.createController("classList",{id:res.source ,school:res.school, class_id: res.class_id }).getView();
+	var win = Alloy.createController("classList",{id:res.source ,school:res.school, class_id: res.ec_id }).getView();
 	openModal(win);
 }
  

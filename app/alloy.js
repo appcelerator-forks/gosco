@@ -126,6 +126,16 @@ function monthFormat(date){
     return day[2]+" "+ monthNames[month]+" "+ day[0];
 }
 
+function textLimit(text, limit){ 
+	text = text.replace(/<br\/>/g,"\r\n");
+	text = text.replace(/\&quot;/g,"'");
+	text = text.replace(/\\/g,'');
+	
+	if(text.length > 80){
+		text = text.substring(0,limit ) + "..."; 
+	}
+	return text;
+}
 function escapeSpecialCharacter(msg){ 
 	msg = msg.replace(/<br\/>/g,"\r\n");
 	msg = msg.replace(/\&quot;/g,"'");

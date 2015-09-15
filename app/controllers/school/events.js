@@ -50,13 +50,13 @@ function loadEvent(school_id){
 			});
 	 
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_medium'],  
+				classes: [ 'hsize','font_medium', 'themeColor'],  
 				text: entry.title,
 				source: entry.id
 			}); 
 			var messageLbl = $.UI.create('Label',{
 				classes: [ 'hsize','font_12'],  
-				text: entry.message,
+				text: textLimit(entry.message,40),
 				source: entry.id
 			}); 
 			rightView.add(titleLbl);
