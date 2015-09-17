@@ -21,7 +21,8 @@ function loadEvent(school_id){
 		details.forEach(function(entry) {
 			var tblRowView = $.UI.create('TableViewRow',{
 				hasChild: true,
-				classes:["horz"]
+				classes:["horz"],
+				source: entry.id
 			});
 			var leftView = $.UI.create('View',{
 				classes: ['padding'  ,'vert', 'hsize'],  
@@ -63,11 +64,21 @@ function loadEvent(school_id){
 			rightView.add(messageLbl); 
 			tblRowView.add(leftView);	
 			tblRowView.add(centerView);	
-    		tblRowView.add(rightView);	 
+    		tblRowView.add(rightView);	
+    		addClickEvent(tblRowView); 
     	 	eventTbl.appendRow(tblRowView);
 		});
 		$.eventSv.add(eventTbl);
 	}	
+}
+
+function addClickEvent(vw){
+	vw.addEventListener('click', function(e){ 
+		var elbl = JSON.stringify(e.source); 
+		var res = JSON.parse(elbl);  
+		var win = Alloy.createController("school/eventDetails", {event_id: res.source}).getView();  
+		Alloy.Globals.schooltabgroup.activeTab.open(win);
+	});
 }
 
 exports.init = function(e){

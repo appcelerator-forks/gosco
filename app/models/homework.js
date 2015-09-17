@@ -44,7 +44,7 @@ exports.definition = {
                 if (res.isValidRow()){
 					arr = {
 						id: res.fieldByName('id'), 
-					    e_id: res.fieldByName('e_id'),
+					    ec_id: res.fieldByName('ec_id'),
 					    subject: res.fieldByName('subject'),
 					    remark: res.fieldByName('remark'),
 					    deadline: res.fieldByName('deadline'),

@@ -74,10 +74,20 @@ function loadHomework(ec_id){
 			tblRowView.add(leftView);	
 			tblRowView.add(centerView);	
     		tblRowView.add(rightView);	 
+    		addClickEvent(tblRowView); 
     	 	pageTbl.appendRow(tblRowView);
 		});
 		$.homeworkSv.add(pageTbl);
 	}
+}
+
+function addClickEvent(vw){
+	vw.addEventListener('click', function(e){ 
+		var elbl = JSON.stringify(e.source); 
+		var res = JSON.parse(elbl);  
+		var win = Alloy.createController("school/homeworkDetails", {homework_id: res.source}).getView();  
+		Alloy.Globals.schooltabgroup.activeTab.open(win);
+	});
 }
 
 exports.init = function(e){
