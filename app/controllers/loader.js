@@ -41,7 +41,7 @@ $.finish = function(_callback) {
 		}, function() {
 			console.log("overlay callback");
 			$.rocketFlight.stop();
-			
+			$.rocket.removeAllChildren();
 			_callback && _callback();
 		});
 	});
