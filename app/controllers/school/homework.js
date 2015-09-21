@@ -23,7 +23,8 @@ function loadHomework(ec_id){
 		details.forEach(function(entry) {
 			var tblRowView = $.UI.create('TableViewRow',{
 				hasChild: true,
-				classes:["horz"]
+				classes:["horz"],
+				source: entry.id
 			});
 			var leftView = $.UI.create('View',{
 				classes: ['padding'  ,'vert', 'hsize'],  
@@ -85,6 +86,7 @@ function addClickEvent(vw){
 	vw.addEventListener('click', function(e){ 
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl);  
+		console.log(" res.source "+ res.source);
 		var win = Alloy.createController("school/homeworkDetails", {homework_id: res.source}).getView();  
 		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});

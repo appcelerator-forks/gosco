@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 var homeworkModel = Alloy.createCollection('homework'); 
 COMMON.construct($);
 var homework_id = args.homework_id || ""; 
-
+console.log( "homework_id "+homework_id);
 loadHomeworktDetails();
 function loadHomeworktDetails(){
 	var details = homeworkModel.getHomeworkById(homework_id);
@@ -17,9 +17,10 @@ function loadHomeworktDetails(){
 		text: details.remark,
 		classes : ["font_12", "padding"]
 	});
-	
+	console.log(details.updated);
 	var updated = details.updated;
 	updated =   updated.substr(0, 10);
+	console.log(updated);
 	var dateLabel = $.UI.create('Label',{
 		text: "Last updated :  " + monthFormat(updated) ,
 		classes : ["font_12", "padding"]
@@ -33,8 +34,9 @@ function loadHomeworktDetails(){
 	
  	$.myContentView.add(titleLabel);
  	$.myContentView.add(contentLabel);
- 	$.myContentView.add(separateHorzLine());
+ 	
  	$.myContentView.add(dateLabel);
+ 	$.myContentView.add(separateHorzLine());
  	$.myContentView.add(pubLabel);
 	/***
 	var titleLabel = $.UI.create('Label',{

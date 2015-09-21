@@ -246,6 +246,7 @@ var selectClass = function(e){
  	
 	kidsEducationModel.updatePartialRecords(param);  
 	API.updateKidsClass(param);
+	API.getHomeworkList(e.className);  
 	loadKidsSchool();  
 };
 
