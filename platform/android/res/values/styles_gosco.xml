@@ -18,24 +18,16 @@
 -->
 
 <resources>
-	<style name="Theme.NoActionBar" parent="@style/Theme.AppCompat">
+	<style name="Theme.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-    </style>
-    <style name="Theme.Gosco" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="actionBarItemBackground">@drawable/selectable_background_gosco</item>
-        <item name="popupMenuStyle">@style/PopupMenu.Gosco</item>
-        <item name="dropDownListViewStyle">@style/DropDownListView.Gosco</item>
-        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Gosco</item>
-        <item name="actionDropDownStyle">@style/DropDownNav.Gosco</item>
-        <item name="actionBarStyle">@style/ActionBar.Solid.Gosco</item>
-        <item name="actionModeBackground">@drawable/cab_background_top_gosco</item>
-        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_gosco</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Gosco</item>
-		<item name="titleTextStyle">@style/MyActionBarTitleText</item>
         
     </style>
-
+    <style name="Theme.Gosco" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+       <item name="titleTextStyle">@style/MyActionBarTitleText</item>
+    </style>
+ 	
+ 	
     <style name="ActionBar.Solid.Gosco" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_gosco</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_gosco</item>
@@ -44,7 +36,7 @@
     </style>
 	 <style name="MyActionBarTitleText"
            parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textColor">#10844D</item>
     </style>
     <style name="ActionBar.Transparent.Gosco" parent="@style/Widget.AppCompat.Light.ActionBar">
         <item name="background">@drawable/ab_transparent_gosco</item>

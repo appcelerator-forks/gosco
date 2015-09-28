@@ -20,9 +20,9 @@
 		 	
 		 	<View height="1" backgroundColor="#CE1D1C" width="98%" top="10" />
 		 	<TableView id="healthTableData" backgroundColor="#ffffff" height="Ti.UI.SIZE" width="100%" scrollable="false" >
-		 		<TableViewRow height="50" left="10" selectedBackgroundColor="#FFE1E1" color="#5E5E5E" onClick="direction2here" title="Direction To Here"   />
-				<TableViewRow height="50" left="10" selectedBackgroundColor="#FFE1E1" color="#5E5E5E" onClick="clickToCall" title="Call"   />
-	            <TableViewRow height="50" left="10" id="add2contact" selectedBackgroundColor="#FFE1E1" color="#5E5E5E" onClick="addToContact" title="Add To Contact"   />
+		 		<TableViewRow height="50" left="10" backgroundSelectedColor="#FFE1E1" color="#5E5E5E" onClick="direction2here" title="Direction To Here"   />
+				<TableViewRow height="50" left="10" backgroundSelectedColor="#FFE1E1" color="#5E5E5E" onClick="clickToCall" title="Call"   />
+	            <TableViewRow height="50" left="10" id="add2contact" backgroundSelectedColor="#FFE1E1" color="#5E5E5E" onClick="addToContact" title="Add To Contact"   />
 			</TableView>
 		 	 
 		 </ScrollView>

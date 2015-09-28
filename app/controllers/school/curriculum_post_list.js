@@ -8,6 +8,10 @@ COMMON.showLoading();
 API.getCurriculumPost({c_id: c_id}, onReturn);
 init(); 
 
+if(OS_ANDROID){
+	showHeader = "0";
+}
+
 if(showHeader == "1"){
 	$.showHeader.visible = true;
 	$.showHeader.height = 50;

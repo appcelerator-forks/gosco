@@ -17,7 +17,7 @@
 		</Window>
 	</NavigationWindow>
 	
-	<Window title="GOSCO" backgroundColor="#10844D" color="#ffffff" platform="android">
+	<Window title="GOSCO" backgroundColor="#10844D" color="#ffffff" platform="android" theme="Theme.NoActionBar">
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
 		    	<Label top="5" text="Loading" color="#ffffff" />

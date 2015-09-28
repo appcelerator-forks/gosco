@@ -39,6 +39,8 @@ function loadKidsTuition(){
 	});			
 	var addTuitionTblRow = Titanium.UI.createTableViewRow({
 		title: "Add Tuition",
+		backgroundColor: "#10844D",
+		color: "#ffffff",
 		height:50, 
 	});
 	addTuitionTblRow.addEventListener("click",function(){showSchool(2);} );
@@ -104,6 +106,8 @@ function loadKidsSchool(){
 	});				 
 	var addSchoolTblRow = Titanium.UI.createTableViewRow({
 		title: "Add School",
+		backgroundColor: "#10844D",
+		color: "#ffffff",
 		height:50, 
 	});
 	addSchoolTblRow.addEventListener("click",function(){showSchool(1);} );
