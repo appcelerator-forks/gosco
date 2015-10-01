@@ -3,15 +3,15 @@
     <id>com.geonn.gosco</id>
     <name>Gosco</name>
     <version>1.0</version>
-    <publisher>Gosco</publisher>
+    <publisher>geomilano</publisher>
     <url>http://</url>
     <description>undefined</description>
-    <copyright>2015 by Gosco</copyright>
+    <copyright>2015 by geomilano</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>f88e48f5-eefb-4bc7-9777-2a4dd249ca87</guid>
+    <guid>acb6ce49-303f-42cb-9444-6fc3c7a1fa7e</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
         <plist>
@@ -35,6 +35,29 @@
                 <false/>
                 <key>UIStatusBarStyle</key>
                 <string>UIStatusBarStyleDefault</string>
+                <key>NSLocationWhenInUseUsageDescription</key>
+                <string>Location services needed in order to route panel location</string>
+                <key>CFBundleURLTypes</key>
+                <array>
+                    <dict>
+                        <key>CFBundleURLName</key>
+                        <!-- Application ID same as the id value in the tiapp.xml file -->
+                        <string>com.geonn.plux</string>
+                        <key>CFBundleURLSchemes</key>
+                        <array>
+                            <!-- Prefix the Facebook App ID with 'fb' -->
+                            <string>fb</string>
+                            <string>1636245926664883</string>
+                            <string>waze</string>
+                        </array>
+                    </dict>
+                </array>
+                <key>FacebookAppID</key>
+                <!-- Facebook App ID -->
+                <string>1636245926664883</string>
+                <key>FacebookDisplayName</key>
+                <!-- Facebook App Name from developer.facebook.com -->
+                <string>GOSCO</string>
             </dict>
         </plist>
     </ios>
@@ -48,6 +71,9 @@
                     <category android:name="android.intent.category.DEFAULT"/>
                     <data android:mimeType="image/*" android:scheme="http"/>
                 </intent-filter>
+                <activity android:label="plux"
+                    android:name="com.facebook.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+                <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
             </application>
             <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -65,9 +91,13 @@
     </mobileweb>
     <modules>
         <module platform="commonjs" version="3.2.8">ti.cloud</module>
-        <module platform="android">ti.cloudpush</module>
+        <module platform="android" version="3.3.8">ti.cloudpush</module>
         <module platform="android">com.appcelerator.apm</module>
         <module platform="iphone">com.appcelerator.apm</module>
+        <module platform="android">facebook</module>
+        <module platform="iphone">facebook</module>
+        <module platform="iphone">ti.map</module>
+        <module platform="android" version="2.3.1">ti.map</module>
     </modules>
     <deployment-targets>
         <target device="android">true</target>
@@ -75,9 +105,25 @@
         <target device="iphone">true</target>
         <target device="mobileweb">true</target>
     </deployment-targets>
-    <sdk-version>5.0.0.GA</sdk-version>
+    <sdk-version>5.0.1.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>
-    <property name="appc-app-id" type="string">55727958ba1c99632ec7e17e</property>
+    <property name="appc-app-id" type="string">560ce568f30d56e363d73d47</property>
+    <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-development" type="string">gPAl6OPxnCWutI3pM9qeKRhz4ojLh20A</property>
+    <property name="acs-oauth-key-development" type="string">L0gG4G1qbaa7eqLFnUNTTBsLbC31wkbt</property>
+    <property name="acs-api-key-development" type="string">jyLorrSBaP01Jy4hFgatzpVk3FuC7fpY</property>
+    <property name="acs-username-development" type="string">appc_app_user_dev</property>
+    <property name="acs-password-development" type="string">q7zxGwtV1e2lV2bz5t</property>
+    <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-oauth-secret-production" type="string">Xlol8MrWuuADj04QTlAsBgE1ncbTC6SL</property>
+    <property name="acs-oauth-key-production" type="string">jba3ivITUyCG3kX8jbRw3Rr6dpySvhJB</property>
+    <property name="acs-api-key-production" type="string">5N9ipEOl7wUq06TuuXCTZjdeZKyteSBj</property>
+    <property name="acs-username-production" type="string">appc_app_user</property>
+    <property name="acs-password-production" type="string">x8v3HNuFtKkEwPNGgX</property>
+    <property name="appc-org-id" type="string">100016072</property>
+    <property name="appc-creator-user-id" type="string">974ebc0c-0865-4ea6-b748-9098dc431587</property>
 </ti:app>

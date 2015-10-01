@@ -23,13 +23,13 @@ function createOptions(title,options,onSelected){
 		width:'33%', 
 	});
 	var theLabel = mainView.UI.create('Label',{
-		classes: [ 'center', 'font_small', 'small_padding','font_dark_grey'], 
+		classes: [ 'center', 'font_small', 'small_padding','font_light_white'], 
 		text : title+" :",
 		width:'100%', 
 	});
 	
 	var theTextLabel = mainView.UI.create('Label',{
-		classes: [ 'center', 'font_12','themeColor'],
+		classes: [ 'center', 'font_12','font_light_white'],
 		text : myselected, 
 		width:Ti.UI.SIZE, 
 	});

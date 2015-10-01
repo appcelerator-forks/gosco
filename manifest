@@ -1,8 +1,8 @@
-#appname:mogso
-#publisher:Gosco
-#url:http://
-#image:appicon.png
-#appid:com.gosco.school
-#desc:undefined
-#type:ipad
-#guid:e57aa49f-4609-4a99-9774-e0ca7d0d9d7d
+#appname: Gosco_public
+#publisher: geomilano
+#url: http://
+#image: appicon.png
+#appid: com.geonn.gosco
+#desc: undefined
+#type: ipad
+#guid: acb6ce49-303f-42cb-9444-6fc3c7a1fa7e

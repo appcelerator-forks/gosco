@@ -1,7 +1,7 @@
 <Alloy> 
 	<TabGroup id="tabGroup"  tabsTintColor="#10844D"  onOpen="doOpen" tabsBackgroundImage="/images/kid_menu_bar1.png">
 		<Tab id="dashboardTab"  tintColor="black" title="Dashboard" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window id="win1" title="Dashboard" backgroundColor="red" backgroundImage="/images/home_background.jpg" > 
+			<Window id="win1" title="Dashboard"  backgroundImage="/images/home_background.jpg"> 
 				<LeftNavButton platform="ios">
 				    <View id="btnLogout" left="0"  width="30" height="35">
 				     	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />

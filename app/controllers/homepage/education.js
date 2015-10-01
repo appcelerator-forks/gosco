@@ -192,26 +192,25 @@ function createSchoolList(){
 			}
 			var logoView = Ti.UI.createView({  
 				width:50 ,
-				layout:"vertical",
-				source: entry.id, 
-				height:Ti.UI.SIZE
+				source: entry.id
 			}); 
 			var schoolLogo = $.UI.create('ImageView',{  
 					source: entry.id, 
-					image: img_path, 
-					width:40,
+					image: img_path,  
+					width:50,
 					top: 4,
 					left: 4
 			});	
-			logoView.add(schoolLogo);
-			tblRowView.add(logoView);
+			//logoView.add(schoolLogo);
+		 	//tblRowView.add(logoView);
 			var schoolTitle = $.UI.create('Label',{
 					classes : ['font_regular','wfill','hsize','themeColor'],
 					text:  entry.name, 
 					source: entry.id, 
 					textAlign:'left',
 					top:10,
-					left:4
+					bottom:10,
+					left:10
 			});	
 			  
 			tblRowView.add(schoolTitle);

@@ -47,7 +47,7 @@ function receivePush(e) {
 function deviceTokenSuccess(ex) {
     deviceToken = ex.deviceToken;
     Cloud.Users.login({
-	    login: 'geonn',
+	    login: 'gosco',
 	    password: '123456'
 	}, function (e) {
 		if (e.success) {

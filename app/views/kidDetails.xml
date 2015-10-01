@@ -1,7 +1,7 @@
 <Alloy> 
-		<Window title="Kids Details" id="win"   >
+		<Window title="Kids Details" id="win"  backgroundImage="/images/home_background.jpg"  >
 			<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
-			<LeftNavButton>
+			<LeftNavButton paltform="ios">
 				<View>
 					<ImageView left='0' onClick="closeWindow" width="25" height="25" image="/images/btn-back.png" />   
 			    </View>
@@ -23,7 +23,7 @@
 						<ImageView width="100" height="100" borderRadius="50" id="thumbPreview" />
 					</View>
 					
-					<Label id="fullname" textAlign="center" class="padding themeColor font_big" top="10"></Label> 
+					<Label id="fullname" textAlign="center" class="padding font_light_white font_big" top="10"></Label> 
 				
 					<View id="table" height="180"  backgroundColor="#ffffff" layout="vertical" > 
 						<View id="tvrFieldDate" height="Ti.UI.SIZE" layout="vertical"  >

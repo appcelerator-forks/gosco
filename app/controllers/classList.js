@@ -23,7 +23,9 @@ function init(){
 
 function createClassList(){
 	//COMMON.removeAllChildren(schContainer);
-	var clsTable = Ti.UI.createTableView();
+	var clsTable = Ti.UI.createTableView({
+		separatorColor: "#375540"
+	});
 	var data=[]; 
 	var counter = 0;
     
@@ -34,8 +36,7 @@ function createClassList(){
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
 			    height: Ti.UI.SIZE,
-			    source: entry.id, 
-			   // layout: "vertical",
+			    source: entry.id,  
 			    backgroundSelectedColor: "#ECFFF9", 
 			});
 			

@@ -55,7 +55,9 @@ $.schoolContainer.add(bigContainer);
  
 function createSchoolList(){
 	COMMON.removeAllChildren(schContainer);
-	var schTable = Ti.UI.createTableView();
+	var schTable = Ti.UI.createTableView({
+		backgroundColor:"#ffffff"
+	});
 	var data=[]; 
 	var counter = 0;
     
@@ -65,11 +67,10 @@ function createSchoolList(){
 		listing.forEach(function(entry) {
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
-			    height: Ti.UI.SIZE,
+			    height: 100,
 			    source: entry.id, 
 			   // layout: "vertical",
-			    backgroundSelectedColor: "#ECFFF9",
-		 
+			    backgroundSelectedColor: "#ECFFF9", 
 			});
 			
 			var tblView = Ti.UI.createView({
@@ -99,6 +100,7 @@ function createSchoolList(){
 			var schoolLogo = $.UI.create('ImageView',{  
 					source: entry.id, 
 					image: img_path, 
+					height:Ti.UI.SIZE,
 					width:50,
 					top: 4,
 					left: 4
@@ -114,7 +116,7 @@ function createSchoolList(){
 					left:4
 			});	
 			var schoolAddress = $.UI.create('Label',{
-				classes : ['font_medium','wfill','hsize'],
+				classes : ['font_12','wfill','hsize'],
 				text:  entry.address, 
 				source: entry.id,
 				color: "#848484", 
@@ -123,7 +125,7 @@ function createSchoolList(){
 				left:4,  
 			});	
 			var schoolContact = $.UI.create('Label',{
-				classes : ['font_medium','wfill','hsize'],
+				classes : ['font_12','wfill','hsize'],
 				text:  entry.contact_no, 
 				source: entry.id,
 				color: "#848484", 

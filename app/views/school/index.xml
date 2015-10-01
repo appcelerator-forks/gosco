@@ -1,7 +1,7 @@
 <Alloy>
 	<TabGroup id="school_tg" tabsTintColor="#10844D" tabsBackgroundImage="/images/kid_menu_bar1.png" onOpen="doOpen">
 		<Tab  title="Notice Board" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="SMK Taman Tasik">
+			<Window title="SMK Taman Tasik"  backgroundImage="/images/home_background.jpg">
 				<LeftNavButton>
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  

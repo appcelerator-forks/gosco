@@ -1,5 +1,5 @@
 <Alloy>  
-	<Window title="School List" id="win" fullscreen="true" > 
+	<Window title="School List" id="win" fullscreen="true"> 
 		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWin" />
 		<View platform="ios" top="0" height="50" backgroundColor="#B8D5BA"> 
 			<View left="0" zIndex="9" width="20%" onClick="closeWin">
@@ -15,7 +15,7 @@
 		</View>
 			 
 		<View id="educationView" class="vert"  > 
-			<View class="wfill hfill vert" id="schoolContainer"  /> 
+			<View class="wfill hfill vert" id="schoolContainer"  backgroundImage="/images/home_background.jpg"   /> 
 		</View>
 	</Window> 
 </Alloy>

@@ -12,6 +12,7 @@
 				<TextField id="username" hintText="Username"></TextField>
 				<TextField id="password" hintText="Password" passwordMask="true"></TextField>
 				<Button onClick="do_login" class="button" title="Login"></Button>
+				<View height="60" id="fbloginView" width="70%" />
 				<Button onClick="do_signup" class="button" backgroundColor="#5375BD" title="Register"></Button>
 			</View>
 		</Window>
