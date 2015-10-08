@@ -11,9 +11,9 @@
 				<ImageView image="/images/full_logo.png"  top="10" width="30%" />
 				<TextField id="username" hintText="Username"></TextField>
 				<TextField id="password" hintText="Password" passwordMask="true"></TextField>
-				<Button onClick="do_login" class="button" title="Login"></Button>
-				<View height="60" id="fbloginView" width="70%" />
-				<Button onClick="do_signup" class="button" backgroundColor="#5375BD" title="Register"></Button>
+				<Button onClick="do_login" width="90%" class="button" title="Login"></Button>
+				<View height="60" id="fbloginView" width="90%" />
+				<Button onClick="do_signup" width="90%" class="button" backgroundColor="#5375BD" title="Register"></Button>
 			</View>
 		</Window>
 	</NavigationWindow>
@@ -27,8 +27,9 @@
 				<ImageView image="/images/full_logo.png"  top="10" width="50%" />
 				<TextField id="username" hintText="Username"></TextField>
 				<TextField id="password" hintText="Password" passwordMask="true"></TextField>
-				<Button onClick="do_login" class="button" title="Login"></Button>
-				<Button onClick="do_signup" class="button" backgroundColor="#5375BD" title="Register"></Button>
+				<Button onClick="do_login" width="250" class="button" title="Login"></Button>
+				<View height="60" id="fbloginView" width="250" />
+				<Button onClick="do_signup" width="250" class="button" backgroundColor="#5375BD" title="Register"></Button>
 			</View>
 	</Window>
 		

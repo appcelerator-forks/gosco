@@ -7,10 +7,10 @@ var listing = bannerModel.getBannerList(1);
 function init(){   
 	COMMON.removeAllChildren($.bannerSv);
 	if(listing.length < 1){ 
-		$.bannerSv.add(Ti.UI.createLabel({
-				color : "#000000",
-				text  : "No records", 
-			}));
+		$.bannerSv.add($.UI.create('Label',{
+			classes: ['font_dark_grey', 'h5'],
+			text  : "No records", 
+		}));
 	}else{
 		listing.forEach(function(entry) {
 			var bannerView = $.UI.create("View",{
@@ -28,8 +28,8 @@ function init(){
 				
 			});
 			
-			var bannerLabel = Ti.UI.createLabel({
-				color : "#000000",
+			var bannerLabel = $.UI.create('Label',{
+				classes: ['font_dark_grey', 'h5'],
 				text  : entry.b_desc, 
 			});	
 			bannerBox.add(bannerImage);

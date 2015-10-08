@@ -4,7 +4,7 @@
 		<View id="main" layout="vertical"   height="100%" >
 		 <ScrollView layout="vertical"  height="Ti.UI.FILL" width="Ti.UI.FILL" top="0">
 		 	<View width="95%" layout="vertical" backgroundColor="#F5F5F5" height="Ti.UI.SIZE" top="15">
-		 		<Label id="educationName" class="education_name"   bottom="10"/>
+		 		<Label id="educationName" class="education_name themeColor bold"   bottom="10"/>
 		 		<Label text="Address" class="education_address educationLabelTitle" />
 			 	<Label id="educationAddress" class="education_address" bottom="10" /> 
 			 	
@@ -18,7 +18,7 @@
 			 	<Label id="educationFax" class="education_address"  bottom="10"   /> 
 			 </View>
 		 	
-		 	<View height="1" backgroundColor="#CE1D1C" width="98%" top="10" />
+		 	 
 		 	<TableView id="healthTableData" backgroundColor="#ffffff" height="Ti.UI.SIZE" width="100%" scrollable="false" >
 		 		<TableViewRow height="50" left="10" backgroundSelectedColor="#FFE1E1" color="#5E5E5E" onClick="direction2here" title="Direction To Here"   />
 				<TableViewRow height="50" left="10" backgroundSelectedColor="#FFE1E1" color="#5E5E5E" onClick="clickToCall" title="Call"   />

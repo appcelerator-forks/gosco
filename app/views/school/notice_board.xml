@@ -2,9 +2,9 @@
     <ScrollView class="wfill hfill vert"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
     	<View class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">
-	    		<Label class="font_big themeColor" id="schoolName"></Label>
-	    		<Label id="schoolAddress"></Label>
-	    		<Label id="schoolTel"></Label>
+	    		<Label class="h4 themeColor bold" id="schoolName"></Label>
+	    		<Label class="h5 font_dark_grey" id="schoolAddress"></Label>
+	    		<Label class="h5 font_dark_grey" id="schoolTel"></Label>
     		</View>
     	</View>
     	<TableView id="boardTbl" class="wfill hsize padding box" top="0" /> 

@@ -1,7 +1,17 @@
 <Alloy>
 	<NavigationWindow platform="ios" id="navWin">
-		<Window title="GOSCO" backgroundColor="#10844D" color="#ffffff">
-			 
+		<Window title="GOSCO" backgroundColor="#10844D" fullscreen="true" navBarHidden="true"  backgroundImage="/images/home_background.jpg" color="#ffffff">
+			 <View class="wfill hsize vert"  >
+			 	<ImageView image="/images/full_logo.png" opacity="0.8" class="wsize hsize" />
+			 	<Label textAlign="center" class="hsize wfill h4 whiteColor" >Load Gosco Data...</Label>
+			 </View> 
 		</Window>
 	</NavigationWindow>
+	
+	<Window title="GOSCO" backgroundColor="#10844D" fullscreen="true" theme="Theme.NoActionBar" navBarHidden="true" backgroundImage="/images/home_background.jpg" color="#ffffff" platform="android">
+		<View class="wfill hsize vert"  >
+			 <ImageView image="/images/full_logo.png" opacity="0.8" class="wsize hsize" />
+			 <Label textAlign="center" class="hsize wfill h4 whiteColor" >Load Gosco Data...</Label>
+		</View> 
+	</Window>
 </Alloy>

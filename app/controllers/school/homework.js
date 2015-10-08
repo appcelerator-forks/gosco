@@ -3,6 +3,9 @@ var args = arguments[0] || {};
 COMMON.construct($);
 var educationModel = Alloy.createCollection('education');  
 var homeworkModel = Alloy.createCollection('homework'); 
+var homeworkAttachmentModel = Alloy.createCollection('homeworkAttachment'); 
+var educationClassModel = Alloy.createCollection('education_class');
+var searchKey = "";
 var ec_id; 
 
 var pageTbl = $.UI.create('TableView',{
@@ -10,86 +13,151 @@ var pageTbl = $.UI.create('TableView',{
 });
  
 function init(e){
-	ec_id = e.ec_id; 
-	//console.log(details);
+	ec_id = e.ec_id;  
 	loadHomework(ec_id);
 }   
 
-function loadHomework(ec_id){
-	console.log(ec_id);
-	var details = homeworkModel.getHomeworkByClass(ec_id);
-	console.log(details);
+function loadHomework(ec_id){ 
+	//COMMON.hideLoading(); 
+	details = homeworkModel.getHomeworkByClass(ec_id,searchKey);
+ 	COMMON.removeAllChildren($.homeworkSv);  
 	if(details.length > 0){ 
+		var count =1;
+		var currentDate;
 		details.forEach(function(entry) {
-			var tblRowView = $.UI.create('TableViewRow',{
-				hasChild: true,
-				classes:["horz"],
-				source: entry.id
+			var cre = entry.created.substring(0,10); 
+			if(cre != currentDate){
+				var view11 = $.UI.create('View',{
+					classes :['hsize','themeBg','padding','box' ],  
+				});
+				var label0 = $.UI.create('Label',{
+					classes :['h5','hsize' ,'whiteColor', 'padding-top', 'padding-bottom', 'wfill','center' ],   
+					text: timeFormat(cre)
+				});
+				view11.add(label0);
+				currentDate = cre;
+				$.homeworkSv.add(view11);
+			} 
+			
+			var statusColor = "#8A6500";
+			if(entry.status == "1"){ //publish
+				statusColor = "#2C8A00";
+			} 
+			if(entry.deadline < currentDateTime() ){  
+				statusColor = "#CE1D1C";
+			}
+			
+			var horzView = $.UI.create('View',{
+				classes: ['horz','wfill'], 
+				source: entry.id,  
+				height: 60 
 			});
-			var leftView = $.UI.create('View',{
-				classes: ['padding'  ,'vert', 'hsize'],  
-				width: 80,
-				source: entry.id
+			
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entry.id,
+				width: 10,
+				backgroundColor: statusColor
+			});
+			horzView.add(statustView);
+			
+			
+			//Class room
+			var eduClass= educationClassModel.getEducationClassById(entry.ec_id);
+			var classView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entry.id,
+				width: 40 
 			});
 			
-			var created = entry.created;
-	 		created =   created.substr(0, 10);
-			var dateLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_medium'],  
-				text: monthFormat(created) ,
-				source: entry.id
-			}); 
+			var classLabel  = $.UI.create('Label',{
+				classes :['h4', 'hsize' ,'font_light_grey','wsize' ],  
+				source :entry.id,
+				text: eduClass.className
+			});
+			classView.add(classLabel);
+			horzView.add(classView);
 			
-			leftView.add(dateLbl); 
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entry.id,
+				width: 1,
+				backgroundColor: "#ececec"
+			});
+			horzView.add(statustView);
 			
-			var centerView = Ti.UI.createView({
-				height: 100,  
-				width: 1, 
-				backgroundColor:"#dfe0e4",
-				source: entry.id
+    		var view0 = $.UI.create('View',{
+				classes :['hsize' ],
+				source :entry.id,
+				width: "auto",
+				selectedBackgroundColor : "#ffffff", 
+			});
+			
+			var view1 = $.UI.create('View',{
+				classes :['hsize', 'vert'],
+				source :entry.id,
+				selectedBackgroundColor : "#ffffff", 
+			});
+			
+			var label1 = $.UI.create('Label',{
+				classes :['h5','hsize' ,'themeColor', 'padding-left','bold' ], 
+				width: "80%",
+				source :entry.id,
+				top:5,
+				text: entry.subject
 			});
 			 
-			var rightView = $.UI.create('View',{
-				classes: ['padding' ,'wfill' ,'vert', 'hsize'],  
-				source: entry.id
+			var label2 = $.UI.create('Label',{
+				classes :['h6', 'hsize' ,'font_light_grey', 'padding-left' ],  
+				width: "80%",
+				source :entry.id,
+				text: "Deadline : "+ convertFromDBDateFormat(entry.deadline)
 			});
-	 
-			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_medium'],  
-				text: entry.subject,
-				source: entry.id
-			}); 
-			var publishedLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12'],  
-				text: entry.published_by,
-				source: entry.id
-			}); 
-			var deadlineLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12'],  
-				text: "Due date : " + monthFormat(entry.deadline),
-				source: entry.id
-			}); 
-			rightView.add(titleLbl);
-			rightView.add(publishedLbl); 
-			rightView.add(deadlineLbl); 
-			tblRowView.add(leftView);	
-			tblRowView.add(centerView);	
-    		tblRowView.add(rightView);	 
-    		addClickEvent(tblRowView); 
-    	 	pageTbl.appendRow(tblRowView);
+			
+			var attList = homeworkAttachmentModel.getRecordByHomework(entry.id); 
+			var label3 = $.UI.create('Label',{
+				classes :['h6', 'hsize' ,'font_light_grey', 'padding-left','padding-bottom' ],  
+				width: "80%",
+				source :entry.id,
+				text:  attList.length  + " Attachment(s)"
+			});
+			
+			var imgView1 = $.UI.create('ImageView',{
+				image : "/images/btn-forward.png",
+				source :entry.id,
+				width : 20,
+				height : 20,
+				right: 10
+			});
+		 	
+			view1.add(label1);
+			view1.add(label2); 
+			view1.add(label3);
+			view0.add(view1);
+			view0.add(imgView1);
+			view0.addEventListener('click', addClickEvent);
+			horzView.add(view0);
+			$.homeworkSv.add(horzView);
+			
+			if(details.length != count){
+				var viewLine = $.UI.create('View',{
+					classes :['gray-line']
+				}); 
+				$.homeworkSv.add(viewLine);
+			} 
+			count++; 
 		});
-		$.homeworkSv.add(pageTbl);
+	  
+	}else{
+	 
 	}
 }
 
-function addClickEvent(vw){
-	vw.addEventListener('click', function(e){ 
-		var elbl = JSON.stringify(e.source); 
-		var res = JSON.parse(elbl);  
-		console.log(" res.source "+ res.source);
-		var win = Alloy.createController("school/homeworkDetails", {homework_id: res.source}).getView();  
-		Alloy.Globals.schooltabgroup.activeTab.open(win);
-	});
+function addClickEvent(e){ 
+	var elbl = JSON.stringify(e.source); 
+	var res = JSON.parse(elbl);   
+	var win = Alloy.createController("school/homeworkDetails", {homework_id: res.source}).getView();  
+	Alloy.Globals.schooltabgroup.activeTab.open(win); 
 }
 
 exports.init = function(e){

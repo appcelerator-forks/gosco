@@ -28,18 +28,18 @@ function loadNoticeBoard(school_id){
 			});
 			
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_regular'],  
+				classes: [ 'hsize','h5','bold','themeColor'],  
 				text: entryPost.title,
 				source: entryPost.id
 			});
 			
 			var message = escapeSpecialCharacter(entryPost.message);
-			if(message.length > 160){
-				message = message.substring(0, 160) + "..."; 
+			if(message.length > 80){
+				message = message.substring(0, 80) + "..."; 
 			}
 					
 			var descLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','font_12'],  
+				classes: [ 'hsize','h6'],  
 				text: message,
 				source: entryPost.id
 			});

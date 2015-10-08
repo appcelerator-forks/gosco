@@ -173,7 +173,7 @@ function createSchoolList(){
 	}else{
 		listing.forEach(function(entry) {
 	   		var row = Titanium.UI.createTableViewRow({ 
-			    height: Ti.UI.SIZE,
+			    height: 40,
 			    source: entry.id,   
 			    backgroundSelectedColor: "#ECFFF9",
 		 		backgroundColor: "#ffffff"
@@ -186,25 +186,21 @@ function createSchoolList(){
 					width:Ti.UI.FILL 
 			}); 
 			
-			var img_path =entry.img_path;
-			if(img_path == ""){
-				img_path = "/images/icons/icon_"+entry.level+".png";
-			}
-			var logoView = Ti.UI.createView({  
-				width:50 ,
-				source: entry.id
-			}); 
-			var schoolLogo = $.UI.create('ImageView',{  
-					source: entry.id, 
-					image: img_path,  
-					width:50,
-					top: 4,
-					left: 4
-			});	
-			//logoView.add(schoolLogo);
-		 	//tblRowView.add(logoView);
+			var statusColor = "#8A6500";
+			if(entry.status == "2"){ //publish
+				statusColor = "#2C8A00";
+			} 
+			 
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entry.id,
+				width: 10,
+				backgroundColor: statusColor
+			});
+			tblRowView.add(statustView);
+			
 			var schoolTitle = $.UI.create('Label',{
-					classes : ['font_regular','wfill','hsize','themeColor'],
+					classes : ['h5','wfill','hsize','themeColor'],
 					text:  entry.name, 
 					source: entry.id, 
 					textAlign:'left',

@@ -65,9 +65,10 @@ function createSchoolList(){
 		schTable.setData(COMMON.noRecord());
 	}else{
 		listing.forEach(function(entry) {
+			console.log(entry);
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
-			    height: 100,
+			    height: 70,
 			    source: entry.id, 
 			   // layout: "vertical",
 			    backgroundSelectedColor: "#ECFFF9", 
@@ -87,6 +88,18 @@ function createSchoolList(){
 					width:Ti.UI.FILL 
 			}); 
 			
+			var statusColor = "#8A6500";
+			if(entry.status == "2"){ //publish
+				statusColor = "#2C8A00";
+			} 
+			 
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entry.id,
+				width: 10,
+				backgroundColor: statusColor
+			});
+			tblRowView.add(statustView);
 			var img_path =entry.img_path;
 			if(img_path == ""){
 				img_path = "/images/icons/icon_"+entry.level+".png";
@@ -98,12 +111,9 @@ function createSchoolList(){
 				height:Ti.UI.SIZE
 			}); 
 			var schoolLogo = $.UI.create('ImageView',{  
-					source: entry.id, 
-					image: img_path, 
-					height:Ti.UI.SIZE,
-					width:50,
-					top: 4,
-					left: 4
+				classes: ['hsize','wfill'],
+				source: entry.id, 
+				image: img_path 
 			});	
 			logoView.add(schoolLogo);
 			tblRowView.add(logoView);
@@ -116,16 +126,15 @@ function createSchoolList(){
 					left:4
 			});	
 			var schoolAddress = $.UI.create('Label',{
-				classes : ['font_12','wfill','hsize'],
+				classes : ['h6','wfill','hsize'],
 				text:  entry.address, 
 				source: entry.id,
 				color: "#848484", 
-				textAlign:'left',
-				top:5,
+				textAlign:'left', 
 				left:4,  
 			});	
-			var schoolContact = $.UI.create('Label',{
-				classes : ['font_12','wfill','hsize'],
+			/**var schoolContact = $.UI.create('Label',{
+				classes : ['h6','wfill','hsize'],
 				text:  entry.contact_no, 
 				source: entry.id,
 				color: "#848484", 
@@ -133,10 +142,10 @@ function createSchoolList(){
 				top:5,
 				bottom:5,
 				left:4 
-			});	
+			});	**/
 			tblView.add(schoolTitle); 
 			tblView.add(schoolAddress); 
-			tblView.add(schoolContact); 
+			//tblView.add(schoolContact); 
 			tblRowView.add(tblView);
 			addSchoolAction(tblRowView);
 			row.add(tblRowView);

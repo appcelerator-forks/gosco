@@ -60,7 +60,7 @@ exports.definition = {
                 return arr;
 			},
 		 
-            getHomeworkByClass :  function(ec_id){
+            getHomeworkByClass :  function(ec_id, searchKey){
 				var collection = this;
                 var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE ec_id='"+ ec_id+ "'  ORDER BY created DESC " ;
  

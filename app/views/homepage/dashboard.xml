@@ -1,13 +1,14 @@
 <Alloy> 
-	<View class=" wfill hfill vert"  bottom="160">
+	<View class=" wfill hfill vert"  bottom="87">
 		<View class="vert" top="5" height="auto" >
-			<Label class="padding font_light_white font_big">Notice Board / Announcement</Label>
+			<Label class="padding themeColor h5 bold">Notice Board / Announcement</Label>
 			<ScrollView class="vert" id="latestBoardView" scrollType="vertical" />
 		</View> 
 	</View>
-	<View  layout="horizontal" width="Ti.UI.FILL" height="100"  bottom="5">
-		<ScrollView  id="myKidsContainer" class="horz" width="75%" height="100" scrollType="horizontal" />   
-		<View class="small_padding" right="0" width="70" height="70" >
+	<View class="wfill" height="3" id="sepLineKids" backgroundColor="#dfe0e4" bottom="85" />
+	<View backgroundColor="#DCDCDC" layout="horizontal" width="Ti.UI.FILL" id="kidsView" height="80" bottom="5" >
+		<ScrollView  id="myKidsContainer" class="horz" width="75%" height="80" scrollType="horizontal" />   
+		<View class="small_padding" right="0" top="10" width="70" height="70" >
 			<ImageView onClick="addKid"  width="70" height="70" image="/images/home_add.png" />
 		</View>
 	</View> 

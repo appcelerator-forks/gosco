@@ -10,35 +10,95 @@ function loadEventDetails(){
 	 
 	var titleLabel = $.UI.create('Label',{
 		text: details.title,
-		classes : ["news_title", "themeColor","padding"]
+		classes : ["h4", "themeColor","padding",'bold']
 	});
  	
- 	var contentLabel = $.UI.create('Label',{
-		text: details.message,
-		classes : ["font_12", "padding"]
+ 	var view1 = $.UI.create('View',{
+		classes :['hsize', 'vert','box','padding','wfill'], 
+		backgroundColor : "#ffffff", 
+		top:0
 	});
 	
-	var dateLabel = $.UI.create('Label',{
-		text: "From : " + monthFormat(details.started) +" - "+ monthFormat(details.ended) ,
-		classes : ["font_12", "padding"]
+	var viewBg = $.UI.create('View',{
+		classes :['wfill', "hsize"],
+		backgroundColor : "#f5f5f5", 
 	});
-	var pubLabel = $.UI.create('Label',{
-		text:"Published by "+details.published_by  ,
-		textAlign: "right", 
-		right: 10,
-		classes : ['font_small','font_light_grey']
+	var remarkLabel = $.UI.create('Label',{
+		text: "Event Details",
+		classes : ["h5", "hsize",'wfill',"padding"]
 	});
+	viewBg.add(remarkLabel);
+	
+ 	var contentLabel = $.UI.create('Label',{
+		text: details.message,
+		classes : ["h5", "padding","hsize"]
+	});
+	
+ 	view1.add(viewBg);
+ 	view1.add(contentLabel);
+ 	
+ 	/**Updated**/
+ 	var view2 = $.UI.create('View',{
+		classes :['hsize', 'vert','box','padding','wfill'], 
+		backgroundColor : "#ffffff", 
+		top:0
+	});
+	
+	var viewBg2 = $.UI.create('View',{
+		classes :['wfill', "hsize"],
+		backgroundColor : "#f5f5f5", 
+	});
+	var updatedLabel = $.UI.create('Label',{
+		text: "Last Updated",
+		classes : ["h5", "hsize",'wfill',"padding"]
+	});
+	viewBg2.add(updatedLabel); 
  
+	var dateLabel = $.UI.create('Label',{
+		text:  monthFormat(details.started) +" - "+ monthFormat(details.ended),
+		classes : ["h5", "padding","hsize"]
+	});
+ 	view2.add(viewBg2);
+ 	view2.add(dateLabel); 
+	 
+	/**Published**/
+ 	var view3 = $.UI.create('View',{
+		classes :['hsize', 'vert','box','padding','wfill'], 
+		backgroundColor : "#ffffff", 
+		top:0
+	});
+	
+	var viewBg3 = $.UI.create('View',{
+		classes :['wfill', "hsize"],
+		backgroundColor : "#f5f5f5", 
+	});
+	var publishedLabel = $.UI.create('Label',{
+		text: "Event Publisher",
+		classes : ["h5", "hsize",'wfill',"padding"]
+	});
+	
+ 	var pubLabel = $.UI.create('Label',{
+		text: details.published_by, 
+		classes : ["h5", "padding","hsize"]
+	});
+	
+	viewBg3.add(publishedLabel); 
+ 	view3.add(viewBg3);
+ 	view3.add(pubLabel); 
+  
 	var saveBtn = $.UI.create('Button',{
 		title:"Add to Calendar ", 
 		backgroundColor: "#5375BD",
+		width : "90%",
 		classes : ['button']
 	});
- 	$.myContentView.add(titleLabel);
- 	$.myContentView.add(contentLabel);
- 	$.myContentView.add(dateLabel);
- 	$.myContentView.add(separateHorzLine());
- 	$.myContentView.add(pubLabel);
+	
+	$.myContentView.add(titleLabel);
+ 	$.myContentView.add(view1);
+ 	$.myContentView.add(view3);
+ 	$.myContentView.add(view2);
+ 	//$.myContentView.add(separateHorzLine());
+ 	
  	$.myContentView.add(saveBtn); 
  	saveBtn.addEventListener('click', function(e){
 		if(Ti.Platform.osname == "android"){

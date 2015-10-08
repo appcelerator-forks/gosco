@@ -29,34 +29,39 @@ function do_login(){
 	API.doLogin(params, $); 
 	
 }
-  
 
 /*** Facebook login***/ 
+/***Facebook Library***/ 
+var FACEBOOK = require('facebook');
+FACEBOOK.appid = "1636245926664883";
+FACEBOOK.permissions = ['email','public_profile','user_friends']; // Permissions your app needs
+FACEBOOK.initialize(1000); 
+FACEBOOK.forceDialogAuth = true; 
+
 $.fbloginView.add(FACEBOOK.createLoginButton({
-	    top : 10,
-	   	readPermissions: ['email','public_profile','user_friends'],
-	    style : FACEBOOK.BUTTON_STYLE_WIDE
+	top : 10,
+	readPermissions: ['email','public_profile','user_friends'],
+	style : FACEBOOK.BUTTON_STYLE_WIDE
 }));  
-  
-function loginFacebook(e){ 
+
+ 
+function loginFacebook(e){   
 	if (e.success) { 
-		common.showLoading();
-	    FACEBOOK.requestWithGraphPath('me', { }, 'GET', function(e) {
-	    	 
+		COMMON.showLoading();
+	    FACEBOOK.requestWithGraphPath('/me?fields=id,email,name,link', { }, 'GET', function(e) { //'/me?fields=id,email,name,link'
 		    if (e.success) { 
-		    	var fbRes = JSON.parse(e.result);
-		     	Ti.App.Properties.setString('plux_email',fbRes.email);
-		     	API.updateUserFromFB({
+		    	var fbRes = JSON.parse(e.result); 
+		     	console.log(fbRes);
+		     	API.doFacebookLogin({
 			       	email: fbRes.email,
 			       	fbid: fbRes.id,
 			       	link: fbRes.link,
-			       	name: fbRes.name,
-			       	gender:fbRes.gender,
+			       	name: fbRes.name
 			    }, $);
 			   
 		    }
 		}); 
-		FACEBOOK.removeEventListener('login', loginFacebook); 
+		//FACEBOOK.removeEventListener('login', loginFacebook); 
 	}  else if (e.error) {
 		       
 	} else if (e.cancelled) {
@@ -64,4 +69,4 @@ function loginFacebook(e){
 	}  	 
 } 
 	 
-FACEBOOK.addEventListener('login', loginFacebook); 
+FACEBOOK.addEventListener('login', loginFacebook);    

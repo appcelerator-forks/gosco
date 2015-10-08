@@ -61,9 +61,7 @@ overrode the settings with other TSS, XML, or JS settings:
 	backgroundColor: "#ED1C24",
 	borderRadius: 6,
 	color: "#ffffff",
-	width: Titanium.UI.FILL,
-	left: 10,
-	right: 10,
+	width: Titanium.UI.FILL, 
 	top: 10,
 }
 
@@ -157,6 +155,9 @@ overrode the settings with other TSS, XML, or JS settings:
 '.center' :{
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 }
+'.whiteColor' : {
+	color: "#ffffff"
+}
 '.themeColor' : {
 	color: "#10844D"
 }
@@ -164,11 +165,93 @@ overrode the settings with other TSS, XML, or JS settings:
 	backgroundColor: "#10844D"
 }
 
+".bold":{
+	font: { fontWeight: 'bold'}
+},
+
+'.left-align' :{
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
+}
+'.right-align' :{
+	textAlign: Titanium.UI.TEXT_ALIGNMENT_RIGHT,
+}
+".padding-top":{
+	top: 10
+},
+
+".padding-left":{
+	left: 10
+},
+
+".padding-right":{
+	right: 10
+},
+
+".padding-bottom":{
+	bottom: 10
+}, 
 ".line":{
 	height: '1',
 	backgroundColor: '#ccc',
 	bottom: '0',
 }
+
+".gray-line":{
+	backgroundColor: "#ececec",
+	width: Ti.UI.FILL,
+	height: 1	
+},
+".grey-background" :{
+	backgroundColor: "#F4F4F4",
+},
+
+".white-line":{
+	backgroundColor: "#fff",
+	width: Ti.UI.FILL,
+	height: 1	
+},
+
+".h1":{
+	font:{
+		fontSize: 36
+	}
+},
+
+".h2":{
+	font:{
+		fontSize: 30
+	}
+},
+
+".h3":{
+	font:{
+		fontSize: 24
+	}
+},
+
+".h4":{
+	font:{
+		fontSize: 18
+	}
+},
+
+".h5":{
+	font:{
+		fontSize: 14
+	}
+},
+
+".h6":{
+	font:{
+		fontSize: 12
+	}
+},
+ 
+".h7":{
+	font:{
+		fontSize: 8
+	}
+},
 "#activityIndicator" : { 
 	 top:30,
 	 left:30,

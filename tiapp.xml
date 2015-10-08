@@ -3,9 +3,9 @@
     <id>com.geonn.gosco</id>
     <name>Gosco</name>
     <version>1.0</version>
-    <publisher>geomilano</publisher>
+    <publisher>Gosco Global</publisher>
     <url>http://</url>
-    <description>undefined</description>
+    <description>GOSCO is a revolutionary enterprise specializing in computer educational technology solution. Established in the new millennia of this 21st century, GOSCO is strategically located at Kuala Lumpur city center precisely in the heart of Malaysia. With current business interest spanning throughout Malaysia, GOSCO has plans for global expansion in the imminent future. Our core service focuses on provision of software and application developing solution. This service is provided freely to non-profit organizations such as learning institutions while commercial users will be charged a nominal fee for product usage.</description>
     <copyright>2015 by geomilano</copyright>
     <icon>appicon.png</icon>
     <fullscreen>false</fullscreen>
@@ -42,12 +42,12 @@
                     <dict>
                         <key>CFBundleURLName</key>
                         <!-- Application ID same as the id value in the tiapp.xml file -->
-                        <string>com.geonn.plux</string>
+                        <string>com.geonn.gosco</string>
                         <key>CFBundleURLSchemes</key>
                         <array>
                             <!-- Prefix the Facebook App ID with 'fb' -->
-                            <string>fb</string>
-                            <string>1636245926664883</string>
+                            <string>fb1636245926664883</string>
+                            <string>gosco</string>
                             <string>waze</string>
                         </array>
                     </dict>
@@ -71,9 +71,11 @@
                     <category android:name="android.intent.category.DEFAULT"/>
                     <data android:mimeType="image/*" android:scheme="http"/>
                 </intent-filter>
-                <activity android:label="plux"
+                <activity android:label="@string/app_name"
                     android:name="com.facebook.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
                 <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
+                <manifest android:installLocation="auto"
+                    android:versionCode="1" android:versionName="1.0.0"/>
             </application>
             <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -105,7 +107,7 @@
         <target device="iphone">true</target>
         <target device="mobileweb">true</target>
     </deployment-targets>
-    <sdk-version>5.0.1.GA</sdk-version>
+    <sdk-version>5.0.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

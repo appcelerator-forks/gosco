@@ -7,6 +7,10 @@ var postModel = Alloy.createCollection('post');
 function init(e){
 	displayLatestBoard();  
 	displayMyKids();  
+	if(OS_ANDROID){
+		$.kidsView.bottom = 0;
+		$.sepLineKids.bottom = 80;
+	}
 }
 
 function displayLatestBoard(){
@@ -105,9 +109,9 @@ function displayMyKids(){
 		myKids.forEach(function(entry) {
 			var myKidView = $.UI.create('View',{
 				classes: ['padding'],
-				height:80,
-				width:80,
-				borderRadius: 40,
+				height:60,
+				width:60,
+				borderRadius: 30,
 				kid_id: entry.id,
 				backgroundColor: "#f5f5f5" 
 			}); 

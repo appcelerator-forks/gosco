@@ -17,15 +17,11 @@ var API = require('api');
 var COMMON = require('common'); 
 var PUSH = require('push');
 var DBVersionControl = require('DBVersionControl');
+  
+
 
 Alloy.Globals.Map = require('ti.map');
-
-/***Facebook Library***/
-var FACEBOOK = require('facebook');
-FACEBOOK.appid = "1636245926664883";
-FACEBOOK.permissions = ['email','public_profile','user_friends']; // Permissions your app needs
-FACEBOOK.initialize(1000); 
-FACEBOOK.forceDialogAuth = true;
+ 
 DBVersionControl.checkAndUpdate();
 
 var openNewWindow = function(win, new_window, tab){ 
@@ -117,10 +113,10 @@ function currentDateTime(){
 
 function monthFormat(date){
 	var monthNames = [
-        "January", "February", "March",
-        "April", "May", "June", "July",
-        "August", "September", "October",
-        "November", "December"
+        "Jan", "Feb", "Mar",
+        "Apr", "May", "Jun", "Jul",
+        "Aug", "Sep", "Oct",
+        "Nov", "Dec"
     ];
  
     var day = date.split('-'); 
@@ -150,6 +146,58 @@ function escapeSpecialCharacter(msg){
 	msg = msg.replace(/\\/g,'');
 	return msg;
 }
+
+
+function convertToDBDateFormat(datetime){
+	var timeStamp = datetime.split(" ");  
+	var newFormat;
+	 
+	var date = timeStamp[0].split("/");  
+	if(timeStamp.length == 1){
+		newFormat = date[2]+"-"+date[1]+"-"+date[0] ;
+	}else{
+		 
+		newFormat = date[2]+"-"+date[1]+"-"+date[0] + " "+ timeStamp[1];
+	}
+	
+	return newFormat;
+}
+
+function convertFromDBDateFormat(datetime){
+	var timeStamp = datetime.split(" ");  
+	var newFormat;
+	 
+	var date = timeStamp[0].split("-");  
+	if(timeStamp.length == 1){
+		newFormat = date[2]+"/"+date[1]+"/"+date[0] ;
+	}else{
+		 
+		newFormat = date[2]+"/"+date[1]+"/"+date[0] + " "+ timeStamp[1];
+	}
+	
+	return newFormat;
+}
+
+function timeFormat(datetime){
+	var timeStamp = datetime.split(" ");  
+	var newFormat;
+	var ampm = "am";
+	var date = timeStamp[0].split("-");  
+	if(timeStamp.length == 1){
+		newFormat = date[2]+"/"+date[1]+"/"+date[0] ;
+	}else{
+		var time = timeStamp[1].split(":");  
+		if(time[0] > 12){
+			ampm = "pm";
+			time[0] = time[0] - 12;
+		}
+		
+		newFormat = date[2]+"/"+date[1]+"/"+date[0] + " "+ time[0]+":"+time[1]+ " "+ ampm;
+	}
+	
+	return newFormat;
+}
+
 
 //
 Alloy.Globals.SchoolLevel =  [ 'Primary School', 'Secondary School', 'College','Cancel'];

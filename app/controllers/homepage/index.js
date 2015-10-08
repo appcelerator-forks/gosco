@@ -16,7 +16,7 @@ $.doLogout = function(){
 
 function doLogout(){ 
 	var dialog = Ti.UI.createAlertDialog({
-	    cancel: 1,
+	    cancel: 0,
 	    buttonNames: ['Cancel','Confirm'],
 	    message: 'Would you like to logout?',
 	    title: 'Logout account'

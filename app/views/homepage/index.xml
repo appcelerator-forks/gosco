@@ -1,7 +1,7 @@
 <Alloy> 
 	<TabGroup id="tabGroup"  tabsTintColor="#10844D"  onOpen="doOpen" tabsBackgroundImage="/images/kid_menu_bar1.png">
 		<Tab id="dashboardTab"  tintColor="black" title="Dashboard" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window id="win1" title="Dashboard"  backgroundImage="/images/home_background.jpg"> 
+			<Window id="win1" title="Dashboard" backgroundColor="#F1F1F1" > 
 				<LeftNavButton platform="ios">
 				    <View id="btnLogout" left="0"  width="30" height="35">
 				     	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
@@ -12,17 +12,17 @@
 			</Window>
 		</Tab>
 		<Tab color="white" title="School" icon="/images/icons/icon_school.png" activeIcon="/images/icons/icon_school_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="School" backgroundImage="/images/home_background.jpg"> 
+			<Window title="School" backgroundColor="#F1F1F1" > 
 				<Require id="schoolDetailsView" src="homepage/education"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Tuition Centre" icon="/images/icons/icon_tuition.png" activeIcon="/images/icons/icon_tuition_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="Tuition Centre" backgroundImage="/images/home_background.jpg"> 
+			<Window title="Tuition Centre"  backgroundColor="#F1F1F1" > 
 				<Require id="tuitionDetailsView" src="homepage/education"></Require>
 			</Window>
 		</Tab>
 		<Tab title="Others" icon="/images/icons/icon_others.png" activeIcon="/images/icons/icon_others_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="Others" backgroundImage="/images/home_background.jpg"> 
+			<Window title="Others" backgroundColor="#F1F1F1" > <!--backgroundImage="/images/home_background.jpg" -->
 				<Require id="othersDetailsView" src="homepage/others"></Require>
 			</Window>
 		</Tab>

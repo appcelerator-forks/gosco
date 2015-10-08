@@ -5,7 +5,7 @@ var eventsModel = Alloy.createCollection('events');
 var school_id; 
 
 var eventTbl = $.UI.create('TableView',{
-	classes: ["wfill", "hfill", "padding", "box"]
+	classes: ["wfill", "hsize" ]
 });
 
  
@@ -21,9 +21,27 @@ function loadEvent(school_id){
 		details.forEach(function(entry) {
 			var tblRowView = $.UI.create('TableViewRow',{
 				hasChild: true,
+				height : 70,
 				classes:["horz"],
 				source: entry.id
 			});
+			
+			var statusColor = "#8A6500";
+			if(entry.status == "1"){ //publish
+				statusColor = "#2C8A00";
+			} 
+			if(entry.ended < currentDateTime() ){  
+				statusColor = "#CE1D1C";
+			}
+			
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entry.id,
+				width: 10,
+				height:65,
+				backgroundColor: statusColor
+			});
+			
 			var leftView = $.UI.create('View',{
 				classes: ['padding'  ,'vert', 'hsize'],  
 				width: 80,
@@ -31,7 +49,7 @@ function loadEvent(school_id){
 			});
 	 
 			var dateLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12'],  
+				classes: [ 'hsize','h5'],  
 				text: monthFormat(entry.started) +" - "+ monthFormat(entry.ended),
 				source: entry.id
 			}); 
@@ -39,7 +57,7 @@ function loadEvent(school_id){
 			leftView.add(dateLbl); 
 			
 			var centerView = Ti.UI.createView({
-				height: 100,  
+				height: 70,  
 				width: 1, 
 				backgroundColor:"#dfe0e4",
 				source: entry.id
@@ -51,17 +69,18 @@ function loadEvent(school_id){
 			});
 	 
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_medium', 'themeColor'],  
+				classes: [ 'hsize','h5', 'themeColor', 'bold' ],  
 				text: entry.title,
 				source: entry.id
 			}); 
-			var messageLbl = $.UI.create('Label',{
+			/**var messageLbl = $.UI.create('Label',{
 				classes: [ 'hsize','font_12'],  
 				text: textLimit(entry.message,40),
 				source: entry.id
-			}); 
+			}); **/
 			rightView.add(titleLbl);
-			rightView.add(messageLbl); 
+			//rightView.add(messageLbl); 
+			tblRowView.add(statustView);	
 			tblRowView.add(leftView);	
 			tblRowView.add(centerView);	
     		tblRowView.add(rightView);	

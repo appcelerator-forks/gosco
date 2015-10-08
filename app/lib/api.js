@@ -20,7 +20,7 @@ var updateKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/updateKidsClass?user="+
 var removeKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/removeKidsClass?user="+USER+"&key="+KEY;
 var updateKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/updateKidsCurriculum?user="+USER+"&key="+KEY;
 var removeKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/removeKidsCurriculum?user="+USER+"&key="+KEY;
-
+var facebookLoginUrl	= "http://"+API_DOMAIN+"/gosco/api/doFacebookLogin?user="+USER+"&key="+KEY;
 //var getTuitionList   	= "http://"+API_DOMAIN+"/gosco/api/getTuitionList?user="+USER+"&key="+KEY; 
 var getKidByUserList    = "http://"+API_DOMAIN+"/gosco/api/getKidByUser?user="+USER+"&key="+KEY; 
 var getKidsClassByUser  = "http://"+API_DOMAIN+"/gosco/api/getKidsClassByUser?user="+USER+"&key="+KEY; 
@@ -271,8 +271,9 @@ exports.getCurriculumList = function(e_id){
 	};
 };
 
-exports.getHomeworkList = function(ec_id){
+exports.getHomeworkList = function(ec_id, skipLoadDone){
 	console.log("loading homework list...");
+	skipLoadDone = skipLoadDone || "";
 	var url = getHomeworkList+"&ec_id="+ec_id;
 	// console.log(url);
 	var _result = contactServerByGet(url);   
@@ -283,11 +284,45 @@ exports.getHomeworkList = function(ec_id){
 			return false;
 		}else{
 			var homeworkModel = Alloy.createCollection('homework'); 
+			var homeworkAttachmentModel = Alloy.createCollection('homeworkAttachment'); 
 			var arr = result.data;  
 			homeworkModel.saveArray(arr);  
-			Ti.App.Properties.setString('kidsHomework', '1'); 
-			console.log("DONE homework LIST..." + Ti.App.Properties.getString('kidsHomework'));
-			checkLoadDone(); 
+			homeworkAttachmentModel.saveArray(arr);
+			if(skipLoadDone == ""){
+				Ti.App.Properties.setString('kidsHomework', '1'); 
+				console.log("DONE homework LIST..." + Ti.App.Properties.getString('kidsHomework'));
+				checkLoadDone(); 
+			}
+			
+		}
+	};
+	
+	_result.onerror = function(e) { 
+	};
+};
+
+//Do FB Login
+exports.doFacebookLogin = function(e){
+	var url = facebookLoginUrl+"&email="+e.email+"&fbid="+e.fbid+"&link="+e.link+"&name="+e.name; 
+	 
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) { 
+		var result = JSON.parse(this.responseText);
+		COMMON.hideLoading(); 
+		if(result.status == "error"){
+			COMMON.createAlert("Error", result.data[0]);
+			return false;
+		}else{
+			var userModel = Alloy.createCollection('user'); 
+			var arr = result.data; 
+			console.log(arr);
+			userModel.saveArray(arr);
+	   		Ti.App.Properties.setString('user_id', arr.id);
+	   		Ti.App.Properties.setString('fullname', arr.fullname);
+	   		
+	   		//UPDATE / SYNC kids from server
+	   		API.getKidsInfoByUser({login: 1}); 
+	   		API.getKidByUser(); 
 		}
 	};
 	

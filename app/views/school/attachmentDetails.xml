@@ -1,0 +1,5 @@
+<Alloy>
+	<Window class="container" id="win" title="Attachment" navTintColor="#10844D"> 
+		<View id="albumView" class="hsize"  />
+	</Window>
+</Alloy>

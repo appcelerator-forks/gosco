@@ -7,10 +7,25 @@ var ec_id = args.ec_id || "";
 init();
 function init(){   
 	$.noticeBoardDetailsView.init({school_id:school_id}); 
-	$.eventsDetailsView.init({school_id:school_id}); 
-	$.curriculumDetailsView.init({school_id:school_id}); 
-	$.awardDetailsView.init({school_id:school_id}); 
-	$.homeworkDetailsView.init({ec_id:ec_id});
+	
+	setTimeout(function(){
+		$.eventsDetailsView.init({school_id:school_id}); 
+	},1000);
+	setTimeout(function(){
+		$.curriculumDetailsView.init({school_id:school_id}); 
+	},1500);
+	
+	setTimeout(function(){
+		$.awardDetailsView.init({school_id:school_id}); 
+	},2000);
+	
+	setTimeout(function(){
+		$.homeworkDetailsView.init({ec_id:ec_id});
+	},2500);
+	
+	
+	
+	API.getHomeworkList(ec_id,1);
 }
 
 $.backToHome = function(){

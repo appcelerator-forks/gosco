@@ -18,6 +18,7 @@
 -->
 
 <resources>
+	<string name="facebook_app_id">1636245926664883</string>
 	<style name="Theme.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>

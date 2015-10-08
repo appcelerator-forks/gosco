@@ -102,7 +102,7 @@ exports.definition = {
 						  	school_name: res.fieldByName('name'),
 						  	school_type: res.fieldByName('school_type'),
 						    level: res.fieldByName('level'), 
-						    class_name: res.fieldByName('class_name'),
+						    class_name: parseInt(res.fieldByName('class_name')),
 						    status: res.fieldByName('status'),
 						    created: res.fieldByName('created'), 
 						    updated: res.fieldByName('updated') 

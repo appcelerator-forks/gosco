@@ -1,25 +1,35 @@
 Alloy.Globals.tabgroup = $.tabGroup;
 //Alloy.Globals.school_tab = $.school_tab;
-Alloy.Globals.navWin = $.navWin;
-/**
- * Lets add a loading animation - Just for Fun!
- */
-var loadingView = Alloy.createController("loader");
-loadingView.getView().open();
-loadingView.start();
-
-function loadingViewFinish(){
-	
-	loadingView.finish(function(){
-		init();
-		loadingView = null;
-	});
+Alloy.Globals.navWin = $.navWin; 
+init();
+function init(){  
+	//load API loadAPIBySequence
+	API.getDeviceInfo();
+	/***Check school updates***/
+	var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
+	var ks = kidsEducationModel.getSchoolList();
+	if(ks.length > 0){   
+		ks.forEach(function(entry) {
+			API.getSchoolPost(entry.e_id);
+			API.getSchoolClassList(entry.e_id);
+			API.getCurriculumList(entry.e_id);  
+			API.getEventsList(entry.e_id);  
+		});
+	}
+	API.loadAPIBySequence(); 
+}
+ 
+if(OS_IOS){
+	$.navWin.open();
+}else{
+	$.index.open();
 }
 
-function init(){ 
+
+function loadToDashboard(){
 	var user = require("user"); 
 	user.checkAuth();
+	Ti.App.removeEventListener('app:loadingViewFinish', loadToDashboard); 
 }
 
-Ti.App.addEventListener('app:loadingViewFinish', loadingViewFinish);
-
+Ti.App.addEventListener('app:loadingViewFinish', loadToDashboard); 
