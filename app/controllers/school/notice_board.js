@@ -10,7 +10,7 @@ function init(e){
 	$.schoolName.text = details.name;
 	$.schoolAddress.text = details.address;
 	$.schoolTel.text = details.contact_no;
-	//console.log(details);
+	$.thumbPreview.image = details.img_path; 
 	loadNoticeBoard(school_id);
 }  
 

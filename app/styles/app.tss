@@ -43,19 +43,18 @@ overrode the settings with other TSS, XML, or JS settings:
 }
 
 'TextField': {
-	height: 40,
+	height: 50,
 	borderColor: "#dfe0e4",
 	borderStyle: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_LEFT,
 	backgroundColor: "#ffffff",
 	width: Titanium.UI.FILL,
 	left: 10,
-	right: 10,
-	top: 10,
+	right: 10
 }
 
 '.button': {
-	height: 40,
+	height: 50,
 	borderColor: "#C6C8CA",
 	textAlign: Titanium.UI.TEXT_ALIGNMENT_CENTER,
 	backgroundColor: "#ED1C24",
@@ -252,8 +251,15 @@ overrode the settings with other TSS, XML, or JS settings:
 		fontSize: 8
 	}
 },
-"#activityIndicator" : { 
+ 
+"#activityIndicator[platform=ios]" : { 
 	 top:30,
+	 left:30,
+	 width:60,
+},
+
+"#activityIndicator[platform=android]" : { 
+	 top:10,
 	 left:30,
 	 width:60,
 },

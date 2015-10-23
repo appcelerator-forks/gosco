@@ -15,7 +15,7 @@
 					<ImageView width="100" height="100" image="/images/avatar.jpg" borderRadius="50" id="thumbPreview" />
 				</View>
 				
-				<Label class="padding font_light_white font_big" top="10">Tell us more about your kid</Label>
+				<Label class="padding font_light_white font_big" top="10">Kid's Information</Label>
 				<View id="table" height="225" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false"> 
 					<View id="tvrName"  height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >

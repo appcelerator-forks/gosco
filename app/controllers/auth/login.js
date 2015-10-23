@@ -26,32 +26,26 @@ function do_login(){
 		password: password
 	};
 	COMMON.showLoading();    
-	API.doLogin(params, $); 
-	
+	API.doLogin(params, $);  
 }
 
-/*** Facebook login***/ 
-/***Facebook Library***/ 
-var FACEBOOK = require('facebook');
-FACEBOOK.appid = "1636245926664883";
-FACEBOOK.permissions = ['email','public_profile','user_friends']; // Permissions your app needs
-FACEBOOK.initialize(1000); 
-FACEBOOK.forceDialogAuth = true; 
+/*** Facebook login***/  
 
+if (Ti.Platform.name === 'android') {
+    $.win.fbProxy = FACEBOOK.createActivityWorker({lifecycleContainer: $.win});
+}
 $.fbloginView.add(FACEBOOK.createLoginButton({
 	top : 10,
 	readPermissions: ['email','public_profile','user_friends'],
 	style : FACEBOOK.BUTTON_STYLE_WIDE
 }));  
 
- 
-function loginFacebook(e){   
-	if (e.success) { 
-		COMMON.showLoading();
-	    FACEBOOK.requestWithGraphPath('/me?fields=id,email,name,link', { }, 'GET', function(e) { //'/me?fields=id,email,name,link'
-		    if (e.success) { 
-		    	var fbRes = JSON.parse(e.result); 
-		     	console.log(fbRes);
+function loginFacebook(e){    
+	if (e.success) {  
+		COMMON.showLoading(); 
+	    FACEBOOK.requestWithGraphPath('me', {'fields': 'id, email,name,link'}, 'GET', function(e) { //'/me?fields=id,email,name,link
+	  		if (e.success) { 
+		    	var fbRes = JSON.parse(e.result);  
 		     	API.doFacebookLogin({
 			       	email: fbRes.email,
 			       	fbid: fbRes.id,
@@ -68,5 +62,6 @@ function loginFacebook(e){
 		        
 	}  	 
 } 
+
 	 
 FACEBOOK.addEventListener('login', loginFacebook);    

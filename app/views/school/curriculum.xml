@@ -11,7 +11,7 @@
     -->
     	<View class="wfill hsize padding">
     		<View left="0" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
-    			<Label class="font_big themeColor " bottom="0">My Kid Curriculum</Label>
+    			<Label class="h5 themeColor padding" bottom="0">My Kid Curriculum</Label>
     		</View>
     		<View right="0" height="Ti.UI.SIZE" width="80">
 				<ImageView right='40' id="removeBtn" onTouchend="showRemoveList" width="25" height="25" image="/images/remove.png" /> 

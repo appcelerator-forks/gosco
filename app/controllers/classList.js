@@ -19,6 +19,10 @@ init();
 function init(){
 	listing = educationClassModel.getEducationClassList(year,e_id); 
 	createClassList();
+	
+	if(OS_ANDROID){
+		$.schoolContainer.top = 0;
+	}
 }
 
 function createClassList(){

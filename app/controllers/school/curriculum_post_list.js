@@ -1,5 +1,6 @@
 var args = arguments[0] || {};
 COMMON.construct($);
+var curriculumModel = Alloy.createCollection('curriculum'); 
 var curriculumPostModel = Alloy.createCollection('curriculumPost'); 
 var curriculumPost_element_model = Alloy.createCollection('curriculumPost_element');  
 var c_id = args.c_id || "";  
@@ -17,6 +18,12 @@ if(showHeader == "1"){
 	$.showHeader.height = 50;
 }
 function init(){
+	var details = curriculumModel.getCurriculumById(c_id);
+	if( details.img_path !=  ""){
+		$.thumbPreview.image = details.img_path;
+	}
+	$.curName.text = details.curriculum;
+	$.curDesc.text = details.description;
 	displayLatestBoard();  
 }
 

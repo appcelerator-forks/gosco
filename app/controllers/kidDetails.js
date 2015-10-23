@@ -51,6 +51,7 @@ function loadKidsTuition(){
 		$.myKidsTuitionView.add(tuiTable);	
 	}else{
 		ts.forEach(function(entry) { 
+			console.log(entry);
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
 			    height: Ti.UI.SIZE,
@@ -220,11 +221,7 @@ function loadKidsSchool(){
 function viewSchoolDetails(e){
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl); 
-	Ti.App.Properties.setString('current_school',  res.school);  
-	console.log("kid Details");
-	console.log("school_id : "+res.school);
-	console.log("ke_id : "+res.source);
-	console.log("ec_id : "+res.ec_id);
+	Ti.App.Properties.setString('current_school',  res.school);   
 	var win = Alloy.createController("school/index",{school_id: res.school, ke_id: res.source, ec_id:res.ec_id}).getView();
 	//Alloy.Globals.tabgroup.activeTab.open(win);
 	openModal(win);

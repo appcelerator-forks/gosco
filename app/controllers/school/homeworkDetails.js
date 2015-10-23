@@ -25,12 +25,12 @@ function loadHomeworktDetails(){
 	});
 	var remarkLabel = $.UI.create('Label',{
 		text: "Homework Remark",
-		classes : ["h5", "hsize",'wfill',"padding"]
+		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	viewBg.add(remarkLabel);
  	var contentLabel = $.UI.create('Label',{
 		text: details.remark,
-		classes : ["h5", "padding","hsize"]
+		classes : ["h5", "padding","hsize","font_light_grey"]
 	});
 	
  	view1.add(viewBg);
@@ -49,7 +49,7 @@ function loadHomeworktDetails(){
 	});
 	var updatedLabel = $.UI.create('Label',{
 		text: "Last Updated",
-		classes : ["h5", "hsize",'wfill',"padding"]
+		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	viewBg2.add(updatedLabel);
   
@@ -58,7 +58,7 @@ function loadHomeworktDetails(){
  
 	var dateLabel = $.UI.create('Label',{
 		text: monthFormat(updated) ,
-		classes : ["h5", "padding","hsize"]
+		classes : ["h5", "padding","hsize",,"font_light_grey"]
 	});
  	view2.add(viewBg2);
  	view2.add(dateLabel);
@@ -76,12 +76,12 @@ function loadHomeworktDetails(){
 	});
 	var publishedLabel = $.UI.create('Label',{
 		text: "Homework Publisher",
-		classes : ["h5", "hsize",'wfill',"padding"]
+		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	
  	var pubLabel = $.UI.create('Label',{
 		text: details.published_by, 
-		classes : ["h5", "padding","hsize"]
+		classes : ["h5", "padding","hsize","font_light_grey"]
 	});
 	
 	viewBg3.add(publishedLabel); 

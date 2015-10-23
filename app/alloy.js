@@ -16,11 +16,15 @@ var _ = require('underscore')._;
 var API = require('api');
 var COMMON = require('common'); 
 var PUSH = require('push');
-var DBVersionControl = require('DBVersionControl');
-  
-
-
+var DBVersionControl = require('DBVersionControl'); 
 Alloy.Globals.Map = require('ti.map');
+
+/***Facebook Library***/ 
+var FACEBOOK = require('facebook');
+FACEBOOK.appid = "1636245926664883";
+FACEBOOK.permissions = ['email','public_profile','user_friends']; // Permissions your app needs
+FACEBOOK.initialize(1000); 
+FACEBOOK.forceDialogAuth = true; 
  
 DBVersionControl.checkAndUpdate();
 

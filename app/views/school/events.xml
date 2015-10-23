@@ -3,5 +3,8 @@
 		<ActivityIndicator id="activityIndicator" />
 		<Label top="5" class="center" text="Loading" color="#ffffff" />
 	</View> 
-    <ScrollView id="eventSv" class="wfill hfill vert"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" /> 
+	<View class="vert wfill hsize" top="0">
+		<Label class="padding themeColor h5">Available events</Label> 
+	</View> 
+    <ScrollView id="eventSv" class="wfill hfill vert" top="35" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" /> 
 </Alloy>

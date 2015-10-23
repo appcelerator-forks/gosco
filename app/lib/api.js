@@ -124,8 +124,7 @@ exports.removeKidsCurriculum = function(ex){
 };
 
 //Get school announcement / awards
-exports.getSchoolPost = function(e_id){
-	console.log("loading school post...");
+exports.getSchoolPost = function(e_id){ 
 	var url = getSchoolPost+"&e_id="+e_id;
 	var _result = contactServerByGet(url);   
 	
@@ -155,8 +154,7 @@ exports.getSchoolPost = function(e_id){
 
 exports.getCurriculumPost = function(e, onReturn){
 	
-	var url = getCurriculumPost+"&c_id="+e.c_id;
-	console.log("loading curriculum post..."+ url);
+	var url = getCurriculumPost+"&c_id="+e.c_id; 
 	var _result = contactServerByGet(url);   
 	
 	_result.onload = function(e) { 
@@ -168,8 +166,7 @@ exports.getCurriculumPost = function(e, onReturn){
 	
 };
 
-exports.getEventsList = function(e_id){
-	console.log("loading events list...");
+exports.getEventsList = function(e_id){ 
 	var url = getEventsList+"&e_id="+e_id;
  
 	var _result = contactServerByGet(url);   
@@ -194,8 +191,7 @@ exports.getEventsList = function(e_id){
 };
 
 //Get school class
-exports.getSchoolClassList = function(e_id){
-	console.log("loading class list...");
+exports.getSchoolClassList = function(e_id){ 
 	var url = getSchoolClassList+"&e_id="+e_id;
 	//console.log(url);
 	var _result = contactServerByGet(url);   
@@ -220,8 +216,7 @@ exports.getSchoolClassList = function(e_id){
 };
 
 //Get kid curriculum
-exports.getKidsCurriculum = function(k_id){
-	console.log("loading kid curriculum...");
+exports.getKidsCurriculum = function(k_id){ 
 	var url = getKidsCurriculum+"&k_id="+k_id;
 	//console.log(url);
 	var _result = contactServerByGet(url);   
@@ -246,8 +241,7 @@ exports.getKidsCurriculum = function(k_id){
 };
 
 //Get curriculum list
-exports.getCurriculumList = function(e_id){
-	console.log("loading curriculum list...");
+exports.getCurriculumList = function(e_id){ 
 	var url = getCurriculumList+"&e_id="+e_id;
 	// console.log(url);
 	var _result = contactServerByGet(url);   
@@ -271,8 +265,7 @@ exports.getCurriculumList = function(e_id){
 	};
 };
 
-exports.getHomeworkList = function(ec_id, skipLoadDone){
-	console.log("loading homework list...");
+exports.getHomeworkList = function(ec_id, skipLoadDone){ 
 	skipLoadDone = skipLoadDone || "";
 	var url = getHomeworkList+"&ec_id="+ec_id;
 	// console.log(url);
@@ -308,8 +301,9 @@ exports.doFacebookLogin = function(e){
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
-		COMMON.hideLoading(); 
+		
 		if(result.status == "error"){
+			COMMON.hideLoading(); 
 			COMMON.createAlert("Error", result.data[0]);
 			return false;
 		}else{
@@ -337,8 +331,9 @@ exports.doLogin = function(ex){
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
-		COMMON.hideLoading(); 
+		
 		if(result.status == "error"){
+			COMMON.hideLoading();
 			COMMON.createAlert("Error", result.data[0]);
 			return false;
 		}else{
@@ -394,8 +389,7 @@ exports.getKidsInfoByUser = function(ex){
 			var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 			kidsEducationModel.resetData(); 
 			var arr = result.data; 
-			arr.forEach(function(entry) {
-				console.log(entry);
+			arr.forEach(function(entry) { 
 				Ti.App.Properties.setString('curriculum', '0');
 				Ti.App.Properties.setString('post', '0');
 				Ti.App.Properties.setString('class', '0');
@@ -430,8 +424,9 @@ function checkLoadDone(){
 	var load6 = Ti.App.Properties.getString('kidsHomework');
 	if(load1 == "1" && load2 == "1" && load3 == "1" && load4 == "1" && load5 =="1" && load6 =="1"){
 		var loadHP = Ti.App.Properties.getString('isLoadHomepage');		
- 
+ 		
 		if(loadHP == "0"){
+			COMMON.hideLoading();
 			Ti.App.Properties.setString('isLoadHomepage', "1");			
 			var win = Alloy.createController("homepage/index").getView();
 			openModal(win); 
@@ -459,8 +454,8 @@ exports.doSignUp = function(ex,mainView){
 			var arr = result.data; 
 			userModel.saveArray(arr);
 	   	
-			COMMON.createAlert("Success", "Gosco account registration successful!");
-			Alloy.Globals.navWin.closeWindow(mainView.signUpWin); 
+			COMMON.createAlert("Success", "Successfully created Gosco account!");
+			COMMON.closeWindow(mainView.win);   
 		}
 	};
 	
@@ -522,10 +517,10 @@ function contactServerByPost(url,records) {
 
 function contactServerByPostImage(url,photo) { 
 	var client = Ti.Network.createHTTPClient({
-		timeout : 5000
+		timeout : 50000
 	});
 	 
-	client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');  
+	//client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');  
 	client.open("POST", url);
 	client.send({Filedata: photo}); 
 	return client;

@@ -14,7 +14,7 @@ function loadEventDetails(){
 	});
  	
  	var view1 = $.UI.create('View',{
-		classes :['hsize', 'vert','box','padding','wfill'], 
+		classes :['hsize', 'vert','box','padding','wfill','font_light_grey'], 
 		backgroundColor : "#ffffff", 
 		top:0
 	});
@@ -25,13 +25,13 @@ function loadEventDetails(){
 	});
 	var remarkLabel = $.UI.create('Label',{
 		text: "Event Details",
-		classes : ["h5", "hsize",'wfill',"padding"]
+		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	viewBg.add(remarkLabel);
 	
  	var contentLabel = $.UI.create('Label',{
 		text: details.message,
-		classes : ["h5", "padding","hsize"]
+		classes : ["h5", "padding","hsize","font_light_grey"]
 	});
 	
  	view1.add(viewBg);
@@ -50,13 +50,13 @@ function loadEventDetails(){
 	});
 	var updatedLabel = $.UI.create('Label',{
 		text: "Last Updated",
-		classes : ["h5", "hsize",'wfill',"padding"]
+		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	viewBg2.add(updatedLabel); 
  
 	var dateLabel = $.UI.create('Label',{
 		text:  monthFormat(details.started) +" - "+ monthFormat(details.ended),
-		classes : ["h5", "padding","hsize"]
+		classes : ["h5", "padding","hsize","font_light_grey"]
 	});
  	view2.add(viewBg2);
  	view2.add(dateLabel); 
@@ -74,12 +74,12 @@ function loadEventDetails(){
 	});
 	var publishedLabel = $.UI.create('Label',{
 		text: "Event Publisher",
-		classes : ["h5", "hsize",'wfill',"padding"]
+		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	
  	var pubLabel = $.UI.create('Label',{
 		text: details.published_by, 
-		classes : ["h5", "padding","hsize"]
+		classes : ["h5", "padding","hsize",'font_light_grey']
 	});
 	
 	viewBg3.add(publishedLabel); 

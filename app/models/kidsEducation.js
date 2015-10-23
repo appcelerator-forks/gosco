@@ -82,7 +82,7 @@ exports.definition = {
             getSchoolByKids :  function(k_id, educationType){
 				var collection = this;
                 //var sql = "SELECT s.id AS e_id, s.name, s.level,s.school_type,k.id AS ks_id,*,es.className AS cName,es.year FROM " + collection.config.adapter.collection_name + " k, education s, education_class es WHERE k.e_id=s.id AND es.id=k.class_name AND k.k_id='"+ k_id+ "'" ;
-                var sql = "SELECT *, k.id AS id, s.name, s.level,s.school_type   FROM " + collection.config.adapter.collection_name +  " k, education s WHERE  k.e_id=s.id AND k_id='"+ k_id+ "' AND s.education_type="+educationType ;
+                var sql = "SELECT *, k.id AS id, s.name, s.level,s.school_type   FROM " + collection.config.adapter.collection_name +  " k, education s WHERE  k.e_id=s.id AND k_id='"+ k_id+ "' AND s.education_type="+educationType + " GROUP BY k.id ";
                 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){

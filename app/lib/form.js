@@ -24,12 +24,12 @@ function loadPhoto(preview, removeBtn,saveBtn){
 	                var image = event.media; 
 	                
 	                if(image.width > image.height){
-	        			var newWidth = 320;
-	        			var ratio =   320 / image.width;
+	        			var newWidth = 640;
+	        			var ratio =   640 / image.width;
 	        			var newHeight = image.height * ratio;
 	        		}else{
-	        			var newHeight = 320;
-	        			var ratio =   320 / image.height;
+	        			var newHeight = 640;
+	        			var ratio =   640 / image.height;
 	        			var newWidth = image.width * ratio;
 	        		}
 	        		
@@ -76,12 +76,12 @@ function loadPhoto(preview, removeBtn,saveBtn){
 	            	// set image view
 	            	var image = event.media;  
 	            	if(image.width > image.height){
-	        			var newWidth = 320;
-	        			var ratio =   320 / image.width;
+	        			var newWidth = 640;
+	        			var ratio =   640 / image.width;
 	        			var newHeight = image.height * ratio;
 	        		}else{
-	        			var newHeight = 320;
-	        			var ratio =   320 / image.height;
+	        			var newHeight = 640;
+	        			var ratio =   640 / image.height;
 	        			var newWidth = image.width * ratio;
 	        		}
 	        		

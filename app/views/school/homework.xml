@@ -3,5 +3,8 @@
 		<ActivityIndicator id="activityIndicator" />
 		<Label top="5" class="center" text="Loading" color="#ffffff" />
 	</View>  
+	<View class="vert wfill hsize" top="0">
+		<Label class="padding themeColor h5">Class Homework List</Label> 
+	</View> 
 	<ScrollView id="homeworkSv" backgroundColor="#ffffff" class="wfill hfill vert"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" />  
 </Alloy>

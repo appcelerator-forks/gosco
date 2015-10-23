@@ -30,7 +30,7 @@ function doLogout(){
 	    	//Do logout  
 			Ti.App.Properties.removeProperty('user_id');
 			Ti.App.Properties.removeProperty('fullname');
-			   		
+			FACEBOOK.logout();   		
 			var win = Alloy.createController("auth/login").getView();
 		  	openModal(win); 
 	    }

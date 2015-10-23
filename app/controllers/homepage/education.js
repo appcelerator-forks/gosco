@@ -45,17 +45,16 @@ var init = function(e){
 	var optionContainer = $.UI.create('View',{
 		classes: [ 'wfill','horz'],
 		height:50
-	}); 
+	});
 	
-	if(educationType == "1"){
-		optionContainer.add(createOptions("Level",Alloy.Globals.SchoolLevel, Ti.App.Properties.getString('LevelPick')));
-		optionContainer.add(separateLine());
-		optionContainer.add(createOptions("Type",Alloy.Globals.SchoolType,Ti.App.Properties.getString('TypePick')));
-		optionContainer.add(separateLine());
-	}
-	
-	optionContainer.add(createOptions("State",Alloy.Globals.SchoolState,Ti.App.Properties.getString('StatePick'))); 
+	optionContainer.add(createOptions("State",Alloy.Globals.SchoolState )); 
 	 
+	if(educationType == "1"){
+		optionContainer.add(separateLine());
+		optionContainer.add(createOptions("Level",Alloy.Globals.SchoolLevel ));
+		optionContainer.add(separateLine());
+		optionContainer.add(createOptions("Type",Alloy.Globals.SchoolType ));
+	} 
 	bigContainer.add(optionContainer);
 	bigContainer.add(searchBar);
 	bigContainer.add(separateHozLine());
@@ -78,14 +77,16 @@ var viewSchoolAction = function(vw){
 };
 
 
-$.createOptions = function(title,options,onSelected){ 
-	createOptions(title,options,onSelected);
+$.createOptions = function(title,options){ 
+	createOptions(title,options);
 };
 
-function createOptions(title,options,onSelected){ 
+function createOptions(title,options){ 
+	var onSelected = Ti.App.Properties.getString(title+'Pick'); 
 	if(onSelected == null){
 		onSelected= "0";
 	}
+	
 	var cancelBtn = options.length-1;
 	if(cancelBtn != onSelected){
 		var myselected= options[onSelected];
@@ -114,7 +115,7 @@ function createOptions(title,options,onSelected){
 		var dialog = Ti.UI.createOptionDialog({
 		  cancel: options.length-1,
 		  options: options,
-		  selectedIndex: 0,
+		  selectedIndex: Ti.App.Properties.getString(title+'Pick') || 0,
 		  title: 'Filter By'
 		});
 		
@@ -122,7 +123,8 @@ function createOptions(title,options,onSelected){
 		
 		dialog.addEventListener("click", function(e){  
 			 
-			if(cancelBtn != e.index){
+			if(cancelBtn != e.index){ 
+				dialog.setSelectedIndex(e.index);
 				theTextLabel.text = options[e.index]; 
 				Ti.App.Properties.setString(title+'Pick', e.index);  
 				Ti.App.fireEvent('filterList');
@@ -164,6 +166,7 @@ function createSchoolList(){
 		width: Ti.UI.FILL,
 		backgroundColor: "#ffffff",
 		separatorColor : "#10844D",
+		search: searchBar
 	});
 	var data=[]; 
 	var counter = 0;
@@ -176,6 +179,8 @@ function createSchoolList(){
 			    height: 40,
 			    source: entry.id,   
 			    backgroundSelectedColor: "#ECFFF9",
+			    title: entry.name,
+			    color: "#ffffff",
 		 		backgroundColor: "#ffffff"
 			});
 			 
@@ -241,8 +246,8 @@ searchBar.addEventListener('focus', function f(e){
 });
 
 searchBar.addEventListener('cancel', function(e){ 
-	listing = educationModel.getSchoolList("all",educationType,""); 
-	createSchoolList(); 
+	//listing = educationModel.getSchoolList("all",educationType,""); 
+//	createSchoolList(); 
 	searchBar.blur();
 });
 

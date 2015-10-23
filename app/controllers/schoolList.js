@@ -40,14 +40,15 @@ var schContainer = Ti.UI.createScrollView({
 	height: Ti.UI.FILL 
 });
 
-if(educationType == "1"){  
-	optionContainer.add(SCHOOL.createOptions("Level",Alloy.Globals.SchoolLevel, Ti.App.Properties.getString('LevelPick')));
-	optionContainer.add(separateLine());
-	optionContainer.add(SCHOOL.createOptions("Type",Alloy.Globals.SchoolType,Ti.App.Properties.getString('TypePick')));
-	optionContainer.add(separateLine());
-}
-optionContainer.add(SCHOOL.createOptions("State",Alloy.Globals.SchoolState,Ti.App.Properties.getString('StatePick'))); 
+optionContainer.add(SCHOOL.createOptions("State",Alloy.Globals.SchoolState)); 
  
+if(educationType == "1"){  
+	optionContainer.add(separateLine());
+	optionContainer.add(SCHOOL.createOptions("Level",Alloy.Globals.SchoolLevel ));
+	optionContainer.add(separateLine());
+	optionContainer.add(SCHOOL.createOptions("Type",Alloy.Globals.SchoolType ));
+}
+
 bigContainer.add(optionContainer);
 bigContainer.add(separateHozLine());
 bigContainer.add(schContainer);
@@ -55,6 +56,7 @@ $.schoolContainer.add(bigContainer);
  
 function createSchoolList(){
 	COMMON.removeAllChildren(schContainer);
+	 
 	var schTable = Ti.UI.createTableView({
 		backgroundColor:"#ffffff"
 	});

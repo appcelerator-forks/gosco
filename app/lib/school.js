@@ -8,7 +8,8 @@ exports.deconstruct = function(){
 };
 
 
-function createOptions(title,options,onSelected){ 
+function createOptions(title,options){ 
+	var onSelected = Ti.App.Properties.getString(title+'Pick'); 
 	if(onSelected == null){
 		onSelected= "0";
 	}
@@ -40,7 +41,7 @@ function createOptions(title,options,onSelected){
 		var dialog = Ti.UI.createOptionDialog({
 		  cancel: options.length-1,
 		  options: options,
-		  selectedIndex: 0,
+		  selectedIndex: Ti.App.Properties.getString(title+'Pick') || 0,
 		  title: 'Filter By'
 		});
 		
@@ -49,6 +50,7 @@ function createOptions(title,options,onSelected){
 		dialog.addEventListener("click", function(e){  
 			 
 			if(cancelBtn != e.index){
+				dialog.setSelectedIndex(e.index);
 				theTextLabel.text = options[e.index]; 
 				Ti.App.Properties.setString(title+'Pick', e.index);  
 				Ti.App.fireEvent('filterList');
@@ -59,6 +61,6 @@ function createOptions(title,options,onSelected){
 	return theView;
 }
 
-exports.createOptions = function(title,options,onSelected){
-	return createOptions(title,options,onSelected);
+exports.createOptions = function(title,options){
+	return createOptions(title,options);
 };

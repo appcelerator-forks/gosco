@@ -2,6 +2,7 @@ var args = arguments[0] || {};
 COMMON.construct($);
 
 function doRegister(){
+	
 	var fullname     = $.fullname.value;
 	var mobile       = $.mobile.value;
 	var email  	  	 = $.email.value;

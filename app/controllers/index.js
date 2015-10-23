@@ -1,10 +1,12 @@
 Alloy.Globals.tabgroup = $.tabGroup;
 //Alloy.Globals.school_tab = $.school_tab;
 Alloy.Globals.navWin = $.navWin; 
+COMMON.construct($); 
 init();
 function init(){  
 	//load API loadAPIBySequence
 	API.getDeviceInfo();
+	COMMON.showLoading(); 
 	/***Check school updates***/
 	var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 	var ks = kidsEducationModel.getSchoolList();
