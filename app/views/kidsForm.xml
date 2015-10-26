@@ -19,22 +19,30 @@
 				<View id="table" height="225" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false"> 
 					<View id="tvrName"  height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<Label text="Kid's Name" top="12" width="35%" class="title_Label"  /> 
-							<TextField borderColor="#ffffff" id="fullname" top="5" bottom='5' right='5' textAlign="right" hintText="Full Name" /> 
+							<ImageView image="/images/user.png" left="10" width="20" height="20"  />
+							<Label text="Kid's Name" width="35%" class="title_Label themeColor"  /> 
+							<TextField borderColor="#ffffff" id="fullname" class="h5" right='5' textAlign="right" hintText="Full Name" /> 
 						</View>
 					</View> 
 					<View class="line" />
 					<View id="tvrFieldDate" onClick="showDatePicker" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<Label text="Birthdate" top="12" width="35%" class="title_Label"  />
-							<Label text="Not Set" top="12" color="#707070" id="date_value" textAlign="right" width="55%"  />
+							<ImageView image="/images/birthday.png" left="10" width="20" height="20"  />
+							<Label text="Birthdate"  width="35%" class="title_Label themeColor"  />
+							<View width='auto'>
+								<Label text="Not Set" class="h5 right" right='5' color="#707070" id="date_value"    />
+							</View>
 						</View>
 					</View>
 					<View class="line" />
 					<View id="tvrFieldGender" onClick="showGenderPicker" height="Ti.UI.SIZE"   selectedBackgroundColor="#ffffff"  >
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" >
-							<Label text="Gender" width="35%" top="12" class="title_Label"  />
-							<Label text="" top="12" color="#707070" id="gender_value" textAlign="right" width="55%"   />
+							<ImageView image="/images/gender.png" left="10" width="20" height="20"  />
+							<Label text="Gender" width="35%" class="title_Label themeColor"  />
+							<View width='auto'>
+								<Label text="Not Set" class="h5 right" right='5' color="#707070" id="gender_value"    />
+							</View>
+							 
 						</View>
 						<View height="0" id="selectorView" top="10"  width="Ti.UI.FILL" platform="android"> 
 							 <Picker id="genderPicker" onChange="changeGender" right="65"  visible="false" />  
@@ -43,15 +51,17 @@
 					<View class="line" />
 					<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<Label text="Hobby" top="12" width="25%" class="title_Label"  /> 
-							<TextField borderColor="#ffffff" id="hobby" value="" top="5" bottom='5' right='5' textAlign="right" hintText="Hobby" /> 
+							<ImageView image="/images/hobby.png" left="10" width="20" height="20"  />
+							<Label text="Hobby" width="25%" class="title_Label themeColor"  /> 
+							<TextField borderColor="#ffffff" id="hobby" value="" class="h5" right='5' textAlign="right" hintText="Hobby" /> 
 						</View>
 					</View>  
 					<View class="line" />
 					<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<Label text="Contact" top="12" width="25%" class="title_Label"  /> 
-							<TextField borderColor="#ffffff" id="contact" top="5" bottom='5' right='5' textAlign="right" keyboardType="Titanium.UI.KEYBOARD_PHONE_PAD" hintText="Parent Contact No." /> 
+							<ImageView image="/images/mobile.png" left="10" width="20" height="20"  />
+							<Label text="Contact" width="25%" class="title_Label themeColor"  /> 
+							<TextField borderColor="#ffffff" id="contact"  class="h5" right='5' textAlign="right" keyboardType="Titanium.UI.KEYBOARD_PHONE_PAD" hintText="Parent Contact No." /> 
 						</View>
 					</View>   
 				</View>

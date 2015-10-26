@@ -6,5 +6,5 @@
 	<View class="vert wfill hsize" top="0">
 		<Label class="padding themeColor h5">Class Homework List</Label> 
 	</View> 
-	<ScrollView id="homeworkSv" backgroundColor="#ffffff" class="wfill hfill vert"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" />  
+	<ScrollView id="homeworkSv" class="wfill hfill vert"  top="35"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" />  
 </Alloy>

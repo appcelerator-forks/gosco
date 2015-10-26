@@ -3,6 +3,6 @@
 		<Label class="padding themeColor h5">Available school awards</Label> 
 	</View> 
     <ScrollView class="wfill hfill vert" top="35" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
-    	<TableView id="awardTbl" class="wfill hsize padding box" top="0" />
+    	<TableView id="awardTbl" class="wfill hsize box padding" top="0" />
 	</ScrollView>
 </Alloy>

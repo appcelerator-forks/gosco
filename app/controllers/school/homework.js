@@ -50,6 +50,7 @@ function loadHomework(ec_id){
 			var horzView = $.UI.create('View',{
 				classes: ['horz','wfill'], 
 				source: entry.id,  
+				backgroundColor: "#ffffff",
 				height: 60 
 			});
 			

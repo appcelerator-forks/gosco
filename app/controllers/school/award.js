@@ -26,7 +26,7 @@ function loadNoticeBoard(school_id){
 			});
 			
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_regular'],  
+				classes: [ 'hsize','h5', 'themeColor','bold'],  
 				text: entryPost.title,
 				source: entryPost.id
 			});
@@ -37,12 +37,12 @@ function loadNoticeBoard(school_id){
 			}
 					
 			var descLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','font_12'],  
+				classes: [ 'hsize','h6'],  
 				text: message,
 				source: entryPost.id
 			});
 			var dateLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','font_12','font_light_grey'],  
+				classes: [ 'hsize','h6','font_light_grey'],  
 				text: monthFormat(entryPost.publish_date),
 				source: entryPost.id
 			});
