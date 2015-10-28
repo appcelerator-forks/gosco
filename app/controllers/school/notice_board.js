@@ -2,22 +2,51 @@ var args = arguments[0] || {};
 COMMON.construct($);
 var educationModel = Alloy.createCollection('education');  
 var postModel = Alloy.createCollection('post'); 
+var post_element_model = Alloy.createCollection('post_element');  
 var school_id; 
 
 function init(e){
-	school_id = e.school_id; 
+	school_id = e.school_id;  
 	var details = educationModel.getSchoolById(school_id);
 	$.schoolName.text = details.name;
 	$.schoolAddress.text = details.address;
 	$.schoolTel.text = details.contact_no;
 	$.thumbPreview.image = details.img_path; 
 	loadNoticeBoard(school_id);
+	syncData(school_id);
 }  
+
+
+function syncData(school_id){
+	var param = { 
+		"e_id"	  : school_id
+	};
+	API.callByPost({url:"getSchoolPost", params: param}, function(responseText){
+		 
+		var res = JSON.parse(responseText);  
+		if(res.status == "success"){ 
+			var postData = res.data; 
+			 if(postData != ""){ 
+			 	 var post = res.data.post;   
+				 postModel.addPost(post);  
+				 post_element_model.addElement(post);  
+				 loadNoticeBoard(school_id); 
+			 } 
+			
+		} 
+	});
+	
+}
 
 function loadNoticeBoard(school_id){
 	var latestPost = postModel.getLatestPostByEducation(school_id,1); 
- 
+ 	 
 	if(latestPost.length > 0){ 
+		var postData= []; 
+		var tblView = $.UI.create('TableView',{
+			classes: ['wfill' , 'hsize'],
+			top:0
+		});
 		latestPost.forEach(function(entryPost) {
 			var tblRowView = Ti.UI.createTableViewRow({
 				hasChild: true
@@ -53,9 +82,11 @@ function loadNoticeBoard(school_id){
 			postView.add(descLbl);
 			postView.add(dateLbl);
 			tblRowView.add(postView);
-			addClickEvent(postView); 
-			$.boardTbl.appendRow(tblRowView);
+			postData.push(tblRowView);
+			addClickEvent(postView);  
 		});
+		tblView.setData(postData);
+		$.boardSv.add(tblView);
 	} 	
 }
 

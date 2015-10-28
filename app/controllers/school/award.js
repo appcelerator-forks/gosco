@@ -15,9 +15,9 @@ function init(e){
 
 function loadNoticeBoard(school_id){
 	var latestPost = postModel.getLatestPostByEducation(school_id,2); 
- 	
+  
 	if(latestPost.length > 0){  
-		var tblRowView = $.UI.create('TableView',{
+		var tblView = $.UI.create('TableView',{
 			classes: ['wfill' , 'hsize'],
 			top:0
 		});
@@ -84,8 +84,8 @@ function loadNoticeBoard(school_id){
 			//$.awardTbl.appendRow(tblRowView); 
 		});
 		
-		tblRowView.setData(awardData);
-		$.awardSv.add(tblRowView);
+		tblView.setData(awardData);
+		$.awardSv.add(tblView);
 	} 	
 }
 

@@ -493,6 +493,32 @@ exports.saveKids = function(ex,onAPIReturn){
 	};
 };
 
+exports.callByPostImage = function(e, onload, getParam){
+	var url =  eval(e.url);
+	var _result = contactServerByPostImage(url, e.params || {});   
+	_result.onload = function(e) {   
+		onload && onload(this.responseText); 
+	};
+		
+	_result.onerror = function(e) { 
+		onerror && onerror(); 
+	};	
+};
+ 
+ 
+exports.callByPost = function(e, onload, onerror){
+	var url =  eval(e.url);
+	//console.log(url);
+	var _result = contactServerByPost(url, e.params || {});   
+	_result.onload = function(e) {   
+		onload && onload(this.responseText); 
+	};
+		
+	_result.onerror = function(e) { 
+		onerror && onerror(); 
+	};	
+};
+ 
 /*********************
  * Private function***
  *********************/
