@@ -18,7 +18,7 @@
 			<Label class="padding themeColor h5 bold">Notice Board / Announcement</Label>
 		</View>
     	
-    	<ScrollView id="boardSv" class="wfill hsize padding box" top="0" bottom="50" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" />
+    	<View id="boardSv" class="wfill hsize padding box" top="0"  />
     	 
 	</ScrollView>
 </Alloy>
