@@ -1,7 +1,10 @@
 <Alloy> 
 	<View class=" wfill hfill vert"  bottom="87">
 		<View class="vert" top="5" height="auto" >
-			<Label class="padding themeColor h5 bold">Notice Board / Announcement</Label>
+			<View class="horz wfill hsize">
+				<ImageView width="30" height="30" left="10" image="/images/announcement.png" />
+				<Label class="padding themeColor h5 bold">Notice Board / Announcement</Label>
+			</View>
 			<ScrollView class="vert" id="latestBoardView" scrollType="vertical" />
 		</View> 
 	</View>

@@ -17,6 +17,7 @@ function displayLatestBoard(){
 	var latestPost = postModel.getLatestPost(5,1);  
 	var boardPost = $.UI.create('View',{
 		classes: ['padding' ,'box', 'hsize', 'vert'], 
+		top:0
 	});
 	if(latestPost.length > 0){ 
 		latestPost.forEach(function(entryPost) {

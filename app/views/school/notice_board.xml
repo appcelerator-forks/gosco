@@ -13,6 +13,10 @@
 	    		<Label class="h6 font_dark_grey" id="schoolTel"></Label>
     		</View>
     	</View>
+    	<View class="horz wfill hsize">
+			<ImageView width="30" height="30" left="10" image="/images/announcement.png" />
+			<Label class="padding themeColor h5 bold">Notice Board / Announcement</Label>
+		</View>
     	<TableView id="boardTbl" class="wfill hsize padding box" top="0" /> 
 	</ScrollView>
 </Alloy>

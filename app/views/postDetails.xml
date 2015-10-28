@@ -10,7 +10,7 @@
 			<ActivityIndicator id="activityIndicator" />
 			<Label top="5" class="center" text="Loading" color="#ffffff" />
 		</View>
-		<View class="wfill hfill vert" >
+		<View class="wfill hfill vert" bottom="50">
 			<View id="showHeader" layout="vertical" backgroundColor="#B8D5BA" visible="false" height="0">
 				<View onClick="closeWindow">
 					<ImageView left='10'  width="25" height="25" image="/images/btn-back.png" />  
@@ -18,5 +18,6 @@
 			</View>
 			<ScrollView class="news_item" id="myContentView" bottom="5" backgroundColor="#FFFFFF" contentWidth="Ti.UI.FILL" contentHeight="Ti.UI.SIZE" />
 		</View>
+		<ImageView class=" wfill" height="50" bottom="0" image="/images/banner1.png" />
 	</Window>
 </Alloy>

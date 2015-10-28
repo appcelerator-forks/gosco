@@ -63,5 +63,28 @@ function loginFacebook(e){
 	}  	 
 } 
 
-	 
+if(OS_ANDROID){
+	$.win.addEventListener('android:back', function (e) {
+		var dialog = Ti.UI.createAlertDialog({
+			cancel: 1,
+			buttonNames: ['Cancel','Confirm'],
+			message: 'Would you like to exit Gosco App?',
+			title: 'Exit app'
+		});
+		dialog.addEventListener('click', function(e){
+			  
+		    if (e.index === e.source.cancel){
+			     //Do nothing
+			 }
+			if (e.index === 1){
+				var activity = Titanium.Android.currentActivity;
+				activity.finish();
+			}
+		});
+		dialog.show(); 
+		return false;
+	});
+		 
+}
+
 FACEBOOK.addEventListener('login', loginFacebook);    
