@@ -80,6 +80,33 @@ exports.definition = {
                 collection.trigger('sync');
                 return listArr;
 			},
+			getImageByPost: function(post_id){
+				var collection = this;
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE post_id ='"+post_id+"' AND `type`=3 LIMIT 1";
+               
+                db = Ti.Database.open(collection.config.adapter.db_name);
+                if(Ti.Platform.osname != "android"){
+                	db.file.setRemoteBackup(false);
+                }
+                var res = db.execute(sql);
+                var arr = []; 
+               
+                if (res.isValidRow()){
+					arr = {
+					    id: res.fieldByName('id'),
+						    post_id: res.fieldByName('post_id'),
+						    element: res.fieldByName('element'), 
+						    caption: res.fieldByName('caption'), 
+						    type: res.fieldByName('type'), 
+						    position: res.fieldByName('position') 
+					};
+					
+				} 
+				res.close();
+                db.close();
+                collection.trigger('sync');
+                return arr;
+			},
 			addElement : function(arr) {
 				var collection = this;
                 db = Ti.Database.open(collection.config.adapter.db_name);

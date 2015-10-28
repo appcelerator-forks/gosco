@@ -177,9 +177,11 @@ exports.getEventsList = function(e_id){
 			return false;
 		}else{
 			var eventsModel = Alloy.createCollection('events'); 
+			var eventsAttachmentModel = Alloy.createCollection('eventsAttachment'); 
 			var arr = result.data; 
 			 
 			eventsModel.saveArray(arr); 
+			eventsAttachmentModel.saveArray(arr);
 			Ti.App.Properties.setString('events', '1');
 			console.log("DONE events LIST..." +Ti.App.Properties.getString('events'));
 			checkLoadDone(); 

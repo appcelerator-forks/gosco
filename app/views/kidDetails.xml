@@ -29,8 +29,10 @@
 					<View id="table" height="180"  backgroundColor="#ffffff" layout="vertical" > 
 						<View id="tvrFieldDate" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
-								<ImageView image="/images/birthday.png" left="10" width="20" height="20"  />
-								<Label text="Birthdate" width="40%" class="title_Label themeColor"  />
+								<View width='40%' class="horz" top="12">
+									<ImageView image="/images/birthday.png" left="10" width="20" height="20"  />
+									<Label text="Birthdate" class="title_Label themeColor"  />
+								</View>
 								<View width='auto'>
 									<Label text="" class="h5 right" right='5' color="#707070" id="date_value"  />
 								</View>
@@ -39,8 +41,10 @@
 						<View class="line" />
 						<View id="tvrFieldGender" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" >
-								<ImageView image="/images/gender.png" left="10" width="20" height="20"  />
-								<Label text="Gender" width="40%" class="title_Label themeColor"  />
+								<View width='40%' class="horz" top="12">
+									<ImageView image="/images/gender.png" left="10" width="20" height="20"  />
+									<Label text="Gender" class="title_Label themeColor"  />
+								</View>
 								<View width='auto'>
 									<Label text="Not Set" class="h5 right" right='5' color="#707070" id="gender_value"    />
 								</View>
@@ -49,8 +53,10 @@
 						<View class="line" />
 						<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
-								<ImageView image="/images/hobby.png" left="10" width="20" height="20"  />
-								<Label text="Hobby" width="40%" class="title_Label themeColor"  /> 
+								<View width='40%' class="horz" top="12">
+									<ImageView image="/images/hobby.png" left="10" width="20" height="20"  />
+									<Label text="Hobby" class="title_Label themeColor"  /> 
+								</View>
 								<View width='auto'>
 									<Label text="" class="h5 right" right='5' color="#707070" id="hobby"  />
 								</View>
@@ -60,8 +66,10 @@
 						<View class="line" />
 						<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
-								<ImageView image="/images/mobile.png" left="10" width="20" height="20"  />
-								<Label text="Contact" width="40%" class="title_Label themeColor"  /> 
+								<View width='40%' class="horz" top="12">
+									<ImageView image="/images/mobile.png" left="10" width="20" height="20"  />
+									<Label text="Contact" class="title_Label themeColor"  /> 
+								</View>
 								<View width='auto'>
 									<Label text="" class="h5 right" right='5' color="#707070" id="parent_contact"  />
 								</View> 

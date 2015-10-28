@@ -1,11 +1,13 @@
 var args = arguments[0] || {};
 var eventsModel = Alloy.createCollection('events'); 
+var eventsAttachmentModel = Alloy.createCollection('eventsAttachment'); 
 COMMON.construct($);
 var event_id = args.event_id || ""; 
 
 loadEventDetails();
 function loadEventDetails(){
 	var details = eventsModel.getRecordsById(event_id);
+	var attList = eventsAttachmentModel.getRecordByEvents(event_id);  
 	console.log(details);
 	 
 	var titleLabel = $.UI.create('Label',{
@@ -96,9 +98,89 @@ function loadEventDetails(){
 	$.myContentView.add(titleLabel);
  	$.myContentView.add(view1);
  	$.myContentView.add(view3);
- 	$.myContentView.add(view2);
- 	//$.myContentView.add(separateHorzLine());
+ 	$.myContentView.add(view2); 
  	
+ 	if(attList.length > 0){
+ 		var galleryLabel = $.UI.create('Label',{
+				text:"Events Attachment",
+				classes : ["h5","hsize", "padding", 'themeColor']
+		});
+		/**EVENTS Attachment**/
+	 	var view4 = $.UI.create('View',{
+			classes :['hsize', 'vert','box','padding','wfill'], 
+			backgroundColor : "#ffffff", 
+			top:0
+		});
+		
+		var viewBg4 = $.UI.create('View',{
+			classes :['wfill', "hsize"],
+			backgroundColor : "#f5f5f5", 
+		});
+		var attachmentLabel = $.UI.create('Label',{
+			text: "Homework Attachment",
+			classes : ["h5", "hsize",'wfill',"padding"]
+		});
+		 
+		viewBg4.add(attachmentLabel);  
+		var galleryListingView = Ti.UI.createView({
+			left:2,
+			layout: "horizontal", 
+			height:Ti.UI.SIZE,
+			width :"auto" 
+		});
+	 	var gal_counter = 0;
+		attList.forEach(function(entry) { 
+				  
+					var cell = $.UI.create('View', {
+						classes: ["cell","tiny_padding","hsize",'vert'], 
+						borderColor:"#10844D" , 
+						width: "48.5%", 
+						source_id:  entry.id, 
+						position: gal_counter});
+						
+					var imageContainer = $.UI.create('View', { 
+						backgroundColor:"#000000" ,
+						width: Ti.UI.FILL, 
+						height:150,  
+						position: gal_counter,
+						source_id:  entry.id
+					});
+					var pad_cell = $.UI.create('View', { 
+						width: Ti.UI.FILL, 
+						height:Ti.UI.SIZE, 
+						position: gal_counter, 
+						source_id:  entry.id
+					});
+					var leftImg = entry.img_thumb;
+					if(leftImg == ""){
+						leftImg = "/images/default.png";
+					}
+					var newsImage = Ti.UI.createImageView({
+				   		defaultImage: "/images/loading_image.png",
+						image: leftImg,
+						width: Ti.UI.FILL,
+						height: Ti.UI.SIZE,
+						position: gal_counter,
+						source_id:  entry.id
+					});
+					imageContainer.add(pad_cell);
+					 
+					pad_cell.add(newsImage);
+					cell.add(imageContainer);
+						 
+					//addClickEvent(cell); 
+					galleryListingView.add(cell); 
+					//image event
+					createGalleryEvent(newsImage,entry.id,gal_counter );
+				  
+					gal_counter++; 
+			 
+		});
+		
+		view4.add(viewBg4);
+	 	view4.add(galleryListingView); 
+		$.myContentView.add(view4); 
+	}	
  	$.myContentView.add(saveBtn); 
  	saveBtn.addEventListener('click', function(e){
 		if(Ti.Platform.osname == "android"){
@@ -118,6 +200,17 @@ function loadEventDetails(){
 		}
 	});
 		
+}
+
+
+function createGalleryEvent(adImage,e_id,position){
+	adImage.addEventListener('click', function(e) {
+    	var elbl = JSON.stringify(e.source); 
+		var res = JSON.parse(elbl);  
+		var win = Alloy.createController("school/attachmentDetails",{ id:event_id,position: position, type: "events" }).getView(); 
+ 
+		Alloy.Globals.schooltabgroup.activeTab.open(win);
+    }); 
 }
 
 function separateHorzLine(){
@@ -162,8 +255,7 @@ function setCalendarEvent(details){
 
 
 function setAndroidCalendarEvent(details){
-	var started = details.started; 
-	 console.log(started);
+	var started = details.started;  
 	if(started != "0000-00-00"){
 		var CALENDAR_TO_USE = 3;
 		var calendar = Ti.Calendar.getCalendarById(CALENDAR_TO_USE);

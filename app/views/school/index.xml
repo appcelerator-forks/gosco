@@ -38,7 +38,7 @@
 		<Tab title="Awards" icon="/images/icons/icon_awards.png" activeIcon="/images/icons/icon_awards_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="School Award" backgroundColor="#F1F1F1">
 				<LeftNavButton>
-			        <View>
+			        <View onClick="backToHome">
 			         	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View>
 			    </LeftNavButton>

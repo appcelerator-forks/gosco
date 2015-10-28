@@ -188,7 +188,7 @@ function createGalleryEvent(adImage,e_id,position){
 	adImage.addEventListener('click', function(e) {
     	var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl);  
-		var win = Alloy.createController("school/attachmentDetails",{  h_id:homework_id,position: position }).getView(); 
+		var win = Alloy.createController("school/attachmentDetails",{  id:homework_id,position: position, type: "homework" }).getView(); 
  
 		Alloy.Globals.schooltabgroup.activeTab.open(win);
     });

@@ -19,28 +19,35 @@
 				<View id="table" height="225" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false"> 
 					<View id="tvrName"  height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<ImageView image="/images/user.png" left="10" width="20" height="20"  />
-							<Label text="Kid's Name" width="35%" class="title_Label themeColor"  /> 
+							<View width='35%' class="horz" top="12">
+								<ImageView image="/images/user.png" left="10" width="20" height="20"  />
+								<Label text="Kid's Name"  class="title_Label themeColor wsize"  /> 
+							</View>
+							
 							<TextField borderColor="#ffffff" id="fullname" class="h5" right='5' textAlign="right" hintText="Full Name" /> 
 						</View>
 					</View> 
 					<View class="line" />
 					<View id="tvrFieldDate" onClick="showDatePicker" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff"  >
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<ImageView image="/images/birthday.png" left="10" width="20" height="20"  />
-							<Label text="Birthdate"  width="35%" class="title_Label themeColor"  />
-							<View width='auto'>
-								<Label text="Not Set" class="h5 right" right='5' color="#707070" id="date_value"    />
+							<View width='35%' class="horz" top="12">
+								<ImageView image="/images/birthday.png" left="10" width="20" height="20"  />
+								<Label text="Birthdate"  class="title_Label themeColor"  />
+							</View>
+							<View width='auto' right='5'>
+								<Label text="Not Set" class="h5 right"  color="#707070" id="date_value"    />
 							</View>
 						</View>
 					</View>
 					<View class="line" />
 					<View id="tvrFieldGender" onClick="showGenderPicker" height="Ti.UI.SIZE"   selectedBackgroundColor="#ffffff"  >
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" >
-							<ImageView image="/images/gender.png" left="10" width="20" height="20"  />
-							<Label text="Gender" width="35%" class="title_Label themeColor"  />
-							<View width='auto'>
-								<Label text="Not Set" class="h5 right" right='5' color="#707070" id="gender_value"    />
+							<View width='35%' class="horz" top="12">
+								<ImageView image="/images/gender.png" left="10" width="20" height="20"  />
+								<Label text="Gender" class="title_Label themeColor"  />
+							</View>
+							<View width='auto' right='5'>
+								<Label text="Not Set" class="h5 right"  color="#707070" id="gender_value"    />
 							</View>
 							 
 						</View>
@@ -51,16 +58,20 @@
 					<View class="line" />
 					<View id="tvrHobby" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<ImageView image="/images/hobby.png" left="10" width="20" height="20"  />
-							<Label text="Hobby" width="25%" class="title_Label themeColor"  /> 
+							<View width='25%' class="horz" top="12">
+								<ImageView image="/images/hobby.png" left="10" width="20" height="20"  />
+								<Label text="Hobby" class="title_Label themeColor"  /> 
+							</View>
 							<TextField borderColor="#ffffff" id="hobby" value="" class="h5" right='5' textAlign="right" hintText="Hobby" /> 
 						</View>
 					</View>  
 					<View class="line" />
 					<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
-							<ImageView image="/images/mobile.png" left="10" width="20" height="20"  />
-							<Label text="Contact" width="25%" class="title_Label themeColor"  /> 
+							<View width='35%' class="horz" top="12">
+								<ImageView image="/images/mobile.png" left="10" width="20" height="20"  />
+								<Label text="Contact" class="title_Label themeColor"  /> 
+							</View>
 							<TextField borderColor="#ffffff" id="contact"  class="h5" right='5' textAlign="right" keyboardType="Titanium.UI.KEYBOARD_PHONE_PAD" hintText="Parent Contact No." /> 
 						</View>
 					</View>   

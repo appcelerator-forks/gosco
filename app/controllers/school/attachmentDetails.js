@@ -1,12 +1,21 @@
 var args = arguments[0] || {};
-var h_id = args.h_id;
+var type = args.type;
+var id = args.id;
 var position = args.position;   
-var homeworkAttachmentModel = Alloy.createCollection('homeworkAttachment'); 
- 
+var attachmentModel;
+if(type == "homework"){
+	attachmentModel = Alloy.createCollection('homeworkAttachment'); 
+}else{
+	attachmentModel = Alloy.createCollection('eventsAttachment'); 
+}
 init(); 
 
 function init(){
-	var items  = homeworkAttachmentModel.getRecordByHomework(h_id);
+	if(type == "homework"){
+		var items  = attachmentModel.getRecordByHomework(id);
+	}else{
+		var items  = attachmentModel.getRecordByEvents(id);
+	}
 	var counter = 0;
 	var imagepath, adImage, row = '';
 	var my_page = 0; 

@@ -4,6 +4,7 @@
 		<Label top="5" class="center" text="Loading" color="#ffffff" />
 	</View> 
 	<View class="vert">
-		<View class="wfill hfill vert" id="schoolContainer"  backgroundImage="/images/home_background.jpg"></View>
+		<View class="wfill hfill vert" bottom="50" id="schoolContainer"  backgroundImage="/images/home_background.jpg"></View>
 	</View>
+	<ImageView class=" wfill" height="50" bottom="0" image="/images/banner1.png" />
 </Alloy>
