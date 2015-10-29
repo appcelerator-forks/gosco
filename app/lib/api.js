@@ -447,9 +447,10 @@ exports.doSignUp = function(ex,mainView){
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
+		console.log(result);
 		COMMON.hideLoading(); 
 		if(result.status == "error"){
-			COMMON.createAlert("Error", result.data);
+			COMMON.createAlert("Error", result.data[0]);
 			return false;
 		}else{
 			var userModel = Alloy.createCollection('user'); 

@@ -2,7 +2,9 @@
 	<Window title="Register" id='win' backgroundImage="/images/home_background.jpg">
 		<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
-		    	<Label top="5" text="Loading" color="#ffffff" />
+		    	<View class="hsize">
+		    		<Label top="5" class="wsize" text="Loading" color="#ffffff" />
+		    	</View>
 		</View>
 		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
 		<ScrollView class="wfill hfill vert"  scrollType="vertical">

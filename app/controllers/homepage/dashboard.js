@@ -87,7 +87,7 @@ function separateHozLine(){
 	return seperatorLine = Titanium.UI.createView({ 
 		backgroundColor: "#D5D5D5",
 		height:1, 
-		top:5,
+		top:2,
 		width:Ti.UI.FILL
 	});
 } 

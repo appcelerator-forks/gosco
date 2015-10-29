@@ -42,6 +42,7 @@ function loadNoticeBoard(school_id){
 	var latestPost = postModel.getLatestPostByEducation(school_id,1); 
  	 
 	if(latestPost.length > 0){ 
+		COMMON.removeAllChildren($.boardSv);
 		var postData= []; 
 		var tblView = $.UI.create('TableView',{
 			classes: ['wfill' , 'hsize'],

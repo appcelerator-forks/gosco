@@ -24,7 +24,7 @@ function init(){
 	$.date_value.text = COMMON.monthFormat(details.dob);
 	$.gender_value.text = gender;
 	$.hobby.text = details.hobby;
-	$.parent_contact.text = details.contact;
+	//$.parent_contact.text = details.contact;
 	loadKidsSchool();
 	loadKidsTuition();
 }

@@ -2,10 +2,8 @@
 	<NavigationWindow platform="ios" id="navWin">
 		<Window title="Login" backgroundColor="#10844D" color="#ffffff" backgroundImage="/images/home_background.jpg">
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
-		        <ActivityIndicator id="activityIndicator" />
-		        <View height="Ti.UI.SIZE">
-		    		<Label textAlign="center" top="5" text="Loading" color="#ffffff" />
-		    	</View>
+		         <ActivityIndicator id="activityIndicator" />
+		    	<Label top="5" text="Loading" color="#ffffff" />
 			</View>
 			<View class="wfill hfill vert"  backgroundImage="/images/home_background.jpg">
 				<ImageView image="/images/full_logo.png"  top="10"  width="30%" />
@@ -21,12 +19,15 @@
 	<Window title="Login" backgroundColor="#10844D" id="win" color="#ffffff" platform="android" theme="Theme.NoActionBar">
 			<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 		        <ActivityIndicator id="activityIndicator" />
-		    	<Label top="5" text="Loading" color="#ffffff" />
+		        <View class="hsize">
+		    		<Label top="5" class="wsize" text="Loading" color="#ffffff" />
+		    	</View>
 			</View>
+			
 			<View class="wfill hfill vert"  backgroundImage="/images/home_background.jpg">
 				<ImageView image="/images/full_logo.png"  top="10" width="50%" />
 				<TextField id="username" hintText="Username"></TextField>
-				<TextField id="password" hintText="Password" passwordMask="true"></TextField>
+				<TextField id="password" hintText="Password" top="5" passwordMask="true"></TextField>
 				<Button onClick="do_login" width="250" class="button" title="Login"></Button>
 				<View height="60" id="fbloginView" width="250" />
 				<Button onClick="do_signup" width="250" class="button" backgroundColor="#5375BD" title="Register"></Button>

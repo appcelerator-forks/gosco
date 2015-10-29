@@ -1,7 +1,7 @@
 <Alloy> 
 	<View class=" wfill hfill vert"  bottom="87">
 		<View class="vert" top="5" height="auto" >
-			<View class="horz wfill hsize">
+			<View class="horz wfill " height="35">
 				<ImageView width="30" height="30" left="10" image="/images/announcement.png" />
 				<Label class="padding themeColor h5 bold">Notice Board / Announcement</Label>
 			</View>

@@ -16,7 +16,7 @@
 				</View>
 				
 				<Label class="padding font_light_white font_big" top="10">Kid's Information</Label>
-				<View id="table" height="225" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false"> 
+				<View id="table" height="180" top="10" backgroundColor="#ffffff" layout="vertical" scrollable="false"> 
 					<View id="tvrName"  height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
 							<View width='35%' class="horz" top="12">
@@ -35,7 +35,7 @@
 								<Label text="Birthdate"  class="title_Label themeColor"  />
 							</View>
 							<View width='auto' right='5'>
-								<Label text="Not Set" class="h5 right"  color="#707070" id="date_value"    />
+								<Label text="Not Set" class="h5 right" right='10' color="#707070" id="date_value"    />
 							</View>
 						</View>
 					</View>
@@ -47,7 +47,7 @@
 								<Label text="Gender" class="title_Label themeColor"  />
 							</View>
 							<View width='auto' right='5'>
-								<Label text="Not Set" class="h5 right"  color="#707070" id="gender_value"    />
+								<Label text="Not Set" class="h5 right" right='10' color="#707070" id="gender_value"    />
 							</View>
 							 
 						</View>
@@ -65,7 +65,7 @@
 							<TextField borderColor="#ffffff" id="hobby" value="" class="h5" right='5' textAlign="right" hintText="Hobby" /> 
 						</View>
 					</View>  
-					<View class="line" />
+					<!--<View class="line" />
 					<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" selectedBackgroundColor="#ffffff">
 						<View  layout="horizontal" height="45" width="Ti.UI.FILL" textAlign="right" >
 							<View width='35%' class="horz" top="12">
@@ -74,7 +74,7 @@
 							</View>
 							<TextField borderColor="#ffffff" id="contact"  class="h5" right='5' textAlign="right" keyboardType="Titanium.UI.KEYBOARD_PHONE_PAD" hintText="Parent Contact No." /> 
 						</View>
-					</View>   
+					</View>   -->
 				</View>
 			
 				 

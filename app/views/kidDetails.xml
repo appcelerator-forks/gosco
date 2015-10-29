@@ -26,7 +26,7 @@
 					
 					<Label id="fullname" textAlign="center" class="padding font_light_white font_big" top="10"></Label> 
 				
-					<View id="table" height="180"  backgroundColor="#ffffff" layout="vertical" > 
+					<View id="table" height="135"  backgroundColor="#ffffff" layout="vertical" > 
 						<View id="tvrFieldDate" height="Ti.UI.SIZE" layout="vertical"  >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
 								<View width='40%' class="horz" top="12">
@@ -34,7 +34,7 @@
 									<Label text="Birthdate" class="title_Label themeColor"  />
 								</View>
 								<View width='auto'>
-									<Label text="" class="h5 right" right='5' color="#707070" id="date_value"  />
+									<Label text="" class="h5 right" right='10' color="#707070" id="date_value"  />
 								</View>
 							</View>
 						</View>
@@ -46,7 +46,7 @@
 									<Label text="Gender" class="title_Label themeColor"  />
 								</View>
 								<View width='auto'>
-									<Label text="Not Set" class="h5 right" right='5' color="#707070" id="gender_value"    />
+									<Label text="Not Set" class="h5 right" right='10' color="#707070" id="gender_value"    />
 								</View>
 							</View>
 						</View>
@@ -63,7 +63,7 @@
 								 
 							</View>
 						</View>  
-						<View class="line" />
+						<!--<View class="line" />
 						<View id="tvrContact" height="Ti.UI.SIZE" layout="vertical" >
 							<View  layout="horizontal" height="45" width="100%" textAlign="right" >
 								<View width='40%' class="horz" top="12">
@@ -74,8 +74,9 @@
 									<Label text="" class="h5 right" right='5' color="#707070" id="parent_contact"  />
 								</View> 
 							</View>
-						</View>   
+						</View>   -->
 					</View>
+				
 					
 					<View class="wfill vert hsize" id="myKidsSchoolView"  />
 					

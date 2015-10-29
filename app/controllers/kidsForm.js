@@ -94,7 +94,7 @@ function setupPersonalData(){
 		$.date_value.text = dobArr[2]+"/"+ dobArr[1] +"/" + dobArr[0] ;
 		$.gender_value.text = gender ;
 		$.hobby.value = details.hobby;
-		$.contact.value = details.contact; 
+		//$.contact.value = details.contact; 
 		
 		//hijack datepicker
 		datePicker.setValue( new Date(dobArr[0],parseInt(dobArr[1]) -1,dobArr[2]));
@@ -108,7 +108,7 @@ var add_kid = function(){
 	var gender     = $.gender_value.text; 
 	var fullname   = $.fullname.value; 
 	var hobby  	   = $.hobby.value;
-	var contact    = $.contact.value;
+	//var contact    = $.contact.value;
 	if(birthdate != "Not Set" && birthdate != ""){ 
 		var bdate =birthdate.split('(');
 		var s_date  = bdate[0].split('/');
@@ -123,15 +123,11 @@ var add_kid = function(){
 		COMMON.createAlert("Error", "Please fill in your kids's gender");
 		return false;
 	}
-	if(contact.trim() == ""){
-		COMMON.createAlert("Error", "Please fill in your contact number");
-		return false;
-	}
-	
+	 
 	var params = { 
 	 	fullname : fullname.trim(), 
 	 	gender : gender, 
-	 	contact : contact.trim(),
+	 	contact : "",//contact.trim(),
 		birthdate : birthdate, 
 		hobby : hobby,  
 		photo : imgBlob, 
@@ -139,7 +135,7 @@ var add_kid = function(){
 		k_id: k_id,
 		type : "kid" 
 	};
-	console.log(params);
+	//console.log(params);
  	API.saveKids(params,onAPIReturn);
 	 
 }; 
