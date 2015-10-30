@@ -22,17 +22,17 @@ function displayLatestBoard(){
 	if(latestPost.length > 0){ 
 		latestPost.forEach(function(entryPost) {
 			var postView = $.UI.create('View',{
-				classes: ['padding' ,'wfill','vert', 'hsize'],  
+				classes: ['small_padding' ,'wfill','vert', 'hsize'],  
 				source: entryPost.id
 			});
 			
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_regular'],  
+				classes: [ 'hsize','h5', 'themeColor','bold'],  
 				text: entryPost.title,
 				source: entryPost.id
 			});
 			var descLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','font_12','font_light_grey'],  
+				classes: [ 'hsize','h6'],  
 				text: entryPost.message,
 				source: entryPost.id
 			});
@@ -49,7 +49,7 @@ function displayLatestBoard(){
 				source: entryPost.id
 			});
 			var publisherLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12','themeColor','left'],  
+				classes: [ 'hsize','h6','font_light_grey','left'],  
 				text: entryPost.published_by,
 				source: entryPost.id
 			});
@@ -63,7 +63,7 @@ function displayLatestBoard(){
 				source: entryPost.id
 			});
 			var dateLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12','themeColor','right'],  
+				classes: [ 'hsize','h6','font_light_grey','right'],  
 				text: monthFormat(entryPost.publish_date),
 				source: entryPost.id
 			});
@@ -86,8 +86,7 @@ function displayLatestBoard(){
 function separateHozLine(){
 	return seperatorLine = Titanium.UI.createView({ 
 		backgroundColor: "#D5D5D5",
-		height:1, 
-		top:2,
+		height:1,  
 		width:Ti.UI.FILL
 	});
 } 

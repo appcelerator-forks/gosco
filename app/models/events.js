@@ -127,12 +127,14 @@ exports.definition = {
                 	db.file.setRemoteBackup(false);
                 }
                 db.execute("BEGIN");
-        		arr.forEach(function(entry) { 
-		            var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, title, message,e_id,status,published_by,started,ended) VALUES (?,?,?,?,?,?,?,?)";
-					db.execute(sql_query, entry.id, entry.title,  entry.message,entry.e_id ,entry.status,entry.published_by,entry.started,entry.ended);
-					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET title=?,message=?,status=?,published_by=?,started=?,ended=?  WHERE id=?";
-					db.execute(sql_query, entry.title,entry.message,entry.status,entry.published_by,entry.started,entry.ended, entry.id);
-			 	}); 
+                if(arr.length > 0){ 
+	        		arr.forEach(function(entry) { 
+			            var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, title, message,e_id,status,published_by,started,ended) VALUES (?,?,?,?,?,?,?,?)";
+						db.execute(sql_query, entry.id, entry.title,  entry.message,entry.e_id ,entry.status,entry.published_by,entry.started,entry.ended);
+						var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET title=?,message=?,status=?,published_by=?,started=?,ended=?  WHERE id=?";
+						db.execute(sql_query, entry.title,entry.message,entry.status,entry.published_by,entry.started,entry.ended, entry.id);
+				 	}); 
+				 }
 				db.execute("COMMIT");
 	            db.close();
 	            collection.trigger('sync');

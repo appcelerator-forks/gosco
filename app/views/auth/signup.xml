@@ -9,7 +9,7 @@
 		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
 		<ScrollView class="wfill hfill vert"  scrollType="vertical">
 			<ImageView image="/images/full_logo.png" top="10" width="30%" />
-			<TextField id="fullname" hintText="Fullname" top="10"></TextField>
+			<TextField id="fullname" hintText="Full Name" top="10"></TextField>
 			<TextField id="mobile" hintText="Mobile Number" top="10"></TextField>
 			<TextField id="email" hintText="Email Address" top="10"></TextField>
 			<TextField id="username" hintText="Username" top="10"></TextField>

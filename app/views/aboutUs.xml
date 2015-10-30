@@ -1,0 +1,40 @@
+<Alloy>
+	<Window id="win" title="About Gosco">
+		<LeftNavButton platform="ios">
+			<View onClick="closeWindow">
+				<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
+			</View>
+		</LeftNavButton>
+		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
+		<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
+			<ActivityIndicator id="activityIndicator" />
+			<Label top="5" class="center" text="Loading" color="#ffffff" />
+		</View>
+		<View class="wfill hfill vert" bottom="50">
+			<View id="showHeader" layout="vertical" backgroundColor="#B8D5BA" visible="false" height="0">
+				<View onClick="closeWindow">
+					<ImageView left='10'  width="25" height="25" image="/images/btn-back.png" />  
+				</View>
+			</View>
+			<ScrollView class="news_item" id="myContentView"  backgroundColor="#FFFFFF" contentWidth="Ti.UI.FILL" contentHeight="Ti.UI.SIZE" >
+				
+				<View class=" wfill " height="85"  >
+					<ImageView width="80" height="80" left="10" image="/images/gosco_global.png" />
+					<View class="vert wfill hsize" left="95">
+						<Label class=" themeColor h4 bold">Gosco Global Sdn Bhd</Label> 
+						<Label class=" font_dark_grey h5">Reliable & Trusted School Communicator</Label>
+					</View>  
+				</View> 
+				
+				<Label class="news_paragraph">GOSCO is a revolutionary enterprise specializing in computer educational technology solution.
+
+Established in the new millennia of this 21st century, GOSCO is strategically located at Kuala Lumpur city center precisely in the heart of Malaysia. With current business interest spanning throughout Malaysia, GOSCO has plans for global expansion in the imminent future. Our core service focuses on provision of software and application developing solution. This service is provided freely to non-profit organizations such as learning institutions while commercial users will be charged a nominal fee for product usage.</Label>
+			
+				<Label class="news_title themeColor">OUR MISSION</Label>
+				<Label class="news_paragraph" top="5">• GOSCO firmly believes in promotion of environmental sustainability. Our innovations help to reduce the wasteful use of photocopy and paper and its related expenses to a minimum. GOSCO conforms to the concept of environmental-friendliness, and is passionate to shape a greener future for all.</Label>
+				<Label class="news_paragraph">• GOSCO is dedicated to provide an effective platform bridging the communication between learning institutions and students/parents. Our vision is to establish a seamless link which serves to enhance information exchange and promotes co-operation between learning institutions and the students/parents .</Label>
+			</ScrollView>
+		</View>
+		<ImageView class=" wfill" height="50" bottom="0" image="/images/banner1.png" /> 
+	</Window>
+</Alloy>

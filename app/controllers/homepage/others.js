@@ -40,6 +40,11 @@ function init(){
 	}
 }
 
+function aboutUs(){
+	var win = Alloy.createController("aboutUs").getView();  
+	Alloy.Globals.tabgroup.activeTab.open(win);
+}
+
 exports.init = function(e){
  	init(e);
 };

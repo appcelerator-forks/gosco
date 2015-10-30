@@ -1,6 +1,6 @@
 <Alloy> 
 	 
-    <ScrollView id="curScrollView" class="wfill hfill vert" top="5" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
+    <ScrollView id="curScrollView" class="wfill hfill vert" top="0" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
     	
     	<!--<View class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">

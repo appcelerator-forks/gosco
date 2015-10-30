@@ -57,7 +57,7 @@ exports.definition = {
 					if(educationType == "1"){
 						lvlntype = " AND level=1 AND school_type=1  ";
 					}
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE state='wp' "+sts+" AND education_type='"+educationType+"' " +srh + lvlntype ;
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE state='wp' "+sts+" AND education_type='"+educationType+"' " +srh + lvlntype + " GROUP BY id" ;
 					 
 				}else{
 					var str ="";
@@ -80,7 +80,7 @@ exports.definition = {
 						str += " AND state='"+st+"'";
 					}
 					 
-					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE education_type='"+educationType+"' "+sts+" " + str +srh;
+					var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE education_type='"+educationType+"' "+sts+" " + str +srh + " GROUP BY id" ;
 				} 
 				 
                 db = Ti.Database.open(collection.config.adapter.db_name);

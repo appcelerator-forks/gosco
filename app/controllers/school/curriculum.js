@@ -31,6 +31,7 @@ function loadCurriculumList(school_id, isShowRemove){
  
 	if(details.length > 0){ 
 		details.forEach(function(entry) {
+			console.log(entry);
     		var tblRowView = Ti.UI.createTableViewRow({
 				hasChild: true,
 				height: 50, 
@@ -45,14 +46,28 @@ function loadCurriculumList(school_id, isShowRemove){
 				kc_id: entry.id
 			});
 			
-			var titleLbl = $.UI.create('Label', { 
-				classes: ['horz',  'hsize'], 
-				text: entry.curriculum,
-				left:10,
-				color: "#000000",
+			var ccImg = "/images/koku.png";
+			if(entry.img_path != ""){
+				ccImg = entry.img_path;
+			}
+			var cocuImg = $.UI.create('ImageView', {  
+				image: ccImg,
+				left:10, 
+				height:30,
+				width:30,
+				borderRadius: 15,
 				c_id: entry.c_id,
 				kc_id: entry.id
 			});
+			
+			var titleLbl = $.UI.create('Label', { 
+				classes: ['horz',  'hsize','h5','font_dark_grey'], 
+				text: entry.curriculum,
+				left:5, 
+				c_id: entry.c_id,
+				kc_id: entry.id
+			});
+			titleView.add(cocuImg);
 			titleView.add(titleLbl);
 			tblRowView.add(titleView);
 			tblRowView.addEventListener('click',readCurriculumDetails);  

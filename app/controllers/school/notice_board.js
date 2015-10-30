@@ -74,7 +74,7 @@ function loadNoticeBoard(school_id){
 				source: entryPost.id
 			});
 			var dateLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','font_12','font_light_grey'],  
+				classes: [ 'hsize','h6','font_light_grey'],  
 				text: monthFormat(entryPost.publish_date),
 				source: entryPost.id
 			});

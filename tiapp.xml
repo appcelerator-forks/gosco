@@ -94,8 +94,6 @@
     <modules>
         <module platform="commonjs" version="3.2.8">ti.cloud</module>
         <module platform="android" version="3.3.8">ti.cloudpush</module>
-        <module platform="android">com.appcelerator.apm</module>
-        <module platform="iphone">com.appcelerator.apm</module>
         <module platform="android">facebook</module>
         <module platform="iphone">facebook</module>
         <module platform="iphone">ti.map</module>

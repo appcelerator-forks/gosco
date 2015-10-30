@@ -1,5 +1,19 @@
 <Alloy>
-	<ScrollView id="bannerSv" class="wfill hfill vert" backgroundColor="#F1F1F1" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
-    	  
-	</ScrollView>
+	<View class=" wfill hfill vert" >
+		<View class="vert hfill" top="5"  >
+			<View class=" wfill " height="85" onClick="aboutUs">
+				<ImageView width="80" height="80" left="10" image="/images/full_logo.png" />
+				<View class="vert wfill hsize" left="95">
+					<Label class=" themeColor h4 bold">Gosco School App</Label>
+					<Label class=" font_dark_grey h5">Version 1.0.0</Label>
+					<Label class=" font_dark_grey h5">Copyright ©2015. All Rights Reserved.</Label>
+				</View>
+				<ImageView width="20" height="20" right="10" image="/images/btn-forward.png" />
+				
+			</View> 
+			<ScrollView id="bannerSv" class="wfill hfill vert" backgroundColor="#F1F1F1" top="0" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" />
+		</View> 
+	</View>
+	
+    	   
 </Alloy>
