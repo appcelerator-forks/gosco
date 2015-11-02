@@ -23,6 +23,7 @@ function loadEvent(school_id){
 				hasChild: true,
 				height : 70,
 				classes:["horz"],
+				backgroundColor: "#ffffff",
 				source: entry.id
 			});
 			
@@ -47,10 +48,17 @@ function loadEvent(school_id){
 				width: 80,
 				source: entry.id
 			});
-	 
+	 		
+	 		
+	 		var eventDate;
+	 		if(entry.ended == "0000-00-00"){
+	 			eventDate = "FROM "+monthFormat(entry.started);
+	 		}else{
+	 			eventDate = monthFormat(entry.started) +" - "+ monthFormat(entry.ended);
+	 		}
 			var dateLbl = $.UI.create('Label',{
-				classes: [ 'hsize','h5'],  
-				text: monthFormat(entry.started) +" - "+ monthFormat(entry.ended),
+				classes: [ 'hsize','h5', 'font_dark_grey'],  
+				text: eventDate,
 				source: entry.id
 			}); 
 			

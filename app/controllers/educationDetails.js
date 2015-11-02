@@ -1,36 +1,110 @@
 var args = arguments[0] || {};
 var e_id = args.e_id || ""; 
-var educationModel = Alloy.createCollection('education'); 
-
-var details = educationModel.getSchoolById(e_id);
-
+var educationModel = Alloy.createCollection('education');  
+var details;
 var contacts = Ti.Contacts.getAllPeople(); 
-var isAddedToContact = "0";
+var isAddedToContact = "0"; 
+init();
+
+function init(){
+	syncData();
+	showDetails(); 
+	populateMap();
+}
+
+
 for (var i = 0; i < contacts.length; i++) {
-	var phone = contacts[i].phone;
-    
+	var phone = contacts[i].phone; 
     var workPhone = phone.work; 
     if(workPhone != null && workPhone[0] == details.contact_no ){
     	isAddedToContact = "1";
     	$.add2contact.title = "Already added to contact";
     } 
 }  
-var phoneArr = []; 
-if(details != ""){  
-	$.win.title = details.name;
-	$.educationName.text = details.name;
-	
-	var add2 =details.address;
-	if(add2.trim() != ""){
-		add2 = add2  +"\r\n";
+
+function syncData(){
+	var checker = Alloy.createCollection('updateChecker'); 
+	var isUpdate = checker.getCheckerById("1");
+	var last_updated ="";
+	 
+	if(isUpdate != "" ){
+		last_updated = isUpdate.updated;
 	}
-	$.educationAddress.text = add2; 
-	$.educationLocation.text = details.latitude +", "+ details.longitude;
- 
-	$.educationTel.text = "TEL : " +details.contact_no  ; 
-	$.educationFax.text = "FAX : " +details.fax_no  ; 
-	phoneArr.push(details.contact_no);
+	var param = { 
+		"last_updated"	  : last_updated
+	};
+	
+	API.callByPost({url:"getSchoolList", params: param}, function(responseText){
+		 
+		var res = JSON.parse(responseText);  
+		
+		if(res.status == "success"){  
+	 		var arr = res.data; 
+	 		 
+	        educationModel.saveArray(arr);
+			showDetails();
+		} 
+	});
+	
 }
+
+function populateMap(){ 
+	if(details.latitude != null && details.longitude != null) {  
+		var annotations = [
+		    Map.createAnnotation({
+		        latitude:  details.longitude,
+		        longitude:details.latitude,
+		        title:details.name, 
+		        animate: true,
+		        image: '/images/marker.png',
+		        //pincolor: Map.ANNOTATION_GREEN,
+		    }),
+		];
+		var mapview = Map.createView({
+		    mapType: Map.NORMAL_TYPE,
+		    region: {
+		        latitude:details.longitude,
+		        longitude:details.latitude,
+		        latitudeDelta:.05,
+		        longitudeDelta:.05
+		    },
+		    animate:true,
+		    regionFit:true,
+		    userLocation:false,
+		    top:0,
+		    height:200,
+		    annotations: annotations
+		});
+		$.win.add(mapview);	
+		//$.educationMap.add(mapview);					
+	}else{
+		$.infoView.top = 0;
+	}
+}
+
+
+function showDetails(){
+	
+	details  = educationModel.getSchoolById(e_id);  
+	var phoneArr = []; 
+	if(details != ""){  
+		$.win.title = details.name;
+		$.educationName.text = details.name;
+		
+		var add2 =details.address;
+		if(add2.trim() != ""){
+			add2 = add2  +"\r\n";
+		}
+		$.educationAddress.text = add2; 
+		$.educationLocation.text = details.longitude +", "+ details.latitude;
+	 
+		$.educationTel.text = "TEL : " +details.contact_no  ; 
+		$.educationFax.text = "FAX : " +details.fax_no  ; 
+		phoneArr.push(details.contact_no);
+		 
+	}
+}
+
  
 function clickToCall(){ 
 	var tel = details.contact_no; 
@@ -97,7 +171,7 @@ function direction2here(){
 	    var latitude = e.coords.latitude; 
 	 	//console.log('http://maps.google.com/maps?saddr='+latitude+','+longitude+'&daddr='+details.latitude+','+details.longitude);
 	     
-		var url = 'geo:'+latitude+','+longitude+"?q="+details.clinicName+" (" + details.add1 + "\r\n"+ add2 +  details.postcode +", " + details.city +"\r\n"+  details.state + ")";
+		var url = 'geo:'+latitude+','+longitude+"?q="+details.name+" (" + details.add1 + "\r\n"+ add2 +  details.postcode +", " + details.city +"\r\n"+  details.state + ")";
 		  
 		   
 			if (Ti.Android){

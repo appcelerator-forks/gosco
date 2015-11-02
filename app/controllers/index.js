@@ -5,7 +5,7 @@ COMMON.construct($);
 init();
 function init(){  
 	//load API loadAPIBySequence
-	API.getDeviceInfo();
+	
 	COMMON.showLoading(); 
 	/***Check school updates***/
 	var kidsEducationModel = Alloy.createCollection('kidsEducation'); 

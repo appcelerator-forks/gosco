@@ -14,8 +14,7 @@
 ".news_title" :{
 	height: Titanium.UI.SIZE,
   	width: Titanium.UI.SIZE,
-  	wordWrap: true,
-  	color: "#1C1C1C",
+  	wordWrap: true, 
   	font:{
   		fontSize: "20dp", 
 		fontWeight: 'bold'

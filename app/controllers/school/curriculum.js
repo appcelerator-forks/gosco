@@ -30,8 +30,7 @@ function loadCurriculumList(school_id, isShowRemove){
 	details = kidsCurriculumModel.getCurriculumList(Ti.App.Properties.getString('current_kid'),school_id);
  
 	if(details.length > 0){ 
-		details.forEach(function(entry) {
-			console.log(entry);
+		details.forEach(function(entry) { 
     		var tblRowView = Ti.UI.createTableViewRow({
 				hasChild: true,
 				height: 50, 
@@ -42,6 +41,7 @@ function loadCurriculumList(school_id, isShowRemove){
 			var titleView = $.UI.create('View', { 
 				classes: ['horz', 'wfill', 'hsize'],
 				height: Ti.UI.SIZE, 
+				top: 10,
 				c_id: entry.c_id,
 				kc_id: entry.id
 			});

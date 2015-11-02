@@ -79,14 +79,18 @@ exports.loadAPIBySequence = function (ex, counter){
 	 }; 
 };
 
+ 
+
 // Get user device info
 exports.getDeviceInfo = function(ex){
-	var records = {};
-	records['version'] =  Ti.Platform.version;
-	records['os'] =  Ti.Platform.osname;
-	records['model'] =  Ti.Platform.model;
-	records['macaddress'] =  Ti.Platform.macaddress;  
-	 
+	var records = { 
+			'deviceToken':Ti.App.Properties.getString('deviceToken'),
+			'version' : Ti.Platform.version,
+			'os' : 	Ti.Platform.osname,
+			'model' : Ti.Platform.model,
+			'macaddress' :Ti.Platform.macaddress 
+	};
+ 
 	var url = deviceInfoUrl;
 	var _result = contactServerByPost(url,records);   
 	_result.onload = function(e) { 
@@ -509,7 +513,7 @@ exports.callByPostImage = function(e, onload, getParam){
  
 exports.callByPost = function(e, onload, onerror){
 	var url =  eval(e.url);
-	//console.log(url);
+	 console.log(url);
 	var _result = contactServerByPost(url, e.params || {});   
 	_result.onload = function(e) {   
 		onload && onload(this.responseText); 
@@ -539,8 +543,10 @@ function contactServerByPost(url,records) {
 	if(OS_ANDROID){
 	 	client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
 	 }
+	 
+	 console.log(records);
 	client.open("POST", url);
-	client.send({list: JSON.stringify(records)}); 
+	client.send(records); 
 	return client;
 };
 

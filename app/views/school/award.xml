@@ -1,8 +1,7 @@
 <Alloy>
-	<View class="vert wfill hsize" top="0">
-		<Label class="padding themeColor h5">Available school awards</Label> 
+	<View class="horz wfill" height="35" top="5" >
+		<ImageView width="30" height="30" left="10" image="/images/award.png" />
+		<Label class="padding themeColor h5 bold" top="5">Available school awards</Label> 
 	</View> 
-    <ScrollView id="awardSv" class="wfill hfill vert" top="35" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
-    	
-	</ScrollView>
+    <ScrollView id="awardSv" class="wfill hfill vert" top="40" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" /> 
 </Alloy>

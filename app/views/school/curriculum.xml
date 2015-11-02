@@ -10,8 +10,9 @@
     	</View>
     -->
     	<View class="wfill hsize padding">
-    		<View left="0" height="Ti.UI.SIZE" width="Ti.UI.SIZE">
-    			<Label class="h5 themeColor padding" bottom="0">My Kid Curriculum</Label>
+    		<View class="horz wfill" height="35" top="5" bottom="5">
+    			<ImageView width="30" height="30" left="10" image="/images/koku.png" />
+    			<Label class="h5 themeColor padding bold" top="5">My Kid Curriculum</Label>
     		</View>
     		<View right="0" height="Ti.UI.SIZE" width="80">
 				<ImageView right='40' id="removeBtn" onTouchend="showRemoveList" width="25" height="25" image="/images/remove.png" /> 

@@ -14,9 +14,9 @@ function init(e){
 }
 
 function displayLatestBoard(){
-	var latestPost = postModel.getLatestPost(5,1);  
+	var latestPost = postModel.getLatestPost(10,1);  
 	var boardPost = $.UI.create('View',{
-		classes: ['padding' ,'box', 'hsize', 'vert'], 
+		classes: ['padding', 'hsize', 'vert'], 
 		top:0
 	});
 	if(latestPost.length > 0){ 
@@ -117,7 +117,7 @@ function displayMyKids(){
 			}); 
 			
 			var avatar = entry.img_path;
-			console.log("avatar : "+avatar);
+			 
 			if(avatar == ""){
 				avatar = "/images/avatar.jpg";
 			}

@@ -7,18 +7,18 @@ var school_id;
 
 function init(e){
 	school_id = e.school_id;  
-	//console.log(details); 
-	loadNoticeBoard(school_id);
+	setTimeout(function(){
+		loadNoticeBoard(school_id); 
+	},500); 
 	
-}  
-
-
+}   
 function loadNoticeBoard(school_id){
 	var latestPost = postModel.getLatestPostByEducation(school_id,2); 
-  
+  	console.log("latestPost");
 	if(latestPost.length > 0){  
 		var tblView = $.UI.create('TableView',{
 			classes: ['wfill' , 'hsize'],
+			backgroundColor: "#ffffff",
 			top:0
 		});
 		var awardData = [];

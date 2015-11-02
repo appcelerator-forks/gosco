@@ -15,10 +15,9 @@ Alloy.Globals.schooltabgroup = undefined;
 var _ = require('underscore')._;
 var API = require('api');
 var COMMON = require('common'); 
-var PUSH = require('push');
-var DBVersionControl = require('DBVersionControl'); 
-Alloy.Globals.Map = require('ti.map');
-
+var PUSH = require('push'); 
+var DBVersionControl = require('DBVersionControl');  
+var Map = (OS_IOS || OS_ANDROID) ? require('ti.map') : Ti.Map;
 /***Facebook Library***/ 
 var FACEBOOK = require('facebook');
 FACEBOOK.appid = "1636245926664883";
@@ -208,3 +207,4 @@ Alloy.Globals.SchoolLevel =  [ 'Primary School', 'Secondary School', 'College','
 Alloy.Globals.SchoolType =  [ 'Kebangsaan', 'Jenis Kebangsaan', 'Private/International','Cancel'];
 Alloy.Globals.SchoolState =  [ 'Kuala Lumpur','Selangor','Cancel'];
 
+PUSH.registerPush();

@@ -60,7 +60,8 @@ function deviceTokenSuccess(ex) {
 			    if (e.success  ) { 
 			    	/** User device token**/
 	         		Ti.App.Properties.setString('deviceToken', deviceToken); 
-					API.updateNotificationToken();
+	         		console.log("deviceToken : "+deviceToken);
+					API.getDeviceInfo();
 			    } else {
 			    	registerPush();
 			    }

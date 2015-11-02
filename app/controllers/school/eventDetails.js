@@ -117,8 +117,8 @@ function loadEventDetails(){
 			backgroundColor : "#f5f5f5", 
 		});
 		var attachmentLabel = $.UI.create('Label',{
-			text: "Homework Attachment",
-			classes : ["h5", "hsize",'wfill',"padding"]
+			text: "Events Attachment",
+			classes : ["h5", "hsize",'wfill',"padding", 'bold']
 		});
 		 
 		viewBg4.add(attachmentLabel);  
@@ -151,7 +151,7 @@ function loadEventDetails(){
 						position: gal_counter, 
 						source_id:  entry.id
 					});
-					var leftImg = entry.img_thumb;
+					var leftImg = entry.img_path;//entry.img_thumb;
 					if(leftImg == ""){
 						leftImg = "/images/default.png";
 					}
