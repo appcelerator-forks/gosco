@@ -14,10 +14,11 @@
 			<Label top="5" class="center" text="Loading" color="#ffffff" />
 		</View>
 			 
-		<View id="educationView" class="vert"  > 
-			<View class="wfill hsize padding">
-	    		<Label class="font_big themeColor" bottom="0">Available Curriculum</Label>
-	    	</View>
+		<View id="educationView" class="vert"  >  
+	    	<View class="wfill" height="35" top="5" > 
+				<Label class="padding themeColor h5 bold" left="10" top="5">Available Curriculum  </Label>
+				<ImageView id="refresh" width="30" height="30" right="10" image="/images/icon_refresh.png" /> 
+			</View>
 			<View class="wfill hfill vert" id="curriculumContainer"  /> 
 		</View>
 	</Window> 

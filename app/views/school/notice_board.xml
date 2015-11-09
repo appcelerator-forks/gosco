@@ -1,6 +1,10 @@
 <Alloy>
+	<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
+		<ActivityIndicator id="activityIndicator" />
+		<Label top="5" class="center" text="Loading" color="#ffffff" />
+	</View> 
     <ScrollView class="wfill hfill vert"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL">
-    	<View class="wfill hsize padding box vert">
+    	<View id="schoolInfo" class="wfill hsize padding box vert">
     		<View class="wfill hsize padding vert ">
     			<View class="horz wfill" height="60">
 					<View width="50" height="50" borderRadius="25"  backgroundColor="#f5f5f5"   top="5">
@@ -13,12 +17,13 @@
 	    		<Label class="h6 font_dark_grey" id="schoolTel"></Label>
     		</View>
     	</View>
-    	<View class="horz wfill" height="35">
+    	<View class="wfill" height="35">
 			<ImageView width="30" height="30" left="10" image="/images/announcement.png" />
-			<Label class="padding themeColor h5 bold" top="5">Notice Board / Announcement</Label>
+			<Label class="padding themeColor h5 bold" left="45" top="5">Notice Board / Announcement</Label>
+			<ImageView id="refresh" width="30" height="30" right="10" image="/images/icon_refresh.png" /> 
 		</View>
     	
-    	<View id="boardSv" class="wfill hsize padding box" top="0"  />
+    	<View id="boardSv" class="wfill hsize " backgroundColor="#ffffff" top="0"  />
     	 
 	</ScrollView>
 </Alloy>

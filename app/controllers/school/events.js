@@ -4,26 +4,30 @@ var educationModel = Alloy.createCollection('education');
 var eventsModel = Alloy.createCollection('events'); 
 var school_id; 
 
-var eventTbl = $.UI.create('TableView',{
-	classes: ["wfill", "hsize" ]
-});
 
  
 function init(e){
 	school_id = e.school_id; 
 	//console.log(details);
-	loadEvent(school_id);
+	loadEvent();
 }   
 
-function loadEvent(school_id){
+function loadEvent(){
 	var details = eventsModel.getLatestEventByEducation(school_id);
 	if(details.length > 0){ 
-		details.forEach(function(entry) {
-			var tblRowView = $.UI.create('TableViewRow',{
-				hasChild: true,
-				height : 70,
-				classes:["horz"],
+		COMMON.removeAllChildren($.eventSv);
+		var eventTbl = $.UI.create('TableView',{
+				classes: ["wfill", "hsize" ]
+			});
+		details.forEach(function(entry) { 
+			var tblRowView = $.UI.create('TableViewRow',{ 
+				height : 70, 
 				backgroundColor: "#ffffff",
+				source: entry.id
+			});
+			
+			var view1 = $.UI.create('View',{
+				classes: [ 'wfill',  'hsize'],  
 				source: entry.id
 			});
 			
@@ -40,12 +44,14 @@ function loadEvent(school_id){
 				source: entry.id,
 				width: 10,
 				height:65,
+				left: 0,
 				backgroundColor: statusColor
 			});
 			
 			var leftView = $.UI.create('View',{
 				classes: ['padding'  ,'vert', 'hsize'],  
-				width: 80,
+				width: 90,
+				left:10,
 				source: entry.id
 			});
 	 		
@@ -57,7 +63,7 @@ function loadEvent(school_id){
 	 			eventDate = monthFormat(entry.started) +" - "+ monthFormat(entry.ended);
 	 		}
 			var dateLbl = $.UI.create('Label',{
-				classes: [ 'hsize','h5', 'font_dark_grey'],  
+				classes: [ 'hsize','h5', 'themeColor', 'center'],  
 				text: eventDate,
 				source: entry.id
 			}); 
@@ -68,12 +74,15 @@ function loadEvent(school_id){
 				height: 70,  
 				width: 1, 
 				backgroundColor:"#dfe0e4",
-				source: entry.id
+				source: entry.id,
+				left:100,
 			});
 			 
 			var rightView = $.UI.create('View',{
-				classes: ['padding' ,'wfill' ,'vert', 'hsize'],  
-				source: entry.id
+				classes: ['padding'  ,'vert', 'hsize'],  
+				source: entry.id,
+				left:105,
+				width:"50%"
 			});
 	 
 			var titleLbl = $.UI.create('Label',{
@@ -86,17 +95,30 @@ function loadEvent(school_id){
 				text: textLimit(entry.message,40),
 				source: entry.id
 			}); **/
+			var imgView1 = $.UI.create('ImageView',{
+				image : "/images/btn-forward.png",
+				source :entry.id,
+				width : 20,
+				height : 20,
+				right: 10
+			});
+			
 			rightView.add(titleLbl);
 			//rightView.add(messageLbl); 
-			tblRowView.add(statustView);	
-			tblRowView.add(leftView);	
-			tblRowView.add(centerView);	
-    		tblRowView.add(rightView);	
+			
+			view1.add(statustView);	
+			view1.add(leftView);	
+			view1.add(centerView);	
+    		view1.add(rightView);	
+    		view1.add(imgView1);	
+    		tblRowView.add(view1);
     		addClickEvent(tblRowView); 
     	 	eventTbl.appendRow(tblRowView);
 		});
 		$.eventSv.add(eventTbl);
+		hideLoading();
 	}	
+	
 }
 
 function addClickEvent(vw){
@@ -106,6 +128,55 @@ function addClickEvent(vw){
 		var win = Alloy.createController("school/eventDetails", {event_id: res.source}).getView();  
 		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});
+}
+
+
+function syncData(){
+	var checker = Alloy.createCollection('updateChecker'); 
+	
+	var param = { 
+		"e_id"	  : school_id
+	};
+	API.callByPost({url:"getEventsList", params: param}, function(responseText){
+		 
+		var res = JSON.parse(responseText);  
+		if(res.status == "success"){  
+			var eventsAttachmentModel = Alloy.createCollection('eventsAttachment'); 
+			var arr = res.data; 
+			 
+			eventsModel.saveArray(arr); 
+			eventsAttachmentModel.saveArray(arr);
+			loadEvent();
+		} 
+	});
+	
+}
+
+
+$.refresh.addEventListener('click', function(){
+	showLoading();
+	syncData();
+});
+
+/*** private function***/
+function showLoading(){ 
+	$.activityIndicator.show();
+	$.loadingBar.opacity = 1;
+	$.loadingBar.zIndex = 100;
+	$.loadingBar.height = 120;
+	 
+	if(OS_ANDROID){ 
+		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (OS_IOS){ 
+		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+}
+
+
+function hideLoading(){
+	$.activityIndicator.hide();
+	$.loadingBar.opacity = "0";
+	$.loadingBar.height = "0"; 
 }
 
 exports.init = function(e){

@@ -144,7 +144,7 @@ function loadHomeworktDetails(){
 						position: gal_counter, 
 						source_id:  entry.id
 					});
-					var leftImg = entry.img_thumb;
+					var leftImg = entry.img_path;//entry.img_thumb;
 					if(leftImg == ""){
 						leftImg = "/images/default.png";
 					}

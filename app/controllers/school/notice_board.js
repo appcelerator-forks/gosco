@@ -50,10 +50,49 @@ function loadNoticeBoard(school_id){
 		});
 		latestPost.forEach(function(entryPost) {
 			var tblRowView = Ti.UI.createTableViewRow({
-				hasChild: true
+				 
 			});
+			
+			var view1 = $.UI.create('View',{
+				classes: [ 'wfill',  'hsize'],  
+				source: entryPost.id
+			});
+			
+			var horzView = $.UI.create('View',{
+				classes: ['horz','wfill'], 
+				source: entryPost.id,  
+				backgroundColor: "#ffffff",
+				height: 60 
+			});
+			
+			var dateViewLbl = $.UI.create('View',{
+				classes: [ 'hsize'],  
+				width:'20%',
+				source: entryPost.id
+			});
+			var dateLbl = $.UI.create('Label',{ 
+				classes: [ 'hsize','h5','themeColor','center'],  
+				text: monthFormat(entryPost.publish_date),
+				source: entryPost.id
+			});
+			dateViewLbl.add(dateLbl);
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entryPost.id,
+				width: 1,
+				backgroundColor: "#ececec"
+			});
+			
+			var imgView1 = $.UI.create('ImageView',{
+				image : "/images/btn-forward.png",
+				source :entryPost.id,
+				width : 20,
+				height : 20,
+				right: 10
+			});
+			
 			var postView = $.UI.create('View',{
-				classes: ['padding' ,'wfill','vert', 'hsize'],  
+				classes: ['small_padding' ,'wfill','vert', 'hsize'],  
 				source: entryPost.id
 			});
 			
@@ -63,7 +102,7 @@ function loadNoticeBoard(school_id){
 				source: entryPost.id
 			});
 			
-			var message = escapeSpecialCharacter(entryPost.message);
+			/**var message = escapeSpecialCharacter(entryPost.message);
 			if(message.length > 80){
 				message = message.substring(0, 80) + "..."; 
 			}
@@ -72,25 +111,50 @@ function loadNoticeBoard(school_id){
 				classes: [ 'hsize','h6'],  
 				text: message,
 				source: entryPost.id
+			});**/
+			
+			var publishView = $.UI.create('View',{
+				classes: [  ,'horz', 'hsize'], 
+				top:5,
+				width: "auto",
+				source: entryPost.id 
 			});
-			var dateLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','h6','font_light_grey'],  
-				text: monthFormat(entryPost.publish_date),
+			var publisherViewLbl = $.UI.create('View',{
+				classes: [ 'wsize','hsize'], 
+				top:0,  
+				source: entryPost.id
+			});
+			var publisherLbl = $.UI.create('Label',{
+				classes: [ 'hsize','h6','font_light_grey','left'],  
+				text: entryPost.published_by,
 				source: entryPost.id
 			});
 			
+			publisherViewLbl.add(publisherLbl); 
+			publishView.add(publisherViewLbl); 
 			postView.add(titleLbl);
-			postView.add(descLbl);
-			postView.add(dateLbl);
-			tblRowView.add(postView);
+			postView.add(publishView);
+			//postView.add(descLbl);
+			//postView.add(dateLbl);
+			horzView.add(dateViewLbl);
+			horzView.add(statustView);
+			horzView.add(postView);
+			view1.add(horzView);
+			view1.add(imgView1); 
+			tblRowView.add(view1);
 			postData.push(tblRowView);
-			addClickEvent(postView);  
+			addClickEvent(view1);  
 		});
 		tblView.setData(postData);
 		$.boardSv.add(tblView);
 	} 	
+	hideLoading();
 }
 
+$.refresh.addEventListener('click', function(){
+	showLoading();
+	syncData();
+});
 
 function addClickEvent(vw){
 	vw.addEventListener('click', function(e){ 
@@ -101,6 +165,32 @@ function addClickEvent(vw){
 		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});
 }
+
+$.schoolInfo.addEventListener('click', function(){
+	var win = Alloy.createController("educationDetails", {e_id:  school_id}).getView();  
+	Alloy.Globals.schooltabgroup.activeTab.open(win); 
+});
+/*** private function***/
+function showLoading(){ 
+	$.activityIndicator.show();
+	$.loadingBar.opacity = 1;
+	$.loadingBar.zIndex = 100;
+	$.loadingBar.height = 120;
+	 
+	if(OS_ANDROID){ 
+		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (OS_IOS){ 
+		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+}
+
+
+function hideLoading(){
+	$.activityIndicator.hide();
+	$.loadingBar.opacity = "0";
+	$.loadingBar.height = "0"; 
+}
+
 
 exports.init = function(e){
  	init(e);

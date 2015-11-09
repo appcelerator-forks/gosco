@@ -3,7 +3,7 @@ CHECKER CONFIG
 ID       type Name
 ------------------------------------
 1		get School List	 
-2 		get Tuition List 	  
+2 		get banner List 	
 ************************************/
 
 exports.definition = {

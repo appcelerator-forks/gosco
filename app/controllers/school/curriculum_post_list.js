@@ -50,7 +50,7 @@ function closeWindow(){
 function displayLatestBoard(){
 	var latestPost = curriculumPostModel.getLatestPost(c_id,5);  
 	var boardPost = $.UI.create('View',{
-		classes: ['padding' ,'box', 'hsize'], 
+		classes: [ 'vert', 'hsize'], 
 	});
 	
 	COMMON.hideLoading();
@@ -58,62 +58,95 @@ function displayLatestBoard(){
 	if(latestPost.length > 0){ 
 		 
 		latestPost.forEach(function(entryPost) {
-			
-			var postView = $.UI.create('View',{
-				classes: ['padding' ,'wfill','vert', 'hsize'],  
+			var view1 = $.UI.create('View',{
+				classes: [ 'wfill',  'hsize'],  
 				source: entryPost.id
 			});
 			
-			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_regular'],  
-				text: entryPost.title,
-				source: entryPost.id
+			var horzView = $.UI.create('View',{
+				classes: ['horz','wfill'], 
+				source: entryPost.id,  
+				backgroundColor: "#ffffff",
+				height: 60 
 			});
-			var descLbl = $.UI.create('Label',{ 
-				classes: [ 'hsize','font_12','font_light_grey'],  
-				text: entryPost.message,
-				source: entryPost.id
-			});
-			
-			var publishView = $.UI.create('View',{
-				classes: [ 'wfill','horz', 'hsize'], 
-				top:5,
-				source: entryPost.id 
-			});
-			var publisherViewLbl = $.UI.create('View',{
-				classes: [ 'hsize'], 
-				top:0, 
-				width:'60%',
-				source: entryPost.id
-			});
-			var publisherLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12','themeColor','left'],  
-				text: entryPost.published_by,
-				source: entryPost.id
-			});
-			
-			publisherViewLbl.add(publisherLbl);
 			
 			var dateViewLbl = $.UI.create('View',{
-				classes: [ 'hsize'], 
-				top:0, 
-				width:'auto',
+				classes: [ 'hsize'],  
+				width:'20%',
 				source: entryPost.id
 			});
 			var dateLbl = $.UI.create('Label',{
-				classes: [ 'hsize','font_12','themeColor','right'],  
+				classes: [ 'hsize','h5','themeColor','center' ],  
 				text: monthFormat(entryPost.publish_date),
 				source: entryPost.id
 			});
 			dateViewLbl.add(dateLbl);
-			publishView.add(publisherViewLbl);
-			publishView.add(dateViewLbl);
+			var statustView = $.UI.create('View',{
+				classes: ['hfill'],
+				source: entryPost.id,
+				width: 1,
+				backgroundColor: "#ececec"
+			});
+			
+			
+			var postView = $.UI.create('View',{
+				classes: ['small_padding' ,'vert', 'hsize'],  
+				source: entryPost.id,
+				width: "60%", 
+			});
+			 
+			
+			var imgView1 = $.UI.create('ImageView',{
+				image : "/images/btn-forward.png",
+				source :entryPost.id,
+				width : 20,
+				height : 20,
+				right: 10
+			});
+			
+			
+			var titleLbl = $.UI.create('Label',{
+				classes: [ 'hsize','h5','themeColor'],  
+				text: entryPost.title,
+				source: entryPost.id
+			});
+			/**var descLbl = $.UI.create('Label',{ 
+				classes: [ 'hsize','h6','font_light_grey'],  
+				text: entryPost.message,
+				source: entryPost.id
+			});**/
+			
+			var publishView = $.UI.create('View',{
+				classes: [  ,'horz', 'hsize'], 
+				top:5,
+				width: "auto",
+				source: entryPost.id 
+			});
+			var publisherViewLbl = $.UI.create('View',{
+				classes: [ 'wsize','hsize'], 
+				top:0,  
+				source: entryPost.id
+			});
+			var publisherLbl = $.UI.create('Label',{
+				classes: [ 'hsize','h6','font_light_grey','left'],  
+				text: entryPost.published_by,
+				source: entryPost.id
+			});
+			
+			publisherViewLbl.add(publisherLbl); 
+			publishView.add(publisherViewLbl); 
 			
 			postView.add(titleLbl);
-			postView.add(descLbl);
+			//postView.add(descLbl);
 			postView.add(publishView);
-			boardPost.add(postView);
-			addClickEvent(postView); 
+			horzView.add(dateViewLbl);
+			horzView.add(statustView);
+			horzView.add(postView);
+			view1.add(horzView);
+			view1.add(imgView1);
+			boardPost.add(view1);
+			boardPost.add(separateHozLine());
+			addClickEvent(view1); 
 		}); 
 		$.latestView.add(boardPost);
 	}else{
@@ -130,6 +163,14 @@ function displayLatestBoard(){
 		$.latestView.add(boardPost);
 	} 
 }
+
+function separateHozLine(){
+	return seperatorLine = Titanium.UI.createView({ 
+		backgroundColor: "#D5D5D5",
+		height:1,  
+		width:Ti.UI.FILL
+	});
+} 
 
 function addClickEvent(vw){
 	vw.addEventListener('click', function(e){ 

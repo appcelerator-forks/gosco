@@ -49,11 +49,11 @@ function syncData(){
 }
 
 function populateMap(){ 
-	if(details.latitude != null && details.longitude != null) {  
+	if((details.latitude != null && details.longitude != null) && (details.latitude != "" && details.longitude != "")) {  
 		var annotations = [
 		    Map.createAnnotation({
-		        latitude:  details.longitude,
-		        longitude:details.latitude,
+		        latitude:  details.latitude,
+		        longitude:details.longitude,
 		        title:details.name, 
 		        animate: true,
 		        image: '/images/marker.png',
@@ -63,8 +63,8 @@ function populateMap(){
 		var mapview = Map.createView({
 		    mapType: Map.NORMAL_TYPE,
 		    region: {
-		        latitude:details.longitude,
-		        longitude:details.latitude,
+		        latitude:details.latitude,
+		        longitude:details.longitude,
 		        latitudeDelta:.05,
 		        longitudeDelta:.05
 		    },
@@ -96,10 +96,10 @@ function showDetails(){
 			add2 = add2  +"\r\n";
 		}
 		$.educationAddress.text = add2; 
-		$.educationLocation.text = details.longitude +", "+ details.latitude;
+		$.educationLocation.text = details.latitude +", "+ details.longitude;
 	 
-		$.educationTel.text = "TEL : " +details.contact_no  ; 
-		$.educationFax.text = "FAX : " +details.fax_no  ; 
+		$.educationTel.text = "TEL : " +details.contact_no || "N/A" ; 
+		$.educationFax.text = "FAX : " + details.fax_no || "N/A"  ;
 		phoneArr.push(details.contact_no);
 		 
 	}
@@ -171,7 +171,7 @@ function direction2here(){
 	    var latitude = e.coords.latitude; 
 	 	//console.log('http://maps.google.com/maps?saddr='+latitude+','+longitude+'&daddr='+details.latitude+','+details.longitude);
 	     
-		var url = 'geo:'+latitude+','+longitude+"?q="+details.name+" (" + details.add1 + "\r\n"+ add2 +  details.postcode +", " + details.city +"\r\n"+  details.state + ")";
+		var url = 'geo:'+latitude+','+longitude+"?q="+details.name+" (" + details.address   +  details.postcode +"\r\n"+  details.state + ")";
 		  
 		   
 			if (Ti.Android){

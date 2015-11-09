@@ -25,8 +25,7 @@ function createList(){
 	 
 	if(details.length > 0){ 
 		details.forEach(function(entry) { 
-    		var tblRowView = Ti.UI.createTableViewRow({
-				hasChild: true,
+    		var tblRowView = Ti.UI.createTableViewRow({ 
 				c_id: entry.id,
 				height: 50,
 				left: 10,
@@ -58,7 +57,7 @@ function createList(){
 					c_id: entry.id 
 				});
 				var addBtn = Ti.UI.createImageView({
-					width: 25,
+					width: 30,
 					height: 25,
 					c_id: entry.id,
 					isAdd:1, 
@@ -79,6 +78,7 @@ function createList(){
 		curTable.appendRow(tblRowView); 
 	}
 	 $.curriculumContainer.add(curTable);
+	 hideLoading()
 }
 
 function selectCurriculum(e){
@@ -128,6 +128,53 @@ searchBar.addEventListener('blur', function(e){
 	
 });
 
+function syncData(){ 
+	var param = { 
+		"e_id"	  : school_id
+	};
+	API.callByPost({url:"getCurriculumList", params: param}, function(responseText){
+		 
+		var res = JSON.parse(responseText);  
+		if(res.status == "success"){   
+			var arr = res.data;  
+			curriculumModel.saveArray(arr); 
+			
+			$.curriculumContainer.opacity = 0;
+			COMMON.removeAllChildren($.curriculumContainer);   
+			$.curriculumContainer.opacity = 1;
+			
+			createList();
+		} 
+	});
+	
+}
+
+$.refresh.addEventListener('click', function(){
+	showLoading();
+	syncData();
+});
+
+
+/*** private function***/
+function showLoading(){ 
+	$.activityIndicator.show();
+	$.loadingBar.opacity = 1;
+	$.loadingBar.zIndex = 100;
+	$.loadingBar.height = 120;
+	 
+	if(OS_ANDROID){ 
+		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (OS_IOS){ 
+		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+}
+
+
+function hideLoading(){
+	$.activityIndicator.hide();
+	$.loadingBar.opacity = "0";
+	$.loadingBar.height = "0"; 
+}
 function init(){
 	createList();
 } 

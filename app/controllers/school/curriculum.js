@@ -31,13 +31,15 @@ function loadCurriculumList(school_id, isShowRemove){
  
 	if(details.length > 0){ 
 		details.forEach(function(entry) { 
-    		var tblRowView = Ti.UI.createTableViewRow({
-				hasChild: true,
+    		var tblRowView = Ti.UI.createTableViewRow({ 
 				height: 50, 
 				c_id: entry.c_id,
 				kc_id: entry.id
 			}); 
-			
+			var view1 = $.UI.create('View',{
+				classes: [ 'wfill',  'hsize'],  
+				source: entry.id
+			});
 			var titleView = $.UI.create('View', { 
 				classes: ['horz', 'wfill', 'hsize'],
 				height: Ti.UI.SIZE, 
@@ -67,9 +69,19 @@ function loadCurriculumList(school_id, isShowRemove){
 				c_id: entry.c_id,
 				kc_id: entry.id
 			});
+			
+			var imgView1 = $.UI.create('ImageView',{
+				image : "/images/btn-forward.png",
+				source :entry.id,
+				width : 20,
+				height : 20,
+				right: 10
+			});
 			titleView.add(cocuImg);
 			titleView.add(titleLbl);
-			tblRowView.add(titleView);
+			view1.add(titleView);
+			view1.add(imgView1);
+			tblRowView.add(view1);
 			tblRowView.addEventListener('click',readCurriculumDetails);  
 			if(isShowRemove == 1){ 
 				var deleteView = Ti.UI.createView({ 

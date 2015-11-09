@@ -23,7 +23,7 @@ function init(){
 	
 	for (var i=0; i< items.length; i++) {  
 		adImage = Ti.UI.createImageView({
-			image: items[i].img_path,
+			image: items[i].img_path,//items[i].img_thumb,
 			width:"100%",
 			top: 50,
 		});

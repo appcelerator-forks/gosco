@@ -33,7 +33,7 @@
 	    	</View>
 			<View class="vert wfill hsize" top="0" >
 				<Label class="padding themeColor font_big">Curriculum Latest News</Label>
-				<ScrollView class=" wfill hsize vert" id="latestView" scrollType="vertical" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL"/>
+				<ScrollView class=" wfill hfill vert" id="latestView" backgroundColor="#ffffff" scrollType="vertical" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL"/>
 			</View> 
 		</ScrollView>
 	 </Window>

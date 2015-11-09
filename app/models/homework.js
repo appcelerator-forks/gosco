@@ -60,10 +60,11 @@ exports.definition = {
                 return arr;
 			},
 		 
-            getHomeworkByClass :  function(ec_id, searchKey){
+            getHomeworkByClass :  function(ec_id, searchKey,offset){
 				var collection = this;
-                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE ec_id='"+ ec_id+ "'  ORDER BY created DESC " ;
- 
+				var limit =10;
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE ec_id='"+ ec_id+ "'  ORDER BY created DESC, id DESC  LIMIT "+offset + ", "+limit ;
+ 			 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
                 	db.file.setRemoteBackup(false);

@@ -29,7 +29,7 @@ exports.definition = {
 		_.extend(Collection.prototype, {
 			getLatestPostByEducation : function(e_id,postType){
 				var collection = this;
-                var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE status !='3' AND type ='"+postType+"' AND e_id='"+e_id+"' ORDER BY publish_date DESC LIMIT 0,10";
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE status ='1' AND type ='"+postType+"' AND (e_id='"+e_id+"' OR e_id IS NULL) ORDER BY publish_date DESC, id DESC LIMIT 0,10";
                 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){

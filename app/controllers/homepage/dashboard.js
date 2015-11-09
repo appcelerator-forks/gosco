@@ -1,10 +1,12 @@
 var args = arguments[0] || {};
-COMMON.construct($);
+COMMON.construct($); 
 //Alloy.Globals.navWin = $.mainWin;
 var kidsModel = Alloy.createCollection('kids'); 
-var postModel = Alloy.createCollection('post'); 
-  
-function init(e){
+var postModel = Alloy.createCollection('post');  
+var post_element_model = Alloy.createCollection('post_element');  
+var educationModel = Alloy.createCollection('education'); 
+function init(e){ 
+	showLoading();
 	displayLatestBoard();  
 	displayMyKids();  
 	if(OS_ANDROID){
@@ -21,22 +23,46 @@ function displayLatestBoard(){
 	});
 	if(latestPost.length > 0){ 
 		latestPost.forEach(function(entryPost) {
-			var postView = $.UI.create('View',{
-				classes: ['small_padding' ,'wfill','vert', 'hsize'],  
+			var schThumb= "/images/full_logo.png";
+			
+			if(entryPost.e_id != null || entryPost.e_id != ""){
+				var school = educationModel.getSchoolById(entryPost.e_id); 
+				if(school.img_path != ""){
+					schThumb = school.img_path;
+				} 
+			} 
+			var view1 = $.UI.create('View',{
+				classes: [ 'wfill',  'hsize'],  
 				source: entryPost.id
 			});
 			
+			var schImg = $.UI.create('ImageView', {  
+				defaultImage: "/images/full_logo.png",
+				image: schThumb,
+				left:5, 
+				height:30,
+				width:30,
+				borderRadius: 15,
+				source: entryPost.id 
+			});
+			
+			var postView = $.UI.create('View',{
+				classes: ['small_padding'  ,'vert', 'hsize'],  
+				source: entryPost.id,
+				left:45
+			});
+			
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','h5', 'themeColor','bold'],  
+				classes: [ 'hsize','h4', 'themeColor','bold'],  
 				text: entryPost.title,
 				source: entryPost.id
 			});
-			var descLbl = $.UI.create('Label',{ 
+			/**var descLbl = $.UI.create('Label',{ 
 				classes: [ 'hsize','h6'],  
 				text: entryPost.message,
 				source: entryPost.id
 			});
-			
+			**/
 			var publishView = $.UI.create('View',{
 				classes: [ 'wfill','horz', 'hsize'], 
 				top:5,
@@ -72,15 +98,19 @@ function displayLatestBoard(){
 			publishView.add(dateViewLbl);
 			
 			postView.add(titleLbl);
-			postView.add(descLbl);
+			//postView.add(descLbl);
 			postView.add(publishView);
-			postView.add(separateHozLine());
-			boardPost.add(postView);
+			
+			view1.add(schImg);
+			view1.add(postView);
+			boardPost.add(view1);
+			boardPost.add(separateHozLine());
 			addClickEvent(postView); 
 		});
 		
 		$.latestBoardView.add(boardPost);
 	} 
+	hideLoading();
 }
 
 function separateHozLine(){
@@ -149,9 +179,62 @@ var refreshKids = function(){
 	displayMyKids(); 
 };
 
+function syncData(){ 
+	//COMMON.showLoading();
+	COMMON.removeAllChildren($.latestBoardView); 
+	/***Check school updates***/
+	var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
+	var ks = kidsEducationModel.getSchoolList();
+	if(ks.length > 0){   
+		ks.forEach(function(entry) {
+			 
+			API.getSchoolPost(entry.e_id);
+			var param = { 
+				"e_id"	  : entry.e_id
+			};
+			
+			API.callByPost({url:"getSchoolPost", params: param}, function(responseText){ 
+				var res = JSON.parse(responseText);  
+				if(res.status == "success"){ 
+					var postData = res.data; 
+					 if(postData != ""){ 
+					 	 var post = res.data.post;   
+						 postModel.addPost(post);  
+						 post_element_model.addElement(post);  
+						 displayLatestBoard(); 
+					 }  
+				} 
+			});
+		});
+	}
+	
+}
+
+$.refresh.addEventListener('click', function(){
+	showLoading();
+	syncData();
+});
   
 Ti.App.addEventListener('refreshKids',refreshKids);
 
+function showLoading(){ 
+	$.activityIndicator.show();
+	$.loadingBar.opacity = 1;
+	$.loadingBar.zIndex = 100;
+	$.loadingBar.height = 120;
+	 
+	if(OS_ANDROID){ 
+		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (OS_IOS){ 
+		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+}
+
+function hideLoading(){
+	$.activityIndicator.hide();
+	$.loadingBar.opacity = "0";
+	$.loadingBar.height = "0"; 
+}
   
 exports.init = function(e){
  	init(e);

@@ -7,6 +7,14 @@ var homeworkAttachmentModel = Alloy.createCollection('homeworkAttachment');
 var educationClassModel = Alloy.createCollection('education_class');
 var searchKey = "";
 var ec_id; 
+var offset = 0;
+if(OS_IOS){
+	var viewTolerance = 550;
+}else{
+	var viewTolerance = 700;
+}
+var lastDistance = 0;
+var nextDistance = viewTolerance;
 
 var pageTbl = $.UI.create('TableView',{
 	classes: ["wfill", "hfill", "padding", "box"]
@@ -14,13 +22,13 @@ var pageTbl = $.UI.create('TableView',{
  
 function init(e){
 	ec_id = e.ec_id;  
-	loadHomework(ec_id);
+	loadHomework();
 }   
 
-function loadHomework(ec_id){ 
+function loadHomework(){ 
 	//COMMON.hideLoading(); 
-	details = homeworkModel.getHomeworkByClass(ec_id,searchKey);
- 	COMMON.removeAllChildren($.homeworkSv);  
+	details = homeworkModel.getHomeworkByClass(ec_id,searchKey, offset);
+ 	//COMMON.removeAllChildren($.homeworkSv);  
 	if(details.length > 0){ 
 		var count =1;
 		var currentDate;
@@ -148,12 +156,75 @@ function loadHomework(ec_id){
 			} 
 			count++; 
 		});
-	  
+	  	offset += 10;
 	}else{
 	 
 	}
+	hideLoading(); 	
 }
 
+
+function syncData(){ 
+	var param = { 
+		"ec_id"	  : ec_id
+	};
+	API.callByPost({url:"getHomeworkList", params: param}, function(responseText){
+		 
+		var res = JSON.parse(responseText);  
+		if(res.status == "success"){  
+			var homeworkModel = Alloy.createCollection('homework'); 
+			var homeworkAttachmentModel = Alloy.createCollection('homeworkAttachment'); 
+			var arr = res.data;  
+			homeworkModel.saveArray(arr);  
+			homeworkAttachmentModel.saveArray(arr);
+			
+			$.homeworkSv.opacity = 0;
+			COMMON.removeAllChildren($.homeworkSv);  
+			offset =0;
+			$.homeworkSv.opacity = 1;
+			loadHomework();
+		} 
+	});
+	
+}
+
+
+$.refresh.addEventListener('click', function(){
+	showLoading();
+	syncData();
+});
+
+
+$.homeworkSv.addEventListener("scroll", function(e){ 
+	lastDistance = e.y;   
+	 
+	if(lastDistance >= nextDistance){ 
+		nextDistance += viewTolerance; 
+		loadHomework();
+	}  
+	 
+});
+
+/*** private function***/
+function showLoading(){ 
+	$.activityIndicator.show();
+	$.loadingBar.opacity = 1;
+	$.loadingBar.zIndex = 100;
+	$.loadingBar.height = 120;
+	 
+	if(OS_ANDROID){ 
+		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (OS_IOS){ 
+		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+}
+
+
+function hideLoading(){
+	$.activityIndicator.hide();
+	$.loadingBar.opacity = "0";
+	$.loadingBar.height = "0"; 
+}
 function addClickEvent(e){ 
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl);   

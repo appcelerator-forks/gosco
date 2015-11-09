@@ -3,9 +3,12 @@
 		<ActivityIndicator id="activityIndicator" />
 		<Label top="5" class="center" text="Loading" color="#ffffff" />
 	</View>  
-	<View class="horz wfill" height="35" top="5">
-		<ImageView width="30" height="30" left="10" image="/images/work.png" />
-		<Label class="padding themeColor h5 bold" top="5">Class Homework List</Label> 
-	</View> 
+	 
+	<View class="wfill" height="35" top="5" >
+			<ImageView width="30" height="30" left="10" image="/images/work.png" />
+			<Label class="padding themeColor h5 bold" left="45" top="5">Class Homework List</Label>
+			<ImageView id="refresh" width="30" height="30" right="10" image="/images/icon_refresh.png" /> 
+	</View>
+	
 	<ScrollView id="homeworkSv" class="wfill hfill vert"  top="40"  contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" />  
 </Alloy>

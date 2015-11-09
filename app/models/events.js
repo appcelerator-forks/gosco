@@ -25,9 +25,9 @@ exports.definition = {
 	},
 	extendCollection: function(Collection) {
 		_.extend(Collection.prototype, {
-			getLatestEventByEducation : function(e_id){
+			getLatestEventByEducation : function(e_id,offset){
 				var collection = this;
-                var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE status !='3'  AND e_id='"+e_id+"' ORDER BY started DESC LIMIT 0,10";
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE status !='3'  AND e_id='"+e_id+"' ORDER BY started DESC, id DESC LIMIT 0,20";
                 
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){
