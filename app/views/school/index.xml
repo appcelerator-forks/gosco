@@ -2,12 +2,12 @@
 	<TabGroup id="school_tg" tabsTintColor="#10844D" tabsBackgroundImage="/images/kid_menu_bar1.png" onOpen="doOpen">
 		<Tab  title="Notice Board" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Notice Board" backgroundColor="#F1F1F1">
-				<LeftNavButton>
+				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View> 
 			    </LeftNavButton>
-			    <RightNavButton>
+			    <RightNavButton platform="ios">
 			        <View onClick="removeEducation">
 			        	<ImageView right='10'  width="25" height="25" image="/images/remove.png" />  
 			        </View>
@@ -17,7 +17,7 @@
 		</Tab>
 		<Tab color="white" title="Events" icon="/images/icons/icon_events.png" activeIcon="/images/icons/icon_events_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="School Events" backgroundColor="#F1F1F1">
-				<LeftNavButton>
+				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View> 
@@ -27,7 +27,7 @@
 		</Tab>
 		<Tab title="Homework" icon="/images/icons/icon_homeworks.png" activeIcon="/images/icons/icon_homeworks_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Homework" backgroundColor="#F1F1F1">
-				<LeftNavButton>
+				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View> 
@@ -37,7 +37,7 @@
 		</Tab>
 		<Tab title="Awards" icon="/images/icons/icon_awards.png" activeIcon="/images/icons/icon_awards_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="School Award" backgroundColor="#F1F1F1">
-				<LeftNavButton>
+				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">
 			         	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View>
@@ -47,7 +47,7 @@
 		</Tab>
 		<Tab title="Curriculum" icon="/images/icons/icon_coccurricula.png" activeIcon="/images/icons/icon_coccurricula_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Curriculum" id="curriculum_win" backgroundColor="#F1F1F1">
-				<LeftNavButton>
+				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  
 			        </View> 

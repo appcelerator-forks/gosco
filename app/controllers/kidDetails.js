@@ -219,12 +219,18 @@ function loadKidsSchool(){
 }
 
 function viewSchoolDetails(e){
+	showLoading();
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl); 
 	Ti.App.Properties.setString('current_school',  res.school);   
 	var win = Alloy.createController("school/index",{school_id: res.school, ke_id: res.source, ec_id:res.ec_id}).getView();
 	//Alloy.Globals.tabgroup.activeTab.open(win);
+  
 	openModal(win);
+	
+	setTimeout(function(){
+		hideLoading();
+	},2000);
 	//COMMON.openWindow(win);
 } 
 
@@ -291,6 +297,27 @@ var refreshKids = function(){
 	init(); 
 };
 
+
+function showLoading(){ 
+	$.activityIndicator.show();
+	$.loadingBar.opacity = 1;
+	$.loadingBar.zIndex = 100;
+	$.loadingBar.height = 120;
+	 
+	if(OS_ANDROID){ 
+		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
+	}else if (OS_IOS){ 
+		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
+	}  
+}
+
+function hideLoading(){
+	$.activityIndicator.hide();
+	$.loadingBar.opacity = "0";
+	$.loadingBar.height = "0"; 
+}
+  
+  
 Ti.App.addEventListener('refreshKidsDetails',refreshKids);
 Ti.App.addEventListener('selectClass',selectClass);
 Ti.App.addEventListener('selectSchool',selectSchool);

@@ -49,7 +49,8 @@ function loadPostDetails(){
 	});
  
 	dateView.add(authorDateView);
-	$.myContentView.add(dateView);		 
+	$.myContentView.add(dateView);		
+	console.log(details); 
 	details.forEach(function(entry) {
 		var msg = escapeSpecialCharacter(entry.element); 
 		if(entry.type == "1"){

@@ -12,12 +12,12 @@ function init(e){
 	$.schoolAddress.text = details.address;
 	$.schoolTel.text = details.contact_no;
 	$.thumbPreview.image = details.img_path; 
-	loadNoticeBoard(school_id);
-	syncData(school_id);
+	//loadNoticeBoard(school_id);
+	syncData();
 }  
 
 
-function syncData(school_id){
+function syncData(){
 	var param = { 
 		"e_id"	  : school_id
 	};
@@ -30,10 +30,13 @@ function syncData(school_id){
 			 	 var post = res.data.post;   
 				 postModel.addPost(post);  
 				 post_element_model.addElement(post);  
-				 loadNoticeBoard(school_id); 
+				 
 			 } 
 			
 		} 
+		loadNoticeBoard(school_id);
+	}, function(){
+		loadNoticeBoard(school_id);
 	});
 	
 }

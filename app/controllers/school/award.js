@@ -8,11 +8,11 @@ var school_id;
 function init(e){
 	school_id = e.school_id;  
 	setTimeout(function(){
-		loadNoticeBoard(); 
+		loadAwardBoard(); 
 	},500); 
 	
 }   
-function loadNoticeBoard(){
+function loadAwardBoard(){
 	var latestPost = postModel.getLatestPostByEducation(school_id,2); 
   	console.log("latestPost");
 	if(latestPost.length > 0){  
@@ -99,6 +99,7 @@ function loadNoticeBoard(){
 		});
 		
 		tblView.setData(awardData);
+		COMMON.removeAllChildren($.awardSv);
 		$.awardSv.add(tblView);
 	} 	
 	hideLoading(); 
@@ -109,15 +110,16 @@ function syncData(){
 		"e_id"	  : school_id
 	};
 	API.callByPost({url:"getSchoolPost", params: param}, function(responseText){
-		 
+		 console.log("getSchoolPost CALLED");
 		var res = JSON.parse(responseText);  
 		if(res.status == "success"){  
 			var postData = res.data; 
+			console.log(postData);
 			if(postData != ""){ 
 				var post = res.data.post;   
 				postModel.addPost(post);  
 				postElementModel.addElement(post);  
-				loadNoticeBoard(); 
+				loadAwardBoard(); 
 			}   
 		} 
 	});

@@ -8,24 +8,21 @@ init();
 function init(){   
 	$.noticeBoardDetailsView.init({school_id:school_id}); 
 	
-	setTimeout(function(){
+	//setTimeout(function(){
 		$.eventsDetailsView.init({school_id:school_id}); 
-	},1000);
-	setTimeout(function(){
+	//},1000);
+	//setTimeout(function(){
 		$.curriculumDetailsView.init({school_id:school_id}); 
-	},1500);
+	//},1300);
 	
-	setTimeout(function(){
+	//setTimeout(function(){
 		$.awardDetailsView.init({school_id:school_id}); 
-	},2000);
+	//},1600);
 	
-	setTimeout(function(){
+	//setTimeout(function(){
+		API.getHomeworkList(ec_id,1);
 		$.homeworkDetailsView.init({ec_id:ec_id});
-	},2500);
-	
-	
-	
-	API.getHomeworkList(ec_id,1);
+	//},2000); 
 }
 
 $.backToHome = function(){

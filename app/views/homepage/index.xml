@@ -1,7 +1,14 @@
 <Alloy> 
 	<TabGroup id="tabGroup"  tabsTintColor="#10844D"  onOpen="doOpen" tabsBackgroundImage="/images/kid_menu_bar1.png">
 		<Tab id="dashboardTab"  tintColor="black" title="Dashboard" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Require id="dashboardDetailsView" src="homepage/dashboard" ></Require> 
+			<Window id="win1" title="Dashboard" backgroundColor="#F1F1F1" > 
+				<LeftNavButton platform="ios">
+				    <View id="btnLogout" left="0"  width="30" height="35">
+				     	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
+				    </View>
+				</LeftNavButton> 
+				<Require id="dashboardDetailsView" src="homepage/dashboard" ></Require> 
+			</Window>
 		</Tab>
 		<Tab color="white" title="School" icon="/images/icons/icon_school.png" activeIcon="/images/icons/icon_school_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="School" backgroundColor="#F1F1F1" > 

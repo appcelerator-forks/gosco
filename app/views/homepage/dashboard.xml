@@ -1,10 +1,5 @@
 <Alloy> 
-	<Window id="win1" title="Dashboard" backgroundColor="#F1F1F1" > 
-		<LeftNavButton platform="ios">
-		    <View id="btnLogout" left="0"  width="30" height="35">
-		     	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
-		    </View>
-		</LeftNavButton> 
+	
 		<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
 			<ActivityIndicator id="activityIndicator" />
 			<Label top="5" class="center" text="Loading" color="#ffffff" />
@@ -26,5 +21,5 @@
 				<ImageView onClick="addKid"  width="70" height="70" image="/images/home_add.png" />
 			</View>
 		</View> 
-	</Window>
+	
 </Alloy>

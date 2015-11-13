@@ -111,7 +111,7 @@ function loadHomeworktDetails(){
 		});
 		var attachmentLabel = $.UI.create('Label',{
 			text: "Homework Attachment",
-			classes : ["h5", "hsize",'wfill',"padding"]
+			classes : ["h5", "hsize",'wfill',"padding",'bold']
 		});
 		 
 		viewBg4.add(attachmentLabel);  
