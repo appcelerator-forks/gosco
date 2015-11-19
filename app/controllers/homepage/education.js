@@ -161,13 +161,23 @@ Ti.App.addEventListener('filterList',filterList);
 
 function createSchoolList(){
 	COMMON.removeAllChildren(schContainer);
-	var schTable = Ti.UI.createTableView({
-		height:Ti.UI.FILL,
-		width: Ti.UI.FILL,
-		backgroundColor: "#ffffff",
-		separatorColor : "#10844D",
-		search: searchBar
-	});
+	if(OS_ANDROID){
+		var schTable = Ti.UI.createTableView({
+			height:Ti.UI.FILL,
+			width: Ti.UI.FILL,
+			backgroundColor: "#ffffff",
+			separatorColor : "#10844D",
+			search: searchBar
+		});
+	}else{
+		var schTable = Ti.UI.createTableView({
+			height:Ti.UI.FILL,
+			width: Ti.UI.FILL,
+			backgroundColor: "#ffffff",
+			separatorColor : "#10844D" 
+		});
+	}
+	
 	var data=[]; 
 	var counter = 0;
     

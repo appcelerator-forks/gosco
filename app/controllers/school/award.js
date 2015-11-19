@@ -131,7 +131,7 @@ function addClickEvent(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl); 
 		 
-		var win = Alloy.createController("postDetails", {p_id: res.source}).getView();
+		var win = Alloy.createController("postDetails", {p_id: res.source, from: "school"}).getView();
 		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});
 }

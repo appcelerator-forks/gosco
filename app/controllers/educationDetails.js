@@ -15,7 +15,7 @@ function init(){
 
 for (var i = 0; i < contacts.length; i++) {
 	var phone = contacts[i].phone; 
-    var workPhone = phone.work; 
+    var workPhone = phone.work || null; 
     if(workPhone != null && workPhone[0] == details.contact_no ){
     	isAddedToContact = "1";
     	$.add2contact.title = "Already added to contact";

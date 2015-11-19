@@ -6,6 +6,7 @@ var post_element_model = Alloy.createCollection('post_element');
 var school_id; 
 
 function init(e){
+	showLoading();
 	school_id = e.school_id;  
 	var details = educationModel.getSchoolById(school_id);
 	$.schoolName.text = details.name;
@@ -99,9 +100,14 @@ function loadNoticeBoard(school_id){
 				source: entryPost.id
 			});
 			
+			var title = entryPost.title;
+			if(title.trim() != "" &&  title.trim() != null){
+				title = title.replace("&quot;", "'"); 
+			}
+			
 			var titleLbl = $.UI.create('Label',{
 				classes: [ 'hsize','h5','bold','themeColor'],  
-				text: entryPost.title,
+				text: title,
 				source: entryPost.id
 			});
 			
@@ -164,7 +170,7 @@ function addClickEvent(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl); 
 		 
-		var win = Alloy.createController("postDetails", {p_id: res.source}).getView();
+		var win = Alloy.createController("postDetails", {p_id: res.source, from: "school"}).getView();
 		Alloy.Globals.schooltabgroup.activeTab.open(win);
 	});
 }

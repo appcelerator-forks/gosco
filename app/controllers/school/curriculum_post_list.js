@@ -177,7 +177,7 @@ function addClickEvent(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl); 
 		 
-		var win = Alloy.createController("postDetails", {p_id: res.source, isCurriculum: "1", showHeader : showHeader}).getView(); 
+		var win = Alloy.createController("postDetails", {p_id: res.source, isCurriculum: "1", showHeader : showHeader,  from: "school"}).getView(); 
 		//COMMON.openWindow(win); 
 		if(showHeader == "1"){
 			openModal(win);

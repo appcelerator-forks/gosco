@@ -1,5 +1,5 @@
 <Alloy> 
-	<TabGroup id="tabGroup"  tabsTintColor="#10844D"  onOpen="doOpen" tabsBackgroundImage="/images/kid_menu_bar1.png">
+	<TabGroup id="tabGroup"  tabsTintColor="#10844D"  onOpen="doOpen" backgroundColor="#000000"  >
 		<Tab id="dashboardTab"  tintColor="black" title="Dashboard" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window id="win1" title="Dashboard" backgroundColor="#F1F1F1" > 
 				<LeftNavButton platform="ios">

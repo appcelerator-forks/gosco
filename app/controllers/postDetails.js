@@ -5,7 +5,7 @@ var postElementModel;
 var post_id = args.p_id  || "";
 var isCurriculum = args.isCurriculum  || "";  
 var showHeader = args.showHeader || "";
-
+var from = args.from || ""; 
 if(showHeader == "1"){
 	$.showHeader.visible = true;
 	$.showHeader.height = 50;
@@ -25,7 +25,7 @@ var details = postElementModel.getListByPost(post_id);
 loadPostDetails();
 function loadPostDetails(){
 	var titleLabel = $.UI.create('Label',{
-		text: postDetails.title,
+		text: escapeSpecialCharacter(postDetails.title),
 		classes : ["news_title", "themeColor"]
 	});
 	$.myContentView.add(titleLabel);
@@ -50,7 +50,7 @@ function loadPostDetails(){
  
 	dateView.add(authorDateView);
 	$.myContentView.add(dateView);		
-	console.log(details); 
+	 
 	details.forEach(function(entry) {
 		var msg = escapeSpecialCharacter(entry.element); 
 		if(entry.type == "1"){
@@ -63,6 +63,7 @@ function loadPostDetails(){
 		}
 		
 		if(entry.type == "2"){  
+			
 			if(OS_IOS){
 				$.myContentView.add(COMMON.displayHTMLArticle(msg));
 			}else{
@@ -92,7 +93,11 @@ function loadPostDetails(){
 			 imageVw.addEventListener('click', function(e) {
 		     
 				var win = Alloy.createController("imageDetails",{element_id:entry.id, isCurriculum: isCurriculum}).getView(); 
-			  	Alloy.Globals.schooltabgroup.activeTab.open(win);  
+			  	if(from == "school"){
+			  		Alloy.Globals.schooltabgroup.activeTab.open(win);  
+			  	}else{
+			  		Alloy.Globals.tabgroup.activeTab.open(win);	
+			  	}
 		    });
 			
 			//caption

@@ -1,6 +1,6 @@
 <Alloy>
-	<TabGroup id="school_tg" tabsTintColor="#10844D" tabsBackgroundImage="/images/kid_menu_bar1.png" onOpen="doOpen">
-		<Tab  title="Notice Board" icon="/images/icons/icon_notice.png" activeIcon="/images/icons/icon_notice_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+	<TabGroup id="school_tg" tabsTintColor="#10844D"   onOpen="doOpen">
+		<Tab  title="Notice Board" icon="/images/icons/icon_announcement.png" activeIcon="/images/icons/icon_announcement_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Notice Board" backgroundColor="#F1F1F1">
 				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">

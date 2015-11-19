@@ -27,10 +27,10 @@ function displayLatestBoard(){
 			
 			if(entryPost.e_id != null || entryPost.e_id != ""){
 				var school = educationModel.getSchoolById(entryPost.e_id); 
-				if(school.img_path != ""){
+				if(school.img_path != "" && school.img_path != null){
 					schThumb = school.img_path;
 				} 
-			} 
+			}  
 			var view1 = $.UI.create('View',{
 				classes: [ 'wfill',  'hsize'],  
 				source: entryPost.id
@@ -52,9 +52,14 @@ function displayLatestBoard(){
 				left:45
 			});
 			
+			var title = entryPost.title;
+			if(title.trim() != "" &&  title.trim() != null){
+				title = title.replace("&quot;", "'"); 
+			}
+			
 			var titleLbl = $.UI.create('Label',{
-				classes: [ 'hsize','h4', 'themeColor','bold'],  
-				text: entryPost.title,
+				classes: [ 'hsize','h5', 'themeColor','bold'],  
+				text: title,
 				source: entryPost.id
 			});
 			/**var descLbl = $.UI.create('Label',{ 
@@ -126,7 +131,7 @@ function addClickEvent(vw){
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl); 
 		 
-		var win = Alloy.createController("postDetails", {p_id: res.source}).getView(); 
+		var win = Alloy.createController("postDetails", {p_id: res.source, from: "dashboard"}).getView(); 
 		//COMMON.openWindow(win); 
 		Alloy.Globals.tabgroup.activeTab.open(win);
 	});
