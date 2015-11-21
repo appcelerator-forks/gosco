@@ -29,6 +29,10 @@ function do_login(){
 	API.doLogin(params, $);  
 }
 
+function do_forgotPassword(){
+	var win = Alloy.createController("auth/forgotPassword").getView();
+	COMMON.openWindow(win); 
+}
 /*** Facebook login***/  
 
 if (Ti.Platform.name === 'android') {

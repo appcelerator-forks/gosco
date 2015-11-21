@@ -157,13 +157,20 @@ function removeAllChildren (viewObject){
     }
 };
 
-function createAlert (tt,msg){
+function createAlert (tt,msg, callback){
 	var box = Titanium.UI.createAlertDialog({
 		title: tt,
 		ok: 'OK',
 		message: msg
 	});
 	box.show();
+	box.addEventListener('click', function(e){ 
+	    if (e.index == 0){ 
+	    	if(typeof callback == "function"){
+	    		callback && callback();
+	    	}
+	    }
+  });
 };
 
 exports.openWindow = _.throttle(openWindow, 500, true);

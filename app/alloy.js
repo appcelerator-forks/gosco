@@ -166,6 +166,11 @@ function convertToDBDateFormat(datetime){
 	return newFormat;
 }
 
+function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}
+
 function convertFromDBDateFormat(datetime){
 	var timeStamp = datetime.split(" ");  
 	var newFormat;
@@ -193,11 +198,9 @@ function timeFormat(datetime){
 		if(time[0] > 12){
 			ampm = "pm";
 			time[0] = time[0] - 12;
-		}
-		
+		} 
 		newFormat = date[2]+"/"+date[1]+"/"+date[0] + " "+ time[0]+":"+time[1]+ " "+ ampm;
-	}
-	
+	} 
 	return newFormat;
 }
 

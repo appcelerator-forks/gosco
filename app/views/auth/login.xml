@@ -14,6 +14,7 @@
 				<Button onClick="do_login" width="90%" class="button" title="Login"></Button>
 				<View height="60" id="fbloginView" width="90%" />
 				<Button onClick="do_signup" width="90%" class="button" backgroundColor="#5375BD" title="Register"></Button>
+				<Button onClick="do_forgotPassword" width="90%" class="button" backgroundColor="#7D7D7D" title="Forgot Password"></Button>
 			</View>
 		</Window>
 	</NavigationWindow>
@@ -33,6 +34,7 @@
 				<Button onClick="do_login" width="250" class="button" title="Login"></Button>
 				<View height="60" id="fbloginView" width="250" />
 				<Button onClick="do_signup" width="250" class="button" backgroundColor="#5375BD" title="Register"></Button>
+				<Button onClick="do_forgotPassword" width="250" class="button" backgroundColor="#7D7D7D" title="Forgot Password"></Button>
 			</View>
 	</Window>
 		

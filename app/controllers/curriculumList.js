@@ -27,14 +27,28 @@ function createList(){
 		details.forEach(function(entry) { 
     		var tblRowView = Ti.UI.createTableViewRow({ 
 				c_id: entry.id,
-				height: 50,
-				left: 10,
+				height: 60,
+				left: 5,
 				//title: entry.curriculum
+			});
+			
+			var ccImg = "/images/koku.png";
+			if(entry.img_path != ""){
+				ccImg = entry.img_path;
+			}
+			var cocuImg = $.UI.create('ImageView', {  
+				image: ccImg,
+				left:10, 
+				height:40,
+				width:40,
+				borderRadius: 20,
+				c_id: entry.c_id, 
 			});
 			
 			var titleView = $.UI.create('View', { 
 				classes: ['horz', 'wfill', 'hsize'],
 				height: Ti.UI.SIZE, 
+				top:10,
 				c_id: entry.id
 			});
 			
@@ -45,6 +59,7 @@ function createList(){
 				color: "#000000",
 				c_id: entry.id
 			});
+			titleView.add(cocuImg);
 			titleView.add(titleLbl);
 			tblRowView.add(titleView);
 			tblRowView.addEventListener('click',readCurriculumDetails);  
@@ -78,7 +93,7 @@ function createList(){
 		curTable.appendRow(tblRowView); 
 	}
 	 $.curriculumContainer.add(curTable);
-	 hideLoading()
+	 hideLoading();
 }
 
 function selectCurriculum(e){

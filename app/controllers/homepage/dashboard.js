@@ -40,16 +40,16 @@ function displayLatestBoard(){
 				defaultImage: "/images/full_logo.png",
 				image: schThumb,
 				left:5, 
-				height:30,
-				width:30,
-				borderRadius: 15,
+				height:40,
+				width:40,
+				borderRadius: 20,
 				source: entryPost.id 
 			});
 			
 			var postView = $.UI.create('View',{
 				classes: ['small_padding'  ,'vert', 'hsize'],  
 				source: entryPost.id,
-				left:45
+				left:55
 			});
 			
 			var title = entryPost.title;
@@ -193,7 +193,7 @@ function syncData(){
 	if(ks.length > 0){   
 		ks.forEach(function(entry) {
 			 
-			API.getSchoolPost(entry.e_id);
+			//API.getSchoolPost(entry.e_id);
 			var param = { 
 				"e_id"	  : entry.e_id
 			};

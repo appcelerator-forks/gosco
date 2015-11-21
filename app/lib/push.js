@@ -9,22 +9,32 @@ if(Ti.Platform.osname == "android"){
 		Ti.App.Payload = payload;
 		// if trayClickLaunchedApp or trayClickFocusedApp set redirect as true
 		if(redirect){
-			if(app_status == "not_running"){
-				
-			}else{
-				redirect = false;
-				getNotificationNumber(payload);
-			}
+			 console.log("here");
 			receivePush(payload);
 		}else{
-			
+			console.log("yea");
+			var dialog = Ti.UI.createAlertDialog({
+					cancel: 1,
+					buttonNames: ['Cancel','OK'],
+					message: 'New message available. Do you want to read now?',
+					title: 'Confirmation'
+				});
+				dialog.addEventListener('click', function(e){
+					if (e.index === 0){
+						//Do nothing
+					}
+
+					if (e.index === 1){
+						receivePush(payload);
+					}
+				});
+				dialog.show();  
 		}
 	});
 	
 	CloudPush.addEventListener('trayClickLaunchedApp', function (evt) {
 		redirect = true;
-		app_status = "not_running"; 
-	    //getNotificationNumber(Ti.App.Payload); 
+		app_status = "not_running";  
 	});
 	CloudPush.addEventListener('trayClickFocusedApp', function (evt) {
 		redirect = true;
@@ -38,6 +48,41 @@ function getNotificationNumber(payload){
 	
 // Process incoming push notifications
 function receivePush(e) { 
+	if (OS_IOS) {
+		Titanium.UI.iPhone.setAppBadge("0");
+	}
+	console.log("PUSH GEO");
+	console.log(e);
+	if(e.category == "announcement"){
+		var postModel = Alloy.createCollection('post');  
+		var post_element_model = Alloy.createCollection('post_element');  
+		var param = { 
+			"e_id"	  : e.extra
+		};
+		
+		API.callByPost({url:"getSchoolPost", params: param}, function(responseText){ 
+			var res = JSON.parse(responseText);  
+			if(res.status == "success"){ 
+				var postData = res.data; 
+				 if(postData != ""){ 
+				 	 var post = res.data.post;   
+					 postModel.addPost(post);  
+					 post_element_model.addElement(post);   
+				 } 
+				 
+			 	if(OS_IOS){  
+					var win = Alloy.createController("postDetails", {p_id: e.data.target, from: "dashboard"}).getView();  
+					Alloy.Globals.tabgroup.activeTab.open(win);
+				}else{ 
+					var win = Alloy.createController("postDetails", {p_id: e.target, from: "dashboard"}).getView();  
+					Alloy.Globals.tabgroup.activeTab.open(win);
+				}
+				
+				
+				 
+			} 
+		});
+	}
 	
 	//Action after receiving push message
 	 
@@ -51,21 +96,45 @@ function deviceTokenSuccess(ex) {
 	    password: '123456'
 	}, function (e) {
 		if (e.success) {
-			  
-			Cloud.PushNotifications.subscribe({
-			    channel: 'general',
-			    type:Ti.Platform.name == 'android' ? 'android' : 'ios', 
-			    device_token: deviceToken
-			}, function (e) { 
-			    if (e.success  ) { 
-			    	/** User device token**/
-	         		Ti.App.Properties.setString('deviceToken', deviceToken); 
-	         		console.log("deviceToken : "+deviceToken);
-					API.getDeviceInfo();
-			    } else {
-			    	registerPush();
-			    }
-			});
+			//unsubscribe previous 
+			 Cloud.PushNotifications.unsubscribe({
+		        channel: 'general',
+		        device_token: deviceToken
+		    }, function (e) {
+		        if (e.success) {
+		             //re-subscribe again
+						Cloud.PushNotifications.subscribe({
+						    channel: 'general',
+						    type:Ti.Platform.name == 'android' ? 'android' : 'ios', 
+						    device_token: deviceToken
+						}, function (e) { 
+						    if (e.success  ) { 
+						    	/** User device token**/
+				         		Ti.App.Properties.setString('deviceToken', deviceToken);  
+								API.getDeviceInfo();
+						    } else {
+						    	registerPush();
+						    }
+						});
+		        } else {
+		            //subscribe
+						Cloud.PushNotifications.subscribe({
+						    channel: 'general',
+						    type:Ti.Platform.name == 'android' ? 'android' : 'ios', 
+						    device_token: deviceToken
+						}, function (e) { 
+						    if (e.success  ) { 
+						    	/** User device token**/
+				         		Ti.App.Properties.setString('deviceToken', deviceToken);  
+								API.getDeviceInfo();
+						    } else {
+						    	registerPush();
+						    }
+						});
+		        }
+		    });
+		    
+		   
 	    } else {
 	    	 
 	    }

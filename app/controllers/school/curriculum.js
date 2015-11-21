@@ -32,7 +32,7 @@ function loadCurriculumList(school_id, isShowRemove){
 	if(details.length > 0){ 
 		details.forEach(function(entry) { 
     		var tblRowView = Ti.UI.createTableViewRow({ 
-				height: 50, 
+				height: 60, 
 				c_id: entry.c_id,
 				kc_id: entry.id
 			}); 
@@ -55,9 +55,9 @@ function loadCurriculumList(school_id, isShowRemove){
 			var cocuImg = $.UI.create('ImageView', {  
 				image: ccImg,
 				left:10, 
-				height:30,
-				width:30,
-				borderRadius: 15,
+				height:40,
+				width:40,
+				borderRadius: 20,
 				c_id: entry.c_id,
 				kc_id: entry.id
 			});
