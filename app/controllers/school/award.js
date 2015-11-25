@@ -13,14 +13,15 @@ function init(e){
 	
 }   
 function loadAwardBoard(){
-	var latestPost = postModel.getLatestPostByEducation(school_id,2); 
-  	console.log("latestPost");
-	if(latestPost.length > 0){  
-		var tblView = $.UI.create('TableView',{
+	var latestPost = postModel.getLatestPostByEducation(school_id,2);  
+	var tblView = $.UI.create('TableView',{
 			classes: ['wfill' , 'hsize'],
 			backgroundColor: "#ffffff",
 			top:0
-		});
+	});
+	COMMON.removeAllChildren($.awardSv);
+	if(latestPost.length > 0){  
+		
 		var awardData = [];
 		latestPost.forEach(function(entryPost) {
 			var imagePost = postElementModel.getImageByPost(entryPost.id); 
@@ -99,9 +100,12 @@ function loadAwardBoard(){
 		});
 		
 		tblView.setData(awardData);
-		COMMON.removeAllChildren($.awardSv);
-		$.awardSv.add(tblView);
-	} 	
+		
+		
+	} else{
+		tblView.setData(COMMON.noRecord());
+	}	 	
+	$.awardSv.add(tblView);
 	hideLoading(); 
 }
 
@@ -109,12 +113,10 @@ function syncData(){
 	var param = { 
 		"e_id"	  : school_id
 	};
-	API.callByPost({url:"getSchoolPost", params: param}, function(responseText){
-		 console.log("getSchoolPost CALLED");
+	API.callByPost({url:"getSchoolPost", params: param}, function(responseText){ 
 		var res = JSON.parse(responseText);  
 		if(res.status == "success"){  
-			var postData = res.data; 
-			console.log(postData);
+			var postData = res.data;  
 			if(postData != ""){ 
 				var post = res.data.post;   
 				postModel.addPost(post);  

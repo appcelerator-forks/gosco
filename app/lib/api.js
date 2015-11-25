@@ -116,14 +116,14 @@ exports.removeKidsClass = function(ex){
 
 exports.updateKidsCurriculum = function(ex){
 	var url = updateKidsCurriculum+"&k_id="+ex.k_id+"&c_id="+ex.c_id;
-	console.log(url);
+	 
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) {};
 };
 
 exports.removeKidsCurriculum = function(ex){
 	var url = removeKidsCurriculum+"&k_id="+ex.k_id+"&c_id="+ex.c_id;
-	console.log(url);
+	 
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) {};
 };
@@ -145,7 +145,7 @@ exports.getSchoolPost = function(e_id){
 				 var post_element_model = Alloy.createCollection('post_element');  
 				 post_element_model.addElement(post); 
 				 Ti.App.Properties.setString('post', '1');
-				 console.log("DONE school POST..." +Ti.App.Properties.getString('post'));
+				  
 				 checkLoadDone(); 
 			 } 
 			 
@@ -188,7 +188,7 @@ exports.getEventsList = function(e_id){
 			eventsModel.saveArray(arr); 
 			eventsAttachmentModel.saveArray(arr);
 			Ti.App.Properties.setString('events', '1');
-			console.log("DONE events LIST..." +Ti.App.Properties.getString('events'));
+			 
 			checkLoadDone(); 
 		}
 	};
@@ -213,7 +213,7 @@ exports.getSchoolClassList = function(e_id){
 			 
 			educationClassModel.saveArray(arr); 
 			Ti.App.Properties.setString('class', '1');
-			console.log("DONE class LIST..." +Ti.App.Properties.getString('class'));
+			 
 			checkLoadDone(); 
 		}
 	};
@@ -238,7 +238,7 @@ exports.getKidsCurriculum = function(k_id){
 			 
 			kidsCurriculumClassModel.saveArray(arr); 
 			Ti.App.Properties.setString('curriculum', '1'); 
-			console.log("DONE kid curriculum..." +Ti.App.Properties.getString('curriculum'));
+			 
 			checkLoadDone(); 
 		}
 	};
@@ -263,7 +263,7 @@ exports.getCurriculumList = function(e_id){
 			curriculumModel.saveArray(arr); 
 			
 			Ti.App.Properties.setString('kidsCurriculum', '1'); 
-			console.log("DONE curriculum LIST..." + Ti.App.Properties.getString('kidsCurriculum'));
+			 
 			checkLoadDone(); 
 		}
 	};
@@ -290,7 +290,7 @@ exports.getHomeworkList = function(ec_id, skipLoadDone){
 			homeworkAttachmentModel.saveArray(arr);
 			if(skipLoadDone == ""){
 				Ti.App.Properties.setString('kidsHomework', '1'); 
-				console.log("DONE homework LIST..." + Ti.App.Properties.getString('kidsHomework'));
+				 
 				checkLoadDone(); 
 			}
 			
@@ -316,7 +316,7 @@ exports.doFacebookLogin = function(e){
 		}else{
 			var userModel = Alloy.createCollection('user'); 
 			var arr = result.data; 
-			console.log(arr);
+			 
 			userModel.saveArray(arr);
 	   		Ti.App.Properties.setString('user_id', arr.id);
 	   		Ti.App.Properties.setString('fullname', arr.fullname);
@@ -452,7 +452,7 @@ exports.doSignUp = function(ex,mainView){
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
-		console.log(result);
+		 
 		COMMON.hideLoading(); 
 		if(result.status == "error"){
 			COMMON.createAlert("Error", result.data[0]);
@@ -485,7 +485,7 @@ exports.saveKids = function(ex,onAPIReturn){
  	if(ex.isEdit == "1"){
  		url += "&id="+ex.k_id;
  	}
- 	console.log(url); 
+ 	 
 	if(ex.photo == ""){
 		var _result = contactServerByGet(url);   
 	}else{
@@ -514,7 +514,7 @@ exports.callByPostImage = function(e, onload, getParam){
  
 exports.callByPost = function(e, onload, onerror){
 	var url =  eval(e.url);
-	 console.log(url);
+	  
 	var _result = contactServerByPost(url, e.params || {});   
 	_result.onload = function(e) {   
 		onload && onload(this.responseText); 
@@ -545,7 +545,7 @@ function contactServerByPost(url,records) {
 	 	client.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); 
 	 }
 	 
-	 console.log(records);
+	  
 	client.open("POST", url);
 	client.send(records); 
 	return client;

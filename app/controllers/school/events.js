@@ -14,11 +14,14 @@ function init(e){
 
 function loadEvent(){
 	var details = eventsModel.getLatestEventByEducation(school_id);
+	var eventTbl = $.UI.create('TableView',{
+		classes: ["wfill", "hsize" ],
+		backgroundColor : "#ffffff" 
+	});
+	COMMON.removeAllChildren($.eventSv);
 	if(details.length > 0){ 
-		COMMON.removeAllChildren($.eventSv);
-		var eventTbl = $.UI.create('TableView',{
-				classes: ["wfill", "hsize" ]
-			});
+		
+		var postData= []; 
 		details.forEach(function(entry) { 
 			var tblRowView = $.UI.create('TableViewRow',{ 
 				height : 70, 
@@ -112,13 +115,16 @@ function loadEvent(){
     		view1.add(rightView);	
     		view1.add(imgView1);	
     		tblRowView.add(view1);
-    		addClickEvent(tblRowView); 
-    	 	eventTbl.appendRow(tblRowView);
+    		postData.push(tblRowView);
+    		addClickEvent(view1);  
 		});
-		$.eventSv.add(eventTbl);
-		hideLoading();
+		eventTbl.setData(postData);
+		
+	}else{
+		eventTbl.setData(COMMON.noRecord());
 	}	
-	
+	hideLoading();
+	$.eventSv.add(eventTbl);
 }
 
 function addClickEvent(vw){

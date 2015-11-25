@@ -6,23 +6,27 @@ var ke_id = args.ke_id || "";
 var ec_id = args.ec_id || ""; 
 init();
 function init(){   
-	$.noticeBoardDetailsView.init({school_id:school_id}); 
+	setTimeout(function(){
+		$.noticeBoardDetailsView.init({school_id:school_id}); 
+	},800);
 	
-	//setTimeout(function(){
+	
+	setTimeout(function(){
 		$.eventsDetailsView.init({school_id:school_id}); 
-	//},1000);
-	//setTimeout(function(){
+	},1000);
+	
+	setTimeout(function(){
 		$.curriculumDetailsView.init({school_id:school_id}); 
-	//},1300);
+	},1300);
 	
-	//setTimeout(function(){
+	setTimeout(function(){
 		$.awardDetailsView.init({school_id:school_id}); 
-	//},1600);
+	},1600);
 	
-	//setTimeout(function(){
+	setTimeout(function(){
 		API.getHomeworkList(ec_id,1);
 		$.homeworkDetailsView.init({ec_id:ec_id});
-	//},2000); 
+	},2000); 
 }
 
 $.backToHome = function(){

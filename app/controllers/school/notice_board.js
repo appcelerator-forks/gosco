@@ -5,7 +5,7 @@ var postModel = Alloy.createCollection('post');
 var post_element_model = Alloy.createCollection('post_element');  
 var school_id; 
 
-function init(e){
+function init(e){ 
 	showLoading();
 	school_id = e.school_id;  
 	var details = educationModel.getSchoolById(school_id);
@@ -30,10 +30,8 @@ function syncData(){
 			 if(postData != ""){ 
 			 	 var post = res.data.post;   
 				 postModel.addPost(post);  
-				 post_element_model.addElement(post);  
-				 
-			 } 
-			
+				 post_element_model.addElement(post);   
+			 }  
 		} 
 		loadNoticeBoard(school_id);
 	}, function(){
@@ -44,14 +42,15 @@ function syncData(){
 
 function loadNoticeBoard(school_id){
 	var latestPost = postModel.getLatestPostByEducation(school_id,1); 
- 	 
+ 	var tblView = $.UI.create('TableView',{
+		classes: ['wfill' , 'hsize'],
+		top:0
+	}); 
+	COMMON.removeAllChildren($.boardSv);
 	if(latestPost.length > 0){ 
-		COMMON.removeAllChildren($.boardSv);
+		
 		var postData= []; 
-		var tblView = $.UI.create('TableView',{
-			classes: ['wfill' , 'hsize'],
-			top:0
-		});
+		
 		latestPost.forEach(function(entryPost) {
 			var tblRowView = Ti.UI.createTableViewRow({
 				 
@@ -154,9 +153,11 @@ function loadNoticeBoard(school_id){
 			postData.push(tblRowView);
 			addClickEvent(view1);  
 		});
-		tblView.setData(postData);
-		$.boardSv.add(tblView);
-	} 	
+		tblView.setData(postData); 
+	} else{
+		tblView.setData(COMMON.noRecord());
+	}	
+	$.boardSv.add(tblView);
 	hideLoading();
 }
 

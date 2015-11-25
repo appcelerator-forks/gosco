@@ -1,5 +1,10 @@
 Alloy.Globals.tabgroup = $.tabGroup;
 //Alloy.Globals.school_tab = $.school_tab;
+
+var postModel = Alloy.createCollection('post');   
+postModel.addColumn("publisher_uid", "INTEGER"); 
+postModel.addColumn("published_from_education", "INTEGER"); 
+
 Alloy.Globals.navWin = $.navWin; 
 COMMON.construct($); 
 init();

@@ -11,5 +11,5 @@
 	</View>
     	
     	
-    <ScrollView id="eventSv" class="wfill hfill vert" top="40" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" /> 
+    <ScrollView id="eventSv" class="wfill hfill vert"  top="40" contentHeight="Ti.UI.SIZE" contentWidth="Ti.UI.FILL" /> 
 </Alloy>

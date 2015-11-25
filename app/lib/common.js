@@ -20,15 +20,7 @@ exports.showLoading = function(){
 	mainView.loadingBar.opacity = 1;
 	mainView.loadingBar.zIndex = 100;
 	mainView.loadingBar.height = 120;
-	 
-	if(Ti.Platform.osname == "android"){
-	//	mainView.loadingBar.top =  (DPUnitsToPixels(Ti.Platform.displayCaps.platformHeight) / 2) -50; 
-		mainView.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG;
-		//mainView.activityIndicator.top = 0; 
-	}else if (Ti.Platform.name === 'iPhone OS'){
-		//mainView.loadingBar.top = (Ti.Platform.displayCaps.platformHeight / 2) -50; 
-		mainView.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
-	}  
+	mainView.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
 };
 
 exports.displayHTMLArticle = function(msg){
@@ -85,11 +77,7 @@ exports.showLoadingFull = function(){
 	  left:30,
 	  width:60, 
 	});
-	if(Ti.Platform.osname == "android"){ 
-		activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
-	}else if (Ti.Platform.name === 'iPhone OS'){ 
-		activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
-	}  
+	activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
 	activityIndicator.show();
 	var loadingLabel = Ti.UI.createLabel({
 		top:5,
@@ -117,8 +105,9 @@ exports.noRecord = function(){
 		text: "No record found", 
 		color: '#375540', 
 		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-		 font:{fontSize:14,fontStyle:'italic'},
+		font:{fontSize:14,fontStyle:'italic'},
 		top: 15,
+		bottom:15,
 		width: "100%"
 	});
 	tblView.add(noRecord); 

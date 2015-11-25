@@ -158,7 +158,22 @@ function loadHomework(){
 		});
 	  	offset += 10;
 	}else{
-	 
+	 	COMMON.removeAllChildren($.homeworkSv);  
+	 	var view11 = $.UI.create('View',{
+			classes :['hsize','padding','wfill' ],  
+			backgroundColor : "#ffffff" 
+		});
+		var label0 = $.UI.create('Label',{
+			text: "No record found", 
+			color: '#375540', 
+			textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+			font:{fontSize:14,fontStyle:'italic'},
+			top: 15,
+			bottom:15,
+			width: "100%"
+		});
+		view11.add(label0);
+	 	$.homeworkSv.add(view11);
 	}
 	hideLoading(); 	
 }

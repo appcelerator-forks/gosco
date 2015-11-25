@@ -30,7 +30,7 @@ exports.definition = {
 		 
             getCurriculumList :  function(k_id,school_id){
 				var collection = this;
-                var sql = "SELECT kc.*, c.curriculum, c.img_path FROM " + collection.config.adapter.collection_name + " kc, curriculum c WHERE kc.c_id=c.id AND k_id='"+k_id+"' ORDER BY c.curriculum " ;
+                var sql = "SELECT kc.*, c.curriculum, c.img_path FROM " + collection.config.adapter.collection_name + " kc, curriculum c WHERE kc.c_id=c.id AND k_id='"+k_id+"' AND c.e_id='"+school_id+"' ORDER BY c.curriculum " ;
  
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){

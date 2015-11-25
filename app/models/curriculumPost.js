@@ -180,7 +180,7 @@ exports.definition = {
 					}
 					
 		       		sql_query = "INSERT INTO "+ collection.config.adapter.collection_name + "(id, title, message,c_id, status,published_by,publish_date, expired_date, images) VALUES ('"+entry.id+"', '"+title+"', '"+message+"', '"+entry.c_id+"' , '"+entry.status+"', '"+entry.published_by+"', '"+entry.publish_date+"', '"+entry.expired_date+"', '"+entry.images+"')";
-					 console.log(sql_query);
+					 
 					db.execute(sql_query);
 				});
                // db.execute("COMMIT");
