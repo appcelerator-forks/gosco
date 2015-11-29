@@ -25,7 +25,7 @@ function syncData(){
 	API.callByPost({url:"getSchoolPost", params: param}, function(responseText){
 		 
 		var res = JSON.parse(responseText);  
-		if(res.status == "success"){ 
+		if(res.status == "success"){  
 			var postData = res.data; 
 			 if(postData != ""){ 
 			 	 var post = res.data.post;   
@@ -186,12 +186,7 @@ function showLoading(){
 	$.loadingBar.opacity = 1;
 	$.loadingBar.zIndex = 100;
 	$.loadingBar.height = 120;
-	 
-	if(OS_ANDROID){ 
-		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
-	}else if (OS_IOS){ 
-		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
-	}  
+	$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
 }
 
 

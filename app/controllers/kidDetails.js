@@ -21,7 +21,13 @@ function init(){
 	}
 	$.thumbPreview.image = avatar;
 	$.fullname.text = details.fullname;
-	$.date_value.text = COMMON.monthFormat(details.dob);
+
+	if(details.dob != "0000-00-00"){
+		$.date_value.text = COMMON.monthFormat(details.dob);
+	}else{
+		$.date_value.text = "Not Set";
+	}
+	
 	$.gender_value.text = gender;
 	$.hobby.text = details.hobby;
 	//$.parent_contact.text = details.contact;
@@ -271,11 +277,13 @@ var selectSchool = function(e){
 		updated: currentDateTime()
 	};  
 	kidsEducationModel.addNewKidsSchool(param);  
-	
+	console.log("in selectSchool");
+	console.log(param);
 	if(e.educationType == "1"){ 
 		API.getSchoolClassList(e.school);
 		API.getCurriculumList(e.school); 
-		loadKidsSchool();	 
+		loadKidsSchool();	
+		console.log("reslect loadKids"); 
 	}else{
 		console.log("tuition");
 		loadKidsTuition();	 
@@ -303,12 +311,7 @@ function showLoading(){
 	$.loadingBar.opacity = 1;
 	$.loadingBar.zIndex = 100;
 	$.loadingBar.height = 120;
-	 
-	if(OS_ANDROID){ 
-		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
-	}else if (OS_IOS){ 
-		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
-	}  
+	$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
 }
 
 function hideLoading(){

@@ -1,7 +1,7 @@
 <Alloy>
 	<NavigationWindow platform="ios" id="mainWin">
 		<Window id="goscoMain" title="Dashboard" backgroundImage="/images/home_background.jpg">
-			<LeftNavButton>
+			<LeftNavButton platform="ios">
 		        <View id="btnLogout" left="0"  width="30" height="35">
 		         	<ImageView left='0'  width="Ti.UI.SIZE"   image="/images/logout.png" />
 		        </View>

@@ -1,7 +1,7 @@
 exports.definition = {
 	config: {
 		columns: {
-		    "id": "INTEGER", 
+		    "id": "INTEGER PRIMARY KEY", 
 		    "name": "TEXT",
 		    "education_type": "INTEGER",
 		    "level": "INTEGER",

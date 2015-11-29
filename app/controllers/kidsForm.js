@@ -13,8 +13,9 @@ var yyyy = today.getFullYear();
 var toolbar;
 var datePicker = Ti.UI.createPicker({
 	  type: Ti.UI.PICKER_TYPE_DATE,
-	  minDate: new Date(1930,0,1),
+	  minDate: new Date(1980,0,1),
 	  maxDate: new Date(yyyy,mm,dd),
+	  value: new Date(1990,0,1),
 	  id: "datePicker", 
 });
 var dpView = Titanium.UI.createView({
@@ -38,7 +39,16 @@ function setupPersonalData(){
 			all_picker[0].visible="false";
 			all_picker[1].visible="false";
 			$.selectorView.height=0;
-			dpView.height=0;
+			dpView.height=0; 
+			//publish date
+			var dpp = datePicker.value;
+			 
+			var dppDay = dpp.getDate();
+			var dppMonth = dpp.getMonth() + 1;
+			var dppYear = dpp.getFullYear(); 
+			
+			 	    
+			$.date_value.text = dppDay +"/"+ dppMonth+"/"+ dppYear;
 		});
 	  
 		toolbar = Titanium.UI.iOS.createToolbar({
@@ -97,7 +107,10 @@ function setupPersonalData(){
 		//$.contact.value = details.contact; 
 		
 		//hijack datepicker
-		datePicker.setValue( new Date(dobArr[0],parseInt(dobArr[1]) -1,dobArr[2]));
+		if(dob != "0000-00-00"){
+			datePicker.setValue( new Date(dobArr[0],parseInt(dobArr[1]) -1,dobArr[2]));
+		}
+		
 
 	}	
 }
@@ -150,7 +163,7 @@ function onAPIReturn(responseText){
 		var kidsModel = Alloy.createCollection('kids'); 
 		var arr = result.data;  
 		kidsModel.saveArray(arr); 
-		console.log(arr);
+		 
 		if(isEdit == "1"){
 			COMMON.createAlert("Success", "Your kid is updated successfully!");
 			Ti.App.fireEvent('refreshKidsDetails');
@@ -236,7 +249,7 @@ function getAge(dateString) {
 }
 
 function showGenderPicker(){  
-	console.log("showGenderPicker");
+	 
 	$.selectorView.height = Ti.UI.SIZE;  
 	resetTextColor();
 	$.gender_value.color = "#10844D";

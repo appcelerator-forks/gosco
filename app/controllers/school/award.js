@@ -12,8 +12,8 @@ function init(e){
 	},500); 
 	
 }   
-function loadAwardBoard(){
-	var latestPost = postModel.getLatestPostByEducation(school_id,2);  
+function loadAwardBoard(){ 
+	var latestPost = postModel.getLatestPostByEducation(school_id,2);   
 	var tblView = $.UI.create('TableView',{
 			classes: ['wfill' , 'hsize'],
 			backgroundColor: "#ffffff",
@@ -150,12 +150,7 @@ function showLoading(){
 	$.loadingBar.opacity = 1;
 	$.loadingBar.zIndex = 100;
 	$.loadingBar.height = 120;
-	 
-	if(OS_ANDROID){ 
-		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
-	}else if (OS_IOS){ 
-		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
-	}  
+	$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
 }
 
 

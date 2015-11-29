@@ -6,7 +6,7 @@
 	 
 	<View class="wfill" height="35" top="5" >
 			<ImageView width="30" height="30" left="10" image="/images/events.png" />
-			<Label class="padding themeColor h5 bold" left="45" top="5">Available events</Label>
+			<Label class="padding themeColor h5 bold" left="45" top="5">List Of Events</Label>
 			<ImageView id="refresh" width="30" height="30" right="10" image="/images/icon_refresh.png" /> 
 	</View>
     	

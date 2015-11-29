@@ -59,7 +59,7 @@ function loadHomework(){
 				classes: ['horz','wfill'], 
 				source: entry.id,  
 				backgroundColor: "#ffffff",
-				height: 60 
+				height: 85 
 			});
 			
 			var statustView = $.UI.create('View',{
@@ -84,8 +84,8 @@ function loadHomework(){
 				source :entry.id,
 				text: eduClass.className
 			});
-			classView.add(classLabel);
-			horzView.add(classView);
+			//classView.add(classLabel);
+			//horzView.add(classView);
 			
 			var statustView = $.UI.create('View',{
 				classes: ['hfill'],
@@ -139,6 +139,12 @@ function loadHomework(){
 				right: 10
 			});
 		 	
+		 	var viewLine = $.UI.create('View',{
+				classes :['gray-line']
+			}); 
+			
+		 	view1.add(classLabel); 
+			view1.add(viewLine);
 			view1.add(label1);
 			view1.add(label2); 
 			view1.add(label3);
@@ -226,12 +232,7 @@ function showLoading(){
 	$.loadingBar.opacity = 1;
 	$.loadingBar.zIndex = 100;
 	$.loadingBar.height = 120;
-	 
-	if(OS_ANDROID){ 
-		$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
-	}else if (OS_IOS){ 
-		$.activityIndicator.style = Ti.UI.iPhone.ActivityIndicatorStyle.BIG;
-	}  
+	$.activityIndicator.style = Ti.UI.ActivityIndicatorStyle.BIG; 
 }
 
 
