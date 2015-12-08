@@ -2,10 +2,13 @@
 	<Window title="" id="win"  backgroundImage="/images/home_background.jpg">
 		<ActionBar platform="android" displayHomeAsUp="true" onHomeIconItemSelected="closeWindow" />
 		 
-		<View id="main" layout="vertical" backgroundColor="#F6F6F6" height="100%" >
+		<View id="main" layout="vertical" backgroundColor="#F6F6F6" height="100%"   >
 	 
 		 <ScrollView layout="vertical" id="infoView" scrollType="vertical" backgroundColor="#ffffff" height="Ti.UI.FILL" width="Ti.UI.FILL" top="200">
- 
+ 			 <Label id="galleryText" text="Gallery" class="hsize wfill padding font_dark_grey"   />  
+ 			 <View id="attView"  class="horz wfill" height="50" backgroundColor="#f5f5f5"  > 
+				<ScrollView id="attachment" scrollType="horizontal" class="horz hsize wfill"   />  
+			</View>
 		 	<View class="box padding wfill hsize horz" backgroundColor="#F5F5F5" bottom="0">
 		 		 <View id="educationMap" height="0" width="Ti.UI.FILL" /> 
 		 		<View class="box wfill horz" backgroundColor="#ffffff" top="0" height="80">
@@ -25,7 +28,7 @@
 			 		</View>
 			 	</View>
 		 		<View layout="vertical" id="educationDetails" width="Ti.UI.FILL" height="Ti.UI.SIZE">
-					 	<Label id="educationName" class="education_name themeColor bold"   bottom="10"/>
+					 	<Label id="educationName" class="education_name themeColor bold" top="10"  bottom="10"/>
 				 		<Label text="Address" class="education_address educationLabelTitle" />
 					 	<Label id="educationAddress" class="education_address" bottom="10" /> 
 					 	
@@ -43,5 +46,6 @@
  
 		 </ScrollView>
 		 </View>
+		
 	</Window>
 </Alloy>

@@ -5,6 +5,8 @@ var position = args.position;
 var attachmentModel;
 if(type == "homework"){
 	attachmentModel = Alloy.createCollection('homeworkAttachment'); 
+}else if(type =="gallery"){
+	attachmentModel = Alloy.createCollection('gallery'); 
 }else{
 	attachmentModel = Alloy.createCollection('eventsAttachment'); 
 }
@@ -13,6 +15,8 @@ init();
 function init(){
 	if(type == "homework"){
 		var items  = attachmentModel.getRecordByHomework(id);
+	}else if(type =="gallery"){
+		var items = attachmentModel.getRecordByEducation(id);
 	}else{
 		var items  = attachmentModel.getRecordByEvents(id);
 	}
@@ -22,11 +26,28 @@ function init(){
 	var the_view = [];
 	
 	for (var i=0; i< items.length; i++) {  
+		
+		var mainView = $.UI.create('View', {
+			classes: ['wfill','hfill','vert'], 
+		});
+		
+		if(type =="gallery"){ 
+			var galCaption =  $.UI.create('Label',{
+				classes: ['wsize','hsize','font_light_white'],
+				top :10,
+				text : items[i].caption
+			});
+			mainView.add(galCaption);
+		}
+		
 		adImage = Ti.UI.createImageView({
 			image: items[i].img_path,//items[i].img_thumb,
 			width:"100%",
-			top: 50,
+			top: 10,
 		});
+		mainView.add(adImage);
+		
+		
 		
 		var scrollView = Ti.UI.createScrollView({
 			contentWidth: 'auto',
@@ -42,7 +63,7 @@ function init(){
 			id:"view"+counter
 		});
 		 
-		row.add(adImage); 
+		row.add(mainView); 
 		scrollView.add(row);
 		the_view.push(scrollView); 
 		

@@ -177,7 +177,7 @@ function addClickEvent(vw){
 }
 
 $.schoolInfo.addEventListener('click', function(){
-	var win = Alloy.createController("educationDetails", {e_id:  school_id}).getView();  
+	var win = Alloy.createController("educationDetails", {e_id:  school_id, from:"school"}).getView();  
 	Alloy.Globals.schooltabgroup.activeTab.open(win); 
 });
 /*** private function***/

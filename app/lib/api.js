@@ -30,6 +30,8 @@ var doLoginUrl  		= "http://"+API_DOMAIN+"/gosco/api/doLogin?user="+USER+"&key="
 var doSignUpUrl  		= "http://"+API_DOMAIN+"/gosco/api/doSignUp?user="+USER+"&key="+KEY;
 var addKidUrl 			= "http://"+API_DOMAIN+"/gosco/api/addkid?user="+USER+"&key="+KEY;
 var forgotPasswordUrl 	= "http://"+API_DOMAIN+"/gosco/api/doForgotPassword?user="+USER+"&key="+KEY;
+var getEducationGalleryUrl = "http://"+API_DOMAIN+"/gosco/api/getEducationGallery?user="+USER+"&key="+KEY;
+
 //API that call in sequence 
 var APILoadingList = [
 	{url: getSchoolList, model: "education", checkId: "1"},

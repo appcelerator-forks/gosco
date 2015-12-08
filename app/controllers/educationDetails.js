@@ -1,6 +1,8 @@
 var args = arguments[0] || {};
 var e_id = args.e_id || ""; 
+var from = args.from || "homepage"; 
 var educationModel = Alloy.createCollection('education');  
+var galleryModel = Alloy.createCollection('gallery');
 var details;
 var contacts = Ti.Contacts.getAllPeople(); 
 var isAddedToContact = "0"; 
@@ -8,6 +10,7 @@ init();
 
 function init(){
 	syncData();
+	syncGallery();
 	showDetails(); 
 	populateMap();
 }
@@ -22,6 +25,7 @@ for (var i = 0; i < contacts.length; i++) {
     } 
 }  
 
+
 function syncData(){
 	var checker = Alloy.createCollection('updateChecker'); 
 	var isUpdate = checker.getCheckerById("1");
@@ -34,18 +38,29 @@ function syncData(){
 		"last_updated"	  : last_updated
 	};
 	
-	API.callByPost({url:"getSchoolList", params: param}, function(responseText){
-		 
-		var res = JSON.parse(responseText);  
-		
+	API.callByPost({url:"getSchoolList", params: param}, function(responseText){ 
+		var res = JSON.parse(responseText);   
 		if(res.status == "success"){  
-	 		var arr = res.data; 
-	 		 
+	 		var arr = res.data;  
 	        educationModel.saveArray(arr);
+			syncGallery();
+		} 
+	}); 
+}
+
+function syncGallery(){
+	var param = { 
+		"e_id"	  : e_id
+	};
+	API.callByPost({url:"getEducationGalleryUrl", params: param}, function(responseText){ 
+		var res = JSON.parse(responseText);   
+		if(res.status == "success"){  
+	 		var arr = res.data;  
+	 		galleryModel.removeRecordByRec(e_id);
+	        galleryModel.saveArray(arr);
 			showDetails();
 		} 
-	});
-	
+	}); 
 }
 
 function populateMap(){ 
@@ -83,6 +98,55 @@ function populateMap(){
 }
 
 
+function attachedPhoto(image,position){ 
+	var iView = $.UI.create('View', {
+		backgroundColor: "#D5D5D5",
+		height : 50,
+		position : position,
+		width: 50,
+		left:5,
+		right: 5,
+		bottom:0
+	});
+	        
+	var iImage = Ti.UI.createImageView({
+		image : image,
+		position :position,
+		width: Ti.UI.FILL
+	}); 
+	iView.add(iImage);
+	
+	iView.addEventListener('click',function(e){ 
+		var win = Alloy.createController("school/attachmentDetails",{id:e_id,position:position, type: "gallery"}).getView(); 
+	  	if(from == "school"){
+			Alloy.Globals.schooltabgroup.activeTab.open(win);
+		}else{
+			Alloy.Globals.tabgroup.activeTab.open(win);	
+		}  
+		 
+	});
+	return iView;	            
+}
+
+function loadAttachment(){
+	var attList = galleryModel.getRecordByEducation(e_id);    
+	var counter = 0;
+	 
+	COMMON.removeAllChildren($.attachment);
+	if(attList.length > 0){  
+		$.galleryText.opacity = 1;
+	 	attList.forEach(function(att){  
+	 		$.attachment.add(attachedPhoto(att.img_path, counter));
+	 		counter++;  
+	 	}); 
+	 }else{
+	 	$.galleryText.visible = false;
+	 	$.galleryText.height = 0;
+	 	$.attView.height = 0;
+	 }
+}
+
+
 function showDetails(){
 	
 	details  = educationModel.getSchoolById(e_id);  
@@ -100,9 +164,10 @@ function showDetails(){
 	 
 		$.educationTel.text = "TEL : " +details.contact_no || "N/A" ; 
 		$.educationFax.text = "FAX : " + details.fax_no || "N/A"  ;
-		phoneArr.push(details.contact_no);
-		 
+		phoneArr.push(details.contact_no); 
 	}
+	
+	loadAttachment();
 }
 
  
