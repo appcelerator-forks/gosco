@@ -2,6 +2,7 @@ var args = arguments[0] || {};
 COMMON.construct($);
 var postModel;
 var postElementModel;
+var ImageLoader = require('imageLoader'); 
 var post_id = args.p_id  || "";
 var isCurriculum = args.isCurriculum  || "";  
 var showHeader = args.showHeader || "";
@@ -84,9 +85,10 @@ function loadPostDetails(){
 			var dynaImage = Ti.UI.createImageView({
 				image: entry.element,
 				width : Ti.UI.FILL,
-				defaultImage :  "/images/default.png"
+				//defaultImage :  "/images/default.png"
 			});
 			imageVw.add(dynaImage);
+			ImageLoader.LoadRemoteImage(dynaImage,entry.element);  
 			$.myContentView.add(imageVw); 
 			
 			//image event

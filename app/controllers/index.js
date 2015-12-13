@@ -4,6 +4,8 @@ Alloy.Globals.tabgroup = $.tabGroup;
 var postModel = Alloy.createCollection('post');   
 postModel.addColumn("publisher_uid", "INTEGER"); 
 postModel.addColumn("published_from_education", "INTEGER"); 
+var educationModel = Alloy.createCollection('education');   
+educationModel.addColumn("authentication", "INTEGER");
 
 Alloy.Globals.navWin = $.navWin; 
 COMMON.construct($); 

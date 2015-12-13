@@ -111,6 +111,14 @@ exports.definition = {
 	            db.close();
 	            collection.trigger('sync');
 			},
+			deleteKid : function(id){
+				var collection = this;
+                var sql = "DELETE FROM " + collection.config.adapter.collection_name + " WHERE id="+id;
+                db = Ti.Database.open(collection.config.adapter.db_name);
+                db.execute(sql);
+                db.close();
+                collection.trigger('sync');
+			}
 		});
 
 		return Collection;

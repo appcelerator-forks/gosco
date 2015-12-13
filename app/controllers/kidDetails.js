@@ -240,6 +240,42 @@ function viewSchoolDetails(e){
 	//COMMON.openWindow(win);
 } 
 
+function doDeleteKids(){
+	var dialog = Ti.UI.createAlertDialog({
+	    cancel: 0,
+	    buttonNames: ['Cancel','Confirm'],
+	    message: 'Are you sure want to delete your kid?',
+	    title: 'Delete Kid'
+	});
+	dialog.addEventListener('click', function(e){  
+		if (e.index === e.source.cancel){
+	      //Do nothing
+	    }
+	    if (e.index === 1){
+	    	//submit to server
+			var param = { 
+				"id"	  :  kid_id 
+			};
+			 
+			API.callByPost({url:"doDeleteKidUrl", params: param}, function(responseText){ 
+				var res = JSON.parse(responseText);   
+				if(res.status == "success"){  
+					kidsModel.deleteKid(kid_id);  
+					Ti.App.fireEvent('refreshKids');
+					COMMON.createAlert("Success", "Kid removed successfully", function(){
+						 closeWindow();
+					});
+				}else{
+					COMMON.createAlert("Error", res.data);
+					return false;
+				} 
+			}); 
+	    }
+	});
+	dialog.show();  
+	
+}
+
 function classPop(e){
 	var elbl = JSON.stringify(e.source); 
 	var res = JSON.parse(elbl);   

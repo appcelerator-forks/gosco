@@ -1,5 +1,5 @@
 var args = arguments[0] || {}; 
- 
+var ImageLoader = require('imageLoader');  
 var element_id = args.element_id  || ""; 
 var post_id = args.post_id  || ""; 
 var isCurriculum =  args.isCurriculum  || "";
@@ -14,17 +14,20 @@ var viewImage = postElementModel.getRecordsById(element_id);
 init();
 
 function init(){
+	$.win.orientationModes = [ Ti.UI.LANDSCAPE_LEFT, Ti.UI.LANDSCAPE_RIGHT,Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT ];
+	
 	var itemImageView = Ti.UI.createView({
 		height: Ti.UI.SIZE,
 		width: Ti.UI.SIZE
 	});
 		
 	adImage = Ti.UI.createImageView({
-		defaultImage: "/images/default.png",
-		image: viewImage.element,
+		//defaultImage: "/images/default.png",
+		image:"",
 		width:"100%",
 		height: Ti.UI.SIZE 
 	});
+	ImageLoader.LoadRemoteImage(adImage,viewImage.element);  
 	$.imageDetailsView.add(adImage); 
 }
 	 

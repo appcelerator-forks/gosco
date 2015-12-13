@@ -139,10 +139,25 @@ var refreshKids = function(){
 Ti.App.addEventListener('refreshKids',refreshKids);
 
 $.btnLogout.addEventListener('touchend', function(){
-	//Do logout  
-	Ti.App.Properties.removeProperty('user_id');
-	Ti.App.Properties.removeProperty('fullname');
-	   		
-	var win = Alloy.createController("auth/login").getView();
-  	openNewWindow(win);
+	var dialog = Ti.UI.createAlertDialog({
+	    cancel: 0,
+	    buttonNames: ['Cancel','Logout'],
+	    message: 'Are you sure want to logout?',
+	    title: 'Logout'
+	});
+	dialog.addEventListener('click', function(e){  
+		if (e.index === e.source.cancel){
+	      //Do nothing
+	    }
+	    if (e.index === 1){
+	    	//Do logout  
+			Ti.App.Properties.removeProperty('user_id');
+			Ti.App.Properties.removeProperty('fullname');
+			   		
+			var win = Alloy.createController("auth/login").getView();
+		  	openNewWindow(win);
+	    }
+	});
+	dialog.show();  
+	
 });

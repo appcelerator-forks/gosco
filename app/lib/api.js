@@ -1,36 +1,37 @@
 /*********************
 *** SETTING / API ***
 **********************/
-var API_DOMAIN = "14.102.151.167";
+var API_DOMAIN = "admin.goscoglobal.com";
 
 // APP authenticate user and key
 var USER  = 'gosco';
 var KEY   = '206b53047cf312532294f7207789fdggh';
 
 //API when app loading phase
-var getSchoolPost		= "http://"+API_DOMAIN+"/gosco/api/getPostList?user="+USER+"&key="+KEY;
-var getCurriculumPost	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumPost?user="+USER+"&key="+KEY;
-var getSchoolList  		= "http://"+API_DOMAIN+"/gosco/api/getSchoolList?user="+USER+"&key="+KEY;
-var getBannerList  		= "http://"+API_DOMAIN+"/gosco/api/getBannerList?user="+USER+"&key="+KEY;
-var getCurriculumList  	= "http://"+API_DOMAIN+"/gosco/api/getCurriculumList?user="+USER+"&key="+KEY;
-var getHomeworkList 	= "http://"+API_DOMAIN+"/gosco/api/getHomeworkList?user="+USER+"&key="+KEY;
-var getSchoolClassList  = "http://"+API_DOMAIN+"/gosco/api/getSchoolClassList?user="+USER+"&key="+KEY;
-var getEventsList       = "http://"+API_DOMAIN+"/gosco/api/getEventsList?user="+USER+"&key="+KEY;
-var updateKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/updateKidsClass?user="+USER+"&key="+KEY;
-var removeKidsClass  	= "http://"+API_DOMAIN+"/gosco/api/removeKidsClass?user="+USER+"&key="+KEY;
-var updateKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/updateKidsCurriculum?user="+USER+"&key="+KEY;
-var removeKidsCurriculum= "http://"+API_DOMAIN+"/gosco/api/removeKidsCurriculum?user="+USER+"&key="+KEY;
-var facebookLoginUrl	= "http://"+API_DOMAIN+"/gosco/api/doFacebookLogin?user="+USER+"&key="+KEY;
-//var getTuitionList   	= "http://"+API_DOMAIN+"/gosco/api/getTuitionList?user="+USER+"&key="+KEY; 
-var getKidByUserList    = "http://"+API_DOMAIN+"/gosco/api/getKidByUser?user="+USER+"&key="+KEY; 
-var getKidsClassByUser  = "http://"+API_DOMAIN+"/gosco/api/getKidsClassByUser?user="+USER+"&key="+KEY; 
-var getKidsCurriculum   = "http://"+API_DOMAIN+"/gosco/api/getKidsCurriculum?user="+USER+"&key="+KEY; 
-var deviceInfoUrl       = "http://"+API_DOMAIN+"/gosco/api/getDeviceInfo?user="+USER+"&key="+KEY;
-var doLoginUrl  		= "http://"+API_DOMAIN+"/gosco/api/doLogin?user="+USER+"&key="+KEY;
-var doSignUpUrl  		= "http://"+API_DOMAIN+"/gosco/api/doSignUp?user="+USER+"&key="+KEY;
-var addKidUrl 			= "http://"+API_DOMAIN+"/gosco/api/addkid?user="+USER+"&key="+KEY;
-var forgotPasswordUrl 	= "http://"+API_DOMAIN+"/gosco/api/doForgotPassword?user="+USER+"&key="+KEY;
-var getEducationGalleryUrl = "http://"+API_DOMAIN+"/gosco/api/getEducationGallery?user="+USER+"&key="+KEY;
+var getSchoolPost		= "http://"+API_DOMAIN+"/api/getPostList?user="+USER+"&key="+KEY;
+var getCurriculumPost	= "http://"+API_DOMAIN+"/api/getCurriculumPost?user="+USER+"&key="+KEY;
+var getSchoolList  		= "http://"+API_DOMAIN+"/api/getSchoolList?user="+USER+"&key="+KEY;
+var getBannerList  		= "http://"+API_DOMAIN+"/api/getBannerList?user="+USER+"&key="+KEY;
+var getCurriculumList  	= "http://"+API_DOMAIN+"/api/getCurriculumList?user="+USER+"&key="+KEY;
+var getHomeworkList 	= "http://"+API_DOMAIN+"/api/getHomeworkList?user="+USER+"&key="+KEY;
+var getSchoolClassList  = "http://"+API_DOMAIN+"/api/getSchoolClassList?user="+USER+"&key="+KEY;
+var getEventsList       = "http://"+API_DOMAIN+"/api/getEventsList?user="+USER+"&key="+KEY;
+var updateKidsClass  	= "http://"+API_DOMAIN+"/api/updateKidsClass?user="+USER+"&key="+KEY;
+var removeKidsClass  	= "http://"+API_DOMAIN+"/api/removeKidsClass?user="+USER+"&key="+KEY;
+var updateKidsCurriculum= "http://"+API_DOMAIN+"/api/updateKidsCurriculum?user="+USER+"&key="+KEY;
+var removeKidsCurriculum= "http://"+API_DOMAIN+"/api/removeKidsCurriculum?user="+USER+"&key="+KEY;
+var facebookLoginUrl	= "http://"+API_DOMAIN+"/api/doFacebookLogin?user="+USER+"&key="+KEY;
+//var getTuitionList   	= "http://"+API_DOMAIN+"/api/getTuitionList?user="+USER+"&key="+KEY; 
+var getKidByUserList    = "http://"+API_DOMAIN+"/api/getKidByUser?user="+USER+"&key="+KEY; 
+var getKidsClassByUser  = "http://"+API_DOMAIN+"/api/getKidsClassByUser?user="+USER+"&key="+KEY; 
+var getKidsCurriculum   = "http://"+API_DOMAIN+"/api/getKidsCurriculum?user="+USER+"&key="+KEY; 
+var deviceInfoUrl       = "http://"+API_DOMAIN+"/api/getDeviceInfo?user="+USER+"&key="+KEY;
+var doLoginUrl  		= "http://"+API_DOMAIN+"/api/doLogin?user="+USER+"&key="+KEY;
+var doSignUpUrl  		= "http://"+API_DOMAIN+"/api/doSignUp?user="+USER+"&key="+KEY;
+var addKidUrl 			= "http://"+API_DOMAIN+"/api/addkid?user="+USER+"&key="+KEY;
+var forgotPasswordUrl 	= "http://"+API_DOMAIN+"/api/doForgotPassword?user="+USER+"&key="+KEY;
+var getEducationGalleryUrl = "http://"+API_DOMAIN+"/api/getEducationGallery?user="+USER+"&key="+KEY;
+var doDeleteKidUrl  	= "http://"+API_DOMAIN+"/api/doDeleteKid?user="+USER+"&key="+KEY;
 
 //API that call in sequence 
 var APILoadingList = [

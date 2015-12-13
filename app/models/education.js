@@ -16,6 +16,7 @@ exports.definition = {
 		    'website': "TEXT",
 		    "img_path" : "TEXT",
 		    "school_type" : "TEXT",
+		    'authentication' : "INTEGER",
 		    'status': "INTEGER",
 		},
 		adapter: {
@@ -35,6 +36,25 @@ exports.definition = {
 	extendCollection: function(Collection) {
 		_.extend(Collection.prototype, {
 			// extended functions and properties go here
+			addColumn : function( newFieldName, colSpec) {
+				var collection = this;
+				var db = Ti.Database.open(collection.config.adapter.db_name);
+				if(Ti.Platform.osname != "android"){
+                	db.file.setRemoteBackup(false);
+                }
+				var fieldExists = false;
+				resultSet = db.execute('PRAGMA TABLE_INFO(' + collection.config.adapter.collection_name + ')');
+				while (resultSet.isValidRow()) {
+					if(resultSet.field(1)==newFieldName) {
+						fieldExists = true;
+					}
+					resultSet.next();
+				}
+			 	if(!fieldExists) { 
+					db.execute('ALTER TABLE ' + collection.config.adapter.collection_name + ' ADD COLUMN '+newFieldName + ' ' + colSpec);
+				}
+				db.close();
+			},
 			getSchoolList : function(schStatus, educationType, searchKey){
 				var collection = this;
 				var arr = []; 
@@ -109,6 +129,7 @@ exports.definition = {
 					    website: res.fieldByName('website'),
 					    img_path: res.fieldByName('img_path'),
 					    school_type: res.fieldByName('school_type'),
+					    authentication : res.fieldByName('authentication'),
 					    status: res.fieldByName('status'),
 					};
 					res.next();
@@ -149,6 +170,7 @@ exports.definition = {
 					    website: res.fieldByName('website'),
 					    img_path: res.fieldByName('img_path'),
 					    school_type: res.fieldByName('school_type'),
+					    authentication : res.fieldByName('authentication'),
 					    status: res.fieldByName('status'),
 					};
 				} 
@@ -168,10 +190,10 @@ exports.definition = {
                 }
                 db.execute("BEGIN");
                 arr.forEach(function(entry) {
-	                var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, name,education_type, level,address,state,postcode,contact_no,fax_no,email,longitude,latitude,website,img_path,school_type,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-					db.execute(sql_query, entry.id, entry.name,entry.education_type, entry.level,entry.address,entry.state ,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.status);
-					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET name=?,education_type=?,level=?,address=?,state=?,postcode=?,contact_no=?,fax_no=?,email=?,longitude=?,latitude=?,website=?,img_path=?,school_type=?,status=? WHERE id=?";
-					db.execute(sql_query,   entry.name,entry.education_type,entry.level,entry.address,entry.state,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.status, entry.id);
+	                var sql_query =  "INSERT OR IGNORE INTO "+collection.config.adapter.collection_name+" (id, name,education_type, level,address,state,postcode,contact_no,fax_no,email,longitude,latitude,website,img_path,school_type,authentication,status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					db.execute(sql_query, entry.id, entry.name,entry.education_type, entry.level,entry.address,entry.state ,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.authentication,entry.status);
+					var sql_query =  "UPDATE "+collection.config.adapter.collection_name+" SET name=?,education_type=?,level=?,address=?,state=?,postcode=?,contact_no=?,fax_no=?,email=?,longitude=?,latitude=?,website=?,img_path=?,school_type=?,authentication=?,status=? WHERE id=?";
+					db.execute(sql_query,   entry.name,entry.education_type,entry.level,entry.address,entry.state,entry.postcode,entry.contact_no,entry.fax_no,entry.email,entry.longitude,entry.latitude,entry.website,entry.img_path,entry.school_type,entry.authentication,entry.status, entry.id);
 				});
 				db.execute("COMMIT");
 	            db.close();
