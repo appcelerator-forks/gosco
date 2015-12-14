@@ -38,32 +38,37 @@ function init(){
 /***Kids Tuition***/ 	
 function loadKidsTuition(){
 	COMMON.removeAllChildren($.myKidsTuitionView);
-	var tuiTable = Ti.UI.createTableView({
+	var tuiTable = Ti.UI.createView({
 		width: Ti.UI.FILL,
 		height: Ti.UI.SIZE, 
+		layout: "vertical",
 		backgroundColor: "#ffffff",
 	});			
-	var addTuitionTblRow = Titanium.UI.createTableViewRow({
-		title: "Add Tuition",
+	var addTuitionTblRow = $.UI.create('View',{ 
 		backgroundColor: "#10844D",
 		color: "#ffffff",
 		height:50, 
 	});
+	var lblTuition = $.UI.create('Label',{
+		classes: ['left'],
+		text: "  Add Tuition", 
+		color: "#ffffff", 
+	});
+	addTuitionTblRow.add(lblTuition);
 	addTuitionTblRow.addEventListener("click",function(){showSchool(2);} );
-	tuiTable.appendRow(addTuitionTblRow);	
+	tuiTable.add(addTuitionTblRow);	
 	var ts = kidsEducationModel.getSchoolByKids(kid_id,2); 
 	 
   	if(ts.length < 1){  
 		$.myKidsTuitionView.add(tuiTable);	
 	}else{
 		ts.forEach(function(entry) { 
-			console.log(entry);
-	   		var row = Titanium.UI.createTableViewRow({
+			 
+	   		var row = Titanium.UI.createView({
 			    touchEnabled: true,
 			    height: Ti.UI.SIZE,
 			    source: entry.id, 
 			  	school: entry.e_id,
-			    backgroundSelectedColor: "#FFFFFF",
 		 
 			});
 			var tblRowView = Ti.UI.createView({
@@ -95,7 +100,7 @@ function loadKidsTuition(){
 			tblView.addEventListener('click',viewSchoolDetails); 
 			 
 			row.add(tblRowView); 
-			tuiTable.appendRow(row);
+			tuiTable.add(row);
 		});
 		$.myKidsTuitionView.add(tuiTable);	
 	}  
@@ -105,28 +110,36 @@ function loadKidsTuition(){
 /***Kids School***/ 		 				 
 function loadKidsSchool(){
 	COMMON.removeAllChildren($.myKidsSchoolView);
-	var ksTable = Ti.UI.createTableView({
+	var ksTable = Ti.UI.createView({
 		width: Ti.UI.FILL,
 		height: Ti.UI.SIZE,
 		backgroundColor: "#ffffff",
+		layout: "vertical",
 		top:10
 	});				 
-	var addSchoolTblRow = Titanium.UI.createTableViewRow({
-		title: "Add School",
+ 
+	var addSchoolTblRow = $.UI.create('View',{ 
 		backgroundColor: "#10844D",
 		color: "#ffffff",
 		height:50, 
 	});
+	var lblSchool = $.UI.create('Label',{
+		classes: ['left'],
+		text: "  Add School", 
+		color: "#ffffff", 
+	});
+	addSchoolTblRow.add(lblSchool);
+	
 	addSchoolTblRow.addEventListener("click",function(){showSchool(1);} );
-	ksTable.appendRow(addSchoolTblRow);	 
+	ksTable.add(addSchoolTblRow);	 
 	var ks = kidsEducationModel.getSchoolByKids(kid_id,1); 
 	 
   	if(ks.length < 1){  
 		$.myKidsSchoolView.add(ksTable);	
 	}else{
 		ks.forEach(function(entry) { 
-			console.log(entry);
-	   		var row = Titanium.UI.createTableViewRow({
+			 
+	   		var row = Titanium.UI.createView({
 			    touchEnabled: true,
 			    height: Ti.UI.SIZE,
 			    source: entry.id, 
@@ -218,7 +231,7 @@ function loadKidsSchool(){
 			tblView.addEventListener('click',viewSchoolDetails); 
 			tblClassView.addEventListener('click',classPop);
 			row.add(tblRowView); 
-			ksTable.appendRow(row);
+			ksTable.add(row);
 		});
 		$.myKidsSchoolView.add(ksTable);	
 	} 
@@ -312,16 +325,14 @@ var selectSchool = function(e){
 		created: currentDateTime(),
 		updated: currentDateTime()
 	};  
+	 
 	kidsEducationModel.addNewKidsSchool(param);  
-	console.log("in selectSchool");
-	console.log(param);
+	 
 	if(e.educationType == "1"){ 
 		API.getSchoolClassList(e.school);
 		API.getCurriculumList(e.school); 
-		loadKidsSchool();	
-		console.log("reslect loadKids"); 
-	}else{
-		console.log("tuition");
+		loadKidsSchool();	 
+	}else{ 
 		loadKidsTuition();	 
 	}
 	

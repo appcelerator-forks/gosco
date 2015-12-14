@@ -1,8 +1,7 @@
 var args = arguments[0] || {};
 COMMON.construct($);
 var postModel;
-var postElementModel;
-var ImageLoader = require('imageLoader'); 
+var postElementModel; 
 var post_id = args.p_id  || "";
 var isCurriculum = args.isCurriculum  || "";  
 var showHeader = args.showHeader || "";
@@ -88,7 +87,7 @@ function loadPostDetails(){
 				//defaultImage :  "/images/default.png"
 			});
 			imageVw.add(dynaImage);
-			ImageLoader.LoadRemoteImage(dynaImage,entry.element);  
+			API.loadRemoteImage(dynaImage,entry.element);  
 			$.myContentView.add(imageVw); 
 			
 			//image event

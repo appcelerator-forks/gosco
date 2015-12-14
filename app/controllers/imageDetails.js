@@ -1,5 +1,4 @@
-var args = arguments[0] || {}; 
-var ImageLoader = require('imageLoader');  
+var args = arguments[0] || {};  
 var element_id = args.element_id  || ""; 
 var post_id = args.post_id  || ""; 
 var isCurriculum =  args.isCurriculum  || "";
@@ -27,7 +26,7 @@ function init(){
 		width:"100%",
 		height: Ti.UI.SIZE 
 	});
-	ImageLoader.LoadRemoteImage(adImage,viewImage.element);  
+	API.loadRemoteImage(adImage,viewImage.element);  
 	$.imageDetailsView.add(adImage); 
 }
 	 

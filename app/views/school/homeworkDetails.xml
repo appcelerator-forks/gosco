@@ -16,7 +16,7 @@
 					<ImageView left='10'  width="25" height="25" image="/images/btn-back.png" />  
 				</View>
 			</View>
-			<ScrollView class="news_item vert" id="myContentView"  contentWidth="Ti.UI.FILL" contentHeight="Ti.UI.SIZE" />
+			<ScrollView class="news_item vert" id="myContentView" scrollType="vertical" contentWidth="Ti.UI.FILL" contentHeight="Ti.UI.SIZE" />
 		</View>
 	</Window>
 </Alloy>

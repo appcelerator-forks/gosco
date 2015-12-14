@@ -79,7 +79,7 @@
 					</View>
 				
 					
-					<View class="wfill vert hsize" id="myKidsSchoolView"  />
+					<View class="wfill vert hsize"  id="myKidsSchoolView"  />
 					
 					<View class="wfill vert hsize" id="myKidsTuitionView" bottom="10" top="10" />
 				</ScrollView>

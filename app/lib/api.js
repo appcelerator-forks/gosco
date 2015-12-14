@@ -32,7 +32,7 @@ var addKidUrl 			= "http://"+API_DOMAIN+"/api/addkid?user="+USER+"&key="+KEY;
 var forgotPasswordUrl 	= "http://"+API_DOMAIN+"/api/doForgotPassword?user="+USER+"&key="+KEY;
 var getEducationGalleryUrl = "http://"+API_DOMAIN+"/api/getEducationGallery?user="+USER+"&key="+KEY;
 var doDeleteKidUrl  	= "http://"+API_DOMAIN+"/api/doDeleteKid?user="+USER+"&key="+KEY;
-
+var authenticateKidUrl  = "http://"+API_DOMAIN+"/api/authenticateKid?user="+USER+"&key="+KEY;
 //API that call in sequence 
 var APILoadingList = [
 	{url: getSchoolList, model: "education", checkId: "1"},
@@ -83,7 +83,15 @@ exports.loadAPIBySequence = function (ex, counter){
 	 }; 
 };
 
- 
+exports.loadRemoteImage = function (obj,url) {
+	var xhr = Titanium.Network.createHTTPClient();
+
+	xhr.onload = function() { 
+	 obj.image=this.responseData; 
+	}; 
+	xhr.open('GET',url); 
+	xhr.send();
+}; 
 
 // Get user device info
 exports.getDeviceInfo = function(ex){

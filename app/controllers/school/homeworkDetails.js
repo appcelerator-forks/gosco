@@ -149,13 +149,14 @@ function loadHomeworktDetails(){
 						leftImg = "/images/default.png";
 					}
 					var newsImage = Ti.UI.createImageView({
-				   		defaultImage: "/images/loading_image.png",
-						image: leftImg,
+				   		//defaultImage: "/images/loading_image.png",
+						image: "",
 						width: Ti.UI.FILL,
 						height: Ti.UI.SIZE,
 						position: gal_counter,
 						source_id:  entry.id
 					});
+					API.loadRemoteImage(newsImage,leftImg); 
 					imageContainer.add(pad_cell);
 					 
 					pad_cell.add(newsImage);

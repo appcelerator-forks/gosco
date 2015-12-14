@@ -32,7 +32,7 @@ Established in the new millennia of this 21st century, GOSCO is strategically lo
 			
 				<Label class="news_title themeColor">OUR MISSION</Label>
 				<Label class="news_paragraph" top="5">• GOSCO firmly believes in promotion of environmental sustainability. Our innovations help to reduce the wasteful use of photocopy and paper and its related expenses to a minimum. GOSCO conforms to the concept of environmental-friendliness, and is passionate to shape a greener future for all.</Label>
-				<Label class="news_paragraph">• GOSCO is dedicated to provide an effective platform bridging the communication between learning institutions and students/parents. Our vision is to establish a seamless link which serves to enhance information exchange and promotes co-operation between learning institutions and the students/parents .</Label>
+				<Label class="news_paragraph">• GOSCO is dedicated to provide an effective platform bridging the communication between learning institutions and students/parents. Our vision is to establish a seamless link which serves to enhance information exchange and promotes co-operation between learning institutions and the students/parents.</Label>
 			</ScrollView>
 		</View>
 		<ImageView class=" wfill" height="50" bottom="0" image="/images/banner1.png" /> 

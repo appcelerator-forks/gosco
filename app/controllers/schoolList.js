@@ -67,7 +67,7 @@ function createSchoolList(){
 		schTable.setData(COMMON.noRecord());
 	}else{
 		listing.forEach(function(entry) {
-			console.log(entry);
+			 
 	   		var row = Titanium.UI.createTableViewRow({
 			    touchEnabled: true,
 			    height: 70,
@@ -164,8 +164,59 @@ function addSchoolAction(vw){
 	vw.addEventListener('click', function(e){ 
 		var elbl = JSON.stringify(e.source); 
 		var res = JSON.parse(elbl);  
-	 	Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
-	 	$.win.close(); 
+		
+		var sch = educationModel.getSchoolById(res.source);
+		if(sch.authentication == "1"){
+			var ic;
+			if(OS_ANDROID){
+				var textfield = Ti.UI.createTextField({keyboardType : Ti.UI.KEYBOARD_PHONE_PAD});
+				var dialog = Ti.UI.createAlertDialog({
+				    title: 'Student I/C without -',
+				   	androidView: textfield,
+				    buttonNames: ['Confirm', 'Cancel'], 
+				}); 
+			}else{ 
+				var dialog = Ti.UI.createAlertDialog({
+				    title: 'Student I/C without -',
+				   	style: Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT,
+				    buttonNames: ['Confirm', 'Cancel'],
+				    keyboardType : Ti.UI.KEYBOARD_PHONE_PAD
+				}); 
+			}
+			
+			dialog.show(); 
+			dialog.addEventListener('click', function(ex){  
+				if(ex.index == 0) { 
+					if(Ti.Platform.osname == "android"){
+						ic = textfield.value;
+					}else{
+						ic = ex.text;
+					}
+					
+					var param = { 
+						"e_id"	  : res.source,
+						"ic"	  : ic
+					};
+					API.callByPost({url:"authenticateKidUrl", params: param}, function(responseText){
+						 
+						var result = JSON.parse(responseText);   
+						if(result.status == "success"){    
+							Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
+	 						$.win.close(); 
+						}else{
+							COMMON.createAlert("Success", "No kid found in this school");
+						} 
+					});
+				}else{
+					
+				}
+			}); 
+		}else{
+			Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
+	 		$.win.close(); 
+		}
+		 
+	 	
 	});
 }
 
