@@ -25,7 +25,7 @@ function init(){
 	
 	setTimeout(function(){
 		API.getHomeworkList(ec_id,1);
-		$.homeworkDetailsView.init({ec_id:ec_id});
+		$.homeworkDetailsView.init({ec_id:ec_id,school_id:school_id});
 	},2000); 
 }
 

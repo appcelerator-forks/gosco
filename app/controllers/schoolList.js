@@ -80,6 +80,7 @@ function createSchoolList(){
 					layout: "vertical",
 					height:Ti.UI.SIZE,
 					image: img_path, 
+					source: entry.id,
 					width:"auto" 
 			}); 
 			
@@ -87,6 +88,7 @@ function createSchoolList(){
 					layout: "horizontal",
 					height:Ti.UI.SIZE,
 					image: img_path, 
+					source: entry.id,
 					width:Ti.UI.FILL 
 			}); 
 			
@@ -110,6 +112,7 @@ function createSchoolList(){
 				width:50 ,
 				layout:"vertical",
 				image: img_path, 
+				source: entry.id,
 				height:Ti.UI.SIZE
 			}); 
 			var schoolLogo = $.UI.create('ImageView',{  
@@ -171,13 +174,13 @@ function addSchoolAction(vw){
 			if(OS_ANDROID){
 				var textfield = Ti.UI.createTextField({keyboardType : Ti.UI.KEYBOARD_PHONE_PAD});
 				var dialog = Ti.UI.createAlertDialog({
-				    title: 'Student I/C without -',
+				    title: "Enter combination of last 6 digit of student I/C No. & parent I/C No.",
 				   	androidView: textfield,
 				    buttonNames: ['Confirm', 'Cancel'], 
 				}); 
 			}else{ 
 				var dialog = Ti.UI.createAlertDialog({
-				    title: 'Student I/C without -',
+				    title: "Enter combination of last 6 digit of student I/C No. & parent I/C No.",
 				   	style: Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT,
 				    buttonNames: ['Confirm', 'Cancel'],
 				    keyboardType : Ti.UI.KEYBOARD_PHONE_PAD
@@ -197,8 +200,7 @@ function addSchoolAction(vw){
 						"e_id"	  : res.source,
 						"ic"	  : ic
 					};
-					API.callByPost({url:"authenticateKidUrl", params: param}, function(responseText){
-						 
+					API.callByPost({url:"authenticateKidUrl", params: param}, function(responseText){ 
 						var result = JSON.parse(responseText);   
 						if(result.status == "success"){    
 							Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
@@ -211,12 +213,12 @@ function addSchoolAction(vw){
 					
 				}
 			}); 
-		}else{
+		}else{ 
 			Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
 	 		$.win.close(); 
 		}
 		 
-	 	
+	 	return false;
 	});
 }
 

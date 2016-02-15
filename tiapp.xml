@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <id>com.geonn.gosco</id>
     <name>Gosco</name>
-    <version>1.0</version>
+    <version>1.0.2</version>
     <publisher>Gosco Global</publisher>
     <url>http://</url>
     <description>GOSCO is a revolutionary enterprise specializing in computer educational technology solution. Established in the new millennia of this 21st century, GOSCO is strategically located at Kuala Lumpur city center precisely in the heart of Malaysia. With current business interest spanning throughout Malaysia, GOSCO has plans for global expansion in the imminent future. Our core service focuses on provision of software and application developing solution. This service is provided freely to non-profit organizations such as learning institutions while commercial users will be charged a nominal fee for product usage.</description>
@@ -14,7 +14,6 @@
     <guid>acb6ce49-303f-42cb-9444-6fc3c7a1fa7e</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
-    	 
         <plist>
             <dict>
                 <key>UISupportedInterfaceOrientations~iphone</key>
@@ -63,7 +62,7 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <manifest android:versionCode="1" android:versionName="1.0.0">
+        <manifest android:versionCode="4" android:versionName="1.0.2">
             <application android:debuggable="false" android:theme="@style/Theme.Gosco">
                 <meta-data
                     android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyCB_mRDVKoRKpN7i6JpgfpU8vnKRbr86CU"/>
@@ -76,7 +75,7 @@
                     android:name="com.facebook.LoginActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
                 <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
                 <manifest android:installLocation="auto"
-                    android:versionCode="1" android:versionName="1.0.0"/>
+                    android:versionCode="4" android:versionName="1.0.2"/>
             </application>
             <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="23"/>
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -121,7 +120,7 @@
         <target device="iphone">true</target>
         <target device="mobileweb">true</target>
     </deployment-targets>
-    <sdk-version>5.1.1.GA</sdk-version>
+    <sdk-version>5.1.2.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>

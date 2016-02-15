@@ -22,7 +22,38 @@ if(isCurriculum == "1"){
 var postDetails = postModel.getRecordsById(post_id);
 var details = postElementModel.getListByPost(post_id);
 
-loadPostDetails();
+init();
+function init(){
+	loadPostDetails();
+	loadBanner();
+}
+
+function loadBanner(){ 
+	//banner
+	var bannerModel = Alloy.createCollection('banner');   
+	var bannerListing = bannerModel.getBannerList(3); 
+	if(bannerListing.length > 0){ 
+		bannerListing.forEach(function(bannerEntry) {
+			var bannerL = $.UI.create('ImageView',{
+				classes: ['wfill'],
+				height: 50,
+				bottom: 0,
+				name : bannerEntry.b_name || "",
+				url : bannerEntry.b_link || "",
+				image : bannerEntry.img_path
+			});
+			bannerL.addEventListener('click', function(be){
+				var elbl = JSON.stringify(be.source); 
+				var res = JSON.parse(elbl); 
+				if(res.url != ""){
+					COMMON.modalWebView(res.name, res.url);
+				}
+			});
+			$.postDetailsView.add(bannerL);
+		});
+	} 
+	 
+}
 function loadPostDetails(){
 	var titleLabel = $.UI.create('Label',{
 		text: escapeSpecialCharacter(postDetails.title),

@@ -81,7 +81,7 @@ exports.showLoadingFull = function(){
 	activityIndicator.show();
 	var loadingLabel = Ti.UI.createLabel({
 		top:5,
-		text : "Loading ...",
+		text : "Loading",
 		color: "#ffffff"
 	});
 	loadingBarView.add(activityIndicator);
@@ -198,6 +198,53 @@ exports.now = function(){
 	return datetime ;
 };
 
+exports.popup = function(subView,config){
+    //Popup win
+	var popupWin = Ti.UI.createWindow({
+		backgroundImage : "/images/Transparent.png",
+		opacity            : 0, 
+		id                : "popupWin"
+	});
+	
+	//View that used to show the msg
+	var popupView = Ti.UI.createView({
+		width    : config.width,
+		height    : config.height,
+		backgroundColor : "#000000",
+		borderRadius : 10,
+		borderColor : "#60BACA",
+		borderWidth : 1
+	}); 
+	 
+	popupView.add(subView ); 
+	popupWin.add(popupView);
+ 
+	//Event to close the popup window
+	popupWin.addEventListener("click", function(e){
+		if(e.source.id != null){
+			popupWin.close();
+		}
+	});
+		
+	var matrix = Ti.UI.create2DMatrix(); 
+	matrix = matrix.scale(1.3, 1.3);
+	  
+	popupWin.addEventListener('open', function(){
+	    if (Titanium.Platform.name == 'android') {
+    		popupWin.activity.actionBar.hide();
+		}
+	    
+	    var a = Ti.UI.createAnimation({
+		    transform : matrix,
+		    opacity: 1, 
+		    duration : 500, 
+		});
+		popupWin.animate(a);  
+	}); 
+	 
+	return popupWin;
+};
+
 exports.monthFormat = function(date){
 	var monthNames = [
         "January", "February", "March",
@@ -232,6 +279,83 @@ exports.timeFormat = function(datetime){
 	return newFormat;
 };
 
+
+exports.modalWebView = function(title, link){
+	//Activate Banner link
+		var myModal = Ti.UI.createWindow({
+			title	: title,
+			backgroundColor : '#FFFFFF',
+			height: Ti.UI.FILL,
+			width: Ti.UI.FILL,
+			navBarHidden : true,
+			fullscreen	 :true
+		});
+		myModal.orientationModes = [ Ti.UI.LANDSCAPE_LEFT, Ti.UI.LANDSCAPE_RIGHT,Ti.UI.PORTRAIT,Ti.UI.UPSIDE_PORTRAIT ];
+	
+		var leftBtn = Ti.UI.createButton({
+			title: "Close",
+			color: "#10844D",
+			left: 10,
+			top: 5,
+		});
+		var wrapperView    = Ti.UI.createView({
+			layout:"vertical",
+			height: Ti.UI.FILL
+		}); 
+		// Full screen
+		var topView = Ti.UI.createView({  // Also full screen
+		    backgroundColor : '#EEEEEE',
+		    top         : 0,
+		    layout		: "horizontal",
+		    height		: 40
+		}); 
+		
+		var viewLabel = Ti.UI.createView({  // Also full screen
+		   	width 		: Ti.UI.FILL, 
+		    height		: 40 
+		}); 
+		
+		var titleLabel = Ti.UI.createLabel({
+			height: Ti.UI.SIZE,
+			width : Ti.UI.FILL,
+			textAlign : "center",
+			top: 10,
+			color: "#646464",
+			text: 	title,
+		});
+		viewLabel.add(titleLabel);
+		var containerView  = Ti.UI.createView({  // Set height appropriately
+		    height          : Ti.UI.SIZE,
+		    width			: Ti.UI.FILL,
+		    backgroundColor : 'transparent'
+		});
+		var webview = Ti.UI.createWebView({ 
+		   url: link,
+		   height: Ti.UI.FILL,
+		   width: Ti.UI.FILL,
+		   backgroundColor:"#ffffff",
+		   bottom:10 
+		});
+		topView.add(leftBtn); 
+		topView.add(viewLabel);
+		containerView.add(webview); 
+		wrapperView.add(topView);
+		wrapperView.add(mainView.UI.create('View',{ 
+			classes : ["line"]
+		}));
+		wrapperView.add(containerView); 
+		myModal.add(wrapperView); 
+		myModal.open({
+			modal : true
+		});
+		leftBtn.addEventListener('click',function(ex){
+			myModal.close({animated: true});
+		});		
+		
+	return myModal;
+};
+
+
 exports.modalView = function(title, contentView){ 
 		var myModal = Ti.UI.createWindow({
 			title	: title,
@@ -244,6 +368,7 @@ exports.modalView = function(title, contentView){
 		var leftBtn = Ti.UI.createButton({
 			title: "Close",
 			color: "#10844D",
+			background: "transparent",
 			left: 10,
 			top: 5,
 		});

@@ -51,13 +51,17 @@ function loadEventDetails(){
 		backgroundColor : "#f5f5f5", 
 	});
 	var updatedLabel = $.UI.create('Label',{
-		text: "Last Updated",
+		text: "Event Date",
 		classes : ["h5", "hsize",'wfill',"padding","bold"]
 	});
 	viewBg2.add(updatedLabel); 
- 
+ 	
+ 	var dateEnded = " - "+ monthFormat(details.ended);
+ 	if(details.ended == "0000-00-00"){
+ 		dateEnded = "";
+ 	}
 	var dateLabel = $.UI.create('Label',{
-		text:  monthFormat(details.started) +" - "+ monthFormat(details.ended),
+		text:  monthFormat(details.started) +dateEnded,
 		classes : ["h5", "padding","hsize","font_light_grey"]
 	});
  	view2.add(viewBg2);

@@ -45,7 +45,7 @@
 				<Require id="awardDetailsView" src="school/award"></Require>
 			</Window>
 		</Tab>
-		<Tab title="Curriculum" icon="/images/icons/icon_coccurricula.png" activeIcon="/images/icons/icon_coccurricula_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+		<Tab title="Co-Curriculum" icon="/images/icons/icon_coccurricula.png" activeIcon="/images/icons/icon_coccurricula_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
 			<Window title="Curriculum" id="curriculum_win" backgroundColor="#F1F1F1">
 				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">

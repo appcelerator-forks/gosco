@@ -7,12 +7,15 @@ var homeworkAttachmentModel = Alloy.createCollection('homeworkAttachment');
 var educationClassModel = Alloy.createCollection('education_class');
 var searchKey = "";
 var ec_id; 
+var school_id;
 var offset = 0;
 if(OS_IOS){
 	var viewTolerance = 550;
 }else{
 	var viewTolerance = 700;
 }
+
+
 var lastDistance = 0;
 var nextDistance = viewTolerance;
 
@@ -22,11 +25,31 @@ var pageTbl = $.UI.create('TableView',{
  
 function init(e){
 	ec_id = e.ec_id;  
+	school_id = e.school_id;  
 	loadHomework();
 }   
 
 function loadHomework(){ 
 	//COMMON.hideLoading(); 
+	var educationDetails = educationModel.getSchoolById(school_id);
+	//console.log(educationDetails);
+	if(educationDetails.external_homework != ""){
+		var horzExtView = $.UI.create('View',{
+			classes: [ 'wfill'],  
+			backgroundColor: "#ffffff",
+			height: 40 
+		});
+		var labelExt = $.UI.create('Label',{
+			classes :['h5','hsize' ,'themeColor', 'padding-top', 'padding-bottom', 'wfill','center' ],   
+			text: '1Bestari Homework'
+		});
+		
+		horzExtView.add(labelExt);
+		horzExtView.addEventListener('click',function(e){
+			COMMON.modalWebView("External Homework", educationDetails.external_homework); 
+		});
+		$.homeworkSv.add(horzExtView);
+	}
 	details = homeworkModel.getHomeworkByClass(ec_id,searchKey, offset);
  	//COMMON.removeAllChildren($.homeworkSv);  
 	if(details.length > 0){ 

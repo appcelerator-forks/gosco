@@ -22,13 +22,42 @@ var searchBar = Ti.UI.createSearchBar({
 	height:50,
 	barColor: "#ffffff"
 });
-
+ 
 var schContainer = Ti.UI.createScrollView({
 		width: Ti.UI.FILL,
 		height: Ti.UI.FILL 
 }); 
 
+function loadBanner(){ 
+	//banner
+	var bannerModel = Alloy.createCollection('banner');   
+	var bannerListing = bannerModel.getBannerList(3); 
+	if(bannerListing.length > 0){ 
+		bannerListing.forEach(function(bannerEntry) {
+			var bannerL = $.UI.create('ImageView',{
+				classes: ['wfill'],
+				height: 50,
+				bottom: 0,
+				name : bannerEntry.b_name || "",
+				url : bannerEntry.b_link || "",
+				image : bannerEntry.img_path
+			});
+			bannerL.addEventListener('click', function(be){
+				var elbl = JSON.stringify(be.source); 
+				var res = JSON.parse(elbl); 
+				if(res.url != ""){
+					COMMON.modalWebView(res.name, res.url);
+				}
+			});
+			$.educationView.add(bannerL);
+		});
+	} 
+	 
+}
+
 var init = function(e){
+	loadBanner();
+	
 	educationType = e.educationType;
 	listing = educationModel.getSchoolList("all",educationType,"");   
 	

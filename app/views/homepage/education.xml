@@ -1,10 +1,12 @@
 <Alloy>
-	<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
-	    <ActivityIndicator id="activityIndicator" />
-		<Label top="5" class="center" text="Loading" color="#ffffff" />
-	</View> 
-	<View class="vert"> 
-		<View class="wfill hfill vert" bottom="50" id="schoolContainer"  backgroundImage="/images/home_background.jpg"></View>
+	<View id="educationView">
+		<View layout="vertical" id="loadingBar" height="0" width="120" borderRadius="15" backgroundColor="#2E2E2E" >
+		    <ActivityIndicator id="activityIndicator" />
+			<Label top="5" class="center" text="Loading" color="#ffffff" />
+		</View> 
+		<View class="vert"> 
+			<View class="wfill hfill vert" bottom="50" id="schoolContainer"  backgroundImage="/images/home_background.jpg"></View>
+		</View>
 	</View>
-	<ImageView class=" wfill" height="50" bottom="0" image="/images/banner1.png" />
+	
 </Alloy>

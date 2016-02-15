@@ -6,6 +6,7 @@ var galleryModel = Alloy.createCollection('gallery');
 var details;
 var contacts = Ti.Contacts.getAllPeople(); 
 var isAddedToContact = "0"; 
+var phoneArr = []; 
 init();
 
 function init(){
@@ -150,7 +151,7 @@ function loadAttachment(){
 function showDetails(){
 	
 	details  = educationModel.getSchoolById(e_id);  
-	var phoneArr = []; 
+	
 	if(details != ""){  
 		$.win.title = details.name;
 		$.educationName.text = details.name;
