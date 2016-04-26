@@ -66,7 +66,7 @@ function loadPostDetails(){
 		layout: "vertical",  
 	});
 	authorDateView.add($.UI.create('Label',{
-		text:postDetails.published_by + " @ "+ monthFormat(postDetails.publish_date),
+		text:postDetails.publisher_position + " @ "+ monthFormat(postDetails.publish_date),
 		textAlign: "right", 
 		right: 10,
 		classes : ['font_small','font_light_grey']
@@ -83,7 +83,9 @@ function loadPostDetails(){
 	$.myContentView.add(dateView);		
 	 
 	details.forEach(function(entry) {
+		 
 		var msg = escapeSpecialCharacter(entry.element); 
+	 
 		if(entry.type == "1"){
 			var dynaLabel = $.UI.create('Label',{
 				text:msg,

@@ -6,9 +6,14 @@ var postModel = Alloy.createCollection('post');
 var post_element_model = Alloy.createCollection('post_element');  
 var educationModel = Alloy.createCollection('education'); 
 function init(e){ 
-	showLoading();
-	displayLatestBoard();  
-	displayMyKids();  
+	showLoading(); 
+	setTimeout(function(){
+		displayLatestBoard();  
+	},2000);
+	setTimeout(function(){
+		displayMyKids();  
+	},3000);
+	
 	if(OS_ANDROID){
 		$.kidsView.bottom = 0;
 		$.sepLineKids.bottom = 80;
@@ -17,6 +22,7 @@ function init(e){
 
 function displayLatestBoard(){
 	var latestPost = postModel.getLatestPost(10,1);  
+	console.log(latestPost);
 	var boardPost = $.UI.create('View',{
 		classes: ['padding', 'hsize', 'vert'], 
 		top:0
@@ -81,7 +87,7 @@ function displayLatestBoard(){
 			});
 			var publisherLbl = $.UI.create('Label',{
 				classes: [ 'hsize','h6','font_light_grey','left'],  
-				text: entryPost.published_by,
+				text: entryPost.publisher_position,
 				source: entryPost.id
 			});
 			
@@ -190,6 +196,7 @@ function syncData(){
 	/***Check school updates***/
 	var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 	var ks = kidsEducationModel.getSchoolList();
+	console.log(ks);
 	if(ks.length > 0){   
 		ks.forEach(function(entry) {
 			 
@@ -211,6 +218,8 @@ function syncData(){
 				} 
 			});
 		});
+	}else{
+		displayLatestBoard(); 
 	}
 	
 }

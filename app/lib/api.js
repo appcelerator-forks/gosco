@@ -143,7 +143,7 @@ exports.removeKidsCurriculum = function(ex){
 exports.getSchoolPost = function(e_id){ 
 	var url = getSchoolPost+"&e_id="+e_id;
 	var _result = contactServerByGet(url);   
-	
+	console.log(url);
 	_result.onload = function(e) { 
 		var res = JSON.parse(this.responseText);  
 	    if(res.status == "success"){	  
@@ -345,11 +345,11 @@ exports.doFacebookLogin = function(e){
 // Do login
 exports.doLogin = function(ex){ 
 	var url = doLoginUrl+"&username="+ex.username+"&password="+ex.password;
-	 
+	 console.log(url);
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
-		
+		//console.log(result);
 		if(result.status == "error"){
 			COMMON.hideLoading();
 			COMMON.createAlert("Error", result.data[0]);
@@ -364,6 +364,7 @@ exports.doLogin = function(ex){
 	   		//UPDATE / SYNC kids from server
 	   		API.getKidsInfoByUser({login: 1}); 
 	   		API.getKidByUser(); 
+	   		checkLoadDone();
 		}
 	};
 	
@@ -374,10 +375,11 @@ exports.doLogin = function(ex){
 
 exports.getKidByUser = function(ex){
 	var url = getKidByUserList+"&u_id="+Ti.App.Properties.getString('user_id'); 
+	console.log(url); 
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
-		 
+		//console.log(result); 
 		if(result.status == "error"){
 			COMMON.createAlert("Error", result.data);
 			return false;
@@ -387,6 +389,7 @@ exports.getKidByUser = function(ex){
 			kidsModel.saveArray(arr);   
 			
 		}
+		checkLoadDone(); 
 	};
 	
 	_result.onerror = function(e) { 
@@ -395,11 +398,12 @@ exports.getKidByUser = function(ex){
 
 exports.getKidsInfoByUser = function(ex){
 	var url = getKidsClassByUser+"&u_id="+Ti.App.Properties.getString('user_id'); 
+	console.log(url); 
 	Ti.App.Properties.setString('isLoadHomepage', "0");			
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) { 
 		var result = JSON.parse(this.responseText);
-		 
+		 //console.log(result); 
 		if(result.status == "error"){
 			COMMON.createAlert("Error", result.data);
 			return false;
@@ -407,26 +411,39 @@ exports.getKidsInfoByUser = function(ex){
 			var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 			kidsEducationModel.resetData(); 
 			var arr = result.data; 
-			arr.forEach(function(entry) { 
-				Ti.App.Properties.setString('curriculum', '0');
-				Ti.App.Properties.setString('post', '0');
-				Ti.App.Properties.setString('class', '0');
-				Ti.App.Properties.setString('events', '0');
-				Ti.App.Properties.setString('kidsCurriculum','0');
-				Ti.App.Properties.setString('kidsHomework','0');
-				API.getKidsCurriculum(entry.k_id);
-				API.getSchoolPost(entry.e_id);
-				API.getSchoolClassList(entry.e_id);
-				API.getCurriculumList(entry.e_id);  
-				API.getEventsList(entry.e_id);  
-				API.getHomeworkList(entry.ec_id);  
-			});
-			 
-			kidsEducationModel.saveArray(arr); 
+			if(arr.length > 0){
+				arr.forEach(function(entry) { 
+					Ti.App.Properties.setString('curriculum', '0');
+					Ti.App.Properties.setString('post', '0');
+					Ti.App.Properties.setString('class', '0');
+					Ti.App.Properties.setString('events', '0');
+					Ti.App.Properties.setString('kidsCurriculum','0');
+					Ti.App.Properties.setString('kidsHomework','0');
+					API.getKidsCurriculum(entry.k_id);
+					API.getSchoolPost(entry.e_id);
+					API.getSchoolClassList(entry.e_id);
+					API.getCurriculumList(entry.e_id);  
+					API.getEventsList(entry.e_id);  
+					API.getHomeworkList(entry.ec_id);  
+				});
+				 
+				kidsEducationModel.saveArray(arr); 
+			}else{
+				Ti.App.Properties.setString('curriculum', '1');
+				Ti.App.Properties.setString('post', '1');
+				Ti.App.Properties.setString('class', '1');
+				Ti.App.Properties.setString('events', '1');
+				Ti.App.Properties.setString('kidsCurriculum','1');
+				Ti.App.Properties.setString('kidsHomework','1');
+				API.getSchoolPost("");
+			}
+			
 			if(ex.login == "1"){
 			//	checkLoadDone(); 
 			}  
 		}
+		
+		checkLoadDone(); 
 	};
 	
 	_result.onerror = function(e) { 
@@ -440,6 +457,14 @@ function checkLoadDone(){
 	var load4 = Ti.App.Properties.getString('kidsCurriculum'); 
 	var load5 = Ti.App.Properties.getString('events');
 	var load6 = Ti.App.Properties.getString('kidsHomework');
+	/**
+	console.log("load1 :"+load1);
+	console.log("load2 :"+load2);
+	console.log("load3 :"+load3);
+	console.log("load4 :"+load4);
+	console.log("load5 :"+load5);
+	console.log("load6 :"+load6);
+	**/
 	if(load1 == "1" && load2 == "1" && load3 == "1" && load4 == "1" && load5 =="1" && load6 =="1"){
 		var loadHP = Ti.App.Properties.getString('isLoadHomepage');		
  		

@@ -9,6 +9,7 @@ exports.definition = {
 		    "status": "TEXT",
 		    "published_by": "TEXT",
 		    "publisher_uid" : "INTEGER",
+		    "publisher_position" : "TEXT",
 		    "published_from_education" : "INTEGER",
 		    "publish_date": "TEXT",
 		    "expired_date": "TEXT",
@@ -70,6 +71,7 @@ exports.definition = {
 					    published_by: res.fieldByName('published_by'),
 					    publisher_uid : res.fieldByName('publisher_uid'),
 					    published_from_education : res.fieldByName('published_from_education'),
+					    publisher_position: res.fieldByName('publisher_position'),
 						publish_date: res.fieldByName('publish_date'),
 					    expired_date: res.fieldByName('expired_date'),
 					    images: res.fieldByName('images'),
@@ -104,6 +106,7 @@ exports.definition = {
 					    status: res.fieldByName('status'),
 					    published_by: res.fieldByName('published_by'),
 					    publisher_uid : res.fieldByName('publisher_uid'),
+					    publisher_position: res.fieldByName('publisher_position'),
 					    published_from_education : res.fieldByName('published_from_education'),
 						publish_date: res.fieldByName('publish_date'),
 					    expired_date: res.fieldByName('expired_date'),
@@ -138,6 +141,7 @@ exports.definition = {
 					    e_id: res.fieldByName('e_id'),
 					    status: res.fieldByName('status'),
 					    published_by: res.fieldByName('published_by'),
+					    publisher_position: res.fieldByName('publisher_position'),
 					    publisher_uid : res.fieldByName('publisher_uid'),
 					    published_from_education : res.fieldByName('published_from_education'),
 						publish_date: res.fieldByName('publish_date'),
@@ -172,6 +176,7 @@ exports.definition = {
 					    status: res.fieldByName('status'),
 					    published_by: res.fieldByName('published_by'),
 					    publisher_uid : res.fieldByName('publisher_uid'),
+					    publisher_position: res.fieldByName('publisher_position'),
 					    published_from_education : res.fieldByName('published_from_education'),
 						publish_date: res.fieldByName('publish_date'),
 					    expired_date: res.fieldByName('expired_date'),
@@ -209,7 +214,7 @@ exports.definition = {
 						message = message.replace(/["']/g, "&quot;"); 
 					}
 					
-		       		sql_query = "INSERT INTO "+ collection.config.adapter.collection_name + "(id, title, message,e_id, type, status,published_by,publisher_uid,published_from_education,publish_date, expired_date, images) VALUES ('"+entry.id+"', '"+title+"', '"+message+"', '"+entry.e_id+"', '"+entry.type+"', '"+entry.status+"', '"+entry.published_by+"', '"+entry.publisher_uid+"', '"+entry.published_from_education+"', '"+entry.publish_date+"', '"+entry.expired_date+"', '"+entry.images+"')";
+		       		sql_query = "INSERT INTO "+ collection.config.adapter.collection_name + "(id, title, message,e_id, type, status,published_by,publisher_position,publisher_uid,published_from_education,publish_date, expired_date, images) VALUES ('"+entry.id+"', '"+title+"', '"+message+"', '"+entry.e_id+"', '"+entry.type+"', '"+entry.status+"', '"+entry.published_by+"', '"+entry.publisher_position+"', '"+entry.publisher_uid+"', '"+entry.published_from_education+"', '"+entry.publish_date+"', '"+entry.expired_date+"', '"+entry.images+"')";
 					 //console.log(sql_query);
 					db.execute(sql_query);
 				});

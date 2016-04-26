@@ -122,7 +122,7 @@ function loadNoticeBoard(school_id){
 			});**/
 			
 			var publishView = $.UI.create('View',{
-				classes: [  ,'horz', 'hsize'], 
+				classes: [  'horz', 'hsize'], 
 				top:5,
 				width: "auto",
 				source: entryPost.id 
@@ -134,7 +134,7 @@ function loadNoticeBoard(school_id){
 			});
 			var publisherLbl = $.UI.create('Label',{
 				classes: [ 'hsize','h6','font_light_grey','left'],  
-				text: entryPost.published_by,
+				text: entryPost.publisher_position,
 				source: entryPost.id
 			});
 			
