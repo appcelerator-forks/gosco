@@ -1,4 +1,5 @@
 Alloy.Globals.tabgroup = $.tabGroup; 
+var postModel = Alloy.createCollection('post');  
 var args = arguments[0] || {}; 
 COMMON.construct($); 
 
@@ -30,9 +31,12 @@ function doLogout(){
 	    	//Do logout  
 			Ti.App.Properties.removeProperty('user_id');
 			Ti.App.Properties.removeProperty('fullname');
+			
+			postModel.resetPost();
 			FACEBOOK.logout();   		
 			var win = Alloy.createController("auth/login").getView();
 		  	openModal(win); 
+		  	$.tabGroup.close();
 	    }
 	});
 	dialog.show();

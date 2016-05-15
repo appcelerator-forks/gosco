@@ -21,8 +21,7 @@ function init(e){
 }
 
 function displayLatestBoard(){
-	var latestPost = postModel.getLatestPost(10,1);  
-	console.log(latestPost);
+	var latestPost = postModel.getLatestPost(10,1);   
 	var boardPost = $.UI.create('View',{
 		classes: ['padding', 'hsize', 'vert'], 
 		top:0

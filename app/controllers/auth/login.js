@@ -40,6 +40,8 @@ if (Ti.Platform.name === 'android') {
 }
 $.fbloginView.add(FACEBOOK.createLoginButton({
 	top : 10,
+	width:"90%",
+	height: 60,
 	readPermissions: ['email','public_profile','user_friends'],
 	style : FACEBOOK.BUTTON_STYLE_WIDE
 }));  
