@@ -7,6 +7,15 @@ var post_element_model = Alloy.createCollection('post_element');
 var educationModel = Alloy.createCollection('education'); 
 function init(e){ 
 	showLoading(); 
+	
+	setTimeout(function(){ 
+		API.getDeviceInfo();
+	},500);
+	setTimeout(function(){ 
+		var AppVersionControl = require('AppVersionControl');
+		AppVersionControl.checkAndUpdate();
+	},8000);
+	
 	setTimeout(function(){
 		displayLatestBoard();  
 	},2000);
@@ -195,7 +204,7 @@ function syncData(){
 	/***Check school updates***/
 	var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 	var ks = kidsEducationModel.getSchoolList();
-	console.log(ks);
+	//console.log(ks);
 	if(ks.length > 0){   
 		ks.forEach(function(entry) {
 			 

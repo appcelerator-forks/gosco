@@ -12,8 +12,8 @@ Alloy.Globals.navWin = $.navWin;
 COMMON.construct($); 
 init();
 function init(){  
-	//load API loadAPIBySequence
-	 
+	//load API loadAPIBySequence 
+	
 	if(Titanium.Network.networkType == Titanium.Network.NETWORK_NONE){
 		var alertDialog = Titanium.UI.createAlertDialog({
               title: 'WARNING!',

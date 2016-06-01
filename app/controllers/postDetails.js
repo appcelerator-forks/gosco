@@ -6,6 +6,9 @@ var post_id = args.p_id  || "";
 var isCurriculum = args.isCurriculum  || "";  
 var showHeader = args.showHeader || "";
 var from = args.from || ""; 
+var postDetails;
+var details;
+ 
 if(showHeader == "1"){
 	$.showHeader.visible = true;
 	$.showHeader.height = 50;
@@ -19,11 +22,12 @@ if(isCurriculum == "1"){
 	postElementModel = Alloy.createCollection('post_element'); 	
 }
 
-var postDetails = postModel.getRecordsById(post_id);
-var details = postElementModel.getListByPost(post_id);
+
 
 init();
 function init(){
+	postDetails = postModel.getRecordsById(post_id);
+	details = postElementModel.getListByPost(post_id);
 	loadPostDetails();
 	loadBanner();
 }
@@ -54,7 +58,7 @@ function loadBanner(){
 	} 
 	 
 }
-function loadPostDetails(){
+function loadPostDetails(){ 
 	var titleLabel = $.UI.create('Label',{
 		text: escapeSpecialCharacter(postDetails.title),
 		classes : ["news_title", "themeColor"]

@@ -49,7 +49,7 @@ $.finish = function(_callback) {
 };
 
 //load API loadAPIBySequence
-API.getDeviceInfo();
+
 /***Check school updates***/
 var kidsEducationModel = Alloy.createCollection('kidsEducation'); 
 var ks = kidsEducationModel.getSchoolList();

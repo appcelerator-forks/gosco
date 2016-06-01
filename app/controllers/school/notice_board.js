@@ -4,6 +4,7 @@ var educationModel = Alloy.createCollection('education');
 var postModel = Alloy.createCollection('post'); 
 var post_element_model = Alloy.createCollection('post_element');  
 var school_id; 
+var latestPost;
 
 function init(e){ 
 	showLoading();
@@ -33,15 +34,26 @@ function syncData(){
 				 post_element_model.addElement(post);   
 			 }  
 		} 
-		loadNoticeBoard(school_id);
+		latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
+		loadNoticeBoard(latestPost);
 	}, function(){
-		loadNoticeBoard(school_id);
+		latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
+		loadNoticeBoard(latestPost);
 	});
 	
 }
 
-function loadNoticeBoard(school_id){
-	var latestPost = postModel.getLatestPostByEducation(school_id,1); 
+$.lbleInfo.addEventListener('click',function(){
+	latestPost = postModel.getLatestPostByEducation(school_id,4,1); 
+	loadNoticeBoard(latestPost);
+}); 
+
+$.lblAnnouncement.addEventListener('click',function(){
+	latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
+	loadNoticeBoard(latestPost);
+}); 
+
+function loadNoticeBoard(latestPost){ 
  	var tblView = $.UI.create('TableView',{
 		classes: ['wfill' , 'hsize'],
 		top:0

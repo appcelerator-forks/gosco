@@ -25,8 +25,8 @@
 				<Require id="eventsDetailsView" src="school/events"></Require>
 			</Window>
 		</Tab>
-		<Tab title="Homework" icon="/images/icons/icon_homeworks.png" activeIcon="/images/icons/icon_homeworks_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
-			<Window title="Homework" backgroundColor="#F1F1F1">
+		<Tab title="Class Info" icon="/images/icons/icon_homeworks.png" activeIcon="/images/icons/icon_homeworks_active.png" iconIsMask="false" activeIconIsMask="false"  activeIconIsMask="false">
+			<Window title="Class Info" backgroundColor="#F1F1F1">
 				<LeftNavButton platform="ios">
 			        <View onClick="backToHome">
 			        	<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  

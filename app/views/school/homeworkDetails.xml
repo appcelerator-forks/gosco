@@ -1,5 +1,5 @@
 <Alloy>
-	<Window id="win" title="Homework Details" backgroundColor="#F1F1F1">
+	<Window id="win" title="Class Info Details" backgroundColor="#F1F1F1">
 		<LeftNavButton platform="ios">
 			<View onClick="closeWindow">
 				<ImageView left='0'  width="25" height="25" image="/images/btn-back.png" />  

@@ -13,7 +13,7 @@ function init(e){
 	
 }   
 function loadAwardBoard(){ 
-	var latestPost = postModel.getLatestPostByEducation(school_id,2);   
+	var latestPost = postModel.getLatestPostByEducation(school_id,1,2);   
 	var tblView = $.UI.create('TableView',{
 			classes: ['wfill' , 'hsize'],
 			backgroundColor: "#ffffff",

@@ -18,8 +18,13 @@
     		</View>
     	</View>
     	<View class="wfill" height="35">
-			<ImageView width="30" height="30" left="10" image="/images/announcement.png" />
-			<Label class="padding themeColor h5 bold" left="45" top="5">Notice Board / Announcement</Label>
+			<View  width="130" height="30" left="15" class="padding box"  top="5">
+				<Label id="lblAnnouncement" textAlign="center" class="  themeColor h5 bold"  >Announcement</Label>
+			</View>
+			<View left="155" width="100" height="30" class="padding box"   top="5">
+				<Label id="lbleInfo" textAlign="center" class="  themeColor h5 bold"  >e-Info</Label>
+			</View>
+			
 			<ImageView id="refresh" width="30" height="30" right="10" image="/images/icon_refresh.png" /> 
 		</View>
     	

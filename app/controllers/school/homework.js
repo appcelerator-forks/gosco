@@ -34,6 +34,8 @@ function loadHomework(){
 	var educationDetails = educationModel.getSchoolById(school_id);
 	//console.log(educationDetails);
 	if(educationDetails.external_homework != ""){
+		//console.log("have homework");
+		//console.log(educationDetails.external_homework);
 		var horzExtView = $.UI.create('View',{
 			classes: [ 'wfill'],  
 			backgroundColor: "#ffffff",
@@ -187,7 +189,7 @@ function loadHomework(){
 		});
 	  	offset += 10;
 	}else{
-	 	COMMON.removeAllChildren($.homeworkSv);  
+	 	//COMMON.removeAllChildren($.homeworkSv);  
 	 	var view11 = $.UI.create('View',{
 			classes :['hsize','padding','wfill' ],  
 			backgroundColor : "#ffffff" 

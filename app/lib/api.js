@@ -33,6 +33,8 @@ var forgotPasswordUrl 	= "http://"+API_DOMAIN+"/api/doForgotPassword?user="+USER
 var getEducationGalleryUrl = "http://"+API_DOMAIN+"/api/getEducationGallery?user="+USER+"&key="+KEY;
 var doDeleteKidUrl  	= "http://"+API_DOMAIN+"/api/doDeleteKid?user="+USER+"&key="+KEY;
 var authenticateKidUrl  = "http://"+API_DOMAIN+"/api/authenticateKid?user="+USER+"&key="+KEY;
+var checkAppVersionUrl  = "http://"+API_DOMAIN+"/api/checkParentAppVersion?user="+USER+"&key="+KEY;
+
 //API that call in sequence 
 var APILoadingList = [
 	{url: getSchoolList, model: "education", checkId: "1"},
@@ -96,13 +98,14 @@ exports.loadRemoteImage = function (obj,url) {
 // Get user device info
 exports.getDeviceInfo = function(ex){
 	var records = { 
+			'u_id' : Ti.App.Properties.getString('user_id') || 0,
 			'deviceToken':Ti.App.Properties.getString('deviceToken'),
 			'version' : Ti.Platform.version,
 			'os' : 	Ti.Platform.osname,
 			'model' : Ti.Platform.model,
 			'macaddress' :Ti.Platform.macaddress 
 	};
- 
+ 	console.log(records);
 	var url = deviceInfoUrl;
 	var _result = contactServerByPost(url,records);   
 	_result.onload = function(e) { 
@@ -111,6 +114,26 @@ exports.getDeviceInfo = function(ex){
 	
 	_result.onerror = function(e) { 
 	};
+};
+
+exports.checkAppVersion = function(callback_download){
+	var appVersion = Ti.App.Properties.getString('appVersion') || "";
+	var os = "android";
+	if(OS_IOS){
+		os = "ios";
+	}
+	var url = checkAppVersionUrl+"&appVersion="+appVersion+"&appPlatform="+os ; 
+	console.log(url);
+	var _result = contactServerByGet(url);   
+	_result.onload = function(e) {
+		var result = JSON.parse(this.responseText); 
+		if(result.status == "error"){
+		 	callback_download && callback_download(result);
+		} 
+		
+	};
+	
+	
 };
 
 exports.updateKidsClass = function(ex){

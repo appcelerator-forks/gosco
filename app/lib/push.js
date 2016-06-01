@@ -8,11 +8,9 @@ if(Ti.Platform.osname == "android"){
 
 		Ti.App.Payload = payload;
 		// if trayClickLaunchedApp or trayClickFocusedApp set redirect as true
-		if(redirect){
-			 console.log("here");
+		if(redirect){ 
 			receivePush(payload);
-		}else{
-			console.log("yea");
+		}else{ 
 			var dialog = Ti.UI.createAlertDialog({
 					cancel: 1,
 					buttonNames: ['Cancel','OK'],
@@ -43,7 +41,7 @@ if(Ti.Platform.osname == "android"){
 } 
 
 function getNotificationNumber(payload){ 
-	console.log(payload);
+	//console.log(payload);
 }
 	
 // Process incoming push notifications
@@ -51,37 +49,46 @@ function receivePush(e) {
 	if (OS_IOS) {
 		Titanium.UI.iPhone.setAppBadge("0");
 	}
-	console.log("PUSH GEO");
-	console.log(e);
-	if(e.category == "announcement"){
+	
+	//console.log(e);
+	
+	if(OS_IOS){
+		Titanium.UI.iPhone.setAppBadge("0"); 
+		 
+		target = e.data.category;
+		url = e.data.target;
+	}else{ 
+		target = e.category;
+		url = e.target;
+	}  
+	
+	if(target == "announcement"){
 		var postModel = Alloy.createCollection('post');  
 		var post_element_model = Alloy.createCollection('post_element');  
 		var param = { 
-			"e_id"	  : e.extra
+			"e_id"	  : url
 		};
+		 
+			API.callByPost({url:"getSchoolPost", params: param}, function(responseText){ 
+				var res = JSON.parse(responseText);  
+				if(res.status == "success"){ 
+					var postData = res.data;   
+					 if(postData != ""){ 
+					 	 var post = res.data.post;   
+						 postModel.addPost(post);  
+						 post_element_model.addElement(post);   
+					 } 
+					 
+					setTimeout(function(){ 
+						var win = Alloy.createController("postDetails", {p_id: url, from: "dashboard"}).getView();  
+						Alloy.Globals.tabgroup.activeTab.open(win);
+					},3000);
+					 
+					 
+				} 
+			});
 		
-		API.callByPost({url:"getSchoolPost", params: param}, function(responseText){ 
-			var res = JSON.parse(responseText);  
-			if(res.status == "success"){ 
-				var postData = res.data; 
-				 if(postData != ""){ 
-				 	 var post = res.data.post;   
-					 postModel.addPost(post);  
-					 post_element_model.addElement(post);   
-				 } 
-				 
-			 	if(OS_IOS){  
-					var win = Alloy.createController("postDetails", {p_id: e.data.target, from: "dashboard"}).getView();  
-					Alloy.Globals.tabgroup.activeTab.open(win);
-				}else{ 
-					var win = Alloy.createController("postDetails", {p_id: e.target, from: "dashboard"}).getView();  
-					Alloy.Globals.tabgroup.activeTab.open(win);
-				}
-				
-				
-				 
-			} 
-		});
+		
 	}
 	
 	//Action after receiving push message
@@ -96,13 +103,7 @@ function deviceTokenSuccess(ex) {
 	    password: '123456'
 	}, function (e) {
 		if (e.success) {
-			//unsubscribe previous 
-			 Cloud.PushNotifications.unsubscribe({
-		        channel: 'general',
-		        device_token: deviceToken
-		    }, function (e) {
-		        if (e.success) {
-		             //re-subscribe again
+			 //subscribe
 						Cloud.PushNotifications.subscribe({
 						    channel: 'general',
 						    type:Ti.Platform.name == 'android' ? 'android' : 'ios', 
@@ -116,23 +117,6 @@ function deviceTokenSuccess(ex) {
 						    	registerPush();
 						    }
 						});
-		        } else {
-		            //subscribe
-						Cloud.PushNotifications.subscribe({
-						    channel: 'general',
-						    type:Ti.Platform.name == 'android' ? 'android' : 'ios', 
-						    device_token: deviceToken
-						}, function (e) { 
-						    if (e.success  ) { 
-						    	/** User device token**/
-				         		Ti.App.Properties.setString('deviceToken', deviceToken);  
-								API.getDeviceInfo();
-						    } else {
-						    	registerPush();
-						    }
-						});
-		        }
-		    });
 		    
 		   
 	    } else {

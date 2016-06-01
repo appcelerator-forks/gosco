@@ -144,9 +144,12 @@ function textLimit(text, limit){
 	return text;
 }
 function escapeSpecialCharacter(msg){ 
-	msg = msg.replace(/<br\/>/g,"\r\n");
-	msg = msg.replace(/\&quot;/g,"'");
-	msg = msg.replace(/\\/g,'');
+	if(msg != "" && msg != null){
+		msg = msg.replace(/<br\/>/g,"\r\n");
+		msg = msg.replace(/\&quot;/g,"'");
+		msg = msg.replace(/\\/g,'');
+	}
+	
 	return msg;
 }
 

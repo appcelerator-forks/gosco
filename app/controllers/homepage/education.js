@@ -96,9 +96,9 @@ var init = function(e){
 }; 
 
 var viewSchoolAction = function(vw){ 
-	vw.addEventListener('click', function(e){ 
+	vw.addEventListener('click', function(e){  
 		var elbl = JSON.stringify(e.source); 
-		var res = JSON.parse(elbl); 
+		var res = JSON.parse(elbl);  
 	 	var win = Alloy.createController("educationDetails", {e_id: res.source, from :"homepage"}).getView();  
 		Alloy.Globals.tabgroup.activeTab.open(win); 
 	 	 

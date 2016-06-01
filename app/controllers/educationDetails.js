@@ -7,26 +7,20 @@ var details;
 var contacts = Ti.Contacts.getAllPeople(); 
 var isAddedToContact = "0"; 
 var phoneArr = []; 
-init();
+setTimeout(function(){
+	init();
+},500);
+
 
 function init(){
 	syncData();
 	syncGallery();
+	 
 	showDetails(); 
 	populateMap();
 }
 
-
-for (var i = 0; i < contacts.length; i++) {
-	var phone = contacts[i].phone; 
-    var workPhone = phone.work || null; 
-    if(workPhone != null && workPhone[0] == details.contact_no ){
-    	isAddedToContact = "1";
-    	$.add2contact.title = "Already added to contact";
-    } 
-}  
-
-
+ 
 function syncData(){
 	var checker = Alloy.createCollection('updateChecker'); 
 	var isUpdate = checker.getCheckerById("1");
@@ -153,6 +147,18 @@ function showDetails(){
 	details  = educationModel.getSchoolById(e_id);  
 	
 	if(details != ""){  
+		
+		if(contacts != null && contacts.length > 0){
+			for (var i = 0; i < contacts.length; i++) {
+				var phone = contacts[i].phone; 
+			    var workPhone = phone.work || null; 
+			    if(workPhone != null && workPhone[0] == details.contact_no ){
+			    	isAddedToContact = "1";
+			    	$.add2contact.title = "Already added to contact";
+			    } 
+			}  
+		}
+		
 		$.win.title = details.name;
 		$.educationName.text = details.name;
 		
@@ -265,4 +271,9 @@ function direction2here(){
 function closeWindow(){
 	COMMON.closeWindow($.win); 
 }
- 
+$.win.addEventListener('close',function(){
+	educationModel = null;  
+	galleryModel = null;
+	details = null;
+	contacts = null; 
+});
