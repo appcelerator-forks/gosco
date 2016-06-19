@@ -85,6 +85,42 @@ exports.definition = {
                 collection.trigger('sync');
                 return listArr;
 			} ,
+			getLatestGlobalPost: function(limit,postType){
+				var collection = this;
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE status !='3' AND type ='"+postType+"' AND   e_id = 'null'  ORDER BY publish_date DESC LIMIT 0,"+limit;
+                
+                db = Ti.Database.open(collection.config.adapter.db_name);
+                if(Ti.Platform.osname != "android"){
+                	db.file.setRemoteBackup(false);
+                }
+                var res = db.execute(sql);
+           		var listArr = []; 
+                var count = 0;
+                while (res.isValidRow()){ 
+					listArr[count] = { 
+					    id: res.fieldByName('id'),
+					    post_id: res.fieldByName('id'),
+						title: res.fieldByName('title'),
+						message: res.fieldByName('message'),  
+						e_id: res.fieldByName('e_id'),
+					    status: res.fieldByName('status'),
+					    published_by: res.fieldByName('published_by'),
+					    publisher_uid : res.fieldByName('publisher_uid'),
+					    publisher_position: res.fieldByName('publisher_position'),
+					    published_from_education : res.fieldByName('published_from_education'),
+						publish_date: res.fieldByName('publish_date'),
+					    expired_date: res.fieldByName('expired_date'),
+					    images: res.fieldByName('images'),
+					};
+					res.next();
+					count++;
+				} 
+			 
+				res.close();
+                db.close();
+                collection.trigger('sync');
+                return listArr;
+			},
 			getLatestPost : function(limit,postType){
 				var collection = this;
                 var sql = "SELECT * FROM " + collection.config.adapter.collection_name +" WHERE status !='3' AND type ='"+postType+"' ORDER BY publish_date DESC LIMIT 0,"+limit;

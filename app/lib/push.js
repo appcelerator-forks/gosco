@@ -57,16 +57,18 @@ function receivePush(e) {
 		 
 		target = e.data.category;
 		url = e.data.target;
+		e_id = e.data.extra;
 	}else{ 
 		target = e.category;
 		url = e.target;
+		e_id = e.extra;
 	}  
 	
 	if(target == "announcement"){
 		var postModel = Alloy.createCollection('post');  
 		var post_element_model = Alloy.createCollection('post_element');  
 		var param = { 
-			"e_id"	  : url
+			"e_id"	  : e_id
 		};
 		 
 			API.callByPost({url:"getSchoolPost", params: param}, function(responseText){ 

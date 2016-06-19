@@ -57,7 +57,7 @@ function doOpen() {
 		activity.onCreateOptionsMenu = function(e) {
 			var menuItem = e.menu.add({
 				title : "Remove",
-				showAsAction : Ti.Android.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW  
+				showAsAction : Ti.Android.SHOW_AS_ACTION_ALWAYS  
 			});
 			menuItem.addEventListener("click", function(e) {
 				removeEducation();

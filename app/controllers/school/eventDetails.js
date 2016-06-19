@@ -8,7 +8,6 @@ loadEventDetails();
 function loadEventDetails(){
 	var details = eventsModel.getRecordsById(event_id);
 	var attList = eventsAttachmentModel.getRecordByEvents(event_id);  
-	console.log(details);
 	 
 	var titleLabel = $.UI.create('Label',{
 		text: details.title,
@@ -185,7 +184,11 @@ function loadEventDetails(){
 	 	view4.add(galleryListingView); 
 		$.myContentView.add(view4); 
 	}	
- 	$.myContentView.add(saveBtn); 
+	var today = new Date(); 
+	if(details.ended != "0000-00-00" && (Date.parse(details.ended) >  today)){
+ 		$.myContentView.add(saveBtn); 
+ 	}
+ 	
  	saveBtn.addEventListener('click', function(e){
 		if(Ti.Platform.osname == "android"){
 			setAndroidCalendarEvent(details); 

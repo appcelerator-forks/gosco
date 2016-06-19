@@ -5,7 +5,7 @@ var postModel = Alloy.createCollection('post');
 var post_element_model = Alloy.createCollection('post_element');  
 var school_id; 
 var latestPost;
-
+var currentTab =1;
 function init(e){ 
 	showLoading();
 	school_id = e.school_id;  
@@ -34,7 +34,13 @@ function syncData(){
 				 post_element_model.addElement(post);   
 			 }  
 		} 
-		latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
+		
+		if(currentTab == 1){
+			latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
+		}else{
+			latestPost = postModel.getLatestPostByEducation(school_id,4,1); 
+		}
+		
 		loadNoticeBoard(latestPost);
 	}, function(){
 		latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
@@ -44,11 +50,17 @@ function syncData(){
 }
 
 $.lbleInfo.addEventListener('click',function(){
+	currentTab = 2;
+	$.containerInfo.backgroundColor = "#E8E8E8";
+	$.containerAnnouncement.backgroundColor = "#FFFFFF";
 	latestPost = postModel.getLatestPostByEducation(school_id,4,1); 
 	loadNoticeBoard(latestPost);
 }); 
 
 $.lblAnnouncement.addEventListener('click',function(){
+	currentTab = 1;
+	$.containerAnnouncement.backgroundColor = "#E8E8E8";
+	$.containerInfo.backgroundColor = "#FFFFFF";
 	latestPost = postModel.getLatestPostByEducation(school_id,1,1); 
 	loadNoticeBoard(latestPost);
 }); 

@@ -30,11 +30,12 @@ function init(e){
 }
 
 function displayLatestBoard(){
-	var latestPost = postModel.getLatestPost(10,1);   
+	var latestPost = postModel.getLatestPost(10,1); 
 	var boardPost = $.UI.create('View',{
 		classes: ['padding', 'hsize', 'vert'], 
 		top:0
 	});
+	 
 	if(latestPost.length > 0){ 
 		latestPost.forEach(function(entryPost) {
 			var schThumb= "/images/full_logo.png";

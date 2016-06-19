@@ -58,7 +58,7 @@ exports.definition = {
 		 
             getEducationClassList :  function(year, e_id){
 				var collection = this;
-                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE e_id='"+ e_id+ "' AND year='"+year+"' ORDER BY className " ;
+                var sql = "SELECT * FROM " + collection.config.adapter.collection_name + " WHERE e_id='"+ e_id+ "' AND year='"+year+"' AND status=1 ORDER BY className " ;
  
                 db = Ti.Database.open(collection.config.adapter.db_name);
                 if(Ti.Platform.osname != "android"){

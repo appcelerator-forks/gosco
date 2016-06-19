@@ -48,7 +48,7 @@ function loadHomework(){
 		
 		horzExtView.add(labelExt);
 		horzExtView.addEventListener('click',function(e){
-			COMMON.modalWebView("External Homework", educationDetails.external_homework); 
+			COMMON.modalWebView("1Bestari Homework", educationDetails.external_homework); 
 		});
 		$.homeworkSv.add(horzExtView);
 	}

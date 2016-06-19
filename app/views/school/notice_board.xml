@@ -18,10 +18,10 @@
     		</View>
     	</View>
     	<View class="wfill" height="35">
-			<View  width="130" height="30" left="15" class="padding box"  top="5">
+			<View  width="130" height="30" backgroundColor="#E8E8E8" left="15" class="padding box" id="containerAnnouncement" top="5">
 				<Label id="lblAnnouncement" textAlign="center" class="  themeColor h5 bold"  >Announcement</Label>
 			</View>
-			<View left="155" width="100" height="30" class="padding box"   top="5">
+			<View left="155" width="100" height="30" class="padding box" id="containerInfo"  top="5">
 				<Label id="lbleInfo" textAlign="center" class="  themeColor h5 bold"  >e-Info</Label>
 			</View>
 			
