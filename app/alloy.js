@@ -214,3 +214,6 @@ Alloy.Globals.SchoolType =  [ 'Kebangsaan', 'Jenis Kebangsaan', 'Private/Interna
 Alloy.Globals.SchoolState =  [ 'Kuala Lumpur','Selangor','Cancel'];
 
 PUSH.registerPush();
+if(OS_IOS){
+	Ti.UI.iPhone.setAppBadge("0"); 
+}

@@ -24,6 +24,7 @@ function init(){
 		//defaultImage: "/images/default.png",
 		image:"",
 		width:"100%",
+		enableZoomControls: true,
 		height: Ti.UI.SIZE 
 	});
 	API.loadRemoteImage(adImage,viewImage.element);  

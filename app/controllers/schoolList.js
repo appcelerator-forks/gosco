@@ -171,16 +171,23 @@ function addSchoolAction(vw){
 		var sch = educationModel.getSchoolById(res.source);
 		if(sch.authentication == "1"){
 			var ic;
+			var alertMsg = "Enter combination of last 6 digit of student I/C No. & parent I/C No.";
+			var errorMsg = "No kid found in this school";
+			if(sch.education_type == "2"){
+				alertMsg = "Enter tuition passcode";
+				errorMsg = "Invalid passcode. Please try again.";
+			}
+			
 			if(OS_ANDROID){
 				var textfield = Ti.UI.createTextField({keyboardType : Ti.UI.KEYBOARD_PHONE_PAD});
 				var dialog = Ti.UI.createAlertDialog({
-				    title: "Enter combination of last 6 digit of student I/C No. & parent I/C No.",
+				    title: alertMsg,
 				   	androidView: textfield,
 				    buttonNames: ['Confirm', 'Cancel'], 
 				}); 
 			}else{ 
 				var dialog = Ti.UI.createAlertDialog({
-				    title: "Enter combination of last 6 digit of student I/C No. & parent I/C No.",
+				    title: alertMsg,
 				   	style: Ti.UI.iPhone.AlertDialogStyle.PLAIN_TEXT_INPUT,
 				    buttonNames: ['Confirm', 'Cancel'],
 				    keyboardType : Ti.UI.KEYBOARD_PHONE_PAD
@@ -198,15 +205,17 @@ function addSchoolAction(vw){
 					
 					var param = { 
 						"e_id"	  : res.source,
-						"ic"	  : ic
+						"ic"	  : ic,
+						"education_type"   : sch.education_type
 					};
+					console.log(param);
 					API.callByPost({url:"authenticateKidUrl", params: param}, function(responseText){ 
 						var result = JSON.parse(responseText);   
 						if(result.status == "success"){    
 							Ti.App.fireEvent('selectSchool',{school:res.source, educationType : educationType });
 	 						$.win.close(); 
 						}else{
-							COMMON.createAlert("Success", "No kid found in this school");
+							COMMON.createAlert("Error", errorMsg);
 						} 
 					});
 				}else{

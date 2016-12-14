@@ -83,7 +83,7 @@ function loadKidsTuition(){
 				height:Ti.UI.SIZE,
 				source: entry.id, 
 				school: entry.e_id,
-				width:Ti.UI.FILL 
+				width:"80%" 
 			}); 
 			var schoolTitle = $.UI.create('Label',{
 				classes : ['font_medium', 'hsize','themeColor'],
@@ -94,9 +94,57 @@ function loadKidsTuition(){
 				top:10,
 				textAlign:'left',  
 			});	
-			  
+			
+			var tblLineView = Ti.UI.createView({
+				layout: "horizontal",
+				height: 1,
+				source: entry.id, 
+				school: entry.e_id,
+				width:  Ti.UI.FILL 
+			});
+			//CLASS NAME
+			var kidcn = entry.class_name;
+			if(kidcn == ""){
+				kidcn ="N/A";
+			}else{
+				var educationClassModel = Alloy.createCollection('education_class'); 
+				var ec = educationClassModel.getEducationClassById(entry.class_name);
+				kidcn = ec.className;
+			}
+			var tblClassView = Ti.UI.createView({
+				layout: "vertical",
+				height:Ti.UI.SIZE,
+				source: entry.id, 
+				school: entry.e_id, 
+				ec_id : entry.class_name,
+				width:"auto" 
+			}); 
+			var className = $.UI.create('Label',{
+				classes : ['font_medium' ,'hsize' ,'themeColor'],
+				text: "Class", 
+				source: entry.id, 
+				school: entry.e_id, 
+				ec_id : entry.class_name,
+				top:0,
+				textAlign:'center' 
+			});	
+			var classNameValue = $.UI.create('Label',{
+				classes : ['font_small', 'hsize' ],
+				text: kidcn, 
+				source: entry.id, 
+				school: entry.e_id, 
+				ec_id : entry.class_name,
+				textAlign:'center',  
+			});	
+			tblClassView.add(className);
+			tblClassView.add(classNameValue);
+			
 			tblView.add(schoolTitle); 
 			tblRowView.add(tblView);  
+			tblRowView.add(separateLine());
+			tblRowView.add(tblClassView);
+			tblRowView.add(tblLineView);
+			tblClassView.addEventListener('click',classPop);
 			tblView.addEventListener('click',viewSchoolDetails); 
 			 
 			row.add(tblRowView); 
@@ -315,6 +363,7 @@ var selectClass = function(e){
 	API.updateKidsClass(param);
 	API.getHomeworkList(e.className);  
 	loadKidsSchool();  
+	loadKidsTuition();
 };
 
 var selectSchool = function(e){   
@@ -335,7 +384,7 @@ var selectSchool = function(e){
 	}else{ 
 		loadKidsTuition();	 
 	}
-	
+ 
 };
 
 function doEditKids(){

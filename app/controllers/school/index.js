@@ -4,8 +4,12 @@ COMMON.construct($);
 var school_id = args.school_id || ""; 
 var ke_id = args.ke_id || ""; 
 var ec_id = args.ec_id || ""; 
+var details;
+var educationModel = Alloy.createCollection('education');  
 init();
 function init(){   
+	details = educationModel.getSchoolById(school_id);
+	
 	setTimeout(function(){
 		$.noticeBoardDetailsView.init({school_id:school_id}); 
 	},800);
@@ -15,9 +19,9 @@ function init(){
 		$.eventsDetailsView.init({school_id:school_id}); 
 	},1000);
 	
-	setTimeout(function(){
-		$.curriculumDetailsView.init({school_id:school_id}); 
-	},1300);
+	//setTimeout(function(){
+	//	$.curriculumDetailsView.init({school_id:school_id}); 
+	//},1300);
 	
 	setTimeout(function(){
 		$.awardDetailsView.init({school_id:school_id}); 
@@ -34,14 +38,14 @@ $.backToHome = function(){
 };
 
 function backToHome(){
-	$.curriculumDetailsView.removeEvent(); 
+	//$.curriculumDetailsView.removeEvent(); 
 	$.school_tg.close();
 }
 
 function doOpen() { 
 	if(OS_ANDROID){
-		var educationModel = Alloy.createCollection('education');  
-		var details = educationModel.getSchoolById(school_id);
+		
+		
 		//Add a title to the tabgroup. We could also add menu items here if needed
 		var activity = $.school_tg.activity;
 	
@@ -68,12 +72,16 @@ function doOpen() {
 }
 
 function removeEducation(){
+	var schoolType = "school";
+	if(details.education_type == "2"){
+		schoolType = "tuition";
+	}
 	
 	 var dialog = Ti.UI.createAlertDialog({
 		    cancel: 1,
 		    buttonNames: ['Cancel','Confirm'],
-		    message: 'Are you sure want to remove this school from your kid?',
-		    title: 'Remove school from kid'
+		    message: 'Are you sure want to remove this '+schoolType+' from your kid?',
+		    title: 'Remove '+schoolType+' from kid'
 		});
 		dialog.addEventListener('click', function(e){
 		  

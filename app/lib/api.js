@@ -137,6 +137,7 @@ exports.checkAppVersion = function(callback_download){
 };
 
 exports.updateKidsClass = function(ex){
+	//console.log(updateKidsClass+"&k_id="+ex.k_id+"&ec_id="+ex.item+"&e_id="+ex.e_id);
 	var url = updateKidsClass+"&k_id="+ex.k_id+"&ec_id="+ex.item+"&e_id="+ex.e_id; 
 	var _result = contactServerByGet(url);   
 	_result.onload = function(e) {};

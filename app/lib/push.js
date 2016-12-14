@@ -1,9 +1,17 @@
 var Cloud = require('ti.cloud');  
 var redirect = false;
 var app_status;
-if(Ti.Platform.osname == "android"){ 
+if(Ti.Platform.osname == "android"){
+	console.log("here start push"); 
 	var CloudPush = require('ti.cloudpush'); 
+	CloudPush.setEnabled(true);
+	var code = CloudPush.isGooglePlayServicesAvailable();
+	if (code != CloudPush.SUCCESS) {
+	    alert ("Google Play Services is not installed/updated/available");
+	}
+
 	CloudPush.addEventListener('callback', function (evt) { 
+		console.log("android push callback ");
 		var payload = JSON.parse(evt.payload); 
 
 		Ti.App.Payload = payload;
@@ -32,12 +40,17 @@ if(Ti.Platform.osname == "android"){
 	
 	CloudPush.addEventListener('trayClickLaunchedApp', function (evt) {
 		redirect = true;
+		Ti.API.info('Tray Click Launched App (app was not running)');
 		app_status = "not_running";  
+		console.log("app status: "+app_status);
 	});
 	CloudPush.addEventListener('trayClickFocusedApp', function (evt) {
+		Ti.API.info('Tray Click Focused App (app was already running)');
 		redirect = true;
 		app_status = "running";  
+		console.log("app status: "+app_status);
 	}); 
+	 
 } 
 
 function getNotificationNumber(payload){ 
@@ -50,7 +63,7 @@ function receivePush(e) {
 		Titanium.UI.iPhone.setAppBadge("0");
 	}
 	
-	//console.log(e);
+	 console.log(e);
 	
 	if(OS_IOS){
 		Titanium.UI.iPhone.setAppBadge("0"); 
@@ -88,14 +101,11 @@ function receivePush(e) {
 					 
 					 
 				} 
-			});
-		
-		
+			}); 
 	}
 	
-	//Action after receiving push message
-	 
-	return false;
+	//Action after receiving push message 
+	//return false;
 }
 
 function deviceTokenSuccess(ex) {

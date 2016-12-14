@@ -35,13 +35,13 @@ function displayLatestBoard(){
 		classes: ['padding', 'hsize', 'vert'], 
 		top:0
 	});
-	 
+	
 	if(latestPost.length > 0){ 
 		latestPost.forEach(function(entryPost) {
 			var schThumb= "/images/full_logo.png";
 			
-			if(entryPost.e_id != null || entryPost.e_id != ""){
-				var school = educationModel.getSchoolById(entryPost.e_id); 
+			if( entryPost.published_from_education != ""){
+				var school = educationModel.getSchoolById(entryPost.published_from_education); 
 				if(school.img_path != "" && school.img_path != null){
 					schThumb = school.img_path;
 				} 
